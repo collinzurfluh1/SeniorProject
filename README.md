@@ -14,6 +14,16 @@ Navigate to pool-party in cmd or terminal and run
 This launches the Frontend at http://localhost:3000/
 This will automatically refresh when you make an update and save on your machine.
 
+# You need to install some modules into Backend AND pool-party
+
+Navigate to Backend in cmd or terminal and run
+
+### `npm i`
+
+Navigate to pool-party in cmd or terminal and run
+
+### `npm i`
+
 # You need to download MYSQL
 https://www.mysql.com/downloads/
 
