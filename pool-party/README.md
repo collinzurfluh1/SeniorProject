@@ -23,6 +23,8 @@ https://www.mysql.com/products/workbench/
 
 Once downloaded you need to click the plus icon next to MySQL Connections. Set host name to 127.0.0.1. Set port to 3306. Set username to root. Set password to password.
 
+# To build for production environment
+
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\
