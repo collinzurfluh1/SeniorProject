@@ -30,7 +30,7 @@ https://www.mysql.com/downloads/
 # You need to download MYSQL Workbench
 https://www.mysql.com/products/workbench/
 
-Once downloaded you need to click the plus icon next to MySQL Connections. Set host name to 127.0.0.1. Set port to 3306. Set username to root. Set password to password.
+Once downloaded you need to click the plus icon next to MySQL Connections. Set host name to 127.0.0.1. Set port to 3306. Set username to root. Set password to password. Create a database called auth_db. Create a blank table called users.
 
 # To build for production environment
 
