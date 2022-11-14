@@ -26,7 +26,23 @@ export const Register = async(req, res) => {
         });
         res.json({msg: "Registration Successful"});
     } catch (error) {
-        console.log(error);
+        if(error.code = "ER_DUP_ENTRY"){
+            res.status(404).json({msg:"Email already exists!"});
+        }
+    }
+}
+
+export const UpdateUser = async(req, res) => {
+    const { newName, oldEmail } = req.body;
+    try {
+        if(newName != "[]"){
+            Users.update({
+                name: newName }, {where: {email: oldEmail}}
+            )
+        }
+        res.status(404).json({msg:"Updated Successfully!"});
+    } catch (error) {
+
     }
 }
  

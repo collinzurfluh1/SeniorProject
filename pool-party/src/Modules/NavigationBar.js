@@ -36,6 +36,8 @@ function NavigationBar() {
         setName(decoded.name);
         setExpire(decoded.exp);
         setLoggedIn(response.request.withCredentials);
+        console.log(response);
+
     } catch (error) {
     }
 }
@@ -60,10 +62,10 @@ function NavigationBar() {
             <Nav.Link href="/Home">Home</Nav.Link>
             <Nav.Link href="/Creator">Creator</Nav.Link>
             <Nav.Link href="/Community">Community</Nav.Link>
-          </Nav>
+        </Nav>
           <Nav>
           { isLoggedIn ?  <NavDropdown title={name} id="navbarScrollingDropdown">
-                            <NavDropdown.Item href="/Dashboard">Profile</NavDropdown.Item>
+                            <NavDropdown.Item href="/Profile">Profile</NavDropdown.Item>
                             <NavDropdown.Item href="/Saved-Pools">Saved Pools</NavDropdown.Item>
 
                             <NavDropdown.Divider />
