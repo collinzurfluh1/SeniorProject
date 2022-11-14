@@ -36,7 +36,6 @@ function NavigationBar() {
         setName(decoded.name);
         setExpire(decoded.exp);
         setLoggedIn(response.request.withCredentials);
-        console.log(response);
 
     } catch (error) {
     }
