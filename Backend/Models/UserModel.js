@@ -8,7 +8,11 @@ const Users = db.define('users',{
         type: DataTypes.STRING
     },
     email:{
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        unique: {
+            args: true,
+            msg: 'Email address already in use!'
+        }
     },
     password:{
         type: DataTypes.STRING

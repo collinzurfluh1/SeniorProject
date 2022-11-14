@@ -5,16 +5,36 @@ import jwt_decode from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
 import NavigationBar from '../Modules/NavigationBar';
  
-const Dashboard = () => {
+const Profile = () => {
     const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
     const [token, setToken] = useState('');
     const [expire, setExpire] = useState('');
     const [users, setUsers] = useState([]);
+
+    const [newName, setNewName] = useState([]);
+    const [msg, setMsg] = useState('');
+
     const navigate = useNavigate();
+
+    const update = async (e) => {
+        e.preventDefault();
+        try {
+            await axios.post('http://localhost:4000/update', {
+                newName: newName,
+                oldEmail: email
+            });
+        } catch (error) {
+            if (error.response) {
+                setMsg(error.response.data.msg);
+            }
+        }
+    }
+
+
  
     useEffect(() => {
         refreshToken();
-        getUsers();
     }, []);
  
     const refreshToken = async () => {
@@ -23,6 +43,7 @@ const Dashboard = () => {
             setToken(response.data.accessToken);
             const decoded = jwt_decode(response.data.accessToken);
             setName(decoded.name);
+            setEmail(decoded.email);
             setExpire(decoded.exp);
         } catch (error) {
             if (error.response) {
@@ -43,6 +64,8 @@ const Dashboard = () => {
             setToken(response.data.accessToken);
             const decoded = jwt_decode(response.data.accessToken);
             setName(decoded.name);
+            setEmail(decoded.email);
+            console.log(response);
             setExpire(decoded.exp);
         }
         return config;
@@ -50,39 +73,32 @@ const Dashboard = () => {
         return Promise.reject(error);
     });
  
-    const getUsers = async () => {
-        const response = await axiosJWT.get('http://localhost:4000/users', {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
-        setUsers(response.data);
-    }
- 
     return (
-        <div className="container mt-5">
-            <h1>Welcome Back: {name}</h1>
-            <table className="table is-striped is-fullwidth">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {users.map((user, index) => (
-                        <tr key={user.id}>
-                            <td>{index + 1}</td>
-                            <td>{user.name}</td>
-                            <td>{user.email}</td>
-                        </tr>
-                    ))}
- 
-                </tbody>
-            </table>
+        <div className="Profile">
+            <NavigationBar />
+            <div className="container mt-5">
+                <p className="has-text-centered">{msg}</p>
+
+                <h2>Edit Profile:</h2>
+            <form onSubmit={update}>
+                <label>Name: </label>
+                <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder={name}
+                onChange={event => setNewName(event.target.value)}
+                autoComplete="off"
+                />
+                <br />
+                <p>Email: {email}</p>
+                <br />
+                <button type="submit">Submit</button>
+            </form>
+            </div>
         </div>
+        
     )
 }
  
-export default Dashboard
+export default Profile
