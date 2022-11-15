@@ -4,6 +4,11 @@ Select mysql server. INSTALL AND SET PASSWORD TO "password"
 Create a new schema called auth_db.
 DONE
 
+# You need to download MYSQL Workbench
+https://www.mysql.com/products/workbench/
+
+Once downloaded you need to click the plus icon next to MySQL Connections. Set host name to 127.0.0.1. Set port to 3306. Set username to root. Set password to password. Create a database called auth_db. Create a blank table called users.
+
 ## You need to run BOTH the Backend AND the Frontend
 
 Navigate to Backend in cmd or terminal and run
@@ -28,14 +33,6 @@ Navigate to Backend in cmd or terminal and run
 Navigate to pool-party in cmd or terminal and run
 
 ### `npm i`
-
-# You need to download MYSQL
-https://www.mysql.com/downloads/
-
-# You need to download MYSQL Workbench
-https://www.mysql.com/products/workbench/
-
-Once downloaded you need to click the plus icon next to MySQL Connections. Set host name to 127.0.0.1. Set port to 3306. Set username to root. Set password to password. Create a database called auth_db. Create a blank table called users.
 
 # To build for production environment
 
