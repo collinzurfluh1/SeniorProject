@@ -1,4 +1,9 @@
 # Senior Project Getting Started
+## You need to install MYSQL from mysql.com
+Select mysql server. INSTALL AND SET PASSWORD TO "password"
+Create a new schema called auth_db.
+DONE
+
 ## You need to run BOTH the Backend AND the Frontend
 
 Navigate to Backend in cmd or terminal and run
