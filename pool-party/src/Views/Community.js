@@ -5,7 +5,7 @@ import CommunityBody from '../Modules/CommunityBody';
 
 function Community() {
   return (
-    <div id="Home">
+    <div id="Community">
         <NavigationBar />
         <CommunityBody />
         <Footer />

@@ -5,7 +5,7 @@ import Footer from '../Modules/Footer';
 
 function Creator() {
   return (
-    <div id="Home">
+    <div id="Creator">
         <NavigationBar />
         <CreatorBody />
         <Footer />

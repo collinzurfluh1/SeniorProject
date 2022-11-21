@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button } from '@mui/material';
 import { createRoutesFromElements, useNavigate } from 'react-router-dom';
 
-import '../SCSS/home.scss';
+import '../SCSS/creator.scss';
 function CreatorBody() {
   const navigate = useNavigate();
 
