@@ -8,7 +8,8 @@ import Login from "./Views/Login";
 import Register from "./Views/Register";
 import Dashboard from "./Views/Dashboard";
 import Profile from "./Views/Profile";
-
+import Creator from "./Views/Creator";
+import Community from "./Views/Community";
 
 // import Creator from './Views/Creator';
 // import Login from './Views/Login';
@@ -24,14 +25,9 @@ function App() {
           <Route path="/Register" element={<Register />} />
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Profile" element={<Profile />} />
+          <Route path="/Creator" element={<Creator />} />
+          <Route path="/Community" element={<Community />} />
 
-
-
-          {/* <Route path="/Creator" element={<Creator />} />
-          <Route path="/Login" element={<Login />} />
-          <Route path="blogs" element={<Blogs />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="*" element={<NoPage />} /> */}
         </Route>
       </Routes>
     </BrowserRouter>
