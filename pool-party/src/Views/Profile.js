@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import NavigationBar from '../Modules/NavigationBar';
  
 const Profile = () => {
-    const [name, setName] = useState('');
+    const [username, setName] = useState('');
     const [email, setEmail] = useState('');
     const [token, setToken] = useState('');
     const [expire, setExpire] = useState('');
@@ -42,7 +42,7 @@ const Profile = () => {
             const response = await axios.get('http://localhost:4000/token');
             setToken(response.data.accessToken);
             const decoded = jwt_decode(response.data.accessToken);
-            setName(decoded.name);
+            setName(decoded.username);
             setEmail(decoded.email);
             setExpire(decoded.exp);
         } catch (error) {
@@ -63,7 +63,7 @@ const Profile = () => {
             config.headers.Authorization = `Bearer ${response.data.accessToken}`;
             setToken(response.data.accessToken);
             const decoded = jwt_decode(response.data.accessToken);
-            setName(decoded.name);
+            setName(decoded.username);
             setEmail(decoded.email);
             console.log(response);
             setExpire(decoded.exp);
@@ -81,12 +81,12 @@ const Profile = () => {
 
                 <h2>Edit Profile:</h2>
             <form onSubmit={update}>
-                <label>Name: </label>
+                <label>Username: </label>
                 <input
                 type="text"
-                id="name"
-                name="name"
-                placeholder={name}
+                id="username"
+                name="username"
+                placeholder={username}
                 onChange={event => setNewName(event.target.value)}
                 autoComplete="off"
                 />

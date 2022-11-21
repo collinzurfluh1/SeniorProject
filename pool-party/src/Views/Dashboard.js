@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import NavigationBar from '../Modules/NavigationBar';
  
 const Dashboard = () => {
-    const [name, setName] = useState('');
+    const [username, setName] = useState('');
     const [token, setToken] = useState('');
     const [expire, setExpire] = useState('');
     const [users, setUsers] = useState([]);
@@ -22,7 +22,7 @@ const Dashboard = () => {
             const response = await axios.get('http://localhost:4000/token');
             setToken(response.data.accessToken);
             const decoded = jwt_decode(response.data.accessToken);
-            setName(decoded.name);
+            setName(decoded.username);
             setExpire(decoded.exp);
         } catch (error) {
             if (error.response) {
@@ -42,7 +42,7 @@ const Dashboard = () => {
             config.headers.Authorization = `Bearer ${response.data.accessToken}`;
             setToken(response.data.accessToken);
             const decoded = jwt_decode(response.data.accessToken);
-            setName(decoded.name);
+            setName(decoded.username);
             setExpire(decoded.exp);
         }
         return config;
@@ -61,12 +61,12 @@ const Dashboard = () => {
  
     return (
         <div className="container mt-5">
-            <h1>Welcome Back: {name}</h1>
+            <h1>Welcome Back: {username}</h1>
             <table className="table is-striped is-fullwidth">
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Name</th>
+                        <th>Username</th>
                         <th>Email</th>
                     </tr>
                 </thead>
@@ -74,7 +74,7 @@ const Dashboard = () => {
                     {users.map((user, index) => (
                         <tr key={user.id}>
                             <td>{index + 1}</td>
-                            <td>{user.name}</td>
+                            <td>{user.username}</td>
                             <td>{user.email}</td>
                         </tr>
                     ))}

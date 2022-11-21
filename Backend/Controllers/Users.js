@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 export const getUsers = async(req, res) => {
     try {
         const users = await Users.findAll({
-            attributes:['id','name','email']
+            attributes:['id','username','email']
         });
         res.json(users);
     } catch (error) {
@@ -14,13 +14,13 @@ export const getUsers = async(req, res) => {
 }
  
 export const Register = async(req, res) => {
-    const { name, email, password, confPassword } = req.body;
+    const { username, email, password, confPassword } = req.body;
     if(password !== confPassword) return res.status(400).json({msg: "Passwords do not match"});
     const salt = await bcrypt.genSalt();
     const hashPassword = await bcrypt.hash(password, salt);
     try {
         await Users.create({
-            name: name,
+            username: username,
             email: email,
             password: hashPassword
         });
@@ -37,7 +37,7 @@ export const UpdateUser = async(req, res) => {
     try {
         if(newName != "[]"){
             Users.update({
-                name: newName }, {where: {email: oldEmail}}
+                username: newName }, {where: {email: oldEmail}}
             )
         }
         res.status(404).json({msg:"Updated Successfully!"});
@@ -53,15 +53,16 @@ export const Login = async(req, res) => {
                 email: req.body.email
             }
         });
+       
         const match = await bcrypt.compare(req.body.password, user[0].password);
         if(!match) return res.status(400).json({msg: "Wrong Password!"});
         const userId = user[0].id;
-        const name = user[0].name;
+        const username = user[0].username;
         const email = user[0].email;
-        const accessToken = jwt.sign({userId, name, email}, process.env.ACCESS_TOKEN_SECRET,{
+        const accessToken = jwt.sign({userId, username, email}, process.env.ACCESS_TOKEN_SECRET,{
             expiresIn: '15s'
         });
-        const refreshToken = jwt.sign({userId, name, email}, process.env.REFRESH_TOKEN_SECRET,{
+        const refreshToken = jwt.sign({userId, username, email}, process.env.REFRESH_TOKEN_SECRET,{
             expiresIn: '1d'
         });
         await Users.update({refresh_token: refreshToken},{

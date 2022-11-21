@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
  
 const Register = () => {
-    const [name, setName] = useState('');
+    const [username, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confPassword, setConfPassword] = useState('');
@@ -14,7 +14,7 @@ const Register = () => {
         e.preventDefault();
         try {
             await axios.post('http://localhost:4000/users', {
-                name: name,
+                username: username,
                 email: email,
                 password: password,
                 confPassword: confPassword
@@ -36,10 +36,10 @@ const Register = () => {
                             <form onSubmit={Register} className="box">
                                 <p className="has-text-centered">{msg}</p>
                                 <div className="field mt-5">
-                                    <label className="label">Name</label>
+                                    <label className="label">Username</label>
                                     <div className="controls">
-                                        <input type="text" className="input" placeholder="Name"
-                                            value={name} onChange={(e) => setName(e.target.value)} />
+                                        <input type="text" className="input" placeholder="Username"
+                                            value={username} onChange={(e) => setName(e.target.value)} />
                                     </div>
                                 </div>
                                 <div className="field mt-5">
