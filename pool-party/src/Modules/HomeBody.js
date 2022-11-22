@@ -7,10 +7,10 @@ function HomeBody() {
   const navigate = useNavigate();
 
   const creator = () => {
-      navigate('/creator');
+      navigate('/Creator');
   }
   const community = () => {
-    navigate('/community');
+    navigate('/Community');
   } 
 
   return (
@@ -21,8 +21,8 @@ function HomeBody() {
           <h3>Welcome To Pool Party. Design Your Dream Pool Today!</h3>
         </div>
         <div className="heroButton">
-        <Button variant="contained" onClick={creator}>Get Started</Button>
-        <Button variant="contained" onClick={community}>Community Pools</Button>
+        <Button variant="contained" href="/Creator">Get Started</Button>
+        <Button variant="contained" href="/Community">Community Pools</Button>
         </div>
       </div>
   </div>

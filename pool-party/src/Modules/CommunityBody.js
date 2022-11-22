@@ -11,7 +11,7 @@ function CommunityBody() {
   }
 
   return (
-    <div id="Home">
+    <div id="Community">
         <div className="heroText">
           <h1>Community Pools</h1>
         </div>

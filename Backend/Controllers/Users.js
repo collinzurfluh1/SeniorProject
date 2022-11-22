@@ -32,18 +32,60 @@ export const Register = async(req, res) => {
     }
 }
 
-export const UpdateUser = async(req, res) => {
-    const { newName, oldEmail } = req.body;
-    try {
-        if(newName != "[]"){
-            Users.update({
-                username: newName }, {where: {email: oldEmail}}
-            )
+export const UpdateUsername = async(req, res) => {
+    const { newName, id } = req.body;
+    const username = newName;
+        if(newName.length < 1){
+        return res.status(400).json({msg: "ERROR! Username must be greater than 1 character."});
         }
-        res.status(404).json({msg:"Updated Successfully!"});
-    } catch (error) {
+        else{
+            const users = await Users.findOne({ where: { 
+                username: username
+            } });
+            if(users != null){
+                return res.status(400).json({msg: "ERROR! Username already Exists."});
+            }
+            else{
+                try {
+                    if(newName != "[]"){
+                        Users.update({
+                            username: newName }, {where: {id: id}}
+                        )
+                    }
+                    res.status(404).json({msg:"Updated Successfully!"});
+                    } catch (error) {
+            
+                }
+            }
+        }
+}
 
-    }
+export const UpdateEmail = async(req, res) => {
+    const { newEmail, id } = req.body;
+    const email = newEmail;
+        if(email.length < 1){
+        return res.status(400).json({msg: "ERROR! Email must be greater than 1 character."});
+        }
+        else{
+            const users = await Users.findOne({ where: { 
+                email: email
+            } });
+            if(users != null){
+                return res.status(400).json({msg: "ERROR! Email already Exists."});
+            }
+            else{
+                try {
+                    if(newEmail != "[]"){
+                        Users.update({
+                            email: email }, {where: {id: id}}
+                        )
+                    }
+                    res.status(404).json({msg:"Updated Successfully!"});
+                    } catch (error) {
+            
+                }
+            }
+        }
 }
  
 export const Login = async(req, res) => {
