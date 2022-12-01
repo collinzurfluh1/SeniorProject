@@ -11,7 +11,7 @@ function CreatorBody() {
   }
 
   return (
-    <div id="Home">
+    <div id="Creator">
         <div className="heroText">
           <h1>Creator Portal</h1>
         </div>

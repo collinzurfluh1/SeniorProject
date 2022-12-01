@@ -14,7 +14,7 @@ function NavigationBar() {
 }, []);
 
 
-  const [name, setName] = useState('');
+  const [username, setName] = useState('');
   const [token, setToken] = useState('');
   const [expire, setExpire] = useState('');
   const [users, setUsers] = useState([]);
@@ -33,7 +33,7 @@ function NavigationBar() {
         const response = await axios.get('http://localhost:4000/token');
         setToken(response.data.accessToken);
         const decoded = jwt_decode(response.data.accessToken);
-        setName(decoded.name);
+        setName(decoded.username);
         setExpire(decoded.exp);
         setLoggedIn(response.request.withCredentials);
 
@@ -63,7 +63,7 @@ function NavigationBar() {
             <Nav.Link href="/Community">Community</Nav.Link>
         </Nav>
           <Nav>
-          { isLoggedIn ?  <NavDropdown title={name} id="navbarScrollingDropdown">
+          { isLoggedIn ?  <NavDropdown title={username} id="navbarScrollingDropdown">
                             <NavDropdown.Item href="/Profile">Profile</NavDropdown.Item>
                             <NavDropdown.Item href="/Saved-Pools">Saved Pools</NavDropdown.Item>
 

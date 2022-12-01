@@ -1,0 +1,31 @@
+#Login{
+    .hero{
+        background-image: url("../Assets/poolpartybackground.jpg");
+        background-size: cover;
+        background-position: center;
+        background-color: black;
+        overflow-y: hidden;
+        height: 90vh;
+    }
+
+    .header{
+        display:flex;
+        justify-content: center;
+    }
+
+    .error{
+        color:red;
+    }
+
+    .accountQuestion{
+        display:flex;
+        justify-content: center;
+        a{
+            color:blue;
+            text-decoration: underline;
+        }
+        a:hover{
+            color:black;
+        }
+    }
+}
