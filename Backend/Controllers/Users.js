@@ -16,6 +16,7 @@ export const getUsers = async(req, res) => {
 export const Register = async(req, res) => {
     const { username, email, password, confPassword } = req.body;
     if(password !== confPassword) return res.status(400).json({msg: "Passwords do not match"});
+    if(isEmailValid(email) == false) return res.status(400).json({msg: "Email is invalid!"});
     const salt = await bcrypt.genSalt();
     const hashPassword = await bcrypt.hash(password, salt);
     try {
@@ -30,6 +31,31 @@ export const Register = async(req, res) => {
             res.status(404).json({msg:"Email already exists!"});
         }
     }
+}
+
+var emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
+
+export function isEmailValid(email) {
+    if (!email)
+        return false;
+
+    if(email.length>254)
+        return false;
+
+    var valid = emailRegex.test(email);
+    if(!valid)
+        return false;
+
+    // Further checking of some things regex can't handle
+    var parts = email.split("@");
+    if(parts[0].length>64)
+        return false;
+
+    var domainParts = parts[1].split(".");
+    if(domainParts.some(function(part) { return part.length>63; }))
+        return false;
+
+    return true;
 }
 
 export const UpdateUsername = async(req, res) => {
@@ -63,6 +89,7 @@ export const UpdateUsername = async(req, res) => {
 export const UpdateEmail = async(req, res) => {
     const { newEmail, id } = req.body;
     const email = newEmail;
+        if(isEmailValid(email) == false) return res.status(400).json({msg: "Email is invalid!"});
         if(email.length < 1){
         return res.status(400).json({msg: "ERROR! Email must be greater than 1 character."});
         }
@@ -89,36 +116,74 @@ export const UpdateEmail = async(req, res) => {
 }
  
 export const Login = async(req, res) => {
-    try {
-        const user = await Users.findAll({
-            where:{
-                email: req.body.email
-            }
-        });
-       
-        const match = await bcrypt.compare(req.body.password, user[0].password);
-        if(!match) return res.status(400).json({msg: "Wrong Password!"});
-        const userId = user[0].id;
-        const username = user[0].username;
-        const email = user[0].email;
-        const accessToken = jwt.sign({userId, username, email}, process.env.ACCESS_TOKEN_SECRET,{
-            expiresIn: '15s'
-        });
-        const refreshToken = jwt.sign({userId, username, email}, process.env.REFRESH_TOKEN_SECRET,{
-            expiresIn: '1d'
-        });
-        await Users.update({refresh_token: refreshToken},{
-            where:{
-                id: userId
-            }
-        });
-        res.cookie('refreshToken', refreshToken,{
-            httpOnly: true,
-            maxAge: 24 * 60 * 60 * 1000
-        });
-        res.json({ accessToken });
-    } catch (error) {
-        res.status(404).json({msg:"Email not found"});
+    console.log(req.body);
+    if(isEmailValid(req.body.email) == true){
+        try {
+            const user = await Users.findAll({
+                where:{
+                    email: req.body.email
+                }
+            });
+        
+            const match = await bcrypt.compare(req.body.password, user[0].password);
+            if(!match) return res.status(400).json({msg: "Wrong Password!"});
+            const userId = user[0].id;
+            const username = user[0].username;
+            const email = user[0].email;
+            const accessToken = jwt.sign({userId, username, email}, process.env.ACCESS_TOKEN_SECRET,{
+                expiresIn: '15s'
+            });
+            const refreshToken = jwt.sign({userId, username, email}, process.env.REFRESH_TOKEN_SECRET,{
+                expiresIn: '1d'
+            });
+            await Users.update({refresh_token: refreshToken},{
+                where:{
+                    id: userId
+                }
+            });
+            res.cookie('refreshToken', refreshToken,{
+                httpOnly: true,
+                maxAge: 24 * 60 * 60 * 1000
+            });
+            res.json({ accessToken });
+        } catch (error) {
+            res.status(404).json({msg:"Email not found"});
+        }
+    }
+    else {
+        console.log(req.body.username);
+        try {
+            const user = await Users.findAll({
+                where:{
+                    username: req.body.username
+                }
+            });
+            console.log(user);
+        
+            const match = await bcrypt.compare(req.body.password, user[0].password);
+            if(!match) return res.status(400).json({msg: "Wrong Password!"});
+            const userId = user[0].id;
+            const username = user[0].username;
+            const email = user[0].email;
+            const accessToken = jwt.sign({userId, username, email}, process.env.ACCESS_TOKEN_SECRET,{
+                expiresIn: '15s'
+            });
+            const refreshToken = jwt.sign({userId, username, email}, process.env.REFRESH_TOKEN_SECRET,{
+                expiresIn: '1d'
+            });
+            await Users.update({refresh_token: refreshToken},{
+                where:{
+                    id: userId
+                }
+            });
+            res.cookie('refreshToken', refreshToken,{
+                httpOnly: true,
+                maxAge: 24 * 60 * 60 * 1000
+            });
+            res.json({ accessToken });
+        } catch (error) {
+            res.status(404).json({msg:"Username not found"});
+        }
     }
 }
  
