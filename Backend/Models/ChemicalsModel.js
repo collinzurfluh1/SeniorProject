@@ -3,27 +3,20 @@ import db from "../config/Database.js";
  
 const { DataTypes } = Sequelize;
  
-const Users = db.define('users',{
-    username:{
+const Chemicals = db.define('chemicals',{
+    name:{
         type: DataTypes.STRING,
         unique: {
             args: true,
-            msg: 'Username already in use!'
+            msg: 'chemical name already exists.'
         }
     },
-    email:{
+    type:{
         type: DataTypes.STRING,
-        unique: {
-            args: true,
-            msg: 'Email address already in use!'
-        }
     },
-    password:{
-        type: DataTypes.STRING
+    ounce_cost:{
+        type: DataTypes.DOUBLE 
     },
-    refresh_token:{
-        type: DataTypes.TEXT
-    }
 },{
     freezeTableName:true
 });
@@ -32,4 +25,4 @@ const Users = db.define('users',{
     await db.sync();
 })();
  
-export default Users;
+export default Chemicals;

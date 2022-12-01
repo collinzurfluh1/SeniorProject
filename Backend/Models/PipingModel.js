@@ -3,26 +3,22 @@ import db from "../config/Database.js";
  
 const { DataTypes } = Sequelize;
  
-const Users = db.define('users',{
-    username:{
+const Piping = db.define('piping',{
+    name:{
         type: DataTypes.STRING,
         unique: {
             args: true,
-            msg: 'Username already in use!'
+            msg: 'pipe name already exists.'
         }
     },
-    email:{
+    type:{
         type: DataTypes.STRING,
-        unique: {
-            args: true,
-            msg: 'Email address already in use!'
-        }
     },
-    password:{
-        type: DataTypes.STRING
+    size:{
+        type: DataTypes.DOUBLE 
     },
-    refresh_token:{
-        type: DataTypes.TEXT
+    linft_cost:{
+        type: DataTypes.DOUBLE
     }
 },{
     freezeTableName:true
@@ -32,4 +28,4 @@ const Users = db.define('users',{
     await db.sync();
 })();
  
-export default Users;
+export default Piping;
