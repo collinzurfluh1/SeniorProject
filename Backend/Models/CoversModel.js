@@ -19,7 +19,7 @@ const Covers = db.define('covers',{
         type: DataTypes.STRING // for now. we will use numrange type in future.
     },
     sqft_cost:{
-        type: DataTypes.double
+        type: DataTypes.DOUBLE
     }
 },{
     freezeTableName:true

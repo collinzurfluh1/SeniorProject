@@ -15,10 +15,10 @@ const Piping = db.define('piping',{
         type: DataTypes.STRING,
     },
     size:{
-        type: DataTypes.double 
+        type: DataTypes.DOUBLE 
     },
     linft_cost:{
-        type: DataTypes.double
+        type: DataTypes.DOUBLE
     }
 },{
     freezeTableName:true

@@ -15,10 +15,10 @@ const Wiring = db.define('wiring',{
         type: DataTypes.STRING,
     },
     gauge:{
-        type: DataTypes.double
+        type: DataTypes.DOUBLE
     },
     linft_cost:{
-        type: DataTypes.double
+        type: DataTypes.DOUBLE
     }
 },{
     freezeTableName:true
