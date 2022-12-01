@@ -10,6 +10,8 @@ import Dashboard from "./Views/Dashboard";
 import Profile from "./Views/Profile";
 import Creator from "./Views/Creator";
 import Community from "./Views/Community";
+import React, { Component }  from 'react';
+
 
 // import Creator from './Views/Creator';
 // import Login from './Views/Login';

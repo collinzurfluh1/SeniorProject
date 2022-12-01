@@ -1,7 +1,7 @@
 import CreatorBody from '../Modules/CreatorBody';
 import NavigationBar from '../Modules/NavigationBar';
 import Footer from '../Modules/Footer';
-
+import React, { Component }  from 'react';
 
 function Creator() {
   return (
