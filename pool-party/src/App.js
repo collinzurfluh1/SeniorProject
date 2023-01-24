@@ -18,6 +18,7 @@ import Dashboard from "./Views/Dashboard";
 import Profile from "./Views/Profile";
 import Creator from "./Views/Creator";
 import Community from "./Views/Community";
+import SavedPools from './Views/SavedPools';
 import { motion, AnimatePresence } from "framer-motion";
 
 
@@ -63,6 +64,7 @@ function App() {
             <Route path="/Profile" element={<Profile />} />
             <Route path="/Creator" element={<Creator />} />
             <Route path="/Community" element={<Community />} />
+            <Route path="/Saved-Pools" element={<SavedPools />} />
           </Route>
         </Routes>
       </Router>
