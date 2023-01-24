@@ -8,6 +8,7 @@ const Login = () => {
         <div id='Login'>
             <NavigationBar/>
             <LoginBody/>
+            <Footer/>
         </div>
     )
 }
