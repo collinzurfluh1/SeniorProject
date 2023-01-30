@@ -1,5 +1,4 @@
 #Creator{
-
     .Pool-Elements{
         background-color: cyan; 
         border-radius:5px; 
@@ -10,7 +9,15 @@
         width: 50%; 
         margin: auto; 
         margin-top: 40px; 
+        display: "none";
     
+
+    }
+    .Iniital-Show{
+        display: block; 
+    }
+    .Initial-Hide{
+        display: "none";
 
     }
 

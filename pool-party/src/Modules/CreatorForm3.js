@@ -16,7 +16,6 @@ class CreatorForm3 extends React.Component {
         material: props.getPoolMaterial()
       };
       this.updatePoolMaterial = this.updatePoolMaterial.bind(this); 
-      alert(this.state.material);
 
   }
 
