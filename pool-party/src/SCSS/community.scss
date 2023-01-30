@@ -1,4 +1,8 @@
 #Community{
+    overflow-y:scroll;
+    display:flex;
+    flex-direction: column;
+
     .Hero-image{
         width:100%;
         height: 90vh;

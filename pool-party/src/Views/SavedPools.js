@@ -4,7 +4,7 @@ import CommunityBody from '../Modules/CommunityBody';
 import SmallHeader from '../Modules/SmallHeader';
 
 
-function Community() {
+function SavedPools() {
   return (
     <div id="Community">
         <NavigationBar />
@@ -15,4 +15,4 @@ function Community() {
   );
 }
 
-export default Community;
+export default SavedPools;

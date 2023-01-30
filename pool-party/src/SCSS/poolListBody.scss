@@ -1,0 +1,91 @@
+#poolList{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px;
+    justify-content: space-between;
+    gap:20px;
+    @media only screen and (max-width: 600px) {
+        #poolListItem{
+            width:100% !important;
+        }
+      }
+
+    #poolListItem:hover{
+        box-shadow: 0 5px 15px rgba(6, 58, 75, 0.4);
+    }
+
+
+    #poolListItem{
+        transition: all .2s ease-in-out; 
+        margin-top:15px;
+        box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+        display:flex;
+        flex-direction:row;
+        width: 48%;
+        gap:5px;
+        border-radius: 15px;
+        padding:5px;
+        cursor: pointer;
+
+        .poolListImage{
+            width:100px;
+            height:100%;
+            display:flex;
+        }
+
+        .poolListBody{
+            width:100%;
+            overflow: hidden;
+            padding-right:5px;
+            .poolListTitle{
+                display:flex;
+                gap:5px;
+                height:30px;
+                .title{
+                    flex: 1;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    h3{
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                    
+                    margin:0;
+                }
+                
+                .poolListActions{
+                    flex:0 1;
+                    width:25px;
+                    justify-self: flex-end;
+                }
+            }
+
+            .poolListAuthor{
+                p{
+                    margin:0px;
+                }
+                text-overflow: ellipsis;
+                margin-bottom:10px;
+
+            }
+
+            .poolListContent{
+                p{margin-bottom:0em;}
+            }
+
+            .poolListActions{
+                Svg{
+                    height:20px;
+                    width:20px;
+                    transition: all 0.5s;
+                    transform-origin: 50% 50%;
+                }
+                Svg:hover{
+                    transform: scale(1.1);
+                }
+            }
+        }
+    }
+
+}

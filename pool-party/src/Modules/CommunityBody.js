@@ -1,6 +1,7 @@
 import React, { Component } from 'react'; 
 import { Button } from '@mui/material';
 import { createRoutesFromElements, useNavigate } from 'react-router-dom';
+import PoolListBody from './PoolListBody';
 
 import '../SCSS/community.scss';
 function CommunityBody() {
@@ -11,10 +12,14 @@ function CommunityBody() {
   }
 
   return (
-    <div id="Community">
-        <div className="heroText">
-          <h1>Community Pools</h1>
-        </div>
+    <div id="CommunityList">
+      <div id='poolList'>
+        <PoolListBody />
+        <PoolListBody />
+        <PoolListBody />
+        <PoolListBody />
+      </div>
+       
   </div>
   );
 }

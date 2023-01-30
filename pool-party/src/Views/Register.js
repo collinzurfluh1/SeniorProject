@@ -10,6 +10,7 @@ const Register = () => {
         <div id="Register">
             <NavigationBar/>
             <RegisterBody/>
+            <Footer/>
         </div>
     )
 }

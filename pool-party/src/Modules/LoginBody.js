@@ -59,7 +59,7 @@ function LoginBody() {
       }
   }
   return (
-    <section className="hero is-fullheight is-fullwidth">
+    <section className="hero is-fullwidth">
     <div className="hero-body">
         <div className="container">
             <div className="columns is-centered">
