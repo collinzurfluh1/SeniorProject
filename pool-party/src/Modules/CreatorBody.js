@@ -3,7 +3,6 @@ import Component from "react";
 import { render } from "react-dom";
 import { Button } from "@mui/material";
 import { createRoutesFromElements, useNavigate } from "react-router-dom";
-import $ from "jquery";
 import { useRef } from "react";
 import ref from "react"; 
 import CreatorForm1 from "../Modules/CreatorForm1";

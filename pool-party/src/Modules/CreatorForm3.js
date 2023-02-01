@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Button } from "@mui/material";
 import { createRoutesFromElements, useNavigate } from "react-router-dom";
-import $ from "jquery";
 import { useRef } from "react";
 
 import "../SCSS/creator.scss";
