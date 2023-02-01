@@ -18,6 +18,7 @@ import Dashboard from "./Views/Dashboard";
 import Profile from "./Views/Profile";
 import Creator from "./Views/Creator";
 import Community from "./Views/Community";
+import React from 'react'
 import SavedPools from './Views/SavedPools';
 import { motion, AnimatePresence } from "framer-motion";
 
