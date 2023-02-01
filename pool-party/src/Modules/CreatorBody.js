@@ -77,14 +77,6 @@ class CreatorBody extends React.Component {
      }); 
   }
 
- 
-
-
-
-
-
-
-
   /* Pool Name Getter and Setter */
   SetPoolName = (poolName) => {
     this.setState({_poolName: poolName}, function() {
@@ -142,6 +134,7 @@ class CreatorBody extends React.Component {
 
     return (
       <div id="Creator">
+        <div className="creator-body">
         <div className="heroText">
           <h1>Creator Portal</h1>
         </div>
@@ -162,16 +155,19 @@ class CreatorBody extends React.Component {
           </div>
 
           <div className="creatorFormNavigation">
-            <button variant="contained" onClick={() => this.prev()}>
+            <Button variant="contained" onClick={() => this.prev()}>
               Prev
-            </button>
-            <button variant="contained" onClick={() => this.next()}>
+            </Button>
+            <Button variant="contained" onClick={() => this.next()}>
               Next
-            </button>
+            </Button>
           </div>
     
         </div>
       </div>
+      </div>
+
+       
     );
   }
 }

@@ -31,9 +31,9 @@ class CreatorForm1 extends React.Component {
   render() {
     return (
       <div id="Creator">
-      <div className="heroText">
-        <h1>Please Name Your Pool</h1>
-        <label>Pool Name: </label><br></br>
+      <div className="CreatorFormTitle">
+        <h2>Please Name Your Pool</h2>
+        <label className="CreatorFormLabel">Pool Name: </label><br></br>
         <input type="text" defaultValue={this.state.value} onChange={this.updatePoolName}></input><br></br>
         
       </div>

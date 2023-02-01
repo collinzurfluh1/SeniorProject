@@ -1,18 +1,18 @@
 import NavigationBar from '../Modules/NavigationBar';
 import Footer from '../Modules/Footer';
 import CommunityBody from '../Modules/CommunityBody';
-import SmallHeader from '../Modules/SmallHeader';
+import MyPoolHeader from '../Modules/MyPoolHeader';
 
 
-function SavedPools() {
+function MyPools() {
   return (
     <div id="Community">
         <NavigationBar />
-        <SmallHeader />
+        <MyPoolHeader />
         <CommunityBody />
         <Footer />
     </div>
   );
 }
 
-export default SavedPools;
+export default MyPools;

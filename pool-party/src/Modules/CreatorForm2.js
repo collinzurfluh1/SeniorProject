@@ -42,13 +42,13 @@ class CreatorForm2 extends React.Component {
   render() {
     return (
         <div id="Creator">
-          <div className="heroText">
-            <h1>Please Choose the Pool Shape</h1>
-            <label>Width: </label>
+          <div className="CreatorFormTitle">
+            <h2>Please Choose the Pool Shape</h2>
+            <label className="CreatorFormLabel">Width: </label>
             <input type="text" defaultValue={this.state.poolWidth} onChange={this.updatePoolWidth}></input><br></br>
-            <label>Length: </label>
+            <label className="CreatorFormLabel">Length: </label>
             <input type="text" defaultValue={this.state.poolLength} onChange={this.updatePoolLength}></input><br></br>
-            <label>Depth: </label>
+            <label className="CreatorFormLabel">Depth: </label>
             <input type="text" defaultValue={this.state.poolLength} onChange={this.updatePoolLength}></input><br></br>
           </div>
         </div>
