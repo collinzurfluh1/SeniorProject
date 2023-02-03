@@ -16,7 +16,9 @@ class CreatorBody extends React.Component {
   constructor(props) {
     super(props);
     this.currIndex = 1;
+    this.maxIndex = 3; 
     this.state = {
+      nextButtonText: "Next",
       name: "React",
       creatorForm1: true,
       creatorForm2: false,
@@ -25,7 +27,9 @@ class CreatorBody extends React.Component {
       _poolWidth: 0,
       _poolDepth: 0,
       _poolLength: 0,
-      _poolMaterial: ""
+      _poolMaterial: "",
+      _shallowDepth: "",
+      _deepDepth: ""
     };
     this._form1 = React.createRef(); 
     this._form2 = React.createRef(); 
@@ -34,6 +38,28 @@ class CreatorBody extends React.Component {
     this.SetPoolName = this.SetPoolName.bind(this); 
   }
 
+/* Shallow Depth Getters And Setters*/
+GetDeepDepth = () => {
+  return this.state._deepDepth; 
+
+}
+
+SetDeepDepth = (deepDepth) => {
+this.setState({_deepDepth: deepDepth}, function() {
+ }); 
+}
+
+
+  /* Shallow Depth Getters And Setters*/
+  GetShallowDepth = () => {
+    return this.state._shallowDepth; 
+
+  }
+
+  SetShallowDepth = (shallowDepth) => {
+  this.setState({_shallowDepth: shallowDepth}, function() {
+   }); 
+  }
 
   /* Pool Width Getters And Setters*/
   GetPoolWidth = () => {
@@ -95,13 +121,21 @@ class CreatorBody extends React.Component {
       this.hideComponent(this.currIndex);
     }
   }
+
   next() {
-    if(this.currIndex < 3){
+    if(this.currIndex < this.maxIndex){
       this.currIndex++;
+      
+      
       this.hideComponent(this.currIndex);
     }
   }
+    
+
+  
+  
   hideComponent() {
+    
     const state = this.state; 
     state['Your property'] = 'value';
     this.setState(state);
@@ -111,16 +145,21 @@ class CreatorBody extends React.Component {
         this.setState({ creatorForm1: true });
         this.setState({ creatorForm2: false });
         this.setState({ creatorForm3: false });
+        this.setState({ nextButtonText: 'Next'});
         break;
       case 2:
         this.setState({ creatorForm1: false });
         this.setState({ creatorForm2: true });
         this.setState({ creatorForm3: false });
+        this.setState({ nextButtonText: 'Next'});
+
         break;
       case 3:
         this.setState({ creatorForm1: false });
         this.setState({ creatorForm2: false });
         this.setState({ creatorForm3: true });
+        this.setState({ nextButtonText: 'Submit'});
+
         break;
       default:
         return;
@@ -148,6 +187,8 @@ class CreatorBody extends React.Component {
              setPoolWidth={this.SetPoolWidth} getPoolWidth={this.GetPoolWidth}
              setPoolDepth={this.SetPoolDepth} getPoolDepth={this.GetPoolDepth}
              setPoolLength={this.SetPoolLength} getPoolLength={this.GetPoolLength}
+             setShallowDepth={this.SetShallowDepth} getShallowDepth={this.GetShallowDepth}
+             setDeepDepth={this.SetDeepDepth} getDeepDepth={this.GetDeepDepth}
             />}
             {creatorForm3 && <CreatorForm3 ref={this._form3} setPoolMaterial={this.SetPoolMaterial} getPoolMaterial={this.GetPoolMaterial}/>}
             </form>
@@ -158,7 +199,7 @@ class CreatorBody extends React.Component {
               Prev
             </Button>
             <Button variant="contained" onClick={() => this.next()}>
-              Next
+              {this.state.nextButtonText}
             </Button>
           </div>
     

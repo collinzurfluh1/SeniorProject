@@ -13,11 +13,16 @@ class CreatorForm2 extends React.Component {
         name: "React",
         poolWidth: props.getPoolWidth(),
         poolLength: props.getPoolLength(),
-        poolDepth: props.getPoolDepth()
+        poolDepth: props.getPoolDepth(),
+        shallowDepth: props.getShallowDepth(),
+        deepDepth: props.getDeepDepth()
       };
      this.updatePoolWidth = this.updatePoolWidth.bind(this); 
      this.updatePoolLength = this.updatePoolLength.bind(this);
      this.updatePoolDepth = this.updatePoolDepth.bind(this); 
+     this.updateShallowDepth = this.updateShallowDepth.bind(this);
+     this.updateDeepDepth= this.updateDeepDepth.bind(this); 
+
  
 
   }
@@ -37,6 +42,15 @@ class CreatorForm2 extends React.Component {
     this.props.setPoolDepth(event.target.value);
 
   }
+  updateShallowDepth(event){
+    
+    this.props.setShallowDepth(event.target.value);
+
+  }
+
+  updateDeepDepth(event){
+    this.props.setDeepDepth(event.target.value);
+  }
   
   render() {
     return (
@@ -49,6 +63,15 @@ class CreatorForm2 extends React.Component {
             <input type="text" defaultValue={this.state.poolLength} onChange={this.updatePoolLength}></input><br></br>
             <label className="CreatorFormLabel">Depth: </label>
             <input type="text" defaultValue={this.state.poolLength} onChange={this.updatePoolLength}></input><br></br>
+            
+            
+
+            <div id="PoolDepth">
+              <label className="CreatorFormLabel">Shallow Depth: </label>
+              <input type="text" defaultValue={this.state.shallowDepth} onChange={this.updateShallowDepth}></input><br></br>
+              <label className="CreatorFormLabel">Deep Depth: </label>
+              <input type="text" defaultValue={this.state.deepDepth} onChange={this.updateDeepDepth}></input><br></br>
+            </div>
           </div>
         </div>
       );
