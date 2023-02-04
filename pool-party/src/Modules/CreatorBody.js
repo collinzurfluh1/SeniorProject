@@ -23,6 +23,7 @@ class CreatorBody extends React.Component {
       creatorForm1: true,
       creatorForm2: false,
       creatorForm3: false,
+      _poolHasShallowEnd: false,
       _poolName: 'Name',
       _poolWidth: 0,
       _poolDepth: 0,
@@ -37,6 +38,16 @@ class CreatorBody extends React.Component {
     this.hideComponent = this.hideComponent.bind(this);
     this.SetPoolName = this.SetPoolName.bind(this); 
   }
+
+/* Pool Has Shallow End Setters and Getters */
+GetPoolHasShallowEnd = () => {
+  return this.state._poolHasShallowEnd; 
+
+}
+
+FlipPoolHasShallowEnd = () => {
+  this.setState({_poolHasShallowEnd: !this.state._poolHasShallowEnd}, function() {});
+}
 
 /* Shallow Depth Getters And Setters*/
 GetDeepDepth = () => {
@@ -139,7 +150,6 @@ this.setState({_deepDepth: deepDepth}, function() {
     const state = this.state; 
     state['Your property'] = 'value';
     this.setState(state);
-    console.log(this.currIndex);
     switch (this.currIndex) {
       case 1:
         this.setState({ creatorForm1: true });
@@ -189,6 +199,7 @@ this.setState({_deepDepth: deepDepth}, function() {
              setPoolLength={this.SetPoolLength} getPoolLength={this.GetPoolLength}
              setShallowDepth={this.SetShallowDepth} getShallowDepth={this.GetShallowDepth}
              setDeepDepth={this.SetDeepDepth} getDeepDepth={this.GetDeepDepth}
+             flipPoolHasShallowEnd={this.FlipPoolHasShallowEnd} getPoolHasShallowEnd={this.GetPoolHasShallowEnd}
             />}
             {creatorForm3 && <CreatorForm3 ref={this._form3} setPoolMaterial={this.SetPoolMaterial} getPoolMaterial={this.GetPoolMaterial}/>}
             </form>
