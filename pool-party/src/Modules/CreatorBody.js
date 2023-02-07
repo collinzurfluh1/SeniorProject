@@ -24,13 +24,15 @@ class CreatorBody extends React.Component {
       creatorForm2: false,
       creatorForm3: false,
       _poolHasShallowEnd: false,
-      _poolName: 'Name',
+      _poolName: '',
       _poolWidth: 0,
       _poolDepth: 0,
       _poolLength: 0,
       _poolMaterial: "",
       _shallowDepth: "",
-      _deepDepth: ""
+      _deepDepth: "",
+      _poolSlant: "",
+    
     };
     this._form1 = React.createRef(); 
     this._form2 = React.createRef(); 
@@ -38,6 +40,16 @@ class CreatorBody extends React.Component {
     this.hideComponent = this.hideComponent.bind(this);
     this.SetPoolName = this.SetPoolName.bind(this); 
   }
+
+/* Pool Slant Getters and Setters */
+
+SetPoolSlant = (poolSlant) => {
+  this.setState({_poolSlant: poolSlant}, function() {});
+}
+
+GetPoolSlant = () => {
+  return this.state._poolSlant;
+}
 
 /* Pool Has Shallow End Setters and Getters */
 GetPoolHasShallowEnd = () => {
@@ -200,6 +212,7 @@ this.setState({_deepDepth: deepDepth}, function() {
              setShallowDepth={this.SetShallowDepth} getShallowDepth={this.GetShallowDepth}
              setDeepDepth={this.SetDeepDepth} getDeepDepth={this.GetDeepDepth}
              flipPoolHasShallowEnd={this.FlipPoolHasShallowEnd} getPoolHasShallowEnd={this.GetPoolHasShallowEnd}
+             setPoolSlant={this.SetPoolSlant} getPoolSlant={this.GetPoolSlant}
             />}
             {creatorForm3 && <CreatorForm3 ref={this._form3} setPoolMaterial={this.SetPoolMaterial} getPoolMaterial={this.GetPoolMaterial}/>}
             </form>

@@ -17,16 +17,20 @@ class CreatorForm2 extends React.Component {
         poolDepth: props.getPoolDepth(),
         shallowDepth: props.getShallowDepth(),
         deepDepth: props.getDeepDepth(),
+        poolSlant: props.getPoolSlant()
       };
      this.updatePoolWidth = this.updatePoolWidth.bind(this); 
      this.updatePoolLength = this.updatePoolLength.bind(this);
      this.updatePoolDepth = this.updatePoolDepth.bind(this); 
      this.updateShallowDepth = this.updateShallowDepth.bind(this);
      this.updateDeepDepth= this.updateDeepDepth.bind(this); 
+     this.updatePoolSlant = this.updatePoolSlant.bind(this);
      this.flipPoolHasShallowEnd = this.flipPoolHasShallowEnd.bind(this);
     
+  }
 
- 
+  updatePoolSlant(event){
+    this.props.setPoolSlant(event.target.value);
 
   }
   updatePoolWidth(event){
@@ -66,7 +70,7 @@ class CreatorForm2 extends React.Component {
     return (
         <div id="Creator">
           <div className="CreatorFormTitle">
-            <h2>Please Choose the Pool Shape</h2>
+            <h2>Pool Shape</h2>
             <label className="CreatorFormLabel">Width: </label>
             <input type="text" defaultValue={this.state.poolWidth} onChange={this.updatePoolWidth}></input><br></br>
             <label className="CreatorFormLabel">Length: </label>
@@ -87,6 +91,14 @@ class CreatorForm2 extends React.Component {
               <input type="text" defaultValue={this.state.shallowDepth} onChange={this.updateShallowDepth}></input><br></br>
               <label className="CreatorFormLabel">Deep Depth: </label>
               <input type="text" defaultValue={this.state.deepDepth} onChange={this.updateDeepDepth}></input><br></br>
+              <div  onChange={this.updatePoolSlant}>
+              <label className="CreatorFormLabel">Pool Slant: </label><br></br>
+              <input type="radio" id="slant1" value="Diver" name="slant" defaultChecked={this.state.poolSlant == "Diver"}></input>
+              <label for="slant">Diver</label><br></br>
+              <input type="radio" id="slant2" value="Slant" name="slant" defaultChecked={this.state.poolSlant == "Slant"}></input>
+              <label for="slant">Slant</label><br></br>
+              </div>
+
             </div>
           }
           </div>
