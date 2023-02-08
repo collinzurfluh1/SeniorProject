@@ -22,7 +22,7 @@ class CreatorForm7 extends React.Component {
   render() {
     return (
         <div id="Creator">
-          <div className="heroText">
+          <div className="CreatorFormLabel">
               <h1>Pool Drain</h1>
               <input type="radio" id="poolDrain1" name="poolDrain" value="Skimmer" defaultChecked={this.state.material === "Skimmer"}></input>
               <label for="poolDrain1">Skimmer</label><br></br>

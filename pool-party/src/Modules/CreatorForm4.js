@@ -25,7 +25,7 @@ class CreatorForm4 extends React.Component {
   render() {
     return (
         <div id="Creator">
-          <div className="heroText">
+          <div className="CreatorFormLabel">
             <h1>Pool Covers</h1>
             <label for="winter-cover" class="CreatorFormLabel">Winter Cover:</label><br></br>
             <select name="winter-cover" id="winter-cover">
