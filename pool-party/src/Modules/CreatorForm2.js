@@ -81,7 +81,7 @@ class CreatorForm2 extends React.Component {
 
           { !this.state.showShallowEndDiv && 
             <div id="NoShallowEnd">
-              <label className="CreatorFormLabel">Depth: </label>
+              <label className="CreatorFormLabel">Depth: </label><br></br>
               <input type="text" defaultValue={this.state.poolDepth} onChange={this.updatePoolDepth}></input><br></br>
             </div>
           }   
