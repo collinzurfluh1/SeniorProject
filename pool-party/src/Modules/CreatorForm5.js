@@ -22,7 +22,7 @@ class CreatorForm5 extends React.Component {
   render() {
     return (
         <div id="Creator">
-          <div className="heroText">
+          <div className="CreatorFormLabel">
               <h1>Pool Piping Options</h1>
               <input type="radio" id="poolPipe1" name="poolPipe" value="PVC-Rigid" defaultChecked={this.state.material === "PVC-Rigid"}></input>
               <label for="poolPipe1">Rigid PVC</label><br></br>
