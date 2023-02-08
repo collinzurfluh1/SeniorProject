@@ -71,9 +71,9 @@ class CreatorForm2 extends React.Component {
         <div id="Creator">
           <div className="CreatorFormTitle">
             <h2>Pool Shape</h2>
-            <label className="CreatorFormLabel">Width: </label>
+            <label className="CreatorFormLabel">Width: </label><br></br>
             <input type="text" defaultValue={this.state.poolWidth} onChange={this.updatePoolWidth}></input><br></br>
-            <label className="CreatorFormLabel">Length: </label>
+            <label className="CreatorFormLabel">Length: </label><br></br>
             <input type="text" defaultValue={this.state.poolLength} onChange={this.updatePoolLength}></input><br></br>
 
             <label className="CreatorFormLabel">Shallow End?</label>
@@ -87,16 +87,16 @@ class CreatorForm2 extends React.Component {
           }   
           { this.state.showShallowEndDiv &&
             <div id="ShallowEnd">
-              <label className="CreatorFormLabel">Shallow Depth: </label>
+              <label className="CreatorFormLabel">Shallow Depth: </label><br></br>
               <input type="text" defaultValue={this.state.shallowDepth} onChange={this.updateShallowDepth}></input><br></br>
-              <label className="CreatorFormLabel">Deep Depth: </label>
+              <label className="CreatorFormLabel">Deep Depth: </label><br></br>
               <input type="text" defaultValue={this.state.deepDepth} onChange={this.updateDeepDepth}></input><br></br>
               <div  onChange={this.updatePoolSlant}>
-              <label className="CreatorFormLabel">Pool Slant: </label><br></br>
+              <label className="CreatorFormLabel">Pool Slant: </label>
               <input type="radio" id="slant1" value="Diver" name="slant" defaultChecked={this.state.poolSlant == "Diver"}></input>
-              <label for="slant">Diver</label><br></br>
+              <label for="slant" className="CreatorFormLabel">Diver</label>
               <input type="radio" id="slant2" value="Slant" name="slant" defaultChecked={this.state.poolSlant == "Slant"}></input>
-              <label for="slant">Slant</label><br></br>
+              <label for="slant" className="CreatorFormLabel">Slant</label><br></br>
               </div>
 
             </div>
