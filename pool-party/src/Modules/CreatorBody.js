@@ -9,6 +9,8 @@ import CreatorForm1 from "../Modules/CreatorForm1";
 
 import CreatorForm2 from "../Modules/CreatorForm2";
 import CreatorForm3 from "../Modules/CreatorForm3";
+import CreatorForm4 from "../Modules/CreatorForm4";
+import CreatorForm5 from "../Modules/CreatorForm5";
 
 import "../SCSS/creator.scss";
 // How to get next/prev working?
@@ -16,7 +18,7 @@ class CreatorBody extends React.Component {
   constructor(props) {
     super(props);
     this.currIndex = 1;
-    this.maxIndex = 3; 
+    this.maxIndex = 5; 
     this.state = {
       nextButtonText: "Next",
       name: "React",
@@ -32,6 +34,7 @@ class CreatorBody extends React.Component {
       _shallowDepth: "",
       _deepDepth: "",
       _poolSlant: "",
+      _poolConcrete: "",
     
     };
     this._form1 = React.createRef(); 
@@ -167,12 +170,16 @@ this.setState({_deepDepth: deepDepth}, function() {
         this.setState({ creatorForm1: true });
         this.setState({ creatorForm2: false });
         this.setState({ creatorForm3: false });
+        this.setState({ creatorForm4: false});
+        this.setState({ creatorForm5: false});
         this.setState({ nextButtonText: 'Next'});
         break;
       case 2:
         this.setState({ creatorForm1: false });
         this.setState({ creatorForm2: true });
         this.setState({ creatorForm3: false });
+        this.setState({ creatorForm4: false });
+        this.setState({ creatorForm5: false});
         this.setState({ nextButtonText: 'Next'});
 
         break;
@@ -180,16 +187,36 @@ this.setState({_deepDepth: deepDepth}, function() {
         this.setState({ creatorForm1: false });
         this.setState({ creatorForm2: false });
         this.setState({ creatorForm3: true });
-        this.setState({ nextButtonText: 'Submit'});
-
+        this.setState({ creatorForm4: false });
+        this.setState({ creatorForm5: false});
+        this.setState({ nextButtonText: 'Next'});
         break;
+      case 4:
+        this.setState({ creatorForm1: false });
+        this.setState({ creatorForm2: false });
+        this.setState({ creatorForm3: false });
+        this.setState({ creatorForm4: true });
+        this.setState({ creatorForm5: false});
+        this.setState({ nextButtonText: 'Next'});
+          break;
+
+      case 5:
+        this.setState({ creatorForm1: false });
+        this.setState({ creatorForm2: false });
+        this.setState({ creatorForm3: false });
+        this.setState({ creatorForm4: false });
+        this.setState({ creatorForm5: true});
+        this.setState({ nextButtonText: 'Submit'});
+              break;    
+        
+
       default:
         return;
     }
   }
 
   render() {
-    const { creatorForm1, creatorForm2, creatorForm3 } = this.state;
+    const { creatorForm1, creatorForm2, creatorForm3, creatorForm4, creatorForm5 } = this.state;
     var currIndex = 0;
 
     return (
@@ -215,6 +242,8 @@ this.setState({_deepDepth: deepDepth}, function() {
              setPoolSlant={this.SetPoolSlant} getPoolSlant={this.GetPoolSlant}
             />}
             {creatorForm3 && <CreatorForm3 ref={this._form3} setPoolMaterial={this.SetPoolMaterial} getPoolMaterial={this.GetPoolMaterial}/>}
+            {creatorForm4 && <CreatorForm4/>}
+            {creatorForm5 && <CreatorForm5/>}
             </form>
           </div>
 
