@@ -12,6 +12,7 @@ import CreatorForm3 from "../Modules/CreatorForm3";
 import CreatorForm4 from "../Modules/CreatorForm4";
 import CreatorForm5 from "../Modules/CreatorForm5";
 import CreatorForm6 from "../Modules/CreatorForm6";
+import CreatorForm7 from "../Modules/CreatorForm7";
 
 import "../SCSS/creator.scss";
 // How to get next/prev working?
@@ -19,7 +20,7 @@ class CreatorBody extends React.Component {
   constructor(props) {
     super(props);
     this.currIndex = 1;
-    this.maxIndex = 6; 
+    this.maxIndex = 7; 
     this.state = {
       nextButtonText: "Next",
       name: "React",
@@ -174,6 +175,8 @@ this.setState({_deepDepth: deepDepth}, function() {
         this.setState({ creatorForm4: false});
         this.setState({ creatorForm5: false});
         this.setState({ creatorForm6: false});
+        this.setState({ creatorForm7: false});
+
         this.setState({ nextButtonText: 'Next'});
         break;
       case 2:
@@ -183,7 +186,7 @@ this.setState({_deepDepth: deepDepth}, function() {
         this.setState({ creatorForm4: false });
         this.setState({ creatorForm5: false});
         this.setState({ creatorForm6: false});
-
+        this.setState({ creatorForm7: false});
         this.setState({ nextButtonText: 'Next'});
 
         break;
@@ -194,6 +197,8 @@ this.setState({_deepDepth: deepDepth}, function() {
         this.setState({ creatorForm4: false });
         this.setState({ creatorForm5: false});
         this.setState({ creatorForm6: false});
+        this.setState({ creatorForm7: false});
+
         this.setState({ nextButtonText: 'Next'});
         break;
       case 4:
@@ -203,6 +208,8 @@ this.setState({_deepDepth: deepDepth}, function() {
         this.setState({ creatorForm4: true });
         this.setState({ creatorForm5: false});
         this.setState({ creatorForm6: false});
+        this.setState({ creatorForm7: false});
+
         this.setState({ nextButtonText: 'Next'});
           break;
 
@@ -213,6 +220,8 @@ this.setState({_deepDepth: deepDepth}, function() {
         this.setState({ creatorForm4: false });
         this.setState({ creatorForm5: true});
         this.setState({ creatorForm6: false});
+        this.setState({ creatorForm7: false});
+
         this.setState({ nextButtonText: 'Next'});
               break;    
 
@@ -223,8 +232,20 @@ this.setState({_deepDepth: deepDepth}, function() {
         this.setState({ creatorForm4: false });
         this.setState({ creatorForm5: false});
         this.setState({ creatorForm6: true});
+        this.setState({ creatorForm7: false});
+        this.setState({ nextButtonText: 'Next'});
+        break;   
+      case 7:
+        this.setState({ creatorForm1: false });
+        this.setState({ creatorForm2: false });
+        this.setState({ creatorForm3: false });
+        this.setState({ creatorForm4: false });
+        this.setState({ creatorForm5: false});
+        this.setState({ creatorForm6: false});
+        this.setState({ creatorForm7: true});
+
         this.setState({ nextButtonText: 'Submit'});
-              break;   
+        break; 
 
       default:
         return;
@@ -232,7 +253,7 @@ this.setState({_deepDepth: deepDepth}, function() {
   }
 
   render() {
-    const { creatorForm1, creatorForm2, creatorForm3, creatorForm4, creatorForm5, creatorForm6 } = this.state;
+    const { creatorForm1, creatorForm2, creatorForm3, creatorForm4, creatorForm5, creatorForm6, creatorForm7 } = this.state;
     var currIndex = 0;
 
     return (
@@ -261,6 +282,7 @@ this.setState({_deepDepth: deepDepth}, function() {
             {creatorForm4 && <CreatorForm4/>}
             {creatorForm5 && <CreatorForm5/>}
             {creatorForm6 && <CreatorForm6/>}
+            {creatorForm7 && <CreatorForm7/>}
             </form>
           </div>
 
