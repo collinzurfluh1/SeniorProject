@@ -26,9 +26,9 @@ class CreatorForm8 extends React.Component {
               <h1>Pool Skimmer</h1>
               <input type="radio" id="poolSkimmer1" name="poolSkimmer" value="Skimmer1" defaultChecked={this.state.material === "Skimmer1"}></input>
               <label for="poolSkimmer1">Skimmer 1</label><br></br>
-              <input type="radio" id="poolDrain2" name="poolDrain" value="Skimmer2" defaultChecked={this.state.material === "Skimmer2"}></input>
+              <input type="radio" id="poolSkimmer2" name="poolSkimmer" value="Skimmer2" defaultChecked={this.state.material === "Skimmer2"}></input>
               <label for="poolSkimmer2">Skimmer 2</label><br></br>
-              <input type="radio" id="poolDrain3" name="poolDrain" value="Skimmer3" defaultChecked={this.state.material === "Skimmer3"}></input>
+              <input type="radio" id="poolSkimmer3" name="poolSkimmer" value="Skimmer3" defaultChecked={this.state.material === "Skimmer3"}></input>
               <label for="poolSkimmer3">Skimmer 3</label><br></br>
 
              
