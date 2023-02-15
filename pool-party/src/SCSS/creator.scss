@@ -1,4 +1,17 @@
 #Creator{
+    .creator-body{
+        width:100%;
+        height: 90vh;
+        overflow-y: hidden;
+        background-image: url("../Assets/poolpartybackground.jpg");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap:40px;
+    }
     .Pool-Elements{
         background-color: cyan; 
         border-radius:5px; 
@@ -12,6 +25,37 @@
         display: "none";
     
 
+    }
+
+    .creatorFormBody{
+        display: flex;
+        justify-content: center;
+        height:85%;
+        padding: 20px;
+    }
+
+    .CreatorFormLabel{
+        padding-right: 8px;
+    }
+
+    .CreatorFormTitle{
+
+    }
+
+    .creatorForm{
+        display:flex;
+        flex-direction: column;
+        background-color: white;
+        width: 80%;
+        max-width: 500px;
+        padding:20px;
+        border-radius: 10% 10%;
+        min-height: 240px;
+    }
+    .creatorFormNavigation{
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
     }
     .Iniital-Show{
         display: block; 

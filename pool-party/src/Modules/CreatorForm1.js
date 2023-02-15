@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Button } from "@mui/material";
 import { createRoutesFromElements, useNavigate } from "react-router-dom";
-import $ from "jquery";
 import { useRef } from "react";
 
 import "../SCSS/creator.scss";
@@ -31,10 +30,10 @@ class CreatorForm1 extends React.Component {
   render() {
     return (
       <div id="Creator">
-      <div className="heroText">
-        <h1>Please Name Your Pool</h1>
-        <label>Pool Name: </label><br></br>
-        <input type="text" defaultValue={this.state.value} onChange={this.updatePoolName}></input><br></br>
+      <div className="CreatorFormTitle">
+        <h2>Please Name Your Pool</h2>
+        <label className="CreatorFormLabel">Pool Name: </label><br></br>
+        <input type="text" placeholder="Pool Name" defaultValue={this.state.value} onChange={this.updatePoolName}></input><br></br>
         
       </div>
     </div>

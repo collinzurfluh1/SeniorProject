@@ -3,13 +3,18 @@ import Component from "react";
 import { render } from "react-dom";
 import { Button } from "@mui/material";
 import { createRoutesFromElements, useNavigate } from "react-router-dom";
-import $ from "jquery";
 import { useRef } from "react";
 import ref from "react"; 
 import CreatorForm1 from "../Modules/CreatorForm1";
 
 import CreatorForm2 from "../Modules/CreatorForm2";
 import CreatorForm3 from "../Modules/CreatorForm3";
+import CreatorForm4 from "../Modules/CreatorForm4";
+import CreatorForm5 from "../Modules/CreatorForm5";
+import CreatorForm6 from "../Modules/CreatorForm6";
+import CreatorForm7 from "../Modules/CreatorForm7";
+import CreatorForm8 from "../Modules/CreatorForm8";
+import CreatorForm9 from "../Modules/CreatorForm9";
 
 import "../SCSS/creator.scss";
 // How to get next/prev working?
@@ -17,16 +22,24 @@ class CreatorBody extends React.Component {
   constructor(props) {
     super(props);
     this.currIndex = 1;
+    this.maxIndex = 9; 
     this.state = {
+      nextButtonText: "Next",
       name: "React",
       creatorForm1: true,
       creatorForm2: false,
       creatorForm3: false,
-      _poolName: 'Name',
+      _poolHasShallowEnd: false,
+      _poolName: '',
       _poolWidth: 0,
       _poolDepth: 0,
       _poolLength: 0,
-      _poolMaterial: ""
+      _poolMaterial: "",
+      _shallowDepth: "",
+      _deepDepth: "",
+      _poolSlant: "",
+      _poolConcrete: "",
+    
     };
     this._form1 = React.createRef(); 
     this._form2 = React.createRef(); 
@@ -35,6 +48,48 @@ class CreatorBody extends React.Component {
     this.SetPoolName = this.SetPoolName.bind(this); 
   }
 
+/* Pool Slant Getters and Setters */
+
+SetPoolSlant = (poolSlant) => {
+  this.setState({_poolSlant: poolSlant}, function() {});
+}
+
+GetPoolSlant = () => {
+  return this.state._poolSlant;
+}
+
+/* Pool Has Shallow End Setters and Getters */
+GetPoolHasShallowEnd = () => {
+  return this.state._poolHasShallowEnd; 
+
+}
+
+FlipPoolHasShallowEnd = () => {
+  this.setState({_poolHasShallowEnd: !this.state._poolHasShallowEnd}, function() {});
+}
+
+/* Shallow Depth Getters And Setters*/
+GetDeepDepth = () => {
+  return this.state._deepDepth; 
+
+}
+
+SetDeepDepth = (deepDepth) => {
+this.setState({_deepDepth: deepDepth}, function() {
+ }); 
+}
+
+
+  /* Shallow Depth Getters And Setters*/
+  GetShallowDepth = () => {
+    return this.state._shallowDepth; 
+
+  }
+
+  SetShallowDepth = (shallowDepth) => {
+  this.setState({_shallowDepth: shallowDepth}, function() {
+   }); 
+  }
 
   /* Pool Width Getters And Setters*/
   GetPoolWidth = () => {
@@ -77,14 +132,6 @@ class CreatorBody extends React.Component {
      }); 
   }
 
- 
-
-
-
-
-
-
-
   /* Pool Name Getter and Setter */
   SetPoolName = (poolName) => {
     this.setState({_poolName: poolName}, function() {
@@ -104,44 +151,162 @@ class CreatorBody extends React.Component {
       this.hideComponent(this.currIndex);
     }
   }
+
   next() {
-    if(this.currIndex < 3){
+    if(this.currIndex < this.maxIndex){
       this.currIndex++;
+      
+      
       this.hideComponent(this.currIndex);
     }
   }
+    
+
+  
+  
   hideComponent() {
+    
     const state = this.state; 
     state['Your property'] = 'value';
     this.setState(state);
-    console.log(this.currIndex);
     switch (this.currIndex) {
       case 1:
         this.setState({ creatorForm1: true });
         this.setState({ creatorForm2: false });
         this.setState({ creatorForm3: false });
+        this.setState({ creatorForm4: false});
+        this.setState({ creatorForm5: false});
+        this.setState({ creatorForm6: false});
+        this.setState({ creatorForm7: false});
+        this.setState({ creatorForm8: false});
+        this.setState({ creatorForm9: false});
+
+        this.setState({ nextButtonText: 'Next'});
         break;
       case 2:
         this.setState({ creatorForm1: false });
         this.setState({ creatorForm2: true });
         this.setState({ creatorForm3: false });
+        this.setState({ creatorForm4: false });
+        this.setState({ creatorForm5: false});
+        this.setState({ creatorForm6: false});
+        this.setState({ creatorForm7: false});
+        this.setState({ creatorForm8: false});
+        this.setState({ creatorForm9: false});
+
+        this.setState({ nextButtonText: 'Next'});
+
         break;
       case 3:
         this.setState({ creatorForm1: false });
         this.setState({ creatorForm2: false });
         this.setState({ creatorForm3: true });
+        this.setState({ creatorForm4: false });
+        this.setState({ creatorForm5: false});
+        this.setState({ creatorForm6: false});
+        this.setState({ creatorForm7: false});
+        this.setState({ creatorForm8: false});
+        this.setState({ creatorForm9: false});
+
+
+        this.setState({ nextButtonText: 'Next'});
         break;
+      case 4:
+        this.setState({ creatorForm1: false });
+        this.setState({ creatorForm2: false });
+        this.setState({ creatorForm3: false });
+        this.setState({ creatorForm4: true });
+        this.setState({ creatorForm5: false});
+        this.setState({ creatorForm6: false});
+        this.setState({ creatorForm7: false});
+        this.setState({ creatorForm8: false});
+        this.setState({ creatorForm9: false});
+
+
+
+        this.setState({ nextButtonText: 'Next'});
+          break;
+
+      case 5:
+        this.setState({ creatorForm1: false });
+        this.setState({ creatorForm2: false });
+        this.setState({ creatorForm3: false });
+        this.setState({ creatorForm4: false });
+        this.setState({ creatorForm5: true});
+        this.setState({ creatorForm6: false});
+        this.setState({ creatorForm7: false});
+        this.setState({ creatorForm8: false});
+        this.setState({ creatorForm9: false});
+
+
+
+        this.setState({ nextButtonText: 'Next'});
+              break;    
+
+      case 6:
+        this.setState({ creatorForm1: false });
+        this.setState({ creatorForm2: false });
+        this.setState({ creatorForm3: false });
+        this.setState({ creatorForm4: false });
+        this.setState({ creatorForm5: false});
+        this.setState({ creatorForm6: true});
+        this.setState({ creatorForm7: false});
+        this.setState({ creatorForm8: false});
+        this.setState({ creatorForm9: false});
+
+
+        this.setState({ nextButtonText: 'Next'});
+        break;   
+      case 7:
+        this.setState({ creatorForm1: false });
+        this.setState({ creatorForm2: false });
+        this.setState({ creatorForm3: false });
+        this.setState({ creatorForm4: false });
+        this.setState({ creatorForm5: false});
+        this.setState({ creatorForm6: false});
+        this.setState({ creatorForm7: true});
+        this.setState({ creatorForm8: false});
+        this.setState({ creatorForm9: false});
+
+        this.setState({ nextButtonText: 'Next'});
+        break; 
+      case 8:
+        this.setState({ creatorForm1: false });
+        this.setState({ creatorForm2: false });
+        this.setState({ creatorForm3: false });
+        this.setState({ creatorForm4: false });
+        this.setState({ creatorForm5: false});
+        this.setState({ creatorForm6: false});
+        this.setState({ creatorForm7: false});
+        this.setState({ creatorForm8: true});
+        this.setState({ creatorForm9: false});
+        this.setState({ nextButtonText: 'Next'});
+        break; 
+     case 9:
+       this.setState({ creatorForm1: false });
+       this.setState({ creatorForm2: false });
+       this.setState({ creatorForm3: false });
+       this.setState({ creatorForm4: false });
+       this.setState({ creatorForm5: false});
+       this.setState({ creatorForm6: false});
+       this.setState({ creatorForm7: false});
+       this.setState({ creatorForm8: false});
+       this.setState({ creatorForm9: true});
+       this.setState({ nextButtonText: 'Submit'});
+       break; 
+
       default:
         return;
     }
   }
 
   render() {
-    const { creatorForm1, creatorForm2, creatorForm3 } = this.state;
+    const { creatorForm1, creatorForm2, creatorForm3, creatorForm4, creatorForm5, creatorForm6, creatorForm7, creatorForm8, creatorForm9 } = this.state;
     var currIndex = 0;
 
     return (
       <div id="Creator">
+        <div className="creator-body">
         <div className="heroText">
           <h1>Creator Portal</h1>
         </div>
@@ -156,22 +321,35 @@ class CreatorBody extends React.Component {
              setPoolWidth={this.SetPoolWidth} getPoolWidth={this.GetPoolWidth}
              setPoolDepth={this.SetPoolDepth} getPoolDepth={this.GetPoolDepth}
              setPoolLength={this.SetPoolLength} getPoolLength={this.GetPoolLength}
+             setShallowDepth={this.SetShallowDepth} getShallowDepth={this.GetShallowDepth}
+             setDeepDepth={this.SetDeepDepth} getDeepDepth={this.GetDeepDepth}
+             flipPoolHasShallowEnd={this.FlipPoolHasShallowEnd} getPoolHasShallowEnd={this.GetPoolHasShallowEnd}
+             setPoolSlant={this.SetPoolSlant} getPoolSlant={this.GetPoolSlant}
             />}
             {creatorForm3 && <CreatorForm3 ref={this._form3} setPoolMaterial={this.SetPoolMaterial} getPoolMaterial={this.GetPoolMaterial}/>}
+            {creatorForm4 && <CreatorForm4/>}
+            {creatorForm5 && <CreatorForm5/>}
+            {creatorForm6 && <CreatorForm6/>}
+            {creatorForm7 && <CreatorForm7/>}
+            {creatorForm8 && <CreatorForm8/>}
+            {creatorForm9 && <CreatorForm9/>}
             </form>
           </div>
 
           <div className="creatorFormNavigation">
-            <button variant="contained" onClick={() => this.prev()}>
+            <Button variant="contained" onClick={() => this.prev()}>
               Prev
-            </button>
-            <button variant="contained" onClick={() => this.next()}>
-              Next
-            </button>
+            </Button>
+            <Button variant="contained" onClick={() => this.next()}>
+              {this.state.nextButtonText}
+            </Button>
           </div>
     
         </div>
       </div>
+      </div>
+
+       
     );
   }
 }

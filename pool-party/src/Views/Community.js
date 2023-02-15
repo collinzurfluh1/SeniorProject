@@ -1,3 +1,4 @@
+import React from 'react'
 import NavigationBar from '../Modules/NavigationBar';
 import Footer from '../Modules/Footer';
 import CommunityBody from '../Modules/CommunityBody';

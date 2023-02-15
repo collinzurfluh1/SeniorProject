@@ -65,7 +65,7 @@ function NavigationBar() {
           <Nav>
           { isLoggedIn ?  <NavDropdown title={username} id="navbarScrollingDropdown">
                             <NavDropdown.Item href="/Profile">Profile</NavDropdown.Item>
-                            <NavDropdown.Item href="/Saved-Pools">Saved Pools</NavDropdown.Item>
+                            <NavDropdown.Item href="/My-Pools">My Pools</NavDropdown.Item>
 
                             <NavDropdown.Divider />
                             <NavDropdown.Item onClick={Logout}>
