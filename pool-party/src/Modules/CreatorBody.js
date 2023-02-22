@@ -15,20 +15,34 @@ import CreatorForm6 from "../Modules/CreatorForm6";
 import CreatorForm7 from "../Modules/CreatorForm7";
 import CreatorForm8 from "../Modules/CreatorForm8";
 import CreatorForm9 from "../Modules/CreatorForm9";
+import CreatorFormFinal from "../Modules/CreatorFormFinal";
 
 import "../SCSS/creator.scss";
+
+/*
+When saving data 
+1) Add the variable of the data ot be saved in the state
+2) Add a getter and setter
+3) Pass the functions to the component
+4) Add variable with its set function to the state
+5) Create an update function which both updates the component's state and also the global state
+6) Use the update function 
+
+*/
 // How to get next/prev working?
 class CreatorBody extends React.Component {
   constructor(props) {
     super(props);
     this.currIndex = 1;
-    this.maxIndex = 9; 
+    this.maxIndex = 10; 
     this.state = {
       nextButtonText: "Next",
       name: "React",
       creatorForm1: true,
       creatorForm2: false,
       creatorForm3: false,
+      prevButton: false,
+      nextButton: true,
       _poolHasShallowEnd: false,
       _poolName: '',
       _poolWidth: 0,
@@ -39,14 +53,115 @@ class CreatorBody extends React.Component {
       _deepDepth: "",
       _poolSlant: "",
       _poolConcrete: "",
+      _poolMaterialBrand: "",
+      _poolSummerCover: "",
+      _poolWinterCover: "",
+      _poolPipe: "",
+      _poolBasinLiner: "",
+      _poolDrain: "",
+      _poolSkimmer: "",
+      _poolPump: ""
+
     
     };
     this._form1 = React.createRef(); 
     this._form2 = React.createRef(); 
     this._form3 = React.createRef(); 
     this.hideComponent = this.hideComponent.bind(this);
-    this.SetPoolName = this.SetPoolName.bind(this); 
+    this.SetPoolName = this.SetPoolName.bind(this);
+    this.GetPoolPump = this.GetPoolPump.bind(this); 
+    this.GetPoolSkimmer = this.GetPoolSkimmer.bind(this); 
+    this.GetPoolDrain = this.GetPoolDrain.bind(this); 
+    this.GetPoolPipe = this.GetPoolPipe.bind(this); 
+    this.GetPoolBasinLiner = this.GetPoolBasinLiner.bind(this); 
+    this.GetPoolSummerCover = this.GetPoolSummerCover.bind(this); 
+    this.GetPoolWinterCover = this.GetPoolWinterCover.bind(this); 
+    this.GetPoolMaterialBrand= this.GetPoolMaterialBrand.bind(this); 
+    this.GetPoolMaterial= this.GetPoolMaterial.bind(this); 
+    this.GetPoolMaterialBrand= this.GetPoolMaterialBrand.bind(this); 
+    this.GetShallowDepth = this.GetShallowDepth.bind(this); 
+    this.GetPoolDepth = this.GetPoolDepth.bind(this); 
+    this.GetDeepDepth = this.GetDeepDepth.bind(this); 
+    this.GetPoolWidth = this.GetPoolWidth.bind(this); 
+    this.GetPoolLength = this.GetPoolLength.bind(this); 
+    this.GetPoolName = this.GetPoolName.bind(this); 
+
   }
+
+/* Pool Pump Getters and Setters*/
+SetPoolPump = (poolPump) => {
+  this.setState({_poolPump: poolPump}, function() {});
+}
+
+GetPoolPump = () => {
+  return this.state._poolPump;
+}
+
+/* Pool Drain Getters and Setters*/
+SetPoolSkimmer = (poolSkimmer) => {
+  this.setState({_poolSkimmer: poolSkimmer}, function() {});
+}
+
+GetPoolSkimmer= () => {
+  return this.state._poolSkimmer;
+}
+
+/* Pool Drain Getters and Setters*/
+SetPoolDrain = (poolDrain) => {
+  this.setState({_poolDrain: poolDrain}, function() {});
+}
+
+GetPoolDrain= () => {
+  return this.state._poolDrain;
+}
+
+/* Pool  Basin Liners Getters and Setters*/
+SetPoolBasinLiner = (poolBasinLiner) => {
+  this.setState({_poolBasinLiner: poolBasinLiner}, function() {});
+}
+
+GetPoolBasinLiner= () => {
+  return this.state._poolBasinLiner;
+}
+
+/* Pool  Piping Getters and Setters*/
+SetPoolPipe = (poolPipe) => {
+  this.setState({_poolPipe: poolPipe}, function() {});
+}
+
+GetPoolPipe = () => {
+  return this.state._poolPipe;
+}
+
+/* Pool  Getters and Setters*/
+SetPoolSummerCover = (poolSummerCover) => {
+  this.setState({_poolSummerCover: poolSummerCover}, function() {});
+}
+
+GetPoolSummerCover = () => {
+  return this.state._poolSummerCover;
+}
+
+/* Pool Winter Cover Getters and Setters*/
+SetPoolWinterCover = (poolWinterCover) => {
+  this.setState({_poolWinterCover: poolWinterCover}, function() {});
+}
+GetPoolWinterCover = () => {
+  return this.state._poolWinterCover;
+}
+GetPoolMaterialBrand = () => {
+  return this.state._poolMaterialBrand;
+}
+
+
+/* Pool Material Brand Getters and Setters*/
+SetPoolMaterialBrand = (poolMaterialBrand) => {
+  this.setState({_poolMaterialBrand: poolMaterialBrand}, function() {});
+}
+
+GetPoolMaterialBrand = () => {
+  return this.state._poolMaterialBrand;
+}
 
 /* Pool Slant Getters and Setters */
 
@@ -145,6 +260,28 @@ this.setState({_deepDepth: deepDepth}, function() {
 
   }
 
+  GetPool = () => {
+      return {
+        'name': this.GetPoolName(),
+        'width': this.GetPoolWidth(),
+        'length': this.GetPoolLength(),
+        'depth': this.GetPoolDepth(),
+        'shallowDepth': this.GetShallowDepth(),
+        'deepDepth': this.GetDeepDepth(),
+        'slant': this.GetPoolSlant(),
+        'material': this.GetPoolMaterial(),
+        'materialBrand': this.GetPoolMaterialBrand(),
+        'summerCover': this.GetPoolSummerCover(),
+        'winterCover': this.GetPoolWinterCover(),
+        'pipe': this.GetPoolPipe(),
+        'basinLiner': this.GetPoolBasinLiner(),
+        'drain': this.GetPoolDrain(),
+        'skimmer': this.GetPoolSkimmer(),
+        'pump': this.GetPoolPump()
+      }; 
+
+  }
+
   prev() {
     if(this.currIndex > 1){
       this.currIndex--;
@@ -167,10 +304,11 @@ this.setState({_deepDepth: deepDepth}, function() {
   hideComponent() {
     
     const state = this.state; 
-    state['Your property'] = 'value';
     this.setState(state);
     switch (this.currIndex) {
       case 1:
+        this.setState({ prevButton: false });
+        this.setState({ nextButton: true });
         this.setState({ creatorForm1: true });
         this.setState({ creatorForm2: false });
         this.setState({ creatorForm3: false });
@@ -180,10 +318,13 @@ this.setState({_deepDepth: deepDepth}, function() {
         this.setState({ creatorForm7: false});
         this.setState({ creatorForm8: false});
         this.setState({ creatorForm9: false});
+        this.setState({ creatorFormSubmit: false});
+
 
         this.setState({ nextButtonText: 'Next'});
         break;
       case 2:
+        this.setState({ prevButton: true });
         this.setState({ creatorForm1: false });
         this.setState({ creatorForm2: true });
         this.setState({ creatorForm3: false });
@@ -292,16 +433,43 @@ this.setState({_deepDepth: deepDepth}, function() {
        this.setState({ creatorForm7: false});
        this.setState({ creatorForm8: false});
        this.setState({ creatorForm9: true});
+       this.setState({ creatorFormSubmit: false});
        this.setState({ nextButtonText: 'Submit'});
        break; 
 
+       case 10:
+        this.setState({ creatorForm1: false });
+        this.setState({ creatorForm2: false });
+        this.setState({ creatorForm3: false });
+        this.setState({ creatorForm4: false });
+        this.setState({ creatorForm5: false});
+        this.setState({ creatorForm6: false});
+        this.setState({ creatorForm7: false});
+        this.setState({ creatorForm8: false});
+        this.setState({ creatorForm9: false});
+        this.setState({ prevButton: false });
+        this.setState({ nextButton: false});
+        this.setState({ creatorFormSubmit: true});
+        break;
+
       default:
+       this.setState({ creatorForm1: false });
+       this.setState({ creatorForm2: false });
+       this.setState({ creatorForm3: false });
+       this.setState({ creatorForm4: false });
+       this.setState({ creatorForm5: false});
+       this.setState({ creatorForm6: false});
+       this.setState({ creatorForm7: false});
+       this.setState({ creatorForm8: false});
+       this.setState({ creatorForm9: false});
+       this.setState({ creatorFormSubmit: true});
+       this.setState({ nextButtonText: 'Submit'});
         return;
     }
   }
 
   render() {
-    const { creatorForm1, creatorForm2, creatorForm3, creatorForm4, creatorForm5, creatorForm6, creatorForm7, creatorForm8, creatorForm9 } = this.state;
+    const { prevButton, nextButton, creatorForm1, creatorForm2, creatorForm3, creatorForm4, creatorForm5, creatorForm6, creatorForm7, creatorForm8, creatorForm9, creatorFormSubmit } = this.state;
     var currIndex = 0;
 
     return (
@@ -326,23 +494,45 @@ this.setState({_deepDepth: deepDepth}, function() {
              flipPoolHasShallowEnd={this.FlipPoolHasShallowEnd} getPoolHasShallowEnd={this.GetPoolHasShallowEnd}
              setPoolSlant={this.SetPoolSlant} getPoolSlant={this.GetPoolSlant}
             />}
-            {creatorForm3 && <CreatorForm3 ref={this._form3} setPoolMaterial={this.SetPoolMaterial} getPoolMaterial={this.GetPoolMaterial}/>}
-            {creatorForm4 && <CreatorForm4/>}
-            {creatorForm5 && <CreatorForm5/>}
-            {creatorForm6 && <CreatorForm6/>}
-            {creatorForm7 && <CreatorForm7/>}
-            {creatorForm8 && <CreatorForm8/>}
-            {creatorForm9 && <CreatorForm9/>}
+            {creatorForm3 && <CreatorForm3 ref={this._form3} 
+              setPoolMaterial={this.SetPoolMaterial} getPoolMaterial={this.GetPoolMaterial}
+              setPoolMaterialBrand={this.SetPoolMaterialBrand} getPoolMaterialBrand={this.GetPoolMaterialBrand}
+            
+            />}
+            {creatorForm4 && <CreatorForm4
+            setPoolWinterCover={this.SetPoolWinterCover} getPoolWinterCover={this.GetPoolWinterCover}
+            setPoolSummerCover={this.SetPoolSummerCover} getPoolSummerCover={this.GetPoolSummerCover}
+            />}
+            {creatorForm5 && <CreatorForm5
+            setPoolPipe={this.SetPoolPipe} getPoolPipe={this.GetPoolPipe}
+            />}
+            {creatorForm6 && <CreatorForm6
+            setPoolBasinLiner={this.SetPoolBasinLiner} getPoolBasinLiner={this.GetPoolBasinLiner}
+
+            />}
+            {creatorForm7 && <CreatorForm7
+            setPoolDrain={this.SetPoolDrain} getPoolDrain={this.GetPoolDrain}
+            />}
+            {creatorForm8 && <CreatorForm8
+            setPoolSkimmer={this.SetPoolSkimmer} getPoolSkimmer={this.GetPoolSkimmer}
+            
+            />}
+            {creatorForm9 && <CreatorForm9
+            setPoolPump={this.SetPoolPump} getPoolPump={this.GetPoolPump}
+            />}
+            {creatorFormSubmit && <CreatorFormFinal
+            getPool = {this.GetPool}
+            />}
             </form>
           </div>
 
           <div className="creatorFormNavigation">
-            <Button variant="contained" onClick={() => this.prev()}>
+            {prevButton && <Button variant="contained" onClick={() => this.prev()}>
               Prev
-            </Button>
-            <Button variant="contained" onClick={() => this.next()}>
+            </Button>}
+            {nextButton && <Button variant="contained" onClick={() => this.next()}>
               {this.state.nextButtonText}
-            </Button>
+            </Button>}
           </div>
     
         </div>
