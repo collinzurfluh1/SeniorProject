@@ -12,9 +12,18 @@ class CreatorForm6 extends React.Component {
     super(props);
     this.state = {
         name: "React",
+        basinLiner: props.getPoolBasinLiner()
       };
-     
+      this.updatePoolBasinLiner = this.updatePoolBasinLiner.bind(this); 
 
+
+  }
+  updatePoolBasinLiner(event) {
+  
+    this.props.setPoolBasinLiner(event.target.value); 
+    this.setState({ basinLiner: event.target.value });
+   
+    
   }
 
 
@@ -22,13 +31,13 @@ class CreatorForm6 extends React.Component {
   render() {
     return (
         <div id="Creator">
-          <div className="CreatorFormLabel">
+          <div className="CreatorFormLabel" onChange={this.updatePoolBasinLiner}>
               <h1>Pool Basin Liner</h1>
-              <input type="radio" id="poolLiner1" name="poolMaterial" value="Island Wave" defaultChecked={this.state.material === "Island Wave"}></input>
+              <input type="radio" id="poolLiner1" name="poolMaterial" value="Island Wave" defaultChecked={this.state.basinLiner === "Island Wave"}></input>
               <label for="poolLiner1"> Island Wave</label><br></br>
-              <input type="radio" id="poolLiner2" name="poolMaterial" value="Grey Crystal" defaultChecked={this.state.material === "Grey Crystal"}></input>
+              <input type="radio" id="poolLiner2" name="poolMaterial" value="Grey Crystal" defaultChecked={this.state.basinLiner === "Grey Crystal"}></input>
               <label for="poolLiner2"> Grey Crystal</label><br></br>
-              <input type="radio" id="poolLiner3" name="poolMaterial" value="Stardust Blue" defaultChecked={this.state.material === "Stardust Blue"}></input>
+              <input type="radio" id="poolLiner3" name="poolMaterial" value="Stardust Blue" defaultChecked={this.state.basinLiner === "Stardust Blue"}></input>
               <label for="poolLiner3">Stardust Blue</label><br></br>
 
              
