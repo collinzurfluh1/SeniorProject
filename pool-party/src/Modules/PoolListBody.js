@@ -9,9 +9,7 @@ import PoolItem from './PoolItem';
 function PoolListBody(pool) {
     const [active, setActive] = useState(false)
     const [modalShow, setModalShow] = React.useState(false);
-    console.log(pool);
         return (
-        
             <>
             
             <div id="poolListItem" onClick={(e) => {setModalShow(true) }}>
@@ -21,7 +19,7 @@ function PoolListBody(pool) {
                 <div className="poolListBody">
                     <div className="poolListTitle">
                         <div className='title'>
-                            <h3>title</h3>
+                            <h3>{pool.pool.title}</h3>
                         </div>
                         <div className="poolListActions" onClick={(e) => {setActive(!active); e.stopPropagation();}}>
                             {/* <Heart isActive={active} /> */}
@@ -29,30 +27,20 @@ function PoolListBody(pool) {
                     </div>
         
                     <div className="poolListAuthor">
-                        <p>Author: {pool.owner}</p>
+                        <p>Author: {pool.pool.owner}</p>
                     </div>
         
                     <div className="poolListContent">
-                        <p>Price: {pool.cost}</p>
-                        <p>Length: {pool.length}</p>
-                        <p>Width: {pool.width}</p>
-                        <p>Depth Shallow: {pool.depth_shallow}</p>
-                        <p>Depth Deep: {pool.depth_deep}</p>
-                        <p>Slant Type: {pool.slant_type}</p>
-                        <p>Lining Type: {pool.lining_type}</p>
-                        <p>Cover 1: {pool.cover1}</p>
-                        <p>Cover 2:{pool.cover2}</p>
-                        <p>Piping: {pool.piping}</p>
-                        <p>Drain: {pool.drain}</p>
-                        <p>Skimmer: {pool.skimmer}</p>
-                        <p>Pump: {pool.pump}</p>
-
+                        <p>Price: ${pool.pool.cost}</p>
+                        <p>Length: {pool.pool.length}ft</p>
+                        <p>Width: {pool.pool.width}ft</p>
                     </div>
                 </div>
             </div>
             <PoolItem
             show={modalShow}
             onHide={() => setModalShow(false)}
+            pool={pool}
             />
             </>
         );

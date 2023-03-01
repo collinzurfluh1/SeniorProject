@@ -27,7 +27,7 @@ function MyPoolBody() {
         const decoded = jwt_decode(response.data.accessToken);
         setName(decoded.username);
     } catch (error) {
-    }
+  }
 }
 
 
@@ -39,10 +39,10 @@ fetch('http://localhost:4000/getUserPools')
   return (
     <div id="CommunityList">
       <div id='poolList'>
+        {/* <PoolListBody />
         <PoolListBody />
         <PoolListBody />
-        <PoolListBody />
-        <PoolListBody />
+        <PoolListBody /> */}
       </div>
        
   </div>

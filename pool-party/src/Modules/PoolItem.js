@@ -16,21 +16,27 @@ function PoolItem(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Coolest Pool EVA
+          {props.pool.pool.title}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div className='poolHeader'>
-            <h4>Pool Stats:</h4>
+            <h4>{props.pool.pool.title}</h4>
         </div>
         <div className='poolStatsList'>
-            <div className='poolStat'>Price: $56,000</div>
-            <div className='poolStat'>Length: 200ft</div>
-            <div className='poolStat'>Width: 12ft</div>
-            <div className='poolStat'>Height: 10ft</div>
-            <div className='poolStat'>Concrete: 1000 lbs $20,000</div>
-            <div className='poolStat'>PVC: 10ft $50</div>
-            <div className='poolStat'>Wiring: 10ft $10</div>
+            <div className='poolStat'>Price: ${props.pool.pool.cost}</div>
+            <div className='poolStat'>Length: {props.pool.pool.length}ft</div>
+            <div className='poolStat'>Width: {props.pool.pool.width}ft</div>
+            <div className='poolStat'>Depth Shallow: {props.pool.pool.depth_shallow}</div>
+            <div className='poolStat'>Depth Deep: {props.pool.pool.depth_deep}</div>
+            <div className='poolStat'>Slant Type: {props.pool.pool.slant_type}</div>
+            <div className='poolStat'>Lining Type: {props.pool.pool.lining_type}</div>
+            <div className='poolStat'>Cover 1: {props.pool.pool.cover1}</div>
+            <div className='poolStat'>Cover 2:{props.pool.pool.cover2}</div>
+            <div className='poolStat'>Piping: {props.pool.pool.piping}</div>
+            <div className='poolStat'>Drain: {props.pool.pool.drain}</div>
+            <div className='poolStat'>Skimmer: {props.pool.pool.skimmer}</div>
+            <div className='poolStat'>Pump: {props.pool.pool.pump}</div>
 
         </div>
       </Modal.Body>
