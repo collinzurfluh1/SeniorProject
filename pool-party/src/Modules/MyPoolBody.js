@@ -10,11 +10,23 @@ function MyPoolBody() {
   const navigate = useNavigate();
 
   const [username, setName] = useState('');
+  const [data,setData]=useState([]);
 
+  const getData=()=>{
+    fetch('http://localhost:4000/getPools')
+    .then(function(response){
+      return response.json();
+    })
+    .then(function(pool) {
+      setData(pool)
+    });
 
-  useEffect(() => {
+  }
+
+  useEffect(()=>{
+    getData();
     refreshToken();
-}, []);
+  },[])
 
   const creator = () => {
       navigate('/creator');
@@ -26,23 +38,16 @@ function MyPoolBody() {
         const response = await axios.get('http://localhost:4000/token');
         const decoded = jwt_decode(response.data.accessToken);
         setName(decoded.username);
-    } catch (error) {
+    } catch (error) {}
   }
-}
-
-
-fetch('http://localhost:4000/getUserPools')
-  .then(response => response.json())
-  .then(data => console.log(data))
-
 
   return (
     <div id="CommunityList">
       <div id='poolList'>
-        {/* <PoolListBody />
-        <PoolListBody />
-        <PoolListBody />
-        <PoolListBody /> */}
+      {data.map(pool => (
+        pool.owner == username? (
+          <PoolListBody pool={pool}/>): null
+      ))}
       </div>
        
   </div>
