@@ -1,10 +1,26 @@
-
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button } from '@mui/material';
 import Modal from 'react-bootstrap/Modal';
 import '../SCSS/poolitem.scss'
+import axios from 'axios';
+import jwt_decode from "jwt-decode";
+
 
 function PoolItem(props) {
+  const [username, setName] = useState('');
+
+  const refreshToken = async () => {
+    try {
+        const response = await axios.get('http://localhost:4000/token');
+        const decoded = jwt_decode(response.data.accessToken);
+        setName(decoded.username);
+    } catch (error) {}
+  }
+
+  useEffect(()=>{
+    refreshToken();
+  },[])
+
   return (
     <Modal
       {...props}
@@ -27,8 +43,8 @@ function PoolItem(props) {
             <div className='poolStat'>Price: ${props.pool.pool.cost}</div>
             <div className='poolStat'>Length: {props.pool.pool.length}ft</div>
             <div className='poolStat'>Width: {props.pool.pool.width}ft</div>
-            <div className='poolStat'>Depth Shallow: {props.pool.pool.depth_shallow}</div>
-            <div className='poolStat'>Depth Deep: {props.pool.pool.depth_deep}</div>
+            <div className='poolStat'>Depth Shallow: {props.pool.pool.depth_shallow}ft</div>
+            <div className='poolStat'>Depth Deep: {props.pool.pool.depth_deep}ft</div>
             <div className='poolStat'>Slant Type: {props.pool.pool.slant_type}</div>
             <div className='poolStat'>Lining Type: {props.pool.pool.lining_type}</div>
             <div className='poolStat'>Cover 1: {props.pool.pool.cover1}</div>
@@ -41,7 +57,9 @@ function PoolItem(props) {
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="contained" color="success">Save Pool</Button>
+        {props.pool.pool.owner == username ?
+          null
+        : <Button variant="contained" color="success">Save Pool</Button>}
         <Button variant="contained" onClick={props.onHide} color="error">Close</Button>
       </Modal.Footer>
     </Modal>

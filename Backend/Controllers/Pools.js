@@ -12,7 +12,6 @@ export const getUserPools = async(req, res) => {
     });
     res.json(pools);
     }catch (error) {
-        console.log(error);
     }
     
 }
@@ -26,7 +25,6 @@ export const getPools = async(req, res) => {
         });
         res.json(pools);
     } catch (error) {
-        console.log(error);
     }
 }
  
