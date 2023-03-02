@@ -4,10 +4,13 @@ import Modal from 'react-bootstrap/Modal';
 import '../SCSS/poolitem.scss'
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
+import EditPoolItem from './EditPoolItem';
 
 
 function PoolItem(props) {
   const [username, setName] = useState('');
+  const [modalShow, setModalShow] = React.useState(false);
+  const [active, setActive] = useState(false)
 
   const refreshToken = async () => {
     try {
@@ -84,10 +87,15 @@ function PoolItem(props) {
       </Modal.Body>
       <Modal.Footer>
         {props.pool.pool.owner == username ?
-          null
+          <Button variant="contained" color="primary" onClick={(e) => {setModalShow(true) }}>Edit Pool</Button>
         : <Button variant="contained" color="success">Save Pool</Button>}
         <Button variant="contained" onClick={props.onHide} color="error">Close</Button>
       </Modal.Footer>
+      <EditPoolItem
+      show={modalShow}
+      onHide={() => setModalShow(false)}
+      pool={props}
+      />
     </Modal>
   );
 }
