@@ -68,18 +68,11 @@ class CreatorForm3 extends React.Component {
   }
 
   updateGunniteBrand(event){
- 
-      this.state.GunniteMaterial['materialBrand'] = event.target.value; 
-      this.setState({ GunniteMaterial: this.state.GunniteMaterial });
-      this.setState({ materialData: this.state.GunniteMaterial });
-      this.setState({ gunniteMaterialBrand: event.target.value });
 
+      this.setState({ materialData: event.target.value });
       this.props.setPoolMaterialData({
-        "materialBrand": this.state.GunniteMaterial["materialBrand"],
-        "rebar": this.state.GunniteMaterial["rebar"],
-        "plaster": this.state.GunniteMaterial["plaster"],
-        "width": this.state.GunniteMaterial["width"],
-        "length": this.state.GunniteMaterial["length"]
+        "materialBrand": event.target.value,
+       
       });
       
 
