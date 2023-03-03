@@ -61,7 +61,7 @@ class CreatorForm3 extends React.Component {
           
 
       }
-
+      this.updatePlaster = this.updatePlaster.bind(this);
       this.updateGunniteBrand = this.updateGunniteBrand.bind(this); 
       this.updatePoolMaterial = this.updatePoolMaterial.bind(this); 
 
@@ -75,6 +75,15 @@ class CreatorForm3 extends React.Component {
        
       });
       
+
+  }
+
+  updatePlaster(event){
+    this.setState({ materialData: event.target.value });
+    this.props.setPoolMaterialData({
+      "plaster": event.target.value,
+     
+    });
 
   }
 
@@ -103,9 +112,6 @@ class CreatorForm3 extends React.Component {
     }
    
   }
-
-
-
   
   render() {
     return (
@@ -139,7 +145,8 @@ class CreatorForm3 extends React.Component {
             
             </div>
             <label for="plaster" className="CreatorFormLabel">Plaster:</label><br></br>
-            <select name="plaster" value={this.state.GunniteMaterial["plaster"]} onChange={this.updateGunnitePlaster} id="plaster">
+            <select name="plaster" value={this.state.materialData["plaster"]} onChange={this.updatePlaster} id="plaster">
+              <option value="None">Select a Value</option>
               <option value="plaster1">Plaster 1</option>
               <option value="plaster2">Plaster 2</option>
               <option value="plaster3">Plaster 3</option>
