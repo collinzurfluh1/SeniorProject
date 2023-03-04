@@ -55,7 +55,7 @@ class CreatorForm3 extends React.Component {
       this.setState({materialBrand: event.target.value}); 
       this.props.setPoolMaterialData({
         "materialBrand": event.target.value, 
-        "plaster": this.state.materialData["plaster"],
+        "plaster": this.state.plaster,
         "rebar": this.state.materialData["rebar"],  
         "shell": this.state.materialData["shell"],
         "lining": this.state.materialData["lining"],
@@ -72,7 +72,7 @@ class CreatorForm3 extends React.Component {
   updatePlaster(event){
     this.setState({plaster: event.target.value}); 
     this.props.setPoolMaterialData({
-      "materialBrand": this.state.materialData["materialBrand"], 
+      "materialBrand": this.state.materialBrand, 
       "plaster": event.target.value,
       "rebar": this.state.materialData["rebar"],  
       "shell": this.state.materialData["shell"],
