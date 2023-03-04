@@ -27,9 +27,11 @@ class CreatorForm3 extends React.Component {
         wall: props.getPoolMaterialData()["wall"],
         shallowDepth: props.getPoolMaterialData()["shallowDepth"],
         deepDepth: props.getPoolMaterialData()["deepDepth"],
-        slant: props.getPoolMaterialData()["slant"]
+        slant: props.getPoolMaterialData()["slant"],
+        shell: props.getPoolMaterialData()["shell"]
         
       };
+      this.updateShell = this.updateShell.bind(this);
       this.updateSlant = this.updateSlant.bind(this);
       this.updateDeepDepth = this.updateDeepDepth.bind(this);
       this.updateShallowDepth = this.updateShallowDepth.bind(this);
@@ -51,7 +53,7 @@ class CreatorForm3 extends React.Component {
         "materialBrand": event.target.value, 
         "plaster": this.state.plaster,
         "rebar": this.state.rebar,  
-        "shell": this.state.materialData["shell"],
+        "shell": this.state.shell,
         "lining": this.state.lining,
         "wall": this.state.wall,
         "shallowDepth": this.state.shallowDepth,
@@ -69,7 +71,7 @@ class CreatorForm3 extends React.Component {
       "materialBrand": this.state.materialBrand, 
       "plaster": event.target.value,
       "rebar": this.state.rebar,  
-      "shell": this.state.materialData["shell"],
+      "shell": this.state.shell,
       "lining": this.state.lining,
       "wall": this.state.wall,
       "shallowDepth": this.state.shallowDepth,
@@ -90,7 +92,7 @@ class CreatorForm3 extends React.Component {
       "materialBrand": this.state.materialBrand, 
       "plaster": this.state.plaster,
       "rebar": event.target.value,  
-      "shell": this.state.materialData["shell"],
+      "shell": this.state.shell,
       "lining": this.state.lining,
       "wall": this.state.wall,
       "shallowDepth": this.state.shallowDepth,
@@ -108,7 +110,7 @@ class CreatorForm3 extends React.Component {
       "materialBrand": this.state.materialBrand, 
       "plaster": this.state.plaster,
       "rebar": event.target.value,  
-      "shell": this.state.materialData["shell"],
+      "shell": this.state.shell,
       "lining": this.state.lining,
       "wall": this.state.wall,
       "shallowDepth": this.state.shallowDepth,
@@ -125,7 +127,7 @@ class CreatorForm3 extends React.Component {
       "materialBrand": this.state.materialBrand, 
       "plaster": this.state.plaster,
       "rebar": event.target.value,  
-      "shell": this.state.materialData["shell"],
+      "shell": this.state.shell,
       "lining": this.state.lining,
       "wall": this.state.wall,
       "shallowDepth": this.state.shallowDepth,
@@ -143,7 +145,7 @@ class CreatorForm3 extends React.Component {
       "materialBrand": this.state.materialBrand, 
       "plaster": this.state.plaster,
       "rebar": event.target.value,  
-      "shell": this.state.materialData["shell"],
+      "shell": this.state.shell,
       "lining": this.state.lining,
       "wall": this.state.wall,
       "shallowDepth": this.state.shallowDepth,
@@ -161,7 +163,7 @@ class CreatorForm3 extends React.Component {
       "materialBrand": this.state.materialBrand, 
       "plaster": this.state.plaster,
       "rebar": this.state.rebar,  
-      "shell": this.state.materialData["shell"],
+      "shell": this.state.shell,
       "lining": event.target.value,
       "wall": this.state.wall,
       "shallowDepth": this.state.shallowDepth,
@@ -181,7 +183,7 @@ class CreatorForm3 extends React.Component {
       "materialBrand": this.state.materialBrand, 
       "plaster": this.state.plaster,
       "rebar": this.state.rebar,  
-      "shell": this.state.materialData["shell"],
+      "shell": this.state.shell,
       "lining": this.state.lining,
       "wall": event.target.value,
       "shallowDepth": this.state.shallowDepth,
@@ -200,7 +202,7 @@ class CreatorForm3 extends React.Component {
       "materialBrand": this.state.materialBrand, 
       "plaster": this.state.plaster,
       "rebar": this.state.rebar,  
-      "shell": this.state.materialData["shell"],
+      "shell": this.state.shell,
       "lining": this.state.lining,
       "wall": this.state.wall,
       "shallowDepth": event.target.value,
@@ -218,7 +220,7 @@ class CreatorForm3 extends React.Component {
       "materialBrand": this.state.materialBrand, 
       "plaster": this.state.plaster,
       "rebar": this.state.rebar,  
-      "shell": this.state.materialData["shell"],
+      "shell": this.state.shell,
       "lining": this.state.lining,
       "wall": this.state.wall,
       "shallowDepth": this.state.shallowDepth,
@@ -236,7 +238,7 @@ class CreatorForm3 extends React.Component {
       "materialBrand": this.state.materialBrand, 
       "plaster": this.state.plaster,
       "rebar": this.state.rebar,  
-      "shell": this.state.materialData["shell"],
+      "shell": this.state.shell,
       "lining": this.state.lining,
       "wall": this.state.wall,
       "shallowDepth": this.state.shallowDepth,
@@ -247,6 +249,23 @@ class CreatorForm3 extends React.Component {
       "depth": this.state.depth
     });
 
+  }
+  updateShell(event){
+    this.setState({shell: event.target.value}); 
+    this.props.setPoolMaterialData({
+      "materialBrand": this.state.materialBrand, 
+      "plaster": this.state.plaster,
+      "rebar": this.state.rebar,  
+      "shell": event.target.value,
+      "lining": this.state.lining,
+      "wall": this.state.wall,
+      "shallowDepth": this.state.shallowDepth,
+      "deepDepth": this.state.deepDepth,
+      "slant": this.state.shell,
+      "width": this.state.width,
+      "length": this.state.length,
+      "depth": this.state.depth
+    });
   }
 
   
@@ -367,12 +386,12 @@ class CreatorForm3 extends React.Component {
             
           } 
           { this.state.material == "Fiber Glass" && 
-            <div id="Fiber Glass" onChange={this.updatePoolMaterialBrand}>
-              <input type="radio" id="fg1" name="fg" value="fg1" defaultChecked={this.state.materialBrand === "fg1"}></input>
+            <div id="Fiber Glass" onChange={this.updateShell}>
+              <input type="radio" id="fg1" name="fg" value="fg1" defaultChecked={this.state.shell=== "fg1"}></input>
               <label for="fg1">Fiber Glass 1</label><br></br>
-              <input type="radio" id="fg2" name="fg" value="fg2" defaultChecked={this.state.materialBrand === "fg2"}></input>
+              <input type="radio" id="fg2" name="fg" value="fg2" defaultChecked={this.state.shell=== "fg2"}></input>
               <label for="fg2">Fiber Glass 2</label><br></br>
-              <input type="radio" id="fg3" name="fg" value="fg3" defaultChecked={this.state.materialBrand === "fg3"}></input>
+              <input type="radio" id="fg3" name="fg" value="fg3" defaultChecked={this.state.shell === "fg3"}></input>
               <label for="fg3">Fiber Glass 3</label><br></br>
             
             </div>
