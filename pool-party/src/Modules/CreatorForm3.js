@@ -6,7 +6,7 @@ import { useRef } from "react";
 import "../SCSS/creator.scss";
 import { resolveBreakpointValues } from "@mui/system/breakpoints";
 class CreatorForm3 extends React.Component {
-
+  
 
 
 
@@ -17,9 +17,9 @@ class CreatorForm3 extends React.Component {
         name: "React",
         material: props.getPoolMaterial(),
         materialData: props.getPoolMaterialData(),
-
-        plaster: props.getPoolMaterialData()["plaster"],
         materialBrand: props.getPoolMaterialData()["materialBrand"],
+        plaster: props.getPoolMaterialData()["plaster"],
+        rebar: props.getPoolMaterialData()["rebar"],
         GunniteMaterial: {
           "materialBrand": "",
           "rebar": "",
@@ -44,7 +44,7 @@ class CreatorForm3 extends React.Component {
       },
         
       };
- 
+      this.updateRebar = this.updateRebar.bind(this);
       this.updatePlaster = this.updatePlaster.bind(this);
       this.updateGunniteBrand = this.updateGunniteBrand.bind(this); 
       this.updatePoolMaterial = this.updatePoolMaterial.bind(this); 
@@ -56,7 +56,7 @@ class CreatorForm3 extends React.Component {
       this.props.setPoolMaterialData({
         "materialBrand": event.target.value, 
         "plaster": this.state.plaster,
-        "rebar": this.state.materialData["rebar"],  
+        "rebar": this.state.rebar,  
         "shell": this.state.materialData["shell"],
         "lining": this.state.materialData["lining"],
         "wall": this.state.materialData["wall"],
@@ -74,7 +74,7 @@ class CreatorForm3 extends React.Component {
     this.props.setPoolMaterialData({
       "materialBrand": this.state.materialBrand, 
       "plaster": event.target.value,
-      "rebar": this.state.materialData["rebar"],  
+      "rebar": this.state.rebar,  
       "shell": this.state.materialData["shell"],
       "lining": this.state.materialData["lining"],
       "wall": this.state.materialData["wall"],
@@ -88,8 +88,24 @@ class CreatorForm3 extends React.Component {
 
   }
 
-  updateGunnitePlaster(event){
-      this.GunniteMaterial["plaster"] = event.target.value; 
+  
+
+  updateRebar(event){
+    this.setState({rebar: event.target.value}); 
+    this.props.setPoolMaterialData({
+      "materialBrand": this.state.materialBrand, 
+      "plaster": this.state.plaster,
+      "rebar": event.target.value,  
+      "shell": this.state.materialData["shell"],
+      "lining": this.state.materialData["lining"],
+      "wall": this.state.materialData["wall"],
+      "shallowDepth": this.state.materialData["shallowDepth"],
+      "deepDepth": this.state.materialData["deepDepth"],
+      "slant": this.state.materialData["slant"],
+      "width": this.state.materialData["width"],
+      "length": this.state.materialData["length"],
+      "depth": this.state.materialData["depth"]
+    });
   }
 
 
@@ -153,7 +169,7 @@ class CreatorForm3 extends React.Component {
               <option value="plaster4">Plaster 4</option>
             </select><br></br>
             <label for="rebar" className="CreatorFormLabel">Rebar:</label><br></br>
-            <select name="rebar" id="rebar">
+            <select name="rebar" value={this.state.rebar} onChange={this.updateRebar} id="rebar">
               <option value="rebar1">Rebar 1</option>
               <option value="rebar2">Rebar 2</option>
               <option value="rebar3">Rebar 3</option>
