@@ -321,7 +321,8 @@ this.setState({_deepDepth: deepDepth}, function() {
         'basinLiner': this.GetPoolBasinLiner(),
         'drain': this.GetPoolDrain(),
         'skimmer': this.GetPoolSkimmer(),
-        'pump': this.GetPoolPump()
+        'pump': this.GetPoolPump(),
+        'materialData': this.GetPoolMaterialData()
       }; 
 
   }
@@ -335,6 +336,9 @@ this.setState({_deepDepth: deepDepth}, function() {
   prev() {
     if(this.currIndex > 1){
       this.currIndex--;
+      if(this.currIndex == 2){
+        this.currIndex--; 
+      }
       this.hideComponent(this.currIndex);
     }
   }
@@ -342,6 +346,10 @@ this.setState({_deepDepth: deepDepth}, function() {
   next() {
     if(this.currIndex < this.maxIndex){
       this.currIndex++;
+      if(this.currIndex == 2){
+
+        this.currIndex++; 
+      }
       
       
       this.hideComponent(this.currIndex);
@@ -389,6 +397,7 @@ this.setState({_deepDepth: deepDepth}, function() {
 
         break;
       case 3:
+        this.setState({ prevButton: true });
         this.setState({ creatorForm1: false });
         this.setState({ creatorForm2: false });
         this.setState({ creatorForm3: true });
