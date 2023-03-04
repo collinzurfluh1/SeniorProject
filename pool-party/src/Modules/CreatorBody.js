@@ -49,18 +49,41 @@ class CreatorBody extends React.Component {
       _poolDepth: 0,
       _poolLength: 0,
       _poolMaterial: "",
+      _poolMaterialData:  {
+        "materialBrand": "", 
+        "plaster": "",
+        "rebar": "",  
+        "shell": "",
+        "lining": "",
+        "wall": "",
+        "shallowDepth": 0,
+        "deepDepth": 0,
+        "slant": "",
+        "width": 0,
+        "length": 0,
+        "depth": 0
+
+    },
       _shallowDepth: "",
       _deepDepth: "",
       _poolSlant: "",
       _poolConcrete: "",
-      _poolMaterialBrand: "",
+      _poolMaterialBrand: {
+          "materialBrand": "",   
+          "shell": "",
+          "width": 0,
+          "length": 0
+
+      },
       _poolSummerCover: "",
       _poolWinterCover: "",
       _poolPipe: "",
       _poolBasinLiner: "",
       _poolDrain: "",
       _poolSkimmer: "",
-      _poolPump: ""
+      _poolPump: "",
+      _poolLining: "",
+      _poolMaterialObject: null
 
     
     };
@@ -78,7 +101,7 @@ class CreatorBody extends React.Component {
     this.GetPoolWinterCover = this.GetPoolWinterCover.bind(this); 
     this.GetPoolMaterialBrand= this.GetPoolMaterialBrand.bind(this); 
     this.GetPoolMaterial= this.GetPoolMaterial.bind(this); 
-    this.GetPoolMaterialBrand= this.GetPoolMaterialBrand.bind(this); 
+    this.GetPoolMaterialData = this.GetPoolMaterialData.bind(this); 
     this.GetShallowDepth = this.GetShallowDepth.bind(this); 
     this.GetPoolDepth = this.GetPoolDepth.bind(this); 
     this.GetDeepDepth = this.GetDeepDepth.bind(this); 
@@ -87,6 +110,26 @@ class CreatorBody extends React.Component {
     this.GetPoolName = this.GetPoolName.bind(this); 
 
   }
+
+  /* Pool Material Getters and Setters */
+  GetPoolMaterialData = () => {
+    return this.state._poolMaterialData; 
+  
+  }
+  SetPoolMaterialData = (poolMaterialData) => {
+    this.setState({_poolMaterialData: poolMaterialData}, function() {
+  }); 
+  }
+  
+
+/* Pool Lining Getters and Setters*/
+SetPoolPump = (poolLining) => {
+  this.setState({_poolLining: poolLining}, function() {});
+}
+
+GetPoolPump = () => {
+  return this.state._poolLining;
+}
 
 /* Pool Pump Getters and Setters*/
 SetPoolPump = (poolPump) => {
@@ -227,6 +270,7 @@ this.setState({_deepDepth: deepDepth}, function() {
      }); 
   }
 
+
   /* Pool Depth Getters and Setter*/
   GetPoolDepth = () => {
     return this.state._poolDepth; 
@@ -277,14 +321,24 @@ this.setState({_deepDepth: deepDepth}, function() {
         'basinLiner': this.GetPoolBasinLiner(),
         'drain': this.GetPoolDrain(),
         'skimmer': this.GetPoolSkimmer(),
-        'pump': this.GetPoolPump()
+        'pump': this.GetPoolPump(),
+        'materialData': this.GetPoolMaterialData()
       }; 
+
+  }
+  SetPool = (pool) =>{
+      //this.SetPoolMaterial(pool.material);
+      //this.SetPoolMaterialBrand(pool.poolMaterialBrand);  
+
 
   }
 
   prev() {
     if(this.currIndex > 1){
       this.currIndex--;
+      if(this.currIndex == 2){
+        this.currIndex--; 
+      }
       this.hideComponent(this.currIndex);
     }
   }
@@ -292,6 +346,10 @@ this.setState({_deepDepth: deepDepth}, function() {
   next() {
     if(this.currIndex < this.maxIndex){
       this.currIndex++;
+      if(this.currIndex == 2){
+
+        this.currIndex++; 
+      }
       
       
       this.hideComponent(this.currIndex);
@@ -339,6 +397,7 @@ this.setState({_deepDepth: deepDepth}, function() {
 
         break;
       case 3:
+        this.setState({ prevButton: true });
         this.setState({ creatorForm1: false });
         this.setState({ creatorForm2: false });
         this.setState({ creatorForm3: true });
@@ -495,8 +554,10 @@ this.setState({_deepDepth: deepDepth}, function() {
              setPoolSlant={this.SetPoolSlant} getPoolSlant={this.GetPoolSlant}
             />}
             {creatorForm3 && <CreatorForm3 ref={this._form3} 
-              setPoolMaterial={this.SetPoolMaterial} getPoolMaterial={this.GetPoolMaterial}
-              setPoolMaterialBrand={this.SetPoolMaterialBrand} getPoolMaterialBrand={this.GetPoolMaterialBrand}
+              getPoolMaterialData={this.GetPoolMaterialData}
+              setPoolMaterialData={this.SetPoolMaterialData}
+              getPoolMaterial={this.GetPoolMaterial}
+              setPoolMaterial={this.SetPoolMaterial}
             
             />}
             {creatorForm4 && <CreatorForm4
@@ -521,7 +582,7 @@ this.setState({_deepDepth: deepDepth}, function() {
             setPoolPump={this.SetPoolPump} getPoolPump={this.GetPoolPump}
             />}
             {creatorFormSubmit && <CreatorFormFinal
-            getPool = {this.GetPool}
+            getPool={this.GetPool}
             />}
             </form>
           </div>
