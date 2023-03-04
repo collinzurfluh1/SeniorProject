@@ -34,6 +34,9 @@ const Pools = db.define('pools',{
     owner:{
         type: DataTypes.STRING, // This should be same as username
     },
+    title:{
+        type: DataTypes.STRING, // This should be same as username
+    },
     original_creator:{
         type: DataTypes.BOOLEAN  // This should be same as username
     },
