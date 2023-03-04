@@ -46,7 +46,6 @@ function NavigationBar() {
           await axios.delete('http://localhost:4000/logout');
           window.location.reload(false);
       } catch (error) {
-          console.log(error);
       }
   }
 

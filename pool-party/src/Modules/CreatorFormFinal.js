@@ -5,7 +5,6 @@ import { useRef } from "react";
 
 import "../SCSS/creator.scss";
 import { resolveBreakpointValues } from "@mui/system/breakpoints";
-// How to get next/prev working?
 
 class CreatorFormFinal extends React.Component {
   constructor(props) {
@@ -28,10 +27,7 @@ class CreatorFormFinal extends React.Component {
         basinLiner: pool['basinLiner'],
         drain: pool['drain'],
         skimmer: pool['skimmer'],
-        pump: pool['pump'],
-  
-        
-
+        pump: pool['pump']
       };
      
 

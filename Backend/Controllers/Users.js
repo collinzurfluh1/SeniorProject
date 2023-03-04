@@ -9,7 +9,6 @@ export const getUsers = async(req, res) => {
         });
         res.json(users);
     } catch (error) {
-        console.log(error);
     }
 }
  
@@ -116,7 +115,6 @@ export const UpdateEmail = async(req, res) => {
 }
  
 export const Login = async(req, res) => {
-    console.log(req.body);
     if(isEmailValid(req.body.email) == true){
         try {
             const user = await Users.findAll({
@@ -151,14 +149,12 @@ export const Login = async(req, res) => {
         }
     }
     else {
-        console.log(req.body.username);
         try {
             const user = await Users.findAll({
                 where:{
                     username: req.body.username
                 }
             });
-            console.log(user);
         
             const match = await bcrypt.compare(req.body.password, user[0].password);
             if(!match) return res.status(400).json({msg: "Wrong Password!"});
