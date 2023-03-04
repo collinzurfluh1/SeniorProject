@@ -17,6 +17,8 @@ class CreatorForm3 extends React.Component {
         name: "React",
         material: props.getPoolMaterial(),
         materialData: props.getPoolMaterialData(),
+        plaster: props.getPoolMaterialData()["plaster"],
+        gunniteBrand: props.getPoolMaterialData()["materialBrand"],
         GunniteMaterial: {
           "materialBrand": "",
           "rebar": "",
@@ -39,28 +41,9 @@ class CreatorForm3 extends React.Component {
           "width": 0,
           "length": 0
       },
-
-
         
       };
-      switch(this.state.material){
-          case("Vinyl"):
-            this.setState({ VinylMaterial: this.state.materialData });
-            break; 
-          case("Gunnite"):
-               this.setState({GunniteMaterial: this.state.materialData}, function() {
-  
-              
-               }); 
-               
-            
-          break; 
-          case("FiberGlass"):
-          this.setState({ FiberGlassMaterial: this.state.materialData });
-            break; 
-          
-
-      }
+ 
       this.updatePlaster = this.updatePlaster.bind(this);
       this.updateGunniteBrand = this.updateGunniteBrand.bind(this); 
       this.updatePoolMaterial = this.updatePoolMaterial.bind(this); 
@@ -69,7 +52,7 @@ class CreatorForm3 extends React.Component {
 
   updateGunniteBrand(event){
 
-      this.setState({ materialData: event.target.value });
+      this.setState({ gunniteBrand: event.target.value });
       this.props.setPoolMaterialData({
         "materialBrand": event.target.value,
        
@@ -79,7 +62,7 @@ class CreatorForm3 extends React.Component {
   }
 
   updatePlaster(event){
-    this.setState({ materialData: event.target.value });
+    this.setState({plaster: event.target.value });
     this.props.setPoolMaterialData({
       "plaster": event.target.value,
      
