@@ -25,6 +25,7 @@ export const savePools = async(req, res) => {
         await Pool.create({
             owner: req.body.owner,
             original_creator: false,
+            title: req.body.title,
             pulic: true,
             length: req.body.length,
             width: req.body.width,

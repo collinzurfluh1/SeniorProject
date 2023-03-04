@@ -15,9 +15,11 @@ function PoolItem(props) {
   const savePool = async (e) => {
     e.preventDefault();
     try {
+        var title = prompt('Please title your new pool')
         await axios.post('http://localhost:4000/savePools', {
           //Error because username is not defined
           owner: props.username,
+          title: title,
           original_creator: false,
           pulic: false,
           length: props.pool.pool.length,
@@ -70,9 +72,6 @@ function PoolItem(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className='poolHeader'>
-            <h4>{props.pool.pool.title}</h4>
-        </div>
         <div className='poolStatsList'>
             <div className='poolStat'>Price: ${props.pool.pool.cost == null ?
           "N/A"

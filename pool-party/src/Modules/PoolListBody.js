@@ -34,7 +34,7 @@ function PoolListBody(pool) {
                 <div className="poolListBody">
                     <div className="poolListTitle">
                         <div className='title'>
-                            <h3>{pool.pool.title}</h3>
+                            <h5>{pool.pool.title}</h5>
                         </div>
                         <div className="poolListActions" onClick={(e) => {setActive(!active); e.stopPropagation();}}>
                             {/* <Heart isActive={active} /> */}
