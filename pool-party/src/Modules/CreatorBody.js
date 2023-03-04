@@ -113,7 +113,6 @@ class CreatorBody extends React.Component {
 
   /* Pool Material Getters and Setters */
   GetPoolMaterialData = () => {
-
     return this.state._poolMaterialData; 
   
   }

@@ -17,8 +17,9 @@ class CreatorForm3 extends React.Component {
         name: "React",
         material: props.getPoolMaterial(),
         materialData: props.getPoolMaterialData(),
+
         plaster: props.getPoolMaterialData()["plaster"],
-        gunniteBrand: props.getPoolMaterialData()["materialBrand"],
+        materialBrand: props.getPoolMaterialData()["materialBrand"],
         GunniteMaterial: {
           "materialBrand": "",
           "rebar": "",
@@ -51,21 +52,38 @@ class CreatorForm3 extends React.Component {
   }
 
   updateGunniteBrand(event){
-
-      this.setState({ gunniteBrand: event.target.value });
+      this.setState({materialBrand: event.target.value}); 
       this.props.setPoolMaterialData({
-        "materialBrand": event.target.value,
-       
+        "materialBrand": event.target.value, 
+        "plaster": this.state.materialData["plaster"],
+        "rebar": this.state.materialData["rebar"],  
+        "shell": this.state.materialData["shell"],
+        "lining": this.state.materialData["lining"],
+        "wall": this.state.materialData["wall"],
+        "shallowDepth": this.state.materialData["shallowDepth"],
+        "deepDepth": this.state.materialData["deepDepth"],
+        "slant": this.state.materialData["slant"],
+        "width": this.state.materialData["width"],
+        "length": this.state.materialData["length"],
+        "depth": this.state.materialData["depth"]
       });
-      
-
   }
 
   updatePlaster(event){
-    this.setState({plaster: event.target.value });
+    this.setState({plaster: event.target.value}); 
     this.props.setPoolMaterialData({
+      "materialBrand": this.state.materialData["materialBrand"], 
       "plaster": event.target.value,
-     
+      "rebar": this.state.materialData["rebar"],  
+      "shell": this.state.materialData["shell"],
+      "lining": this.state.materialData["lining"],
+      "wall": this.state.materialData["wall"],
+      "shallowDepth": this.state.materialData["shallowDepth"],
+      "deepDepth": this.state.materialData["deepDepth"],
+      "slant": this.state.materialData["slant"],
+      "width": this.state.materialData["width"],
+      "length": this.state.materialData["length"],
+      "depth": this.state.materialData["depth"]
     });
 
   }
@@ -117,9 +135,8 @@ class CreatorForm3 extends React.Component {
           { this.state.material == "Gunnite" && 
             <div id="gunniteDiv">
             <div id="GunniteBrand" onChange={this.updateGunniteBrand}>
-
             <label for="gunnite-brand" className="CreatorFormLabel">Choose Gunnite Brand</label><br></br>
-            <select name="gunnite-brand" value={this.state.materialData["materialBrand"]} id="pool-material">
+            <select name="gunnite-brand" value={this.state.materialBrand} id="pool-material">
             <option value="None">Select a Value</option>
             <option value="Gunnite 1">Gunnite 1</option>
             <option value="Gunnite 2">Gunnite 2</option>
@@ -128,7 +145,7 @@ class CreatorForm3 extends React.Component {
             
             </div>
             <label for="plaster" className="CreatorFormLabel">Plaster:</label><br></br>
-            <select name="plaster" value={this.state.materialData["plaster"]} onChange={this.updatePlaster} id="plaster">
+            <select name="plaster" value={this.state.plaster} onChange={this.updatePlaster} id="plaster">
               <option value="None">Select a Value</option>
               <option value="plaster1">Plaster 1</option>
               <option value="plaster2">Plaster 2</option>
