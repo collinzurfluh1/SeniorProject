@@ -14,9 +14,12 @@ const Cement = db.define('cement',{
     type:{
         type: DataTypes.STRING, // There might not be different types of cement.
     },
-    pound_cost:{
+    bag_cost:{
         type: DataTypes.DOUBLE  // Is cement measured in pounds or volume for cost?
     },
+    bag_size_pounds:{
+        type: DataTypes.DOUBLE  // Is cement measured in pounds or volume for cost?
+    }
 },{
     freezeTableName:true
 });
