@@ -24,8 +24,9 @@ cost
 const Pools = db.define('pools',{
     // Asset Information
     id:{
-        type: DataTypes.STRING, // we can make this int.
+        type: DataTypes.INTEGER, // we can make this int.
         primaryKey: true,
+        autoIncrement: true,
         unique: {
             args: true,
             msg: 'pool id already exists.'

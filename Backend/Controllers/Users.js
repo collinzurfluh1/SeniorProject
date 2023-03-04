@@ -26,9 +26,7 @@ export const Register = async(req, res) => {
         });
         res.json({msg: "Registration Successful"});
     } catch (error) {
-        if(error.code = "ER_DUP_ENTRY"){
-            res.status(404).json({msg:"Email already exists!"});
-        }
+        
     }
 }
 

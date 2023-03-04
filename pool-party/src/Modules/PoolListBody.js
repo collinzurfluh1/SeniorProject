@@ -1,14 +1,29 @@
-import React, { Component, useState } from 'react'; 
+import React, { Component, useState, useEffect } from 'react'; 
 import { Button } from '@mui/material';
 import { createRoutesFromElements, useNavigate } from 'react-router-dom';
 import poolModel from '../Assets/poolmodel.svg';
 import '../SCSS/poolListBody.scss';
 import Heart from "react-heart";
 import PoolItem from './PoolItem';
+import axios from 'axios';
+import jwt_decode from "jwt-decode";
 
 function PoolListBody(pool) {
     const [active, setActive] = useState(false)
     const [modalShow, setModalShow] = React.useState(false);
+    const [username, setName] = useState('');
+
+  const refreshToken = async () => {
+    try {
+        const response = await axios.get('http://localhost:4000/token');
+        const decoded = jwt_decode(response.data.accessToken);
+        setName(decoded.username);
+    } catch (error) {}
+  }
+
+  useEffect(()=>{
+    refreshToken();
+  },[])
         return (
             <>
             
@@ -41,6 +56,7 @@ function PoolListBody(pool) {
             show={modalShow}
             onHide={() => setModalShow(false)}
             pool={pool}
+            username={username}
             />
             </>
         );

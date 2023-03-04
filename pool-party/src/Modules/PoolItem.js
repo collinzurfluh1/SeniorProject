@@ -3,6 +3,7 @@ import { Button } from '@mui/material';
 import Modal from 'react-bootstrap/Modal';
 import '../SCSS/poolitem.scss'
 import axios from 'axios';
+import { createRoutesFromElements, useNavigate } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
 import EditPoolItem from './EditPoolItem';
 
@@ -10,7 +11,37 @@ import EditPoolItem from './EditPoolItem';
 function PoolItem(props) {
   const [username, setName] = useState('');
   const [modalShow, setModalShow] = React.useState(false);
-  const [active, setActive] = useState(false)
+  const navigate = useNavigate();
+  const savePool = async (e) => {
+    e.preventDefault();
+    try {
+        await axios.post('http://localhost:4000/savePools', {
+          //Error because username is not defined
+          owner: props.username,
+          original_creator: false,
+          pulic: false,
+          length: props.pool.pool.length,
+          width: props.pool.pool.width,
+          depth_shallow: props.pool.pool.depth_shallow,
+          depth_deep: props.pool.pool.depth_deep,
+          slant_type: props.pool.pool.slant_type,
+          lining_type: props.pool.pool.lining_type,
+          cover1: props.pool.pool.cover1,
+          cover2: props.pool.pool.cover2,
+          piping: props.pool.pool.piping,
+          drain: props.pool.pool.drain,
+          skimmer: props.pool.pool.skimmer,
+          pump: props.pool.pool.pump,
+          cost: props.pool.pool.cost,
+        });
+        alert("Your new pool is now saved!")
+        navigate('/My-Pools');
+        window.location.reload(false);
+
+    } catch (error) {
+      alert("Sorry the pool was not able to be saved! Try again later!");
+    }
+}
 
   const refreshToken = async () => {
     try {
@@ -88,7 +119,7 @@ function PoolItem(props) {
       <Modal.Footer>
         {props.pool.pool.owner == username ?
           <Button variant="contained" color="primary" onClick={(e) => {setModalShow(true) }}>Edit Pool</Button>
-        : <Button variant="contained" color="success">Save Pool</Button>}
+        : <Button variant="contained" color="success" onClick={savePool} >Save Pool</Button>}
         <Button variant="contained" onClick={props.onHide} color="error">Close</Button>
       </Modal.Footer>
       <EditPoolItem
