@@ -1,6 +1,6 @@
 import express from "express";
 import { getUsers, Register, Login, Logout, UpdateUsername, UpdateEmail } from "../Controllers/Users.js";
-import { getUserPools, getPools } from "../Controllers/Pools.js"
+import { getPools, savePools } from "../Controllers/Pools.js"
 import "../Controllers/Materials.js";
 import { verifyToken } from "../Middleware/VerifyToken.js";
 import { refreshToken } from "../Controllers/RefreshToken.js";
@@ -15,8 +15,9 @@ router.post('/login', Login);
 router.get('/token', refreshToken);
 router.delete('/logout', Logout);
 
-router.get('/getUserPools', getUserPools);
 router.get('/getPools', getPools);
+router.post('/savePools', savePools);
+
 
 
  

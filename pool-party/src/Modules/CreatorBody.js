@@ -4,6 +4,13 @@ import { render } from "react-dom";
 import { Button } from "@mui/material";
 import { createRoutesFromElements, useNavigate } from "react-router-dom";
 import { useRef } from "react";
+import Modal from 'react-bootstrap/Modal';
+import '../SCSS/poolitem.scss'
+import axios from 'axios';
+import jwt_decode from "jwt-decode";
+import EditPoolItem from './EditPoolItem';
+
+
 import ref from "react"; 
 import CreatorForm1 from "../Modules/CreatorForm1";
 
@@ -16,6 +23,7 @@ import CreatorForm7 from "../Modules/CreatorForm7";
 import CreatorForm8 from "../Modules/CreatorForm8";
 import CreatorForm9 from "../Modules/CreatorForm9";
 import CreatorFormFinal from "../Modules/CreatorFormFinal";
+import CreatorFormFinal2 from "../Modules/CreatorFormFinal2";
 
 import "../SCSS/creator.scss";
 
@@ -34,7 +42,7 @@ class CreatorBody extends React.Component {
   constructor(props) {
     super(props);
     this.currIndex = 1;
-    this.maxIndex = 10; 
+    this.maxIndex = 11; 
     this.state = {
       nextButtonText: "Next",
       name: "React",
@@ -61,8 +69,8 @@ class CreatorBody extends React.Component {
         "slant": "",
         "width": 0,
         "length": 0,
-        "depth": 0
-
+        "depth": 0,
+        "basinLiner": ""
     },
       _shallowDepth: "",
       _deepDepth: "",
@@ -92,6 +100,7 @@ class CreatorBody extends React.Component {
     this._form3 = React.createRef(); 
     this.hideComponent = this.hideComponent.bind(this);
     this.SetPoolName = this.SetPoolName.bind(this);
+    this.GetPool = this.GetPool.bind(this);
     this.GetPoolPump = this.GetPoolPump.bind(this); 
     this.GetPoolSkimmer = this.GetPoolSkimmer.bind(this); 
     this.GetPoolDrain = this.GetPoolDrain.bind(this); 
@@ -108,6 +117,41 @@ class CreatorBody extends React.Component {
     this.GetPoolWidth = this.GetPoolWidth.bind(this); 
     this.GetPoolLength = this.GetPoolLength.bind(this); 
     this.GetPoolName = this.GetPoolName.bind(this); 
+
+  }
+
+  UploadPool =  async (props) =>{
+    alert("Pool Uploading");
+     alert(this.GetPool()['name']);
+     // var navigate = useNavigate();
+      try {
+          await axios.post('http://localhost:4000/savePools', {
+            //Error because username is not defined
+            owner: props.username,
+            title: this.GetPool()["name"],
+            original_creator: false,
+            pulic: false,
+            length: this.GetPool()['materialData']['length'],
+            width: this.GetPool()['materialData']['width'],
+            depth_shallow: this.GetPool()['materialData']['shallowDepth'],
+            depth_deep: this.GetPool()['materialData']['deepDepth'],
+            slant_type: this.GetPool()['materialData']['slant'],
+            lining_type: this.GetPool()['materialData']['lining'],
+            cover1: this.GetPool()['winterCover'],
+            cover2: this.GetPool()['summerCover'],
+            piping: this.GetPool()['piping'],
+            drain: this.GetPool()['drain'],
+            skimmer:this.GetPool()['skimmer'],
+            pump: this.GetPool()['pump'],
+            cost: 0,
+
+          });
+          alert("Your new pool is now saved!")
+      //    navigate('/My-Pools');
+          window.location.reload(false);
+      } catch (error) {
+        alert("Sorry the pool was not able to be saved! Try again later");
+      }
 
   }
 
@@ -326,17 +370,12 @@ this.setState({_deepDepth: deepDepth}, function() {
       }; 
 
   }
-  SetPool = (pool) =>{
-      //this.SetPoolMaterial(pool.material);
-      //this.SetPoolMaterialBrand(pool.poolMaterialBrand);  
 
-
-  }
 
   prev() {
     if(this.currIndex > 1){
       this.currIndex--;
-      if(this.currIndex == 2){
+      if(this.currIndex == 2 || this.currIndex == 6){
         this.currIndex--; 
       }
       this.hideComponent(this.currIndex);
@@ -346,13 +385,15 @@ this.setState({_deepDepth: deepDepth}, function() {
   next() {
     if(this.currIndex < this.maxIndex){
       this.currIndex++;
-      if(this.currIndex == 2){
+      if(this.currIndex == 2 || this.currIndex == 6){
 
         this.currIndex++; 
       }
-      
-      
       this.hideComponent(this.currIndex);
+    }
+    else if(this.currIndex == this.maxIndex){
+        this.UploadPool(this.props);
+
     }
   }
     
@@ -377,6 +418,8 @@ this.setState({_deepDepth: deepDepth}, function() {
         this.setState({ creatorForm8: false});
         this.setState({ creatorForm9: false});
         this.setState({ creatorFormSubmit: false});
+        this.setState({ creatorFormSubmit2: false});
+
 
 
         this.setState({ nextButtonText: 'Next'});
@@ -493,7 +536,6 @@ this.setState({_deepDepth: deepDepth}, function() {
        this.setState({ creatorForm8: false});
        this.setState({ creatorForm9: true});
        this.setState({ creatorFormSubmit: false});
-       this.setState({ nextButtonText: 'Submit'});
        break; 
 
        case 10:
@@ -507,9 +549,31 @@ this.setState({_deepDepth: deepDepth}, function() {
         this.setState({ creatorForm8: false});
         this.setState({ creatorForm9: false});
         this.setState({ prevButton: false });
-        this.setState({ nextButton: false});
+        this.setState({ nextButtonText: 'Next'});
+
+        this.setState({ nextButton: true});
         this.setState({ creatorFormSubmit: true});
+        this.setState({ creatorFormSubmit2: false});
+
         break;
+        case 11:
+          this.setState({ creatorForm1: false });
+          this.setState({ creatorForm2: false });
+          this.setState({ creatorForm3: false });
+          this.setState({ creatorForm4: false });
+          this.setState({ creatorForm5: false});
+          this.setState({ creatorForm6: false});
+          this.setState({ creatorForm7: false});
+          this.setState({ creatorForm8: false});
+          this.setState({ creatorForm9: false});
+          this.setState({ prevButton: true });
+          this.setState({ nextButton: true});
+          this.setState({ nextButtonText: 'Submit'});
+
+          this.setState({ creatorFormSubmit: false});
+          this.setState({ creatorFormSubmit2: true});
+
+          break;
 
       default:
        this.setState({ creatorForm1: false });
@@ -528,7 +592,7 @@ this.setState({_deepDepth: deepDepth}, function() {
   }
 
   render() {
-    const { prevButton, nextButton, creatorForm1, creatorForm2, creatorForm3, creatorForm4, creatorForm5, creatorForm6, creatorForm7, creatorForm8, creatorForm9, creatorFormSubmit } = this.state;
+    const { prevButton, nextButton, creatorForm1, creatorForm2, creatorForm3, creatorForm4, creatorForm5, creatorForm6, creatorForm7, creatorForm8, creatorForm9, creatorFormSubmit, creatorFormSubmit2 } = this.state;
     var currIndex = 0;
 
     return (
@@ -582,6 +646,10 @@ this.setState({_deepDepth: deepDepth}, function() {
             setPoolPump={this.SetPoolPump} getPoolPump={this.GetPoolPump}
             />}
             {creatorFormSubmit && <CreatorFormFinal
+            getPool={this.GetPool}
+            getPoolMaterial={this.GetPoolMaterial}
+            />}
+            {creatorFormSubmit2 && <CreatorFormFinal2
             getPool={this.GetPool}
             />}
             </form>

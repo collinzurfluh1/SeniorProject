@@ -36,9 +36,6 @@ function EditPoolItem(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div className='poolHeader'>
-            <h4>{props.pool.pool.pool.title}</h4>
-        </div>
         <div className='poolStatsList'>
             <div className='poolStat'>Price: $<input type="text" defaultValue={props.pool.pool.pool.cost}></input></div>
             <div className='poolStat'>Length: <input type="text" defaultValue={props.pool.pool.pool.length}></input>ft</div>

@@ -45,7 +45,7 @@ function MyPoolBody() {
     <div id="CommunityList">
       <div id='poolList'>
       {data.map(pool => (
-        pool.owner == username? (
+        pool.owner.toLowerCase() == username.toLowerCase()? (
           <PoolListBody pool={pool}/>): null
       ))}
       </div>
