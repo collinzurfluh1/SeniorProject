@@ -17,6 +17,7 @@ class CreatorForm3 extends React.Component {
         name: "React",
         material: props.getPoolMaterial(),
         materialData: props.getPoolMaterialData(),
+        basinLiner: props.getPoolMaterialData()['basinLiner'],
         materialBrand: props.getPoolMaterialData()["materialBrand"],
         plaster: props.getPoolMaterialData()["plaster"],
         rebar: props.getPoolMaterialData()["rebar"],
@@ -32,7 +33,6 @@ class CreatorForm3 extends React.Component {
         
       };
 
-      alert(props.getPoolMaterial()); 
       this.updateShell = this.updateShell.bind(this);
       this.updateSlant = this.updateSlant.bind(this);
       this.updateDeepDepth = this.updateDeepDepth.bind(this);
@@ -46,6 +46,8 @@ class CreatorForm3 extends React.Component {
       this.updatePlaster = this.updatePlaster.bind(this);
       this.updateGunniteBrand = this.updateGunniteBrand.bind(this); 
       this.updatePoolMaterial = this.updatePoolMaterial.bind(this); 
+      this.updateBasinLiner = this.updateBasinLiner.bind(this); 
+
 
   }
 
@@ -63,9 +65,30 @@ class CreatorForm3 extends React.Component {
         "slant": this.state.slant,
         "width": this.state.width,
         "length": this.state.length,
+      "basinLiner": this.state.basinLiner,
         "depth": this.state.depth
       });
   }
+
+  updateBasinLiner(event){
+    this.setState({basinLiner: event.target.value}); 
+    this.props.setPoolMaterialData({
+      "materialBrand": this.state.materialBrand, 
+      "plaster": this.state.plaster,
+      "rebar": this.state.rebar,  
+      "shell": this.state.shell,
+      "lining": this.state.lining,
+      "wall": this.state.wall,
+      "shallowDepth": this.state.shallowDepth,
+      "deepDepth": this.state.deepDepth,
+      "slant": this.state.slant,
+      "width": this.state.width,
+      "length": this.state.length,
+      "basinLiner": event.target.value,
+      "depth": this.state.depth
+    }); 
+}
+
 
   updatePlaster(event){
     this.setState({plaster: event.target.value}); 
@@ -81,11 +104,12 @@ class CreatorForm3 extends React.Component {
       "slant": this.state.slant,
       "width": this.state.width,
       "length": this.state.length,
-      "depth": this.state.depth
+      "depth": this.state.depth,
+      "basinLiner": this.state.basinLiner
+
     });
 
   }
-
   
 
   updateRebar(event){
@@ -102,7 +126,9 @@ class CreatorForm3 extends React.Component {
       "slant": this.state.slant,
       "width": this.state.width,
       "length": this.state.length,
-      "depth": this.state.depth
+      "depth": this.state.depth,
+      "basinLiner": this.state.basinLiner
+
     });
   }
 
@@ -120,7 +146,9 @@ class CreatorForm3 extends React.Component {
       "slant": this.state.slant,
       "width": event.target.value,
       "length": this.state.length,
-      "depth": this.state.depth
+      "depth": this.state.depth,
+      "basinLiner": this.state.basinLiner
+
     });
   }
   updateLength(event){
@@ -137,7 +165,9 @@ class CreatorForm3 extends React.Component {
       "slant": this.state.slant,
       "width": this.state.width,
       "length": event.target.value,
-      "depth": this.state.depth
+      "depth": this.state.depth,
+      "basinLiner": this.state.basinLiner
+
     });
   }
 
@@ -155,7 +185,9 @@ class CreatorForm3 extends React.Component {
       "slant": this.state.slant,
       "width": this.state.width,
       "length": this.state.length,
-      "depth": event.target.value
+      "depth": event.target.value,
+      "basinLiner": this.state.basinLiner
+
     });
   }
 
@@ -173,7 +205,9 @@ class CreatorForm3 extends React.Component {
       "slant": this.state.slant,
       "width": this.state.width,
       "length": this.state.length,
-      "depth": this.state.depth
+      "depth": this.state.depth,
+      "basinLiner": this.state.basinLiner
+
     });
 
   }
@@ -193,7 +227,9 @@ class CreatorForm3 extends React.Component {
       "slant": this.state.slant,
       "width": this.state.width,
       "length": this.state.length,
-      "depth": this.state.depth
+      "depth": this.state.depth,
+      "basinLiner": this.state.basinLiner
+
     });
 
   }
@@ -212,7 +248,9 @@ class CreatorForm3 extends React.Component {
       "slant": this.state.slant,
       "width": this.state.width,
       "length": this.state.length,
-      "depth": this.state.depth
+      "depth": this.state.depth,
+      "basinLiner": this.state.basinLiner
+
     });
 
   }
@@ -230,7 +268,9 @@ class CreatorForm3 extends React.Component {
       "slant": this.state.slant,
       "width": this.state.width,
       "length": this.state.length,
-      "depth": this.state.depth
+      "depth": this.state.depth,
+      "basinLiner": this.state.basinLiner
+
     });
 
   }
@@ -248,7 +288,9 @@ class CreatorForm3 extends React.Component {
       "slant": event.target.value,
       "width": this.state.width,
       "length": this.state.length,
-      "depth": this.state.depth
+      "depth": this.state.depth,
+      "basinLiner": this.state.basinLiner
+
     });
 
   }
@@ -266,7 +308,9 @@ class CreatorForm3 extends React.Component {
       "slant": this.state.shell,
       "width": this.state.width,
       "length": this.state.length,
-      "depth": this.state.depth
+      "depth": this.state.depth,
+      "basinLiner": this.state.basinLiner
+
     });
   }
 
@@ -301,12 +345,12 @@ class CreatorForm3 extends React.Component {
           { this.state.material == "Gunnite" && 
             <div id="gunniteDiv">
             <div id="GunniteBrand" onChange={this.updateGunniteBrand}>
-            <label for="gunnite-brand" className="CreatorFormLabel">Choose Gunnite Brand</label><br></br>
-            <select name="gunnite-brand" value={this.state.materialBrand} id="pool-material">
+            <label for="gunnite-brand" className="CreatorFormLabel">Choose A Concrete</label><br></br>
+            <select name="concrete" value={this.state.materialBrand} id="pool-material">
             <option value="None">Select a Value</option>
-            <option value="Gunnite 1">Gunnite 1</option>
-            <option value="Gunnite 2">Gunnite 2</option>
-            <option value="Gunnite 3">Gunnite 3</option>
+            <option value="Concrete 1">Concrete 1</option>
+            <option value="Concrete 2">Concrete 2</option>
+            <option value="Concrete 3">Concrete 3</option>
             </select><br></br>
             
             </div>
@@ -319,13 +363,7 @@ class CreatorForm3 extends React.Component {
               <option value="plaster3">Plaster 3</option>
               <option value="plaster4">Plaster 4</option>
             </select><br></br>
-            <label for="rebar" className="CreatorFormLabel">Rebar:</label><br></br>
-            <select name="rebar" value={this.state.rebar} onChange={this.updateRebar} id="rebar">
-              <option value="rebar1">Rebar 1</option>
-              <option value="rebar2">Rebar 2</option>
-              <option value="rebar3">Rebar 3</option>
-              <option value="rebar4">Rebar 4</option>
-            </select><br></br>
+
           <div>
             <label className="CreatorFormLabel">Width: </label><br></br>
             <input type="text" defaultValue={this.state.width} onChange={this.updateWidth}></input><br></br>
@@ -343,13 +381,7 @@ class CreatorForm3 extends React.Component {
           }   
           { this.state.material == "Vinyl" && 
             <div id="Vinyl" >
-            <label for="plaster" className="CreatorFormLabel">Vinyl Brand:</label><br></br>
-            <select name="materialBrand" onChange={this.updateGunniteBrand} value={this.state.materialBrand} id="vinylMaterialBrand">
-              <option value="vinyl1">Vinyl 1</option>
-              <option value="vinyl2">Vinyl 2</option>
-              <option value="vinyl3">Vinyl 3</option>
-              <option value="vinyl4">Vinyl 4</option>
-            </select><br></br>
+           
             <label for="lining" className="CreatorFormLabel">Pool Lining:</label><br></br>
             <select name="pool-lining"  value={this.state.lining} onChange={this.updateLining} id="pool-lining">
               <option value="pool-lining1">Pool Lining 1</option>
@@ -364,6 +396,14 @@ class CreatorForm3 extends React.Component {
               <option value="steel-walls2">Steel Walls 2</option>
               <option value="steel-walls3">Steel Walls 3</option>
               <option value="steel-walls4">Steel Walls 4</option>
+            </select><br></br>
+
+            <label for="" className="CreatorFormLabel">Basin Liner:</label><br></br>
+            <select name="basin-liner" value={this.state.basinLiner} onChange={this.updateBasinLiner} id="basin-liner">
+              <option value="Basin Liner 1">Basin Liner 1</option>
+              <option value="Basin Liner 2">Basin Liner 2</option>
+              <option value="Basin Liner 3">Basin Liner 3</option>
+              <option value="Basin Liner 4">Basin Liner 4</option>
             </select><br></br>
  
               <label className="CreatorFormLabel">Width: </label><br></br>

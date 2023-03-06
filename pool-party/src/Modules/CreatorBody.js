@@ -4,6 +4,13 @@ import { render } from "react-dom";
 import { Button } from "@mui/material";
 import { createRoutesFromElements, useNavigate } from "react-router-dom";
 import { useRef } from "react";
+import Modal from 'react-bootstrap/Modal';
+import '../SCSS/poolitem.scss'
+import axios from 'axios';
+import jwt_decode from "jwt-decode";
+import EditPoolItem from './EditPoolItem';
+
+
 import ref from "react"; 
 import CreatorForm1 from "../Modules/CreatorForm1";
 
@@ -62,8 +69,8 @@ class CreatorBody extends React.Component {
         "slant": "",
         "width": 0,
         "length": 0,
-        "depth": 0
-
+        "depth": 0,
+        "basinLiner": ""
     },
       _shallowDepth: "",
       _deepDepth: "",
@@ -93,6 +100,7 @@ class CreatorBody extends React.Component {
     this._form3 = React.createRef(); 
     this.hideComponent = this.hideComponent.bind(this);
     this.SetPoolName = this.SetPoolName.bind(this);
+    this.GetPool = this.GetPool.bind(this);
     this.GetPoolPump = this.GetPoolPump.bind(this); 
     this.GetPoolSkimmer = this.GetPoolSkimmer.bind(this); 
     this.GetPoolDrain = this.GetPoolDrain.bind(this); 
@@ -109,6 +117,41 @@ class CreatorBody extends React.Component {
     this.GetPoolWidth = this.GetPoolWidth.bind(this); 
     this.GetPoolLength = this.GetPoolLength.bind(this); 
     this.GetPoolName = this.GetPoolName.bind(this); 
+
+  }
+
+  UploadPool =  async (props) =>{
+    alert("Pool Uploading");
+     alert(this.GetPool()['name']);
+     // var navigate = useNavigate();
+      try {
+          await axios.post('http://localhost:4000/savePools', {
+            //Error because username is not defined
+            owner: props.username,
+            title: this.GetPool()["name"],
+            original_creator: false,
+            pulic: false,
+            length: this.GetPool()['materialData']['length'],
+            width: this.GetPool()['materialData']['width'],
+            depth_shallow: this.GetPool()['materialData']['shallowDepth'],
+            depth_deep: this.GetPool()['materialData']['deepDepth'],
+            slant_type: this.GetPool()['materialData']['slant'],
+            lining_type: this.GetPool()['materialData']['lining'],
+            cover1: this.GetPool()['winterCover'],
+            cover2: this.GetPool()['summerCover'],
+            piping: this.GetPool()['piping'],
+            drain: this.GetPool()['drain'],
+            skimmer:this.GetPool()['skimmer'],
+            pump: this.GetPool()['pump'],
+            cost: 0,
+
+          });
+          alert("Your new pool is now saved!")
+      //    navigate('/My-Pools');
+          window.location.reload(false);
+      } catch (error) {
+        alert("Sorry the pool was not able to be saved! Try again later");
+      }
 
   }
 
@@ -327,17 +370,12 @@ this.setState({_deepDepth: deepDepth}, function() {
       }; 
 
   }
-  SetPool = (pool) =>{
-      //this.SetPoolMaterial(pool.material);
-      //this.SetPoolMaterialBrand(pool.poolMaterialBrand);  
 
-
-  }
 
   prev() {
     if(this.currIndex > 1){
       this.currIndex--;
-      if(this.currIndex == 2){
+      if(this.currIndex == 2 || this.currIndex == 6){
         this.currIndex--; 
       }
       this.hideComponent(this.currIndex);
@@ -347,13 +385,15 @@ this.setState({_deepDepth: deepDepth}, function() {
   next() {
     if(this.currIndex < this.maxIndex){
       this.currIndex++;
-      if(this.currIndex == 2){
+      if(this.currIndex == 2 || this.currIndex == 6){
 
         this.currIndex++; 
       }
-      
-      
       this.hideComponent(this.currIndex);
+    }
+    else if(this.currIndex == this.maxIndex){
+        this.UploadPool(this.props);
+
     }
   }
     
