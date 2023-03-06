@@ -52,45 +52,45 @@ class CreatorBody extends React.Component {
       prevButton: false,
       nextButton: true,
       _poolHasShallowEnd: false,
-      _poolName: '',
-      _poolWidth: 0,
-      _poolDepth: 0,
-      _poolLength: 0,
-      _poolMaterial: "",
+      _poolName: null,
+      _poolWidth: null,
+      _poolDepth: null,
+      _poolLength: null,
+      _poolMaterial: null,
       _poolMaterialData:  {
-        "materialBrand": "", 
-        "plaster": "",
-        "rebar": "",  
-        "shell": "",
-        "lining": "",
-        "wall": "",
-        "shallowDepth": 0,
-        "deepDepth": 0,
-        "slant": "",
-        "width": 0,
-        "length": 0,
-        "depth": 0,
-        "basinLiner": ""
+        "materialBrand": null,
+        "plaster": null,
+        "rebar": null,  
+        "shell": null,
+        "lining": null,
+        "wall": null,
+        "shallowDepth": null,
+        "deepDepth": null,
+        "slant": null,
+        "width": null,
+        "length": null,
+        "depth": null,
+        "basinLiner": null
     },
-      _shallowDepth: "",
-      _deepDepth: "",
-      _poolSlant: "",
-      _poolConcrete: "",
+      _shallowDepth: null,
+      _deepDepth: null,
+      _poolSlant: null,
+      _poolConcrete: null,
       _poolMaterialBrand: {
-          "materialBrand": "",   
-          "shell": "",
-          "width": 0,
-          "length": 0
+          "materialBrand": null,   
+          "shell": null,
+          "width": null,
+          "length": null,
 
       },
-      _poolSummerCover: "",
-      _poolWinterCover: "",
-      _poolPipe: "",
-      _poolBasinLiner: "",
-      _poolDrain: "",
-      _poolSkimmer: "",
-      _poolPump: "",
-      _poolLining: "",
+      _poolSummerCover: null,
+      _poolWinterCover: null,
+      _poolPipe: null,
+      _poolBasinLiner: null,
+      _poolDrain: null,
+      _poolSkimmer: null,
+      _poolPump: null,
+      _poolLining: null,
       _poolMaterialObject: null
 
     
@@ -123,14 +123,16 @@ class CreatorBody extends React.Component {
   UploadPool =  async (props) =>{
     alert("Pool Uploading");
      alert(this.GetPool()['name']);
+     alert(this.GetPool()['summerCover']); 
+     alert(this.GetPool()['winterCover']); 
      // var navigate = useNavigate();
       try {
           await axios.post('http://localhost:4000/savePools', {
             //Error because username is not defined
-            owner: props.username,
+            owner: "TestUser",
             title: this.GetPool()["name"],
             original_creator: false,
-            pulic: false,
+            pulic: true,
             length: this.GetPool()['materialData']['length'],
             width: this.GetPool()['materialData']['width'],
             depth_shallow: this.GetPool()['materialData']['shallowDepth'],

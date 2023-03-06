@@ -39,10 +39,14 @@ class CreatorFormFinal extends React.Component {
           <p>Pool Name: {this.state.name}</p>
           <p>Pool Material: {this.state.material}</p>
           <p>Pool Concrete: {this.state.materialBrand}</p>
+          <h4>Fiber Glass Options</h4>
           <p>Fiber Glass Shell: {this.state.shell}</p>
+          <h4>Dimensions</h4>
           <p>Pool Width: {this.state.width}</p>
           <p>Pool Length: {this.state.length}</p>
+          <h4>Concrete Depth</h4>
           <p>Pool Depth: {this.state.depth}</p>
+          <h4>Vinyl Depht</h4>
           <p>Pool Shallow Depth: {this.state.shallowDepth}</p>
           <p>Pool Deep Depth: {this.state.deepDepth}</p>
           <p>Pool Slant: {this.state.slant}</p>
