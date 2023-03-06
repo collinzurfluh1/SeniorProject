@@ -116,7 +116,7 @@ function PoolItem(props) {
         </div>
       </Modal.Body>
       <Modal.Footer>
-        {props.pool.pool.owner == username ?
+        {props.pool.pool.owner.toLowerCase() == username.toLowerCase() ?
           <Button variant="contained" color="primary" onClick={(e) => {setModalShow(true) }}>Edit Pool</Button>
         : <Button variant="contained" color="success" onClick={savePool} >Save Pool</Button>}
         <Button variant="contained" onClick={props.onHide} color="error">Close</Button>
