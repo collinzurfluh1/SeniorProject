@@ -16,8 +16,8 @@ function PoolItem(props) {
     e.preventDefault();
     try {
         var title = prompt('Please title your new pool')
-        await axios.post('http://localhost:4000/savePools', {
-          //Error because username is not defined
+        if(title != null && title != "" && title.value.match("[A-Za-z]+")){
+          await axios.post('http://localhost:4000/savePools', {
           owner: props.username,
           title: title,
           original_creator: false,
@@ -39,6 +39,7 @@ function PoolItem(props) {
         alert("Your new pool is now saved!")
         navigate('/My-Pools');
         window.location.reload(false);
+        }
 
     } catch (error) {
       alert("Sorry the pool was not able to be saved! Try again later!");
