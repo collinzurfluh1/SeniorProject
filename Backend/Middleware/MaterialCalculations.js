@@ -160,15 +160,48 @@ function calculateChlorineTablets(gallons)
     }
     return tabletCount;
 }
+function calculateChlorinePrice(tablets, chlorineJson)
+{
+    var units;
+    units = tablets / chlorineJson.tabletCount;
+    if(!(tablets % chlorineJson.tabletCount == 0))
+    {
+        units = units + 1;
+    }
+    var price = units * chlorineJson.price;
+    return price;
+}
 function calculateCyanuricAcidOunces(gallons)
 {
     var cyanuricAcid = 1.75 + (((gallons - 10000) / 5000) * .75);
     return cyanuricAcid;
 }
+function calculateCyanuricAcidPrice(cyanuricAcidlbs, cyanuricAcidJson)
+{
+    var units;
+    units = cyanuricAcidlbs / cyanuricAcidJson.lbs;
+    if(!(cyanuricAcidlbs % cyanuricAcidJson.lbs == 0))
+    {
+        units = units + 1;
+    }
+    var price = units * cyanuricAcidJson.price;
+    return price;
+}
 function calculateShockLbs(gallons)
 {
     var lbsOfShock = gallons / 5000;
     return lbsOfShock;
+}
+function calculateShockPrice(shocklbs, shockJson)
+{
+    var units;
+    units = shocklbs / shockJson.lbs;
+    if(!(shocklbs % shockJson.lbs == 0))
+    {
+        units = units + 1;
+    }
+    var price = units * shockJson.price;
+    return price;
 }
 function calculatePipesAmount(depth, length, width)
 {
@@ -177,7 +210,10 @@ function calculatePipesAmount(depth, length, width)
     var pipeLength = (length * 1.75) + (width * 2) + (depth * 1.1) + 20;
     return pipeLength;
 }
-
+function calculatePipesCost(pipeLength, pipeJson)
+{
+    return (pipeLength * pipeJson.price);
+}
 function calculateConcretePounds(length, width, depth, surfaceArea, basinType)
 {
     //This calculates the total cost of concrete through cubic and square feet cost around and inside the pool.
@@ -204,6 +240,19 @@ function calculateConcretePounds(length, width, depth, surfaceArea, basinType)
     }
 }
 
+function calcualteConcreteCost(concretelbs, concreteJson)
+{
+    var units;
+    units = concretelbs / concreteJson.lbs;
+    if(!(concretelbs % concreteJson.lbs == 0))
+    {
+        units = units + 1;
+    }
+    var price = units * concreteJson.price;
+    return price;
+}
+
+
 function calculateWaterPrice(gallons)
 {
     //This calculates the total cost of water for a pool based on the pools volume.
@@ -225,6 +274,11 @@ function calculateSideWallingSqFT(length, width)
     var sqFt = (2 * (width * sideWalling) + 2 * (length * sideWalling));
     return sqFt;
 }
+
+function calcuateSideWallingPrice(sqFt, sideWallingJson)
+{
+    return (sqFt * sideWallingJson.price);
+}
 function calculatePoolLiner(surfaceArea)
 {
     //This calculates the cost of a vinyl pools liner based on its surface area.
@@ -232,6 +286,10 @@ function calculatePoolLiner(surfaceArea)
     //Database call for liner price
     var poolLinerSize = surfaceArea * 1.05;
     return poolLinerSize;
+}
+function calcualtePoolLiner(poolLinerSize, poolLinerJson)
+{
+    
 }
 function calculatePoolWinterCover(length, width)
 {
