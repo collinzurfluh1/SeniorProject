@@ -12,7 +12,7 @@ function calculatePrice(poolMaterials, basinType)
         var poolObject = calculateFiberglass(poolMaterials);
         return poolObject;
     }
-    else if(basinType.equals("vinyl"))
+    else if(basinType.equals("Vinyl"))
     {
         var poolObject = calculateVinyl(poolMaterials);
         return poolObject;
@@ -39,7 +39,7 @@ function calculateVinyl(poolMaterials)
     calculatePoolWinterCover()
     calculateSideWalling()
     calculatePoolFilter()
-    */
+    
    //                   0       1       2       3   4           5           6          7        8               9       10            11         12          13              14      15      16      17
     //poolMaterials = {length, width, depth, type, pipes, chlorineTablet, shockName, ppm, cyanuricAcidName, concrete, poolLiner, steelWalling, solarCover, winterCover, basinType, Skimmer, drain, numDrains}
     
@@ -55,13 +55,14 @@ function calculateVinyl(poolMaterials)
     var solarCoverCost = calculatePoolSolarCover(poolMaterials[0], poolMaterials[1], poolMaterials[12]);
     var winterCoverCost = calculatePoolWinterCover(poolMaterials[0], poolMaterials[1], poolMaterials[13]);
     var filterInformation = calculatePoolFilter(gallons);
-    var pumpInformation = calculatePoolPump(gallons, filterInformation[0], poolMaterials[4]);
+    var pumpInformation = calculatePoolPump(gallons);
     var skimmerPrice = poolMaterials[15];//This line will be replaced with a database call for the skimmer price
     var drainPrice = poolMaterials[16] * poolMaterials[17];
     var price = chemicalPrice[0] + chemicalPrice[1] + chemicalPrice[2] + concretePrice + sideWallingCost + waterPrice + poolLinerCost + solarCoverCost + winterCoverCost + filterInformation[1] + pumpInformation[1] + skimmerPrice + drainPrice;
     var poolStatistics = null;//for this I would want to build a pool object and then yeet it through, yes, I know very professional
 
     return poolStatistics;
+    */
 }
 function calculateGunite(poolMaterials)
 {
@@ -75,13 +76,12 @@ function calculateGunite(poolMaterials)
     calculatePoolLiner()
     calculatePoolSolarCover()
     calculatePoolWinterCover()
-    calculateSideWalling()
     calculatePoolFilter()
     calculateRebar()
     calculatePlaster()
     *///                0       1       2       3   4           5           6          7        8               9       10      11      12          13              14      15      16      17
     //poolMaterials = {length, width, depth, type, pipes, chlorineTablet, shockName, ppm, cyanuricAcidName, concrete, plaster, rebar, solarCover, winterCover, basinType, Skimmer, drain, numDrains}
-    
+    /*
     var surfaceArea = calculatePoolSurfaceArea(poolMaterials[0], poolMaterials[1], poolMaterials[2], poolMaterials[14]);
     var volume = calculatePoolVolume(poolMaterials[0], poolMaterials[1], poolMaterials[2], poolMaterials[14]);
     var gallons = calcualteGallons(gallons);
@@ -99,8 +99,9 @@ function calculateGunite(poolMaterials)
     var drainPrice = poolMaterials[16] * poolMaterials[17];
     var price = chemicalPrice[0] + chemicalPrice[1] + chemicalPrice[2] + concretePrice + rebarCost + waterPrice + plasterCost + solarCoverCost + winterCoverCost + filterInformation[1] + pumpInformation[1] + skimmerPrice + drainPrice;
     var poolStatistics = null;//for this I would want to build a pool object and then yeet it through, yes, I know very professional
-
+    
     return poolStatistics;
+    */
 }   
 function calculateFiberglass(poolMaterials)
 {
@@ -113,7 +114,7 @@ function calculateFiberglass(poolMaterials)
     calculateSolarCover()
     calculateWinterCover()
     calculateFilter()
-    */
+    
    //                    0       1       2     3     4           5           6          7        8               9       10            11          12          13      14      15      16
     //poolMaterials = {length, width, depth, type, pipes, chlorineTablet, shockName, ppm, cyanuricAcidName, concrete, fiberShell, solarCover, winterCover, basinType, Skimmer, drain, numDrains}
     
@@ -136,6 +137,7 @@ function calculateFiberglass(poolMaterials)
     var poolStatistics = null;//for this I would want to build a pool object and then yeet it through, yes, I know very professional
 
     return poolStatistics;
+    */
 }
 function calculateFiberglass(shell)
 {
@@ -143,13 +145,11 @@ function calculateFiberglass(shell)
     var fiberglassCost = 10;
     return fiberglassCost;
 }
-function calculateChemicals(gallons, chlorineTablet, shockName, cyanuricAcidName, ppm)
+function calculateChlorineTablets(gallons)
 {
     //This function calculates the cost based on the volume of the pool
     //Inputs: Pools Gallons of Water, chlorine tablet name, shock name, cyanuric acid name, ppm is from user input
     var tabletCount;
-    var lbsOfShock;
-    var cyanuricAcid;
     if(gallons < 20000)
     {
         tabletCount = 2 * (gallons / 10000);
@@ -158,67 +158,53 @@ function calculateChemicals(gallons, chlorineTablet, shockName, cyanuricAcidName
     {
         tabletCount = 3 * (gallons / 10000);
     }
-    lbsOfShock = gallons / 5000;
-    switch(ppm)
-    {
-        case 10:
-            cyanuricAcid = .75 + (((gallons - 10000) / 5000) * .5);
-            break;
-        case 20:
-            cyanuricAcid = 1.75 + (((gallons - 10000) / 5000) * .75);
-            break
-        case 30:
-            cyanuricAcid = 2.5 + (((gallons - 10000) / 5000) * 1.25);
-            break;
-        case 40:
-            cyanuricAcid = 3.25 + (((gallons - 10000) / 5000) * 1.75);
-            break;
-    }
-    var cyanuricPrice = cyanuricAcid * cyanuricAcidName;
-    var shockPrice = lbsOfShock * shockName;
-    var tabletPrice = tabletCount * chlorineTablet;
-    var toReturn = {tabletPrice, shockPrice, cyanuricPrice};
-    return toReturn;
+    return tabletCount;
 }
-function calculatePipes(pipes, depth, length, width)
+function calculateCyanuricAcidOunces(gallons)
+{
+    var cyanuricAcid = 1.75 + (((gallons - 10000) / 5000) * .75);
+    return cyanuricAcid;
+}
+function calculateShockLbs(gallons)
+{
+    var lbsOfShock = gallons / 5000;
+    return lbsOfShock;
+}
+function calculatePipesAmount(depth, length, width)
 {
     //This function calculates the length and cost of pipe based on the type of pipe and perimeter of the pool
     //Inputs: Pipe Price/Name, Pools Max Depth, Length, and Width
     var pipeLength = (length * 1.75) + (width * 2) + (depth * 1.1) + 20;
-    return (pipeLength * pipes);
+    return pipeLength;
 }
 
-function calculateConcrete(length, width, depth, surfaceArea, concrete, type)
+function calculateConcretePounds(length, width, depth, surfaceArea, basinType)
 {
     //This calculates the total cost of concrete through cubic and square feet cost around and inside the pool.
     //Inputs: Length, Width, Depth, Surface Area, Concrete Price, BasinType
     //database call for concrete price
-    var concretePriceSqFT = concrete;
-    var concretePriceCbFT = concrete;
-    var totalPrice;
-    if(type == 1)//pool gunite
-    {
-        var totalPrice = surfaceArea * concretePriceSqFT; 
-        totalPrice = concretePriceCbFT * ((length + 1) * (width + 1) * depth) - (length * width * depth);
-        totalPrice = concretePriceSqFT * ((length + 3) * (width + 3)) - (length * width);
-        return totalPrice;
+    if(basinType.equals("Gunite"))//pool gunite
+    { 
+        concretelesCbFT = 64.21 * ((length + 1) * (width + 1) * depth) - (length * width * depth);
+        concretelbsSqFT = 75 * ((length + 3) * (width + 3)) - (length * width) * 0.5;
+        return (concretelbsCbFT + concretelbsSqFT);
     }
     if (type == 2)//pool fiberglass
     {
-        var totalPrice = (surfaceArea * 1.1) * concretePriceSqFT;
-        totalPrice = concretePriceSqFT * ((length + 3) * (width + 3)) - (length * width);
-        return totalPrice;
+        var totallbs = (surfaceArea * 1.1) * 75 * 0.5;
+        totallbs = 75 * ((length + 3) * (width + 3)) - (length * width) * 0.5;
+        return totallbs;
     }
     if (type == 3)//pool vinyl
     {
-        var totalPrice = calculatePoolFloor(length, width, depth) * concretePriceSqFT; 
-        totalPrice = concretePriceCbFT * ((length + 1) * (width + 1) * depth) - (length * width * depth);
-        totalPrice = concretePriceSqFT * ((length + 3) * (width + 3)) - (length * width);
-        return totalPrice;
+        var totallbs = calculatePoolFloor(length, width, depth) * 75; 
+        totallbs = 64.21 * ((length + 1) * (width + 1) * depth) - (length * width * depth);
+        totallbs = 75 * ((length + 3) * (width + 3)) - (length * width) * 0.5;
+        return totallbs;
     }
 }
 
-function calculateWater(gallons)
+function calculateWaterPrice(gallons)
 {
     //This calculates the total cost of water for a pool based on the pools volume.
     //Inputs: Pools Volume
@@ -228,43 +214,42 @@ function calculateWater(gallons)
 }
 function calcualteGallons(volume)
 {
-
     return (volume * 7.47);
 }
-function calculateSideWalling(length, width, sideWalling)
+function calculateSideWallingSqFT(length, width)
 {
     //This calculates the steel side walling for a pool
     //Inputs: Pools Length, Width, Depth 1, Price/Name of side walling
     //database call for sidewalling price
-    var sideWallingPrice = sideWalling; //Database call for sidewalling price based on name;
-    var price = sideWalling * (2 * (width * sideWalling) + 2 * (length * sideWalling));
-    return price;
+    //Database call for sidewalling price based on name;
+    var sqFt = (2 * (width * sideWalling) + 2 * (length * sideWalling));
+    return sqFt;
 }
-function calculatePoolLiner(surfaceArea, liner)
+function calculatePoolLiner(surfaceArea)
 {
     //This calculates the cost of a vinyl pools liner based on its surface area.
     //Inputs: Pools Surface Area, Liner price/name
-    var poolLinerPrice = liner; //Database call for liner price
-    var price = surfaceArea * liner * 1.05;
-    return price;
+    //Database call for liner price
+    var poolLinerSize = surfaceArea * 1.05;
+    return poolLinerSize;
 }
-function calculatePoolWinterCover(length, width, winterCover)
+function calculatePoolWinterCover(length, width)
 {
     //This calculates the cost of a winter pool cover based on the Length and Width of a pool
     //Inputs: pools Length, width, Winter Cover Price/Name
-    var winterCoverPrice = winterCover; //database call to get the winter cover price
-    var price = winterCoverPrice * (width + 1) * (length + 1);
+    //database call to get the winter cover price
+    var winterCoverSize = (width + 1) * (length + 1);
 
-    return price;
+    return winterCoverSize;
 }
-function calculatePoolSolarCover(length, width, solarCover)
+function calculatePoolSolarCover(length, width)
 {
     //This calculates the cost of the pools solar cover based on its length and width
     //Inputs: Pool Length, Width, Solar Cover Price/Name
     //function call for solar cover price
-    var solarCoverPrice = solarCover; //database call to get the solar cover price;
-    var price = width * length * solarCover;
-    return price;
+    //database call to get the solar cover price;
+    var solarCoverSize = width * length;
+    return solarCoverSize;
 }
 function calculatePoolFilter(gallons)
 {
@@ -276,13 +261,13 @@ function calculatePoolFilter(gallons)
     return price;
 
 }
-function calculateRebar(length, width, depth, rebar)
+function calculateRebar(length, width, depth)
 {
     //This calculates the rebar needed with 2 inch spacing from its depth 1, length, and width
     //Inputs:Pool Length, Width, Depth, Rebar name/price
     //call to get rebar price if not included
-    var rebarPrice = rebar; //database call to get the price of rebar based on name
-    var areaForBar = rebarPrice * (2(length * 6 * depth) + 2(width * 6 * depth));
+    //database call to get the price of rebar based on name
+    var areaForBar = 2.33 * (2(length * 6 * depth) + 2(width * 6 * depth));
 
     return areaForBar;
 }
@@ -291,8 +276,8 @@ function calculatePlaster(surfaceArea, plaster)
     //This calculates the cost of plaster
     //Inputs: Pools Surface Area, Cost of Plaster/Name of Plaster
     //Call to get Plaster(Or pass in plaster price)
-    var plasterPrice = plaster;//database call for plaster price
-    return (surfaceArea * plasterPrice);
+    //database call for plaster price
+    return (surfaceArea * 0.4);
 }
 function calculatePoolSurfaceArea(length, width, depth, basinType)
 {
@@ -337,16 +322,16 @@ function calculatePoolVolume(length, width, depth, basinType)
         return volume;
     }
 }
-function calculatePoolPump(gallons, filter, pipes)
+function calculatePoolPump(gallons)
 {
     //this calculates the pools pumps needed. 
-    //Inputs: gallons, filter
-    //For each 1.5-inch intake line, the maximum flow rate is 42 gallons per minute.
-    //For each 2-inch intake line, the maximum flow rate is 73 gallons per minute.
-    //This function will need to get various parameters about the pool filter in order to appropriately calculate the required pool pump.
-    //pipes will also need to be known for their inch intake.
+    //Inputs: gallons
+    var hpNeeded = (gallons / 24) / 60;
+    hpNeeded = hpNeeded / 15;
+    //Database call to get a pump with a horsepower closest but not less than needed.
+    toReturn = hpNeeded;
 
-
+    return toReturn;
 
 
 
