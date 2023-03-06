@@ -31,6 +31,8 @@ class CreatorForm3 extends React.Component {
         shell: props.getPoolMaterialData()["shell"]
         
       };
+
+      alert(props.getPoolMaterial()); 
       this.updateShell = this.updateShell.bind(this);
       this.updateSlant = this.updateSlant.bind(this);
       this.updateDeepDepth = this.updateDeepDepth.bind(this);
@@ -109,7 +111,7 @@ class CreatorForm3 extends React.Component {
     this.props.setPoolMaterialData({
       "materialBrand": this.state.materialBrand, 
       "plaster": this.state.plaster,
-      "rebar": event.target.value,  
+      "rebar": this.state.rebar,  
       "shell": this.state.shell,
       "lining": this.state.lining,
       "wall": this.state.wall,
@@ -126,7 +128,7 @@ class CreatorForm3 extends React.Component {
     this.props.setPoolMaterialData({
       "materialBrand": this.state.materialBrand, 
       "plaster": this.state.plaster,
-      "rebar": event.target.value,  
+      "rebar": this.state.rebar,  
       "shell": this.state.shell,
       "lining": this.state.lining,
       "wall": this.state.wall,
@@ -144,7 +146,7 @@ class CreatorForm3 extends React.Component {
     this.props.setPoolMaterialData({
       "materialBrand": this.state.materialBrand, 
       "plaster": this.state.plaster,
-      "rebar": event.target.value,  
+      "rebar": this.state.rebar,  
       "shell": this.state.shell,
       "lining": this.state.lining,
       "wall": this.state.wall,
