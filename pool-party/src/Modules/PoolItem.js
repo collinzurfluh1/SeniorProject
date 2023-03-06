@@ -16,12 +16,12 @@ function PoolItem(props) {
     e.preventDefault();
     try {
         var title = prompt('Please title your new pool')
-        if(title != null && title != "" && title.value.match("[A-Za-z]+")){
-          await axios.post('http://localhost:4000/savePools', {
+        await axios.post('http://localhost:4000/savePools', {
+          //Error because username is not defined
           owner: props.username,
           title: title,
           original_creator: false,
-          pulic: false,
+          pulic: true,
           length: props.pool.pool.length,
           width: props.pool.pool.width,
           depth_shallow: props.pool.pool.depth_shallow,
@@ -39,7 +39,6 @@ function PoolItem(props) {
         alert("Your new pool is now saved!")
         navigate('/My-Pools');
         window.location.reload(false);
-        }
 
     } catch (error) {
       alert("Sorry the pool was not able to be saved! Try again later!");
@@ -117,7 +116,7 @@ function PoolItem(props) {
         </div>
       </Modal.Body>
       <Modal.Footer>
-        {props.pool.pool.owner.toLowerCase() == username.toLowerCase() ?
+        {props.pool.pool.owner == username ?
           <Button variant="contained" color="primary" onClick={(e) => {setModalShow(true) }}>Edit Pool</Button>
         : <Button variant="contained" color="success" onClick={savePool} >Save Pool</Button>}
         <Button variant="contained" onClick={props.onHide} color="error">Close</Button>

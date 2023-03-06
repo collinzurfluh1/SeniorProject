@@ -35,13 +35,16 @@ class CreatorFormFinal2 extends React.Component {
     return (
         <div id="Creator">
           <h1>{this.state.name}: Page 2</h1>
+          <h4>Gunnite Options</h4>
+          <p>Pool Concrete: {this.state.materialBrand}</p>
           <p>Pool Plaster: {this.state.plaster}</p>
+          <h4>Vinyl Options</h4>
           <p>Pool Wall: {this.state.wall}</p>
           <p>Pool Lining: {this.state.lining}</p>
+          <h4>All-Pool Options</h4>
           <p>Pool Summer Cover: {this.state.summerCover}</p>
           <p>Pool Winter Cover: {this.state.winterCover}</p>
           <p>Pool Pipe: {this.state.pipe}</p>
-          <p>Pool Basin Liner: {this.state.basinLiner}</p>
           <p>Pool Drain: {this.state.drain}</p>
           <p>Pool Skimmer: {this.state.skimmer}</p>
           <p>Pool Pump: {this.state.pump}</p>

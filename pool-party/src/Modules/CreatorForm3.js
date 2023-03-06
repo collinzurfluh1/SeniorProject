@@ -366,11 +366,11 @@ class CreatorForm3 extends React.Component {
 
           <div>
             <label className="CreatorFormLabel">Width: </label><br></br>
-            <input type="text" defaultValue={this.state.width} onChange={this.updateWidth}></input><br></br>
+            <input type="number" defaultValue={this.state.width} onChange={this.updateWidth}></input><br></br>
             <label className="CreatorFormLabel">Length: </label><br></br>
-            <input type="text" defaultValue={this.state.length} onChange={this.updateLength}></input><br></br>
+            <input type="number" defaultValue={this.state.length} onChange={this.updateLength}></input><br></br>
             <label className="CreatorFormLabel">Depth: </label><br></br>
-            <input type="text" defaultValue={this.state.depth} onChange={this.updateDepth}></input><br></br>    
+            <input type="number" defaultValue={this.state.depth} onChange={this.updateDepth}></input><br></br>    
             </div>
            
             </div>
@@ -398,22 +398,16 @@ class CreatorForm3 extends React.Component {
               <option value="steel-walls4">Steel Walls 4</option>
             </select><br></br>
 
-            <label for="" className="CreatorFormLabel">Basin Liner:</label><br></br>
-            <select name="basin-liner" value={this.state.basinLiner} onChange={this.updateBasinLiner} id="basin-liner">
-              <option value="Basin Liner 1">Basin Liner 1</option>
-              <option value="Basin Liner 2">Basin Liner 2</option>
-              <option value="Basin Liner 3">Basin Liner 3</option>
-              <option value="Basin Liner 4">Basin Liner 4</option>
-            </select><br></br>
+ 
  
               <label className="CreatorFormLabel">Width: </label><br></br>
-            <input type="text" defaultValue={this.state.width} onChange={this.updateWidth}></input><br></br>
+            <input type="number" defaultValue={this.state.width} onChange={this.updateWidth}></input><br></br>
             <label className="CreatorFormLabel">Length: </label><br></br>
-            <input type="text" defaultValue={this.state.length} onChange={this.updateLength}></input><br></br>
+            <input type="number" defaultValue={this.state.length} onChange={this.updateLength}></input><br></br>
             <label className="CreatorFormLabel">Shallow Depth: </label><br></br>
-            <input type="text" defaultValue={this.state.shallowDepth} onChange={this.updateShallowDepth}></input><br></br>
+            <input type="number" defaultValue={this.state.shallowDepth} onChange={this.updateShallowDepth}></input><br></br>
             <label className="CreatorFormLabel">Deep Depth: </label><br></br>
-            <input type="text" defaultValue={this.state.deepDepth} onChange={this.updateDeepDepth}></input><br></br>
+            <input type="number" defaultValue={this.state.deepDepth} onChange={this.updateDeepDepth}></input><br></br>
             <div  onChange={this.updateSlant}>
               <label className="CreatorFormLabel">Pool Slant: </label>
               <input type="radio" id="slant1" value="Diver" name="slant" defaultChecked={this.state.slant == "Diver"}></input>
