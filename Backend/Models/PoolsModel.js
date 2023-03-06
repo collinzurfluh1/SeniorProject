@@ -73,16 +73,16 @@ const Pools = db.define('pools',{
         type: DataTypes.STRING  // ID for product
     },
     piping:{
-        type: DataTypes.DOUBLE  // ID for product
+        type: DataTypes.STRING  // ID for product
     },
     drain:{
-        type: DataTypes.DOUBLE  // ID for product
+        type: DataTypes.STRING  // ID for product
     },
     skimmer:{
-        type: DataTypes.DOUBLE  // ID for product
+        type: DataTypes.STRING  // ID for product
     },
     pump:{
-        type: DataTypes.DOUBLE  // ID for product
+        type: DataTypes.STRING  // ID for product
     },
     //Cost, this is the last column that will be filled.
     cost:{
