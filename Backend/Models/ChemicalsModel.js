@@ -14,7 +14,7 @@ const Chemicals = db.define('chemicals',{
     type:{
         type: DataTypes.STRING,
     },
-    ounce_cost:{
+    cost:{
         type: DataTypes.DOUBLE 
     },
 },{
