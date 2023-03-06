@@ -16,7 +16,7 @@ function PoolItem(props) {
     e.preventDefault();
     try {
         var title = prompt('Please title your new pool')
-        if(title != null && title != "" && title.value.match("[A-Za-z]+")){
+        if(title != null && title != ""){
           await axios.post('http://localhost:4000/savePools', {
           owner: props.username,
           title: title,
