@@ -57,6 +57,11 @@ class CreatorBody extends React.Component {
       _poolDepth: null,
       _poolLength: null,
       _poolMaterial: null,
+      _poolChemicals: {
+        "chlorine": null,
+        "cyaneuricAcid": null,
+        "shock": null
+      },
       _poolMaterialData:  {
         "materialBrand": null,
         "plaster": null,
@@ -102,6 +107,8 @@ class CreatorBody extends React.Component {
     this.SetPoolName = this.SetPoolName.bind(this);
     this.GetPool = this.GetPool.bind(this);
     this.GetPoolPump = this.GetPoolPump.bind(this); 
+    this.GetPoolChemicals = this.GetPoolChemicals.bind(this); 
+    this.GetPoolSkimmer = this.GetPoolSkimmer.bind(this); 
     this.GetPoolSkimmer = this.GetPoolSkimmer.bind(this); 
     this.GetPoolDrain = this.GetPoolDrain.bind(this); 
     this.GetPoolPipe = this.GetPoolPipe.bind(this); 
@@ -156,6 +163,20 @@ class CreatorBody extends React.Component {
       }
 
   }
+
+  GetPoolChemicals = () => {
+      return this.state._poolChemicals; 
+
+  }
+
+  SetPoolChemicals = (chemicals) =>{
+      alert(chemicals['chlorine']);
+      this.setState({_poolChemicals: chemicals});
+
+
+
+  }
+
 
   /* Pool Material Getters and Setters */
   GetPoolMaterialData = () => {
@@ -377,7 +398,7 @@ this.setState({_deepDepth: deepDepth}, function() {
   prev() {
     if(this.currIndex > 1){
       this.currIndex--;
-      if(this.currIndex == 2 || this.currIndex == 6){
+      if(this.currIndex == 2){
         this.currIndex--; 
       }
       this.hideComponent(this.currIndex);
@@ -387,7 +408,7 @@ this.setState({_deepDepth: deepDepth}, function() {
   next() {
     if(this.currIndex < this.maxIndex){
       this.currIndex++;
-      if(this.currIndex == 2 || this.currIndex == 6){
+      if(this.currIndex == 2){
 
         this.currIndex++; 
       }
@@ -634,7 +655,7 @@ this.setState({_deepDepth: deepDepth}, function() {
             setPoolPipe={this.SetPoolPipe} getPoolPipe={this.GetPoolPipe}
             />}
             {creatorForm6 && <CreatorForm6
-            setPoolBasinLiner={this.SetPoolBasinLiner} getPoolBasinLiner={this.GetPoolBasinLiner}
+            setPoolChemicals={this.SetPoolChemicals} getPoolChemicals={this.GetPoolChemicals}
 
             />}
             {creatorForm7 && <CreatorForm7
