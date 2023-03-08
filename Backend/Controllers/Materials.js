@@ -74,3 +74,51 @@ export async function get_solar_covers(solar_cover_name) {
 
     return cover_data
 }
+
+export async function get_chlorine(chlorine_name) {
+
+    var chemical_data = null;
+
+    if(chlorine_name == null) {
+        const chemicals_sequelize = await Chemicals.findAll({ where: { type: 'chlorine' } })
+        chemical_data = chemicals_sequelize.map(chemical => chemical.get({ plain: true }));
+        
+    } else {
+        const chemicals_sequelize = await Chemicals.findAll({ where: { type: 'chlorine', name: chlorine_name } })
+        chemical_data = chemicals_sequelize.map(chemical => chemical.get({ plain: true }));
+    }
+
+    return chemical_data
+}
+
+export async function get_cyanuric_acid(cyanuric_acid_name) {
+
+    var chemical_data = null;
+
+    if(cyanuric_acid_name == null) {
+        const chemicals_sequelize = await Chemicals.findAll({ where: { type: 'cyanuric acid' } })
+        chemical_data = chemicals_sequelize.map(chemical => chemical.get({ plain: true }));
+        
+    } else {
+        const chemicals_sequelize = await Chemicals.findAll({ where: { type: 'cyanuric acid', name: cyanuric_acid_name } })
+        chemical_data = chemicals_sequelize.map(chemical => chemical.get({ plain: true }));
+    }
+
+    return chemical_data
+}
+
+export async function get_shock(shock_name) {
+
+    var chemical_data = null;
+
+    if(shock_name == null) {
+        const chemicals_sequelize = await Chemicals.findAll({ where: { type: 'shock' } })
+        chemical_data = chemicals_sequelize.map(chemical => chemical.get({ plain: true }));
+        
+    } else {
+        const chemicals_sequelize = await Chemicals.findAll({ where: { type: 'shock', name: shock_name } })
+        chemical_data = chemicals_sequelize.map(chemical => chemical.get({ plain: true }));
+    }
+
+    return chemical_data
+}
