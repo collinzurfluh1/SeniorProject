@@ -11,6 +11,7 @@ import jwt_decode from "jwt-decode";
 import EditPoolItem from './EditPoolItem';
 
 
+
 import ref from "react"; 
 import CreatorForm1 from "../Modules/CreatorForm1";
 
@@ -27,6 +28,7 @@ import CreatorFormFinal2 from "../Modules/CreatorFormFinal2";
 
 import "../SCSS/creator.scss";
 
+
 /*
 When saving data 
 1) Add the variable of the data ot be saved in the state
@@ -39,6 +41,7 @@ When saving data
 */
 // How to get next/prev working?
 class CreatorBody extends React.Component {
+  
   constructor(props) {
     super(props);
     this.currIndex = 1;
@@ -122,10 +125,8 @@ class CreatorBody extends React.Component {
 
   UploadPool =  async (props) =>{
     alert("Pool Uploading");
-     alert(this.GetPool()['name']);
-     alert(this.GetPool()['summerCover']); 
-     alert(this.GetPool()['winterCover']); 
-     // var navigate = useNavigate();
+
+     var navigate = useNavigate();
       try {
           await axios.post('http://localhost:4000/savePools', {
             //Error because username is not defined
@@ -149,7 +150,6 @@ class CreatorBody extends React.Component {
 
           });
           alert("Your new pool is now saved!")
-      //    navigate('/My-Pools');
           window.location.reload(false);
       } catch (error) {
         alert("Sorry the pool was not able to be saved! Try again later");
