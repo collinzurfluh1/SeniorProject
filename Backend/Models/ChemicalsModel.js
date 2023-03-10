@@ -21,9 +21,9 @@ const Chemicals = db.define('chemicals',{
     freezeTableName:true
 });
  
-(async () => {
-    await db.sync();
-})();
+// (async () => {
+//     await db.sync();
+// })();
 
 const chemicals_data = [
     {'name': 'In The Swim Chlorine Tablets', 'type': 'chlorine', 'cost': 109.99},
@@ -41,11 +41,11 @@ const chemicals_data = [
     {'name': 'Clorox Pool Aand Spa Pool Shock Xtrablue ', 'type': 'shock', 'cost': 94.50}
    ]
 
-db.sync({ force: true }).then(() => {
-Chemicals.bulkCreate(chemicals_data, { validate: true }).then(() => {
-}).catch((err) => { console.log(err); });
-}).catch((error) => {
-console.error('Unable to create the table : ', error);
-});
+// db.sync({ force:true }).then(() => {
+// Chemicals.bulkCreate(chemicals_data, { validate: true }).then(() => {
+// }).catch((err) => { console.log(err); });
+// }).catch((error) => {
+// console.error('Unable to create the table : ', error);
+// });
  
 export default Chemicals;

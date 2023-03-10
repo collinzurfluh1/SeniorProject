@@ -24,9 +24,9 @@ const Piping = db.define('piping',{
     freezeTableName:true
 });
  
-(async () => {
-    await db.sync();
-})();
+// (async () => {
+//     await db.sync();
+// })();
 
 const piping_data = [
     {'name': 'Charlotte Pipe', 'type': 'Rigid PVC', 'linft_cost': 4.44},
@@ -36,11 +36,11 @@ const piping_data = [
     {'name': '1in 160 PSI Black Poly Pipe', 'type': 'Black Poly', 'linft_cost': 1.02}
    ]
 
-db.sync({ force: true }).then(() => {
-Piping.bulkCreate(piping_data, { validate: true }).then(() => {
-}).catch((err) => { console.log(err); });
-}).catch((error) => {
-console.error('Unable to create the table : ', error);
-});
+// db.sync({ force: true }).then(() => {
+// Piping.bulkCreate(piping_data, { validate: true }).then(() => {
+// }).catch((err) => { console.log(err); });
+// }).catch((error) => {
+// console.error('Unable to create the table : ', error);
+// });
  
 export default Piping;
