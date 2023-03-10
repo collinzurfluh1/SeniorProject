@@ -349,19 +349,39 @@ export async function getAllConcretePrices(length, width, depth, basinType)
 {
 
     var concreteOptions = [];
-    var concreteJson = await get_cement_data(product_name);
-    var pounds = calculateConcretePounds(length, width, depth, basinType);
+    var concreteJsons = await get_cement_data();
 
-    products.forEach(function(concreteJson) {
-        const name = concreteJson.name;
-        const price = concreteJson.price;
+    concreteJsons.forEach(async function(concreteJson) {
+        // console.log(concreteJson)
+        var name = concreteJson.name;
+        // console.log(name)
+        const price = await calcualteConcreteCost(length, width, depth, basinType, name)
+        console.log(price)
         
         // Create a new JSON object with the name and price fields
-        const option = { "name": name, "price": price };
+        const option = { "name": name, "price": 50 };
         
         // Add the new JSON object to the empty JSON array
         concreteOptions.push(option);
-      });
+    });
+
+    // for (let i = 0; i < concreteJsons.length; i++) {
+    //     var concreteJson = concreteJsons[i]
+        
+    //     console.log(concreteJson)
+    //     var name = concreteJson.name;
+    //     console.log(name)
+    //     const price = await calcualteConcreteCost(length, width, depth, basinType, name)
+    //     console.log(price)
+        
+    //     // Create a new JSON object with the name and price fields
+    //     const option = { "name": name, "price": 50 };
+        
+    //     // Add the new JSON object to the empty JSON array
+    //     concreteOptions.push(option);
+    // }
+    return concreteOptions;
+    
 }
 
 ///////////////////////////
