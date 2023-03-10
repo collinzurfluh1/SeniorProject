@@ -21,8 +21,8 @@ app.use(router);
 // console.log(await get_plaster_data('Sider Pool Plaster - 55 lb'));
 // console.log('############');
 
-console.log('############');
-console.log(await get_cement_data('Quikrete 50 lb. Fast-Setting Mix'));
-console.log('############');
+// console.log('############');
+// console.log(await get_cement_data('Quikrete 50 lb. Fast-Setting Mix'));
+// console.log('############');
  
 app.listen(4000, ()=> console.log('Server running at port 4000'));
