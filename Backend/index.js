@@ -25,9 +25,9 @@ app.use(router);
 // console.log(await get_plaster_data('Sider Pool Plaster - 55 lb'));
 // console.log('############');
 
-console.log('############');
-console.log(await get_cement_data('Quikrete 50 lb. Fast-Setting Mix'));
-console.log('############');
+// console.log('############');
+// console.log(await get_cement_data('Quikrete 50 lb. Fast-Setting Mix'));
+// console.log('############');
 
 //TESTING CONCRETE COST FUNCTION
 // console.log('############################################################');
@@ -35,13 +35,13 @@ console.log('############');
 // console.log('############################################################');
 
 // TESTING CONCRETE COST FUNCTION
-// setTimeout(async function() {
-//     console.log('############################################################');
-//     // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
-//     var all_options = await getAllConcretePrices(10, 20, 6, 'Gunite');
-//     console.log(all_options);
-//     console.log('############################################################');
-// }, 5000);
+setTimeout(async function() {
+    console.log('############################################################');
+    // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
+    var all_options = await getAllConcretePrices(10, 20, 6, 'Gunite');
+    console.log(all_options);
+    console.log('############################################################');
+}, 5000);
 
 // console.log('############################################################');
 // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));

@@ -351,19 +351,30 @@ export async function getAllConcretePrices(length, width, depth, basinType)
     var concreteOptions = [];
     var concreteJsons = await get_cement_data();
 
-    concreteJsons.forEach(async function(concreteJson) {
-        console.log(concreteJson)
+    // concreteJsons.forEach(async function(concreteJson) {
+    //     console.log(concreteJson)
+    //     var name = await concreteJson.name;
+    //     console.log(name)
+    //     const price = await calcualteConcreteCost(length, width, depth, basinType, name)
+    //     console.log(price)
+        
+    //     // Create a new JSON object with the name and price fields
+    //     const option = { "name": name, "price": price };
+        
+    //     // Add the new JSON object to the empty JSON array
+    //     concreteOptions.push(option);
+    // });
+
+    for (const concreteJson of concreteJsons) {
         var name = await concreteJson.name;
-        console.log(name)
         const price = await calcualteConcreteCost(length, width, depth, basinType, name)
-        console.log(price)
         
         // Create a new JSON object with the name and price fields
         const option = { "name": name, "price": price };
         
         // Add the new JSON object to the empty JSON array
         concreteOptions.push(option);
-    });
+    }
 
     // for (let i = 0; i < concreteJsons.length; i++) {
     //     var concreteJson = concreteJsons[i]
