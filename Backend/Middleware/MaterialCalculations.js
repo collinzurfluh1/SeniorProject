@@ -1,6 +1,9 @@
 //Things still needed to be added in during calculations 
 //Drains, Pumps, Skimmer
 
+import { get_plaster_data, get_cement_data } from "../Controllers/Materials.js";
+
+
 
 function calculatePrice(poolMaterials, basinType)
 {
@@ -139,16 +142,24 @@ function calculateFiberglass(poolMaterials)
     return poolStatistics;
     */
 }
-function calculateFiberglass(shell)
-{
-    //This function takes in the input of the shell from the calculation function and then gets the fiberglass shells price
-    var fiberglassCost = 10;
-    return fiberglassCost;
-}
-function calculateChlorineTablets(gallons)
+// function calculateFiberglass(shell)
+// {
+//     //This function takes in the input of the shell from the calculation function and then gets the fiberglass shells price
+//     var fiberglassCost = 10;
+//     return fiberglassCost;
+// }
+
+///////////////////////////////
+////////// CHEMICALS //////////
+///////////////////////////////
+
+function calculateChlorineTablets(length, width, depth, basinType)
 {
     //This function calculates the cost based on the volume of the pool
     //Inputs: Pools Gallons of Water, chlorine tablet name, shock name, cyanuric acid name, ppm is from user input
+
+    var gallons = calcualteGallons(length, width, depth, basinType);
+
     var tabletCount;
     if(gallons < 20000)
     {
@@ -160,8 +171,11 @@ function calculateChlorineTablets(gallons)
     }
     return tabletCount;
 }
-function calculateChlorinePrice(tablets, chlorineJson)
+function calculateChlorinePrice(length, width, depth, basinType)
 {
+
+    var tablets = calculateChlorineTablets(length, width, depth, basinType);
+
     var units;
     units = tablets / chlorineJson.tabletCount;
     if(!(tablets % chlorineJson.tabletCount == 0))
@@ -171,21 +185,30 @@ function calculateChlorinePrice(tablets, chlorineJson)
     var price = units * chlorineJson.price;
     return price;
 }
-function getAllChlorinePrices(tablets)
+function getAllChlorinePrices(length, width, depth, basinType)
 {
+
+    var tablets = calculateChlorineTablets(length, width, depth, basinType);
+
     var chlorineJson;// = getChlorineData(null);
     //for(chlorineJsonRow : chlorineJson)
         var chrlorinePriceAndNameJson;//calculateChlorinePrice(tablets, chlorineJsonRow);
 
     return chrlorinePriceAndNameJson;    
 }
-function calculateCyanuricAcidPounds(gallons)
+function calculateCyanuricAcidPounds(length, width, depth, basinType)
 {
+
+    var gallons = calcualteGallons(length, width, depth, basinType);
+
     var cyanuricAcid = 1.75 + (((gallons - 10000) / 5000) * .75);
     return cyanuricAcid;
 }
-function calculateCyanuricAcidPrice(cyanuricAcidlbs, cyanuricAcidJson)
+function calculateCyanuricAcidPrice(length, width, depth, basinType)
 {
+
+    var cyanuricAcidlbs = calculateCyanuricAcidPounds(length, width, depth, basinType);
+
     var units;
     units = cyanuricAcidlbs / cyanuricAcidJson.lbs;
     if(!(cyanuricAcidlbs % cyanuricAcidJson.lbs == 0))
@@ -195,21 +218,30 @@ function calculateCyanuricAcidPrice(cyanuricAcidlbs, cyanuricAcidJson)
     var price = units * cyanuricAcidJson.price;
     return price;
 }
-function getAllCyanuricAcidPrices(pounds)
+function getAllCyanuricAcidPrices(length, width, depth, basinType)
 {
+
+    var pounds = calculateCyanuricAcidPounds(length, width, depth, basinType);
+
     var cyanuricAcidJson;// = getCyanuricAcidData(null);
     //for(cyanuricAcidJsonRow : cyanuricAcidJson)
         var cyanuricAcidPriceAndNameJson;//calculateChlorinePrice(pounds, cyanuricAcidJsonRow);
 
     return cyanuricAcidPriceAndNameJson; 
 }
-function calculateShockLbs(gallons)
+function calculateShockLbs(length, width, depth, basinType)
 {
+
+    var gallons = calcualteGallons(length, width, depth, basinType);
+
     var lbsOfShock = gallons / 5000;
     return lbsOfShock;
 }
-function calculateShockPrice(shocklbs, shockJson)
+function calculateShockPrice(length, width, depth, basinType)
 {
+
+    var shocklbs = calculateShockLbs(length, width, depth, basinType);
+
     var units;
     units = shocklbs / shockJson.lbs;
     if(!(shocklbs % shockJson.lbs == 0))
@@ -219,14 +251,22 @@ function calculateShockPrice(shocklbs, shockJson)
     var price = units * shockJson.price;
     return price;
 }
-function getAllShockPrices(pounds)
+function getAllShockPrices(length, width, depth, basinType)
 {
+
+    var pounds = calculateShockLbs(length, width, depth, basinType);
+
     var shockJson;// = getShockData(null);
     //for(shockJsonRow : shockJson)
         var shockPriceAndNameJson;//calculateShockPrice(pounds, shockJsonRow);
 
     return shockPriceAndNameJson; 
 }
+
+////////////////////////////
+////////// PIPING //////////
+////////////////////////////
+
 function calculatePipesAmount(depth, length, width)
 {
     //This function calculates the length and cost of pipe based on the type of pipe and perimeter of the pool
@@ -234,36 +274,50 @@ function calculatePipesAmount(depth, length, width)
     var pipeLength = (length * 1.75) + (width * 2) + (depth * 1.1) + 20;
     return pipeLength;
 }
-function calculatePipesCost(pipeLength, pipeJson)
+function calculatePipesCost(depth, length, width)
 {
+
+    var pipeLength = calculatePipesAmount(depth, length, width);
+
     return (pipeLength * pipeJson.price);
 }
-function getAllPipesPrices(length)
+function getAllPipesPrices(depth, length, width)
 {
+
+    var pipeLength = calculatePipesAmount(depth, length, width);
+
     var pipesJson;// = getPipesData(null);
     //for(pipesJsonRow : pipesJson)
         var pipesPriceAndNameJson;//calculatePipesCost(length, pipesJsonRow);
 
     return pipesPriceAndNameJson; 
 }
-function calculateConcretePounds(length, width, depth, surfaceArea, basinType)
+
+//////////////////////////////
+////////// CONCRETE //////////
+//////////////////////////////
+
+function calculateConcretePounds(length, width, depth, basinType)
 {
     //This calculates the total cost of concrete through cubic and square feet cost around and inside the pool.
     //Inputs: Length, Width, Depth, Surface Area, Concrete Price, BasinType
     //database call for concrete price
-    if(basinType.equals("Gunite"))//pool gunite
+
+    var surfaceArea = calculatePoolSurfaceArea(length, width, depth, basinType);
+
+    if(basinType == "Gunite")//pool gunite
     { 
-        concretelesCbFT = 64.21 * ((length + 1) * (width + 1) * depth) - (length * width * depth);
-        concretelbsSqFT = 75 * ((length + 3) * (width + 3)) - (length * width) * 0.5;
+        var concretelbsCbFT = 64.21 * ((length + 1) * (width + 1) * depth) - (length * width * depth);
+        var concretelbsSqFT = 75 * ((length + 3) * (width + 3)) - (length * width) * 0.5;
         return (concretelbsCbFT + concretelbsSqFT);
     }
-    if (type == 2)//pool fiberglass
+    if (basinType == "Fiberglass")//pool fiberglass
     {
         var totallbs = (surfaceArea * 1.1) * 75 * 0.5;
         totallbs = 75 * ((length + 3) * (width + 3)) - (length * width) * 0.5;
         return totallbs;
     }
-    if (type == 3)//pool vinyl
+    if (basinType == "Vinyl")//pool vinyl
     {
         var totallbs = calculatePoolFloor(length, width, depth) * 75; 
         totallbs = 64.21 * ((length + 1) * (width + 1) * depth) - (length * width * depth);
@@ -272,38 +326,68 @@ function calculateConcretePounds(length, width, depth, surfaceArea, basinType)
     }
 }
 
-function calcualteConcreteCost(concretelbs, concreteJson)
+export async function calcualteConcreteCost(length, width, depth, basinType, product_name)
 {
+
+    var concretelbs = calculateConcretePounds(length, width, depth, basinType);
+
+    var concreteJson = await get_cement_data(product_name);
+    concreteJson = concreteJson[0] // only one json in the list
+
+    // return concreteJson[0]['bag_size_pounds'];
+
     var units;
-    units = concretelbs / concreteJson.lbs;
-    if(!(concretelbs % concreteJson.lbs == 0))
+    units = concretelbs / concreteJson['bag_size_pounds'];
+    if(!(concretelbs % concreteJson['bag_size_pounds'] == 0))
     {
         units = units + 1;
     }
-    var price = units * concreteJson.price;
+    var price = units * concreteJson['bag_cost'];
     return price;
 }
-function getAllConcretePrices(pounds)
+export async function getAllConcretePrices(length, width, depth, basinType)
 {
-    var concreteJson;// = getConcreteData(null);
-    //for(concreteJsonRow : concreteJson)
-        var concretePriceAndNameJson;//calculateconcretePrice(pounds, concreteJsonRow);
 
-    return concretePriceAndNameJson; 
+    var concreteOptions = [];
+    var concreteJson = await get_cement_data(product_name);
+    var pounds = calculateConcretePounds(length, width, depth, basinType);
+
+    products.forEach(function(concreteJson) {
+        const name = concreteJson.name;
+        const price = concreteJson.price;
+        
+        // Create a new JSON object with the name and price fields
+        const option = { "name": name, "price": price };
+        
+        // Add the new JSON object to the empty JSON array
+        concreteOptions.push(option);
+      });
 }
 
-function calculateWaterPrice(gallons)
+///////////////////////////
+////////// WATER //////////
+///////////////////////////
+
+function calculateWaterPrice(length, width, depth, basinType)
 {
+
+    var gallons = calcualteGallons(length, width, depth, basinType);
     //This calculates the total cost of water for a pool based on the pools volume.
     //Inputs: Pools Volume
     var waterPrice = 0.005;//set price
     varprice = volume * waterPrice;
     return price;
 }
-function calcualteGallons(volume)
+function calcualteGallons(length, width, depth, basinType)
 {
-    return (volume * 7.47);
+    var volume = calculatePoolVolume(length, width, depth, basinType);
+    return (volume * 7.48);
 }
+
+///////////////////////////////////
+////////// STEEL WALLING //////////
+///////////////////////////////////
+
 function calculateSteelWallingSqFT(length, width)
 {
     //This calculates the steel side walling for a pool
@@ -314,28 +398,45 @@ function calculateSteelWallingSqFT(length, width)
     return sqFt;
 }
 
-function calcuateSteelWallingPrice(sqFt, sideWallingJson)
+function calcuateSteelWallingPrice(length, width)
 {
+
+    var sqFt = calculateSteelWallingSqFT(length, width);
+
     return (sqFt * sideWallingJson.price);
 }
-function getAllSteelWallingPrices(sqFt)
+function getAllSteelWallingPrices(length, width)
 {
+
+    var sqFt = calculateSteelWallingSqFT(length, width)
+
     var steelWallingJson;// = getSteelWallingData(null);
     //for(steelWallingJsonRow : steelWallingJson)
         var steelWallingPriceAndNameJson;//calculateSteelWallingPrice(sqFt, steelWallingJsonRow);
 
     return steelWallingPriceAndNameJson; 
 }
-function calculatePoolLinerArea(surfaceArea)
+
+//////////////////////////////////
+////////// VINYL LINING //////////
+//////////////////////////////////
+
+function calculatePoolLinerArea(length, width, depth, basinType)
 {
     //This calculates the cost of a vinyl pools liner based on its surface area.
     //Inputs: Pools Surface Area, Liner price/name
     //Database call for liner price
+
+    var surfaceArea = calculatePoolSurfaceArea(length, width, depth, basinType);
+
     var poolLinerSize = surfaceArea * 1.05;
     return poolLinerSize;
 }
-function calcualtePoolLinerPrice(poolLinerSize, poolLinerJson)
+function calcualtePoolLinerPrice(length, width, depth, basinType)
 {
+
+    var poolLinerSize = calculatePoolLinerArea(length, width, depth, basinType);
+
     var linerWidth = poolLinerJson.width;
     var linerLength = poolLinerJson.length;
     var linerCoverArea = linerLength * linerWidth;
@@ -347,14 +448,22 @@ function calcualtePoolLinerPrice(poolLinerSize, poolLinerJson)
     
     return unitsNeeded;
 }
-function getAllPoolLinerPrices(poolLinerSize)
+function getAllPoolLinerPrices(length, width, depth, basinType)
 {
+
+    var poolLinerSize = calculatePoolLinerArea(length, width, depth, basinType);
+
     var poolLinerJson;// = getPoolLinerData(null);
     //for(poolLinerJsonRow : poolLinerJson)
         var poolLinerPriceAndNameJson;//calculatePoolLinerPrice(poolLinerSize, poolLinerJsonRow);
 
     return poolLinerPriceAndNameJson; 
 }
+
+////////////////////////////
+////////// COVERS //////////
+////////////////////////////
+
 function calculatePoolWinterCoverArea(length, width)
 {
     //This calculates the cost of a winter pool cover based on the Length and Width of a pool
@@ -364,8 +473,11 @@ function calculatePoolWinterCoverArea(length, width)
 
     return winterCoverSize;
 }
-function calculatePoolWinterCoverPrice(winterCoverSize, winterCoverJson)
+function calculatePoolWinterCoverPrice(length, width)
 {
+
+    var winterCoverSize = calculatePoolWinterCoverArea(length, width);
+
     var winterCoverLength = winterCoverJson.length;
     var winterCoverWidth = winterCoverJson.width;
     var winterCoverArea = winterCoverLength * winterCoverWidth;
@@ -376,8 +488,11 @@ function calculatePoolWinterCoverPrice(winterCoverSize, winterCoverJson)
     }
     return unitsNeeded;
 }
-function getAllWinterCoverPrices(winterCoverSize)
+function getAllWinterCoverPrices(length, width)
 {
+
+    var winterCoverSize = calculatePoolWinterCoverArea(length, width);
+
     var winterCoverJson;// = getWinterCoverData(null);
     //for(winterCoverJsonRow : winterCoverJson)
         var winterCoverPriceAndNameJson;//calculateWinterCoverPrice(winterCoverSize, winterCoverJsonRow);
@@ -393,8 +508,11 @@ function calculatePoolSolarCover(length, width)
     var solarCoverSize = width * length;
     return solarCoverSize;
 }
-function calculatePoolSolarCoverPrice(solarCoverSize, solarCoverJson)
+function calculatePoolSolarCoverPrice(length, width)
 {
+
+    var solarCoverSize = calculatePoolSolarCover(length, width);
+
     var solarCoverLength = solarCoverJson.length;
     var solarCoverWidth = solarCoverJson.width;
     var solarCoverArea = solarCoverLength * solarCoverWidth;
@@ -405,16 +523,27 @@ function calculatePoolSolarCoverPrice(solarCoverSize, solarCoverJson)
     }
     return unitsNeeded;
 }
-function getAllSolarCoverPrices(solarCoverSize)
+function getAllSolarCoverPrices(length, width)
 {
+
+    var solarCoverSize = calculatePoolSolarCover(length, width)
+
     var solarCoverJson;// = getSolarCoverData(null);
     //for(solarCoverJsonRow : solarCoverJson)
         var solarCoverPriceAndNameJson;//calculateSolarCoverPrice(solarCoverSize, solarCoverJsonRow);
 
     return solarCoverPriceAndNameJson; 
 }
-function calculatePoolFilter(gallons)
+
+//////////////////////////
+////////// MISC //////////
+//////////////////////////
+
+function calculatePoolFilter(length, width, depth, basinType)
 {
+
+    var gallons = calcualteGallons(length, width, depth, basinType);
+
     //This calculatees the appropriate filter based on the pools volume
     //Inputs: Pool Gallons
     var filterSqFt = gallons / 10000;
@@ -422,6 +551,19 @@ function calculatePoolFilter(gallons)
     var price;
     return price;
 
+}
+function calculatePoolPump(length, width, depth, basinType)
+{
+    var gallons = calcualteGallons(length, width, depth, basinType)
+
+    //this calculates the pools pumps needed. 
+    //Inputs: gallons
+    var hpNeeded = (gallons / 24) / 60;
+    hpNeeded = hpNeeded / 15;
+    //Database call to get a pump with a horsepower closest but not less than needed.
+    toReturn = hpNeeded;
+
+    return toReturn;
 }
 function calculateRebar(length, width, depth)
 {
@@ -433,16 +575,26 @@ function calculateRebar(length, width, depth)
 
     return areaForBar;
 }
-function calculatePlaster(surfaceArea, plaster)
+
+/////////////////////////////
+////////// PLASTER //////////
+/////////////////////////////
+
+function calculatePlaster(length, width, depth, basinType)
 {
-    //This calculates the cost of plaster
+    //This calculates the cost of plaster - No it doesn't it calculates how much plaster is needed - devin
     //Inputs: Pools Surface Area, Cost of Plaster/Name of Plaster
     //Call to get Plaster(Or pass in plaster price)
     //database call for plaster price
+
+    var surfaceArea = calculatePoolSurfaceArea(length, width, depth, basinType);
     return (surfaceArea / (1/3));
 }
-function calculatePlasterCost(plasterlbsNeeded, plasterJson)
+function calculatePlasterCost(length, width, depth, basinType, produt_name)
 {
+
+    var plasterlbsNeeded = calculatePlaster(length, width, depth, basinType);
+
     var plasterlbs = plasterJson.lbs;
     var unitsNeeded = plasterlbsNeeded / plasterlbs;
     if(!(plasterlbsNeeded % plasterlbs == 0))
@@ -451,31 +603,39 @@ function calculatePlasterCost(plasterlbsNeeded, plasterJson)
     }
     return unitsNeeded;
 }
-function getAllPlasterPrices(pounds)
+function getAllPlasterPrices(length, width, depth, basinType)
 {
+
+    var pounds = calculatePlaster(length, width, depth, basinType);
+
     var plasterJson;// = getPlasterData(null);
     //for(plasterJsonRow : plasterJson)
         var plasterPriceAndNameJson;//calculatePlasterPrice(pounds, plasterJsonRow);
 
     return plasterPriceAndNameJson; 
 }
+
+///////////////////////////////////////////
+////////// POOL MEASURMENT TOOLS //////////
+///////////////////////////////////////////
+
 function calculatePoolSurfaceArea(length, width, depth, basinType)
 {
     //This calculates the pools surface area
     //Inputs: Pools Length, Depth's, Widths, Type of Basin
 
-    if(basinType.equals("Diver"))
+    if(basinType == "Diver")
     {
         var volume = 2(width * depth[0]) + 2(length * depth[0]) + calculatePoolFloor(length, width, depth);
     }
-    else if(basinType.equals("Slant"))
+    else if(basinType == "Slant")
     {
         var surfaceArea = (width * depth[0]) + (width * depth[1]) + 2(length * ((depth[1] - depth[0]) / 2)) + (width * Math.sqrt(Math.pow(width, 2) + Math.pow((depth[1] - depth[0]), 2)));
         return surfaceArea;
     }
     else
     {
-        var surfaceArea = (length * width) + 2(width * depth) + 2(length * depth);
+        var surfaceArea = (length * width) + (2 * (width * depth)) + (2 * (length * depth));
         return surfaceArea;
     }
 
@@ -501,17 +661,6 @@ function calculatePoolVolume(length, width, depth, basinType)
         var volume = length * (depth - .75) * width; //calculations done in feet
         return volume;
     }
-}
-function calculatePoolPump(gallons)
-{
-    //this calculates the pools pumps needed. 
-    //Inputs: gallons
-    var hpNeeded = (gallons / 24) / 60;
-    hpNeeded = hpNeeded / 15;
-    //Database call to get a pump with a horsepower closest but not less than needed.
-    toReturn = hpNeeded;
-
-    return toReturn;
 }
 function calculatePoolFloor(length, width, depth)
 {

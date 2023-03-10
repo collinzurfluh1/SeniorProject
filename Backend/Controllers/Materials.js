@@ -1,7 +1,7 @@
 import Cement from "../Models/CementModel.js";
 import Chemicals from "../Models/ChemicalsModel.js";
 import Piping from "../Models/PipingModel.js";
-import Covers from "../Models/CoversModel";
+import Covers from "../Models/CoversModel.js";
 
 export async function get_plaster_data(plaster_name) {
     // This function will return a JSON of plaster data. If you pass None you will get all plaster options. 
@@ -40,7 +40,7 @@ export async function get_cement_data(cement_name) {
         cement_data = cement_sequelize.map(cement => cement.get({ plain: true }));;
     }
 
-        return cement_data
+    return cement_data
 }
 
 export async function get_winter_covers(winter_cover_name) {
