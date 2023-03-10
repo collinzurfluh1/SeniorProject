@@ -92,9 +92,9 @@ const Pools = db.define('pools',{
     freezeTableName:true
 });
  
-(async () => {
-    await db.sync();
-})();
+// (async () => {
+//     await db.sync({ force: false });
+// })();
  
 
 export default Pools;

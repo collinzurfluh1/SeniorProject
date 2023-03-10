@@ -28,8 +28,8 @@ const Users = db.define('users',{
     freezeTableName:true
 });
  
-(async () => {
-    await db.sync();
-})();
+// (async () => {
+//     await db.sync({ force: false, logging: true });
+// })();
  
 export default Users;
