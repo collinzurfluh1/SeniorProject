@@ -1,7 +1,7 @@
 //Things still needed to be added in during calculations 
 //Drains, Pumps, Skimmer
 
-import { get_plaster_data, get_cement_data, get_piping, get_chlorine, get_cyanuric_acid, get_shock, get_winter_covers } from "../Controllers/Materials.js";
+import { get_plaster_data, get_cement_data, get_piping, get_chlorine, get_cyanuric_acid, get_shock, get_winter_covers, get_solar_covers } from "../Controllers/Materials.js";
 
 
 
@@ -589,27 +589,35 @@ export async function calculatePoolSolarCoverPrice(length, width, product_name)
 {
 
     var solarCoverSize = calculatePoolSolarCover(length, width);
+    var solarCoverJson = (await get_solar_covers(product_name))[0];
 
-    var solarCoverLength = solarCoverJson.length;
-    var solarCoverWidth = solarCoverJson.width;
+    var solarCoverLength = solarCoverJson.length_feet;
+    var solarCoverWidth = solarCoverJson.width_feet;
     var solarCoverArea = solarCoverLength * solarCoverWidth;
     var unitsNeeded = solarCoverSize / solarCoverArea;
     if(!(solarCoverSize % solarCoverArea == 0))
     {
         unitsNeeded += 1;
     }
-    return unitsNeeded;
+    return unitsNeeded * solarCoverJson.cost;
 }
 export async function getAllSolarCoverPrices(length, width)
 {
 
-    var solarCoverSize = calculatePoolSolarCover(length, width)
+    var solarCoverOptions = []
+    var solarCoverJsons = await get_solar_covers();
 
-    var solarCoverJson;// = getSolarCoverData(null);
-    //for(solarCoverJsonRow : solarCoverJson)
-        var solarCoverPriceAndNameJson;//calculateSolarCoverPrice(solarCoverSize, solarCoverJsonRow);
-
-    return solarCoverPriceAndNameJson; 
+    for (const solarCoverJson of solarCoverJsons) {
+        var name = await solarCoverJson.name;
+        const price = await calculatePoolSolarCoverPrice(length, width, name);
+        
+        // Create a new JSON object with the name and price fields
+        const option = { "name": name, "price": price };
+        
+        // Add the new JSON object to the empty JSON array
+        solarCoverOptions.push(option);
+    }
+    return solarCoverOptions;
 }
 
 //////////////////////////

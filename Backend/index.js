@@ -111,18 +111,30 @@ import { calculateWaterPrice } from "./Middleware/MaterialCalculations.js";
 // console.log('############################################################');
 
 // Covers
-import { calculatePoolWinterCoverPrice, getAllWinterCoverPrices } from "./Middleware/MaterialCalculations.js";
+import { calculatePoolWinterCoverPrice, getAllWinterCoverPrices, calculatePoolSolarCoverPrice, getAllSolarCoverPrices } from "./Middleware/MaterialCalculations.js";
 // console.log('############################################################');
 // console.log(await calculatePoolWinterCoverPrice(20, 10, 'Vevor Winter Cover'));
 // console.log('############################################################');
 
-setTimeout(async function() {
-    console.log('############################################################');
-    // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
-    var all_options = await getAllWinterCoverPrices(20, 10);
-    console.log(all_options);
-    console.log('############################################################');
-}, 5000);
+// setTimeout(async function() {
+//     console.log('############################################################');
+//     // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
+//     var all_options = await getAllWinterCoverPrices(20, 10);
+//     console.log(all_options);
+//     console.log('############################################################');
+// }, 5000);
+
+// console.log('############################################################');
+// console.log(await calculatePoolSolarCoverPrice(20, 10, 'Sun2Solar Blue'));
+// console.log('############################################################');
+
+// setTimeout(async function() {
+//     console.log('############################################################');
+//     // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
+//     var all_options = await getAllSolarCoverPrices(20, 10);
+//     console.log(all_options);
+//     console.log('############################################################');
+// }, 5000);
 
 
 app.listen(4000, ()=> console.log('Server running at port 4000'));
