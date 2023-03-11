@@ -93,8 +93,7 @@ const Pools = db.define('pools',{
 });
  
 // (async () => {
-//     await db.sync();
-// })();
+//     await db.sync({ force: false });
  
 
 export default Pools;
