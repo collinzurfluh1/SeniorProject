@@ -171,7 +171,7 @@ function calculateChlorineTablets(length, width, depth, basinType)
     }
     return tabletCount;
 }
-function calculateChlorinePrice(length, width, depth, basinType)
+export async function calculateChlorinePrice(length, width, depth, basinType, product_name)
 {
 
     var tablets = calculateChlorineTablets(length, width, depth, basinType);
@@ -185,7 +185,7 @@ function calculateChlorinePrice(length, width, depth, basinType)
     var price = units * chlorineJson.price;
     return price;
 }
-function getAllChlorinePrices(length, width, depth, basinType)
+export async function getAllChlorinePrices(length, width, depth, basinType)
 {
 
     var tablets = calculateChlorineTablets(length, width, depth, basinType);
@@ -204,7 +204,7 @@ function calculateCyanuricAcidPounds(length, width, depth, basinType)
     var cyanuricAcid = 1.75 + (((gallons - 10000) / 5000) * .75);
     return cyanuricAcid;
 }
-function calculateCyanuricAcidPrice(length, width, depth, basinType)
+export async function calculateCyanuricAcidPrice(length, width, depth, basinType, product_name)
 {
 
     var cyanuricAcidlbs = calculateCyanuricAcidPounds(length, width, depth, basinType);
@@ -218,7 +218,7 @@ function calculateCyanuricAcidPrice(length, width, depth, basinType)
     var price = units * cyanuricAcidJson.price;
     return price;
 }
-function getAllCyanuricAcidPrices(length, width, depth, basinType)
+export async function getAllCyanuricAcidPrices(length, width, depth, basinType)
 {
 
     var pounds = calculateCyanuricAcidPounds(length, width, depth, basinType);
@@ -237,7 +237,7 @@ function calculateShockLbs(length, width, depth, basinType)
     var lbsOfShock = gallons / 5000;
     return lbsOfShock;
 }
-function calculateShockPrice(length, width, depth, basinType)
+export async function calculateShockPrice(length, width, depth, basinType, product_name)
 {
 
     var shocklbs = calculateShockLbs(length, width, depth, basinType);
@@ -251,7 +251,7 @@ function calculateShockPrice(length, width, depth, basinType)
     var price = units * shockJson.price;
     return price;
 }
-function getAllShockPrices(length, width, depth, basinType)
+export async function getAllShockPrices(length, width, depth, basinType)
 {
 
     var pounds = calculateShockLbs(length, width, depth, basinType);
@@ -274,14 +274,14 @@ function calculatePipesAmount(depth, length, width)
     var pipeLength = (length * 1.75) + (width * 2) + (depth * 1.1) + 20;
     return pipeLength;
 }
-function calculatePipesCost(depth, length, width)
+export async function calculatePipesCost(depth, length, width, product_name)
 {
 
     var pipeLength = calculatePipesAmount(depth, length, width);
 
     return (pipeLength * pipeJson.price);
 }
-function getAllPipesPrices(depth, length, width)
+export async function getAllPipesPrices(depth, length, width)
 {
 
     var pipeLength = calculatePipesAmount(depth, length, width);
@@ -399,7 +399,7 @@ export async function getAllConcretePrices(length, width, depth, basinType)
 ////////// WATER //////////
 ///////////////////////////
 
-function calculateWaterPrice(length, width, depth, basinType)
+export function calculateWaterPrice(length, width, depth, basinType) // will this need to be acessed?
 {
 
     var gallons = calcualteGallons(length, width, depth, basinType);
@@ -429,14 +429,14 @@ function calculateSteelWallingSqFT(length, width)
     return sqFt;
 }
 
-function calcuateSteelWallingPrice(length, width)
+export async function calcuateSteelWallingPrice(length, width, product_name)
 {
 
     var sqFt = calculateSteelWallingSqFT(length, width);
 
     return (sqFt * sideWallingJson.price);
 }
-function getAllSteelWallingPrices(length, width)
+export async function getAllSteelWallingPrices(length, width)
 {
 
     var sqFt = calculateSteelWallingSqFT(length, width)
@@ -463,7 +463,7 @@ function calculatePoolLinerArea(length, width, depth, basinType)
     var poolLinerSize = surfaceArea * 1.05;
     return poolLinerSize;
 }
-function calcualtePoolLinerPrice(length, width, depth, basinType)
+export async function calcualtePoolLinerPrice(length, width, depth, basinType, product_name)
 {
 
     var poolLinerSize = calculatePoolLinerArea(length, width, depth, basinType);
@@ -479,7 +479,7 @@ function calcualtePoolLinerPrice(length, width, depth, basinType)
     
     return unitsNeeded;
 }
-function getAllPoolLinerPrices(length, width, depth, basinType)
+export async function getAllPoolLinerPrices(length, width, depth, basinType)
 {
 
     var poolLinerSize = calculatePoolLinerArea(length, width, depth, basinType);
@@ -504,7 +504,7 @@ function calculatePoolWinterCoverArea(length, width)
 
     return winterCoverSize;
 }
-function calculatePoolWinterCoverPrice(length, width)
+export async function calculatePoolWinterCoverPrice(length, width, product_name)
 {
 
     var winterCoverSize = calculatePoolWinterCoverArea(length, width);
@@ -519,7 +519,7 @@ function calculatePoolWinterCoverPrice(length, width)
     }
     return unitsNeeded;
 }
-function getAllWinterCoverPrices(length, width)
+export async function getAllWinterCoverPrices(length, width)
 {
 
     var winterCoverSize = calculatePoolWinterCoverArea(length, width);
@@ -539,7 +539,7 @@ function calculatePoolSolarCover(length, width)
     var solarCoverSize = width * length;
     return solarCoverSize;
 }
-function calculatePoolSolarCoverPrice(length, width)
+export async function calculatePoolSolarCoverPrice(length, width, product_name)
 {
 
     var solarCoverSize = calculatePoolSolarCover(length, width);
@@ -554,7 +554,7 @@ function calculatePoolSolarCoverPrice(length, width)
     }
     return unitsNeeded;
 }
-function getAllSolarCoverPrices(length, width)
+export async function getAllSolarCoverPrices(length, width)
 {
 
     var solarCoverSize = calculatePoolSolarCover(length, width)
@@ -621,7 +621,7 @@ function calculatePlaster(length, width, depth, basinType)
     var surfaceArea = calculatePoolSurfaceArea(length, width, depth, basinType);
     return (surfaceArea / (1/3));
 }
-function calculatePlasterCost(length, width, depth, basinType, produt_name)
+export async function calculatePlasterCost(length, width, depth, basinType, product_name)
 {
 
     var plasterlbsNeeded = calculatePlaster(length, width, depth, basinType);
@@ -634,7 +634,7 @@ function calculatePlasterCost(length, width, depth, basinType, produt_name)
     }
     return unitsNeeded;
 }
-function getAllPlasterPrices(length, width, depth, basinType)
+export async function getAllPlasterPrices(length, width, depth, basinType)
 {
 
     var pounds = calculatePlaster(length, width, depth, basinType);
