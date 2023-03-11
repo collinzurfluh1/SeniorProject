@@ -1,7 +1,9 @@
 import Cement from "../Models/CementModel.js";
 import Chemicals from "../Models/ChemicalsModel.js";
 import Piping from "../Models/PipingModel.js";
-import Covers from "../Models/CoversModel";
+import Covers from "../Models/CoversModel.js";
+import Liners from "../Models/LinerModel.js";
+import SteelWalling from "../Models/SteelWallingModel.js";
 
 export async function get_plaster_data(plaster_name) {
     // This function will return a JSON of plaster data. If you pass None you will get all plaster options. 
@@ -40,7 +42,7 @@ export async function get_cement_data(cement_name) {
         cement_data = cement_sequelize.map(cement => cement.get({ plain: true }));;
     }
 
-        return cement_data
+    return cement_data
 }
 
 export async function get_winter_covers(winter_cover_name) {
@@ -121,4 +123,52 @@ export async function get_shock(shock_name) {
     }
 
     return chemical_data
+}
+
+export async function get_piping(pipe_type) {
+
+    var pipe_data = null;
+
+    if(pipe_type == null) {
+        const piping_sequelize = await Piping.findAll()
+        pipe_data = piping_sequelize.map(piping => piping.get({ plain: true }));
+        
+    } else {
+        const piping_sequelize = await Piping.findAll({ where: { type: pipe_type } })
+        pipe_data = piping_sequelize.map(piping => piping.get({ plain: true }));
+    }
+
+    return pipe_data
+}
+
+export async function get_liner(liner_name) {
+
+    var liner_data = null;
+
+    if(liner_name == null) {
+        const liner_sequelize = await Liners.findAll()
+        liner_data = liner_sequelize.map(liner => liner.get({ plain: true }));
+        
+    } else {
+        const liner_sequelize = await Liners.findAll({ where: { name: liner_name } })
+        liner_data = liner_sequelize.map(liner => liner.get({ plain: true }));
+    }
+
+    return liner_data
+}
+
+export async function get_steel_walling(steel_wall_name) {
+
+    var steel_wall_data = null;
+
+    if(steel_wall_name == null) {
+        const steel_wall_sequelize = await SteelWalling.findAll()
+        steel_wall_data = steel_wall_sequelize.map(liner => liner.get({ plain: true }));
+        
+    } else {
+        const steel_wall_sequelize = await SteelWalling.findAll({ where: { name: steel_wall_name } })
+        steel_wall_data = steel_wall_sequelize.map(liner => liner.get({ plain: true }));
+    }
+
+    return steel_wall_data
 }
