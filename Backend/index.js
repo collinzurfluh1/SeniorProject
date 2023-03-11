@@ -106,8 +106,23 @@ import {calculateChlorinePrice, getAllChlorinePrices, calculateCyanuricAcidPrice
 
 // Water test
 import { calculateWaterPrice } from "./Middleware/MaterialCalculations.js";
-console.log('############################################################');
-console.log(await calculateWaterPrice(20, 10, 6, 'Gunnite'));
-console.log('############################################################');
+// console.log('############################################################');
+// console.log(await calculateWaterPrice(20, 10, 6, 'Gunnite'));
+// console.log('############################################################');
+
+// Covers
+import { calculatePoolWinterCoverPrice, getAllWinterCoverPrices } from "./Middleware/MaterialCalculations.js";
+// console.log('############################################################');
+// console.log(await calculatePoolWinterCoverPrice(20, 10, 'Vevor Winter Cover'));
+// console.log('############################################################');
+
+setTimeout(async function() {
+    console.log('############################################################');
+    // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
+    var all_options = await getAllWinterCoverPrices(20, 10);
+    console.log(all_options);
+    console.log('############################################################');
+}, 5000);
+
 
 app.listen(4000, ()=> console.log('Server running at port 4000'));

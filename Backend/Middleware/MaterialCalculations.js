@@ -1,7 +1,7 @@
 //Things still needed to be added in during calculations 
 //Drains, Pumps, Skimmer
 
-import { get_plaster_data, get_cement_data, get_piping, get_chlorine, get_cyanuric_acid, get_shock } from "../Controllers/Materials.js";
+import { get_plaster_data, get_cement_data, get_piping, get_chlorine, get_cyanuric_acid, get_shock, get_winter_covers } from "../Controllers/Materials.js";
 
 
 
@@ -546,27 +546,35 @@ export async function calculatePoolWinterCoverPrice(length, width, product_name)
 {
 
     var winterCoverSize = calculatePoolWinterCoverArea(length, width);
+    var winterCoverJson = (await get_winter_covers(product_name))[0];
 
-    var winterCoverLength = winterCoverJson.length;
-    var winterCoverWidth = winterCoverJson.width;
+    var winterCoverLength = winterCoverJson.length_feet;
+    var winterCoverWidth = winterCoverJson.width_feet;
     var winterCoverArea = winterCoverLength * winterCoverWidth;
     var unitsNeeded = winterCoverSize / winterCoverArea;
     if(!(winterCoverSize % winterCoverArea == 0))
     {
         unitsNeeded += 1;
     }
-    return unitsNeeded;
+    return unitsNeeded * winterCoverJson.cost;
 }
 export async function getAllWinterCoverPrices(length, width)
 {
 
-    var winterCoverSize = calculatePoolWinterCoverArea(length, width);
+    var winterCoverOptions = []
+    var winterCoverJsons = await get_winter_covers();
 
-    var winterCoverJson;// = getWinterCoverData(null);
-    //for(winterCoverJsonRow : winterCoverJson)
-        var winterCoverPriceAndNameJson;//calculateWinterCoverPrice(winterCoverSize, winterCoverJsonRow);
-
-    return winterCoverPriceAndNameJson; 
+    for (const winterCoverJson of winterCoverJsons) {
+        var name = await winterCoverJson.name;
+        const price = await calculatePoolWinterCoverPrice(length, width, name);
+        
+        // Create a new JSON object with the name and price fields
+        const option = { "name": name, "price": price };
+        
+        // Add the new JSON object to the empty JSON array
+        winterCoverOptions.push(option);
+    }
+    return winterCoverOptions;
 }
 function calculatePoolSolarCover(length, width)
 {
