@@ -67,15 +67,27 @@ app.use(router);
 // console.log('############################################################');
 
 // Chlorine
-import {calculateChlorinePrice, getAllChlorinePrices} from "./Middleware/MaterialCalculations.js";
+import {calculateChlorinePrice, getAllChlorinePrices, calculateCyanuricAcidPrice, getAllCyanuricAcidPrices} from "./Middleware/MaterialCalculations.js";
 // console.log('############################################################');
 // console.log(await calculateChlorinePrice(20, 10, 6, 'Gunnite', 'In The Swim Chlorine Tablets'));
+// console.log('############################################################');
+
+// setTimeout(async function() {
+//     console.log('############################################################');
+//     // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
+//     var all_options = await getAllCyanuricAcidPrices(20, 10, 6, 'Gunnite');
+//     console.log(all_options);
+//     console.log('############################################################');
+// }, 5000);
+
+// console.log('############################################################');
+// console.log(await getAllChlorinePrices(20, 10, 6, 'Gunnite', 'Pool Mate Stabilizer and Conditioner'));
 // console.log('############################################################');
 
 setTimeout(async function() {
     console.log('############################################################');
     // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
-    var all_options = await getAllChlorinePrices(20, 10, 6, 'Gunnite');
+    var all_options = await getAllCyanuricAcidPrices(20, 10, 6, 'Gunnite');
     console.log(all_options);
     console.log('############################################################');
 }, 5000);

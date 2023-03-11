@@ -1,7 +1,7 @@
 //Things still needed to be added in during calculations 
 //Drains, Pumps, Skimmer
 
-import { get_plaster_data, get_cement_data, get_piping, get_chlorine } from "../Controllers/Materials.js";
+import { get_plaster_data, get_cement_data, get_piping, get_chlorine, get_cyanuric_acid } from "../Controllers/Materials.js";
 
 
 
@@ -219,25 +219,35 @@ export async function calculateCyanuricAcidPrice(length, width, depth, basinType
 
     var cyanuricAcidlbs = calculateCyanuricAcidPounds(length, width, depth, basinType);
 
+    var cyanuricAcidJson = (await get_cyanuric_acid(product_name))[0];
+
     var units;
-    units = cyanuricAcidlbs / cyanuricAcidJson.lbs;
-    if(!(cyanuricAcidlbs % cyanuricAcidJson.lbs == 0))
+    units = cyanuricAcidlbs / cyanuricAcidJson.quantity;
+    if(!(cyanuricAcidlbs % cyanuricAcidJson.quantity == 0))
     {
         units = units + 1;
     }
-    var price = units * cyanuricAcidJson.price;
+    var price = units * cyanuricAcidJson.cost;
     return price;
 }
 export async function getAllCyanuricAcidPrices(length, width, depth, basinType)
 {
 
-    var pounds = calculateCyanuricAcidPounds(length, width, depth, basinType);
+    var cyanuricAcidOptions = [];
+    var cyanuricAcidJsons = await get_cyanuric_acid();
 
-    var cyanuricAcidJson;// = getCyanuricAcidData(null);
-    //for(cyanuricAcidJsonRow : cyanuricAcidJson)
-        var cyanuricAcidPriceAndNameJson;//calculateChlorinePrice(pounds, cyanuricAcidJsonRow);
+    for (const cyanuricAcidJson of cyanuricAcidJsons) {
+        var name = await cyanuricAcidJson.name;
+        const price = await calculateCyanuricAcidPrice(length, width, depth, basinType, name)
+        
+        // Create a new JSON object with the name and price fields
+        const option = { "name": name, "price": price };
+        
+        // Add the new JSON object to the empty JSON array
+        cyanuricAcidOptions.push(option);
+    }
 
-    return cyanuricAcidPriceAndNameJson; 
+    return cyanuricAcidOptions; 
 }
 function calculateShockLbs(length, width, depth, basinType)
 {
