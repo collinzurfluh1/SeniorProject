@@ -679,25 +679,33 @@ export async function calculatePlasterCost(length, width, depth, basinType, prod
 {
 
     var plasterlbsNeeded = calculatePlaster(length, width, depth, basinType);
+    var plasterJson = (await get_plaster_data(product_name))[0];
 
-    var plasterlbs = plasterJson.lbs;
+    var plasterlbs = plasterJson.bag_size_pounds;
     var unitsNeeded = plasterlbsNeeded / plasterlbs;
     if(!(plasterlbsNeeded % plasterlbs == 0))
     {
         unitsNeeded += 1;
     }
-    return unitsNeeded;
+    return unitsNeeded * plasterJson.bag_cost;
 }
 export async function getAllPlasterPrices(length, width, depth, basinType)
 {
 
-    var pounds = calculatePlaster(length, width, depth, basinType);
+    var plasterOptions = []
+    var plasterJsons = await get_plaster_data();
 
-    var plasterJson;// = getPlasterData(null);
-    //for(plasterJsonRow : plasterJson)
-        var plasterPriceAndNameJson;//calculatePlasterPrice(pounds, plasterJsonRow);
-
-    return plasterPriceAndNameJson; 
+    for (const plasterJson of plasterJsons) {
+        var name = await plasterJson.name;
+        const price = await calculatePlasterCost(length, width, depth, basinType, name);
+        
+        // Create a new JSON object with the name and price fields
+        const option = { "name": name, "price": price };
+        
+        // Add the new JSON object to the empty JSON array
+        plasterOptions.push(option);
+    }
+    return plasterOptions;
 }
 
 ///////////////////////////////////////////

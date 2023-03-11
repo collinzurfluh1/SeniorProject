@@ -136,5 +136,18 @@ import { calculatePoolWinterCoverPrice, getAllWinterCoverPrices, calculatePoolSo
 //     console.log('############################################################');
 // }, 5000);
 
+//Plaster
+import { calculatePlasterCost, getAllPlasterPrices } from "./Middleware/MaterialCalculations.js";
+// console.log('############################################################');
+// console.log(await calculatePlasterCost(20, 10, 6, 'Gunnite', 'Sider Pool Plaster - 55 lb'));
+// console.log('############################################################');
+
+setTimeout(async function() {
+    console.log('############################################################');
+    // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
+    var all_options = await getAllPlasterPrices(20, 10, 6, 'Gunnite');
+    console.log(all_options);
+    console.log('############################################################');
+}, 5000);
 
 app.listen(4000, ()=> console.log('Server running at port 4000'));
