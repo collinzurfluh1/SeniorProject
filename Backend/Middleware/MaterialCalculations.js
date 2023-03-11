@@ -1,7 +1,7 @@
 //Things still needed to be added in during calculations 
 //Drains, Pumps, Skimmer
 
-import { get_plaster_data, get_cement_data, get_piping, get_chlorine, get_cyanuric_acid, get_shock, get_winter_covers, get_solar_covers } from "../Controllers/Materials.js";
+import { get_plaster_data, get_cement_data, get_piping, get_chlorine, get_cyanuric_acid, get_shock, get_winter_covers, get_solar_covers, get_liner } from "../Controllers/Materials.js";
 
 
 
@@ -505,9 +505,10 @@ export async function calcualtePoolLinerPrice(length, width, depth, basinType, p
 {
 
     var poolLinerSize = calculatePoolLinerArea(length, width, depth, basinType);
+    var poolLinerJson = (await get_liner(product_name))[0];
 
-    var linerWidth = poolLinerJson.width;
-    var linerLength = poolLinerJson.length;
+    var linerWidth = poolLinerJson.width_feet;
+    var linerLength = poolLinerJson.length_feet;
     var linerCoverArea = linerLength * linerWidth;
     var unitsNeeded = poolLinerSize / (linerCoverArea);
     if(!(unitsNeeded % linerCoverArea == 0))
@@ -515,18 +516,25 @@ export async function calcualtePoolLinerPrice(length, width, depth, basinType, p
         unitsNeeded += 1;
     }
     
-    return unitsNeeded;
+    return unitsNeeded * poolLinerJson.cost;
 }
 export async function getAllPoolLinerPrices(length, width, depth, basinType)
 {
 
-    var poolLinerSize = calculatePoolLinerArea(length, width, depth, basinType);
+    var poolLinerOptions = [];
+    var poolLinerJsons = await get_liner()
 
-    var poolLinerJson;// = getPoolLinerData(null);
-    //for(poolLinerJsonRow : poolLinerJson)
-        var poolLinerPriceAndNameJson;//calculatePoolLinerPrice(poolLinerSize, poolLinerJsonRow);
-
-    return poolLinerPriceAndNameJson; 
+    for (const poolLinerJson of poolLinerJsons) {
+        var name = await poolLinerJson.name;
+        const price = await calcualtePoolLinerPrice(depth, length, width, basinType, name)
+        
+        // Create a new JSON object with the name and price fields
+        const option = { "name": name, "price": price };
+        
+        // Add the new JSON object to the empty JSON array
+        poolLinerOptions.push(option);
+    }
+    return poolLinerOptions;
 }
 
 ////////////////////////////
@@ -620,9 +628,9 @@ export async function getAllSolarCoverPrices(length, width)
     return solarCoverOptions;
 }
 
-//////////////////////////
-////////// MISC //////////
-//////////////////////////
+///////////////////////////////////////
+////////// MISC INTERNAL USE //////////
+///////////////////////////////////////
 
 function calculatePoolFilter(length, width, depth, basinType)
 {

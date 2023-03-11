@@ -2,6 +2,7 @@ import Cement from "../Models/CementModel.js";
 import Chemicals from "../Models/ChemicalsModel.js";
 import Piping from "../Models/PipingModel.js";
 import Covers from "../Models/CoversModel.js";
+import Liners from "../Models/LinerModel.js";
 
 export async function get_plaster_data(plaster_name) {
     // This function will return a JSON of plaster data. If you pass None you will get all plaster options. 
@@ -137,4 +138,20 @@ export async function get_piping(pipe_type) {
     }
 
     return pipe_data
+}
+
+export async function get_liner(liner_name) {
+
+    var liner_data = null;
+
+    if(liner_name == null) {
+        const liner_sequelize = await Liners.findAll()
+        liner_data = liner_sequelize.map(liner => liner.get({ plain: true }));
+        
+    } else {
+        const liner_sequelize = await Liners.findAll({ where: { name: liner_name } })
+        liner_data = liner_sequelize.map(liner => liner.get({ plain: true }));
+    }
+
+    return liner_data
 }
