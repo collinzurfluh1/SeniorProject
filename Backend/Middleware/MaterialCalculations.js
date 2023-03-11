@@ -1,7 +1,7 @@
 //Things still needed to be added in during calculations 
 //Drains, Pumps, Skimmer
 
-import { get_plaster_data, get_cement_data, get_piping, get_chlorine, get_cyanuric_acid } from "../Controllers/Materials.js";
+import { get_plaster_data, get_cement_data, get_piping, get_chlorine, get_cyanuric_acid, get_shock } from "../Controllers/Materials.js";
 
 
 
@@ -261,26 +261,35 @@ export async function calculateShockPrice(length, width, depth, basinType, produ
 {
 
     var shocklbs = calculateShockLbs(length, width, depth, basinType);
+    var shockJson = (await get_shock(product_name))[0];
 
     var units;
-    units = shocklbs / shockJson.lbs;
-    if(!(shocklbs % shockJson.lbs == 0))
+    units = shocklbs / shockJson.quantity;
+    if(!(shocklbs % shockJson.quantity == 0))
     {
         units = units + 1;
     }
-    var price = units * shockJson.price;
+    var price = units * shockJson.cost;
     return price;
 }
 export async function getAllShockPrices(length, width, depth, basinType)
 {
 
-    var pounds = calculateShockLbs(length, width, depth, basinType);
+    var shockOptions = [];
+    var shockJsons = await get_shock();
 
-    var shockJson;// = getShockData(null);
-    //for(shockJsonRow : shockJson)
-        var shockPriceAndNameJson;//calculateShockPrice(pounds, shockJsonRow);
+    for (const shockJson of shockJsons) {
+        var name = await shockJson.name;
+        const price = await calculateShockPrice(length, width, depth, basinType, name)
+        
+        // Create a new JSON object with the name and price fields
+        const option = { "name": name, "price": price };
+        
+        // Add the new JSON object to the empty JSON array
+        shockOptions.push(option);
+    }
 
-    return shockPriceAndNameJson; 
+    return shockOptions; 
 }
 
 ////////////////////////////
