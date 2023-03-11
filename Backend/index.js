@@ -177,17 +177,17 @@ import { calcualtePoolLinerPrice, getAllPoolLinerPrices } from "./Middleware/Mat
 // console.log('############');
 
 //Steel Walling
-import { calcuateSteelWallingPrice, getAllSteelWallingPrices } from "./Middleware/MaterialCalculations.js";
+// import { calcuateSteelWallingPrice, getAllSteelWallingPrices } from "./Middleware/MaterialCalculations.js";
 // console.log('############################################################');
 // console.log(await calcuateSteelWallingPrice(20, 10, 'Pool Warehouse walling'));
 // console.log('############################################################');
 
-setTimeout(async function() {
-    console.log('############################################################');
-    // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
-    var all_options = await getAllSteelWallingPrices(20, 10, 6, 'Gunnite');
-    console.log(all_options);
-    console.log('############################################################');
-}, 5000);
+// setTimeout(async function() {
+//     console.log('############################################################');
+//     // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
+//     var all_options = await getAllSteelWallingPrices(20, 10, 6, 'Gunnite');
+//     console.log(all_options);
+//     console.log('############################################################');
+// }, 5000);
 
 app.listen(4000, ()=> console.log('Server running at port 4000'));
