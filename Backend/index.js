@@ -96,12 +96,18 @@ import {calculateChlorinePrice, getAllChlorinePrices, calculateCyanuricAcidPrice
 // console.log(await calculateShockPrice(20, 10, 6, 'Gunnite', 'In The Swim Super Pool Shock'));
 // console.log('############################################################');
 
-setTimeout(async function() {
-    console.log('############################################################');
-    // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
-    var all_options = await getAllShockPrices(20, 10, 6, 'Gunnite');
-    console.log(all_options);
-    console.log('############################################################');
-}, 5000);
+// setTimeout(async function() {
+//     console.log('############################################################');
+//     // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
+//     var all_options = await getAllShockPrices(20, 10, 6, 'Gunnite');
+//     console.log(all_options);
+//     console.log('############################################################');
+// }, 5000);
+
+// Water test
+import { calculateWaterPrice } from "./Middleware/MaterialCalculations.js";
+console.log('############################################################');
+console.log(await calculateWaterPrice(20, 10, 6, 'Gunnite'));
+console.log('############################################################');
 
 app.listen(4000, ()=> console.log('Server running at port 4000'));

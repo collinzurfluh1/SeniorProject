@@ -437,6 +437,11 @@ export async function getAllConcretePrices(length, width, depth, basinType)
 ////////// WATER //////////
 ///////////////////////////
 
+function calcualteGallons(length, width, depth, basinType)
+{
+    var volume = calculatePoolVolume(length, width, depth, basinType);
+    return (volume * 7.48);
+}
 export function calculateWaterPrice(length, width, depth, basinType) // will this need to be acessed?
 {
 
@@ -444,13 +449,8 @@ export function calculateWaterPrice(length, width, depth, basinType) // will thi
     //This calculates the total cost of water for a pool based on the pools volume.
     //Inputs: Pools Volume
     var waterPrice = 0.005;//set price
-    varprice = volume * waterPrice;
-    return price;
-}
-function calcualteGallons(length, width, depth, basinType)
-{
-    var volume = calculatePoolVolume(length, width, depth, basinType);
-    return (volume * 7.48);
+    var varprice = gallons * waterPrice;
+    return varprice;
 }
 
 ///////////////////////////////////
