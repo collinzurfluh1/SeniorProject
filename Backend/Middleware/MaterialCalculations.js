@@ -1,7 +1,7 @@
 //Things still needed to be added in during calculations 
 //Drains, Pumps, Skimmer
 
-import { get_plaster_data, get_cement_data, get_piping } from "../Controllers/Materials.js";
+import { get_plaster_data, get_cement_data, get_piping, get_chlorine } from "../Controllers/Materials.js";
 
 
 
@@ -176,25 +176,35 @@ export async function calculateChlorinePrice(length, width, depth, basinType, pr
 
     var tablets = calculateChlorineTablets(length, width, depth, basinType);
 
+    var chlorineJson = (await get_chlorine(product_name))[0];
+
     var units;
-    units = tablets / chlorineJson.tabletCount;
-    if(!(tablets % chlorineJson.tabletCount == 0))
+    units = tablets / chlorineJson.quantity;
+    if(!(tablets % chlorineJson.quantity == 0))
     {
         units = units + 1;
     }
-    var price = units * chlorineJson.price;
+    var price = units * chlorineJson.cost;
     return price;
 }
 export async function getAllChlorinePrices(length, width, depth, basinType)
 {
 
-    var tablets = calculateChlorineTablets(length, width, depth, basinType);
+    var chlorineOptions = [];
+    var chlorineJsons = await get_chlorine();
 
-    var chlorineJson;// = getChlorineData(null);
-    //for(chlorineJsonRow : chlorineJson)
-        var chrlorinePriceAndNameJson;//calculateChlorinePrice(tablets, chlorineJsonRow);
+    for (const chlorineJson of chlorineJsons) {
+        var name = await chlorineJson.name;
+        const price = await calculateChlorinePrice(length, width, depth, basinType, name)
+        
+        // Create a new JSON object with the name and price fields
+        const option = { "name": name, "price": price };
+        
+        // Add the new JSON object to the empty JSON array
+        chlorineOptions.push(option);
+    }
 
-    return chrlorinePriceAndNameJson;    
+    return chlorineOptions;  
 }
 function calculateCyanuricAcidPounds(length, width, depth, basinType)
 {
@@ -685,13 +695,13 @@ function calculatePoolVolume(length, width, depth, basinType)
     //this calculates the pools volume
     //Inputs:Pools Length, Width, Depth, Basin Type
 
-    if(basinType.equals("Diver"))
+    if(basinType == "Diver")
     {
         //later
         var volume = length * width * depth[0] + ((width * (length * .75) * (depth[1] - depth[0]))/3);
         return volume;
     }
-    else if(basinType.equals("Slant"))
+    else if(basinType == "Slant")
     {
         var volume = length * width * ((depth[0] + depth[1] - .75)/2);
         return volume;

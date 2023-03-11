@@ -14,9 +14,12 @@ const Chemicals = db.define('chemicals',{
     type:{
         type: DataTypes.STRING,
     },
+    quantity:{
+        type: DataTypes.DOUBLE
+    },
     cost:{
         type: DataTypes.DOUBLE 
-    },
+    }
 },{
     freezeTableName:true
 });
