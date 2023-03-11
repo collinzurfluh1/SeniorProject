@@ -1,7 +1,7 @@
 //Things still needed to be added in during calculations 
 //Drains, Pumps, Skimmer
 
-import { get_plaster_data, get_cement_data } from "../Controllers/Materials.js";
+import { get_plaster_data, get_cement_data, get_piping } from "../Controllers/Materials.js";
 
 
 
@@ -274,23 +274,32 @@ function calculatePipesAmount(depth, length, width)
     var pipeLength = (length * 1.75) + (width * 2) + (depth * 1.1) + 20;
     return pipeLength;
 }
-export async function calculatePipesCost(depth, length, width, product_name)
+export async function calculatePipesCost(depth, length, width, pipe_type)
 {
+
+    var price_per_linear_foot =  (await get_piping(pipe_type))[0]['linft_cost'];
 
     var pipeLength = calculatePipesAmount(depth, length, width);
 
-    return (pipeLength * pipeJson.price);
+    return (pipeLength * price_per_linear_foot);
 }
 export async function getAllPipesPrices(depth, length, width)
 {
 
-    var pipeLength = calculatePipesAmount(depth, length, width);
+    var PipingOptions = [];
+    var pipingJsons = await get_piping();
 
-    var pipesJson;// = getPipesData(null);
-    //for(pipesJsonRow : pipesJson)
-        var pipesPriceAndNameJson;//calculatePipesCost(length, pipesJsonRow);
-
-    return pipesPriceAndNameJson; 
+    for (const pipingJson of pipingJsons) {
+        var type = await pipingJson.type;
+        const price = await calculatePipesCost(depth, length, width, type)
+        
+        // Create a new JSON object with the name and price fields
+        const option = { "type": type, "price": price };
+        
+        // Add the new JSON object to the empty JSON array
+        PipingOptions.push(option);
+    }
+    return PipingOptions;
 }
 
 //////////////////////////////

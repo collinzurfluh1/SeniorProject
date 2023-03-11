@@ -35,13 +35,32 @@ app.use(router);
 // console.log('############################################################');
 
 // TESTING CONCRETE COST FUNCTION
-setTimeout(async function() {
-    console.log('############################################################');
-    // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
-    var all_options = await getAllConcretePrices(10, 20, 6, 'Gunite');
-    console.log(all_options);
-    console.log('############################################################');
-}, 5000);
+// setTimeout(async function() {
+//     console.log('############################################################');
+//     // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
+//     var all_options = await getAllConcretePrices(10, 20, 6, 'Gunite');
+//     console.log(all_options);
+//     console.log('############################################################');
+// }, 5000);
+
+// PIPING TESTS
+// import { get_piping } from "./Controllers/Materials.js";
+// console.log('############');
+// console.log(await get_piping('Rigid PVC'));
+// console.log('############');
+
+// import {calculatePipesCost, getAllPipesPrices} from "./Middleware/MaterialCalculations.js";
+// console.log('############################################################');
+// console.log(await calculatePipesCost(6, 20, 10, 'Rigid PVC'));
+// console.log('############################################################');
+
+// setTimeout(async function() {
+//     console.log('############################################################');
+//     // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
+//     var all_options = await getAllPipesPrices(6, 20, 10);
+//     console.log(all_options);
+//     console.log('############################################################');
+// }, 5000);
 
 // console.log('############################################################');
 // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
