@@ -162,10 +162,30 @@ import { calcualtePoolLinerPrice, getAllPoolLinerPrices } from "./Middleware/Mat
 // console.log(await calcualtePoolLinerPrice(20, 10, 6, 'Gunnite', '20 x 40 Rectangle Inground Swimming Pool Liners - Samara Coast'));
 // console.log('############################################################');
 
+// setTimeout(async function() {
+//     console.log('############################################################');
+//     // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
+//     var all_options = await getAllPoolLinerPrices(20, 10, 6, 'Gunnite');
+//     console.log(all_options);
+//     console.log('############################################################');
+// }, 5000);
+
+//steel walling db access
+// import { get_steel_walling } from "./Controllers/Materials.js";
+// console.log('############');
+// console.log(await get_steel_walling());
+// console.log('############');
+
+//Steel Walling
+import { calcuateSteelWallingPrice, getAllSteelWallingPrices } from "./Middleware/MaterialCalculations.js";
+// console.log('############################################################');
+// console.log(await calcuateSteelWallingPrice(20, 10, 'Pool Warehouse walling'));
+// console.log('############################################################');
+
 setTimeout(async function() {
     console.log('############################################################');
     // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
-    var all_options = await getAllPoolLinerPrices(20, 10, 6, 'Gunnite');
+    var all_options = await getAllSteelWallingPrices(20, 10, 6, 'Gunnite');
     console.log(all_options);
     console.log('############################################################');
 }, 5000);

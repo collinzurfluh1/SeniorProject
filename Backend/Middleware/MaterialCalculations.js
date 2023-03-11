@@ -1,7 +1,7 @@
 //Things still needed to be added in during calculations 
 //Drains, Pumps, Skimmer
 
-import { get_plaster_data, get_cement_data, get_piping, get_chlorine, get_cyanuric_acid, get_shock, get_winter_covers, get_solar_covers, get_liner } from "../Controllers/Materials.js";
+import { get_plaster_data, get_cement_data, get_piping, get_chlorine, get_cyanuric_acid, get_shock, get_winter_covers, get_solar_covers, get_liner, get_steel_walling } from "../Controllers/Materials.js";
 
 
 
@@ -463,7 +463,7 @@ function calculateSteelWallingSqFT(length, width)
     //Inputs: Pools Length, Width, Depth 1, Price/Name of side walling
     //database call for sidewalling price
     //Database call for sidewalling price based on name;
-    var sqFt = (2 * (width * sideWalling) + 2 * (length * sideWalling));
+    var sqFt = (2 * width + 2 * length);
     return sqFt;
 }
 
@@ -471,19 +471,28 @@ export async function calcuateSteelWallingPrice(length, width, product_name)
 {
 
     var sqFt = calculateSteelWallingSqFT(length, width);
+    var sideWallingJson = (await get_steel_walling(product_name))[0];
 
-    return (sqFt * sideWallingJson.price);
+    return (sqFt * sideWallingJson.sqft_cost);
 }
 export async function getAllSteelWallingPrices(length, width)
 {
 
-    var sqFt = calculateSteelWallingSqFT(length, width)
+    var SteelWallingOptions = [];
+    var SteelWallingJsons = await get_steel_walling();
 
-    var steelWallingJson;// = getSteelWallingData(null);
-    //for(steelWallingJsonRow : steelWallingJson)
-        var steelWallingPriceAndNameJson;//calculateSteelWallingPrice(sqFt, steelWallingJsonRow);
-
-    return steelWallingPriceAndNameJson; 
+    for (const SteelWallingJson of SteelWallingJsons) {
+        var name = await SteelWallingJson.name;
+        const price = await calcuateSteelWallingPrice(length, width, name)
+        
+        // Create a new JSON object with the name and price fields
+        const option = { "name": name, "price": price };
+        
+        // Add the new JSON object to the empty JSON array
+        SteelWallingOptions.push(option);
+    }
+    return SteelWallingOptions;
+    
 }
 
 //////////////////////////////////

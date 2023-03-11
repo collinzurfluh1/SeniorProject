@@ -3,6 +3,7 @@ import Chemicals from "../Models/ChemicalsModel.js";
 import Piping from "../Models/PipingModel.js";
 import Covers from "../Models/CoversModel.js";
 import Liners from "../Models/LinerModel.js";
+import SteelWalling from "../Models/SteelWallingModel.js";
 
 export async function get_plaster_data(plaster_name) {
     // This function will return a JSON of plaster data. If you pass None you will get all plaster options. 
@@ -154,4 +155,20 @@ export async function get_liner(liner_name) {
     }
 
     return liner_data
+}
+
+export async function get_steel_walling(steel_wall_name) {
+
+    var steel_wall_data = null;
+
+    if(steel_wall_name == null) {
+        const steel_wall_sequelize = await SteelWalling.findAll()
+        steel_wall_data = steel_wall_sequelize.map(liner => liner.get({ plain: true }));
+        
+    } else {
+        const steel_wall_sequelize = await SteelWalling.findAll({ where: { name: steel_wall_name } })
+        steel_wall_data = steel_wall_sequelize.map(liner => liner.get({ plain: true }));
+    }
+
+    return steel_wall_data
 }
