@@ -25,6 +25,7 @@ import CreatorForm8 from "../Modules/CreatorForm8";
 import CreatorForm9 from "../Modules/CreatorForm9";
 import CreatorFormFinal from "../Modules/CreatorFormFinal";
 import CreatorFormFinal2 from "../Modules/CreatorFormFinal2";
+import CreatorFormFinal3 from "../Modules/CreatorFormFinal3";
 
 import "../SCSS/creator.scss";
 
@@ -45,7 +46,7 @@ class CreatorBody extends React.Component {
   constructor(props) {
     super(props);
     this.currIndex = 1;
-    this.maxIndex = 11; 
+    this.maxIndex = 12; 
     this.state = {
       nextButtonText: "Next",
       name: "React",
@@ -60,6 +61,11 @@ class CreatorBody extends React.Component {
       _poolDepth: null,
       _poolLength: null,
       _poolMaterial: null,
+      _poolChemicals: {
+        "chlorine": null,
+        "cyaneuricAcid": null,
+        "shock": null
+      },
       _poolMaterialData:  {
         "materialBrand": null,
         "plaster": null,
@@ -105,6 +111,8 @@ class CreatorBody extends React.Component {
     this.SetPoolName = this.SetPoolName.bind(this);
     this.GetPool = this.GetPool.bind(this);
     this.GetPoolPump = this.GetPoolPump.bind(this); 
+    this.GetPoolChemicals = this.GetPoolChemicals.bind(this); 
+    this.GetPoolSkimmer = this.GetPoolSkimmer.bind(this); 
     this.GetPoolSkimmer = this.GetPoolSkimmer.bind(this); 
     this.GetPoolDrain = this.GetPoolDrain.bind(this); 
     this.GetPoolPipe = this.GetPoolPipe.bind(this); 
@@ -120,7 +128,6 @@ class CreatorBody extends React.Component {
     this.GetPoolWidth = this.GetPoolWidth.bind(this); 
     this.GetPoolLength = this.GetPoolLength.bind(this); 
     this.GetPoolName = this.GetPoolName.bind(this); 
-
   }
 
   UploadPool =  async (props) =>{
@@ -156,6 +163,20 @@ class CreatorBody extends React.Component {
       }
 
   }
+
+  GetPoolChemicals = () => {
+      return this.state._poolChemicals; 
+
+  }
+
+  SetPoolChemicals = (chemicals) =>{
+      alert(chemicals['chlorine']);
+      this.setState({_poolChemicals: chemicals});
+
+
+
+  }
+
 
   /* Pool Material Getters and Setters */
   GetPoolMaterialData = () => {
@@ -368,7 +389,8 @@ this.setState({_deepDepth: deepDepth}, function() {
         'drain': this.GetPoolDrain(),
         'skimmer': this.GetPoolSkimmer(),
         'pump': this.GetPoolPump(),
-        'materialData': this.GetPoolMaterialData()
+        'materialData': this.GetPoolMaterialData(),
+        'chemicals': this.GetPoolChemicals()
       }; 
 
   }
@@ -377,7 +399,7 @@ this.setState({_deepDepth: deepDepth}, function() {
   prev() {
     if(this.currIndex > 1){
       this.currIndex--;
-      if(this.currIndex == 2 || this.currIndex == 6){
+      if(this.currIndex == 2){
         this.currIndex--; 
       }
       this.hideComponent(this.currIndex);
@@ -387,7 +409,7 @@ this.setState({_deepDepth: deepDepth}, function() {
   next() {
     if(this.currIndex < this.maxIndex){
       this.currIndex++;
-      if(this.currIndex == 2 || this.currIndex == 6){
+      if(this.currIndex == 2){
 
         this.currIndex++; 
       }
@@ -421,6 +443,7 @@ this.setState({_deepDepth: deepDepth}, function() {
         this.setState({ creatorForm9: false});
         this.setState({ creatorFormSubmit: false});
         this.setState({ creatorFormSubmit2: false});
+        this.setState({ creatorFormSubmit3: false});
 
 
 
@@ -551,11 +574,11 @@ this.setState({_deepDepth: deepDepth}, function() {
         this.setState({ creatorForm8: false});
         this.setState({ creatorForm9: false});
         this.setState({ prevButton: false });
-        this.setState({ nextButtonText: 'Next'});
 
         this.setState({ nextButton: true});
         this.setState({ creatorFormSubmit: true});
         this.setState({ creatorFormSubmit2: false});
+        this.setState({ creatorFormSubmit3: false});
 
         break;
         case 11:
@@ -570,13 +593,17 @@ this.setState({_deepDepth: deepDepth}, function() {
           this.setState({ creatorForm9: false});
           this.setState({ prevButton: true });
           this.setState({ nextButton: true});
-          this.setState({ nextButtonText: 'Submit'});
-
           this.setState({ creatorFormSubmit: false});
           this.setState({ creatorFormSubmit2: true});
-
+          this.setState({ nextButtonText: 'Next'});
+          this.setState({ prevButton: true });
           break;
-
+        case 12: 
+          this.setState({ creatorFormSubmit: false});
+          this.setState({ creatorFormSubmit2: false});
+          this.setState({ nextButtonText: 'Submit' });
+          this.setState({ creatorFormSubmit3: true }); 
+          break;  
       default:
        this.setState({ creatorForm1: false });
        this.setState({ creatorForm2: false });
@@ -587,14 +614,14 @@ this.setState({_deepDepth: deepDepth}, function() {
        this.setState({ creatorForm7: false});
        this.setState({ creatorForm8: false});
        this.setState({ creatorForm9: false});
-       this.setState({ creatorFormSubmit: true});
+       this.setState({ creatorFormSubmit: false});
        this.setState({ nextButtonText: 'Submit'});
         return;
     }
   }
 
   render() {
-    const { prevButton, nextButton, creatorForm1, creatorForm2, creatorForm3, creatorForm4, creatorForm5, creatorForm6, creatorForm7, creatorForm8, creatorForm9, creatorFormSubmit, creatorFormSubmit2 } = this.state;
+    const { prevButton, nextButton, creatorForm1, creatorForm2, creatorForm3, creatorForm4, creatorForm5, creatorForm6, creatorForm7, creatorForm8, creatorForm9, creatorFormSubmit, creatorFormSubmit2, creatorFormSubmit3 } = this.state;
     var currIndex = 0;
 
     return (
@@ -634,7 +661,7 @@ this.setState({_deepDepth: deepDepth}, function() {
             setPoolPipe={this.SetPoolPipe} getPoolPipe={this.GetPoolPipe}
             />}
             {creatorForm6 && <CreatorForm6
-            setPoolBasinLiner={this.SetPoolBasinLiner} getPoolBasinLiner={this.GetPoolBasinLiner}
+            setPoolChemicals={this.SetPoolChemicals} getPoolChemicals={this.GetPoolChemicals}
 
             />}
             {creatorForm7 && <CreatorForm7
@@ -652,6 +679,9 @@ this.setState({_deepDepth: deepDepth}, function() {
             getPoolMaterial={this.GetPoolMaterial}
             />}
             {creatorFormSubmit2 && <CreatorFormFinal2
+            getPool={this.GetPool}
+            />}
+            {creatorFormSubmit3 && <CreatorFormFinal3
             getPool={this.GetPool}
             />}
             </form>

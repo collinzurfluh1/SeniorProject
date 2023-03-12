@@ -12,35 +12,80 @@ class CreatorForm6 extends React.Component {
     super(props);
     this.state = {
         name: "React",
-        basinLiner: props.getPoolBasinLiner()
+        chlorine: props.getPoolChemicals()['chlorine'],
+        cyaneuricAcid: props.getPoolChemicals()['cyaneuricAcid'],
+        shock: props.getPoolChemicals()['shock'],
+
+        chemicals: {
+          'chlorine': props.getPoolChemicals()['chlorine'],
+          'cyaneuricAcid': props.getPoolChemicals()['cyaneuricAcid'],
+          'shock': props.getPoolChemicals()['cyaneuricAcid'] 
+        }
       };
-      this.updatePoolBasinLiner = this.updatePoolBasinLiner.bind(this); 
+      this.updateChlorine = this.updateChlorine.bind(this); 
+      this.updateCyaneuricAcid = this.updateCyaneuricAcid.bind(this); 
+      this.updateShock = this.updateShock.bind(this); 
 
 
   }
-  updatePoolBasinLiner(event) {
+  updateChlorine(event) {
   
-    this.props.setPoolBasinLiner(event.target.value); 
-    this.setState({ basinLiner: event.target.value });
-   
-    
+    this.props.setPoolChemicals({
+        'chlorine': event.target.value,
+        'cyaneuricAcid': this.state.cyaneuricAcid,
+        'shock': this.state.shock
+    }); 
+    this.setState({ chlorine: event.target.value });
   }
+  updateCyaneuricAcid(event) {
+    this.props.setPoolChemicals({
+        'chlorine': this.state.chlorine,
+        'cyaneuricAcid': event.target.value,
+        'shock': this.state.shock
+    }); 
+    this.setState({ cyaneuricAcid: event.target.value });
+  }
+  
+  updateShock(event) {
+    this.props.setPoolChemicals({
+        'chlorine': this.state.chlorine,
+        'cyaneuricAcid': this.state.cyaneuricAcid,
+        'shock': event.target.value
+    }); 
+    this.setState({ shock: event.target.value });
 
-
+  }
   
   render() {
     return (
         <div id="Creator">
-          <div className="CreatorFormLabel" onChange={this.updatePoolBasinLiner}>
-              <h1>Pool Basin Liner</h1>
-              <input type="radio" id="poolLiner1" name="poolMaterial" value="Island Wave" defaultChecked={this.state.basinLiner === "Island Wave"}></input>
-              <label for="poolLiner1"> Island Wave</label><br></br>
-              <input type="radio" id="poolLiner2" name="poolMaterial" value="Grey Crystal" defaultChecked={this.state.basinLiner === "Grey Crystal"}></input>
-              <label for="poolLiner2"> Grey Crystal</label><br></br>
-              <input type="radio" id="poolLiner3" name="poolMaterial" value="Stardust Blue" defaultChecked={this.state.basinLiner === "Stardust Blue"}></input>
-              <label for="poolLiner3">Stardust Blue</label><br></br>
-
-             
+          <div className="CreatorFormLabel" onChange={this.updateChlorine}>
+            <h1>Pool Chemicals</h1>
+              <label for="chlorine" class="chlorine">Chlorine:</label><br></br>
+              <select name="chlorine" value={this.state.chlorine} id="winter-cover">
+              <option value="Not Selected">Not Selected</option>
+              <option value="chlorine2">Chlorine 1</option>
+              <option value="chlorine3">Chlorine 2</option>
+              <option value="chlorine4">Chlorine 3</option>
+            </select><br></br>
+          </div>
+          <div className="CreatorFormLabel" onChange={this.updateCyaneuricAcid}>
+            <label for="cyaneuricAcid" class="CreatorFormLabel">Cyaneuric Acid</label><br></br>
+            <select name="cyaneuricAcid" value={this.state.cyaneuricAcid}  id="cyaneuricAcid">
+            <option value="Not Selected">Not Selected</option>
+            <option value="cyaneuricAcid1">Cyaneuric Acid 1</option>
+            <option value="cyaneuricAcid2">Cyaneuric Acid 2</option>
+             <option value="cyaneuricAcid3">Cyaneuric Acid 3</option>
+            </select>
+          </div>
+          <div className="CreatorFormLabel" onChange={this.updateShock}>
+            <label for="shock" class="CreatorFormLabel">Shock</label><br></br>
+            <select name="shock" value={this.state.shock}  id="shock">
+            <option value="Not Selected">Not Selected</option>
+            <option value="shock1">Shock 1</option>
+            <option value="shock2">Shock 2</option>
+             <option value="shock3">Shock 3</option>
+            </select>
           </div>
         </div>
       );
