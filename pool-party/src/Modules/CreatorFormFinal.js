@@ -21,6 +21,9 @@ class CreatorFormFinal extends React.Component {
       deepDepth: (pool['material'] == 'Vinyl') ? pool['materialData']['deepDepth'] : "Not Applicable",
       slant: (pool['material'] == 'Vinyl') ? pool['materialData']['slant'] : "Not Applicable",
       shell: (pool['material'] == 'Fiber Glass') ? pool['materialData']['shell'] : "Not Applicable",
+      chlorine: pool['chemicals']['chlorine'],
+      cyaneuricAcid: pool['chemicals']['cyaneuricAcid'],
+      shock: pool['chemicals']['shock']
 
        
       };
@@ -38,7 +41,6 @@ class CreatorFormFinal extends React.Component {
           <h1>{this.state.name}: Page 1</h1>
           <p>Pool Name: {this.state.name}</p>
           <p>Pool Material: {this.state.material}</p>
-          <p>Pool Concrete: {this.state.materialBrand}</p>
           <h4>Fiber Glass Options</h4>
           <p>Fiber Glass Shell: {this.state.shell}</p>
           <h4>Dimensions</h4>
@@ -50,6 +52,9 @@ class CreatorFormFinal extends React.Component {
           <p>Pool Shallow Depth: {this.state.shallowDepth}</p>
           <p>Pool Deep Depth: {this.state.deepDepth}</p>
           <p>Pool Slant: {this.state.slant}</p>
+          <p>Pool Chlorine: {this.state.chlorine}</p>
+          <p>Pool Cyaneuric Acid: {this.state.cyaneuricAcid}</p>
+          <p>Pool Shock: {this.state.shock}</p>
 
         </div>
       );
