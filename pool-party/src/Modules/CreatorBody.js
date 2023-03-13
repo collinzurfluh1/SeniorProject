@@ -1,14 +1,7 @@
 import * as React from "react";
-import Component from "react";
-import { render } from "react-dom";
 import { Button } from "@mui/material";
-import { createRoutesFromElements, useNavigate } from "react-router-dom";
-import { useRef } from "react";
-import Modal from 'react-bootstrap/Modal';
 import '../SCSS/poolitem.scss'
 import axios from 'axios';
-import jwt_decode from "jwt-decode";
-import EditPoolItem from './EditPoolItem';
 
 
 
@@ -41,12 +34,12 @@ When saving data
 */
 // How to get next/prev working?
 class CreatorBody extends React.Component {
-  
   constructor(props) {
     super(props);
     this.currIndex = 1;
     this.maxIndex = 11; 
     this.state = {
+      username: props.username,
       nextButtonText: "Next",
       name: "React",
       creatorForm1: true,
@@ -98,6 +91,7 @@ class CreatorBody extends React.Component {
 
     
     };
+    this.setState({username: props.username}, function() {});
     this._form1 = React.createRef(); 
     this._form2 = React.createRef(); 
     this._form3 = React.createRef(); 
@@ -122,15 +116,15 @@ class CreatorBody extends React.Component {
     this.GetPoolName = this.GetPoolName.bind(this); 
 
   }
-
+  
+  
   UploadPool =  async (props) =>{
     alert("Pool Uploading");
 
-     var navigate = useNavigate();
       try {
           await axios.post('http://localhost:4000/savePools', {
             //Error because username is not defined
-            owner: "TestUser",
+            owner: props.username,
             title: this.GetPool()["name"],
             original_creator: false,
             pulic: true,
@@ -150,7 +144,7 @@ class CreatorBody extends React.Component {
 
           });
           alert("Your new pool is now saved!")
-          window.location.reload(false);
+          window.location.href = '/my-pools';
       } catch (error) {
         alert("Sorry the pool was not able to be saved! Try again later");
       }
@@ -394,7 +388,7 @@ this.setState({_deepDepth: deepDepth}, function() {
       this.hideComponent(this.currIndex);
     }
     else if(this.currIndex == this.maxIndex){
-        this.UploadPool(this.props);
+     this.UploadPool(this.props);
 
     }
   }
@@ -592,11 +586,10 @@ this.setState({_deepDepth: deepDepth}, function() {
         return;
     }
   }
-
   render() {
     const { prevButton, nextButton, creatorForm1, creatorForm2, creatorForm3, creatorForm4, creatorForm5, creatorForm6, creatorForm7, creatorForm8, creatorForm9, creatorFormSubmit, creatorFormSubmit2 } = this.state;
     var currIndex = 0;
-
+    
     return (
       <div id="Creator">
         <div className="creator-body">
