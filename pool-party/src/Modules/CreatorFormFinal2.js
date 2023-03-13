@@ -22,7 +22,7 @@ class CreatorFormFinal2 extends React.Component {
         basinLiner: pool['materialData']['basinLiner'],
         drain: pool['drain'],
         skimmer: pool['skimmer'],
-        pump: pool['pump']
+        pump: pool['pump'],
       };
      
 
@@ -48,6 +48,10 @@ class CreatorFormFinal2 extends React.Component {
           <p>Pool Drain: {this.state.drain}</p>
           <p>Pool Skimmer: {this.state.skimmer}</p>
           <p>Pool Pump: {this.state.pump}</p>
+          <h4>Chemicals</h4>
+          <p>Pool Chlorine: {this.state.chlorine}</p>
+          <p>Pool Cyaneuric Acid: {this.state.cyaneuricAcid}</p>
+          <p>Pool Shock: {this.state.shock}</p>
         </div>
       );
   

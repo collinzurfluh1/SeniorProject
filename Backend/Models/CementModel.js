@@ -46,6 +46,6 @@ const cement_data = [
 //     }).catch((err) => { console.log(err); });
 //     }).catch((error) => {
 //     console.error('Unable to create the table : ', error);
-//     });
+// });
 
 export default Cement;
