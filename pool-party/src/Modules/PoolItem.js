@@ -92,7 +92,7 @@ function PoolItem(props) {
             <div className='poolStat'>Slant Type: {props.pool.pool.slant_type == null ?
           "N/A"
         : props.pool.pool.slant_type}</div>
-            <div className='poolStat'>Lining Type: {props.pool.pool.lining_type == null ?
+            <div className='poolStat'>Basin Liner: {props.pool.pool.lining_type == null ?
           "N/A"
         : props.pool.pool.lining_type}</div>
             <div className='poolStat'>Cover 1: {props.pool.pool.cover1 == null ?

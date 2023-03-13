@@ -8,6 +8,11 @@ import jwt_decode from "jwt-decode";
 
 function EditPoolItem(props) {
   const [username, setName] = useState('');
+  const [chlorine,setPipe]=useState([]);
+  const length = props.pool.pool.pool.length;
+  const width = props.pool.pool.pool.width;
+  const depth = props.pool.pool.pool.depth_deep;
+  const basinType = "Gunnite";
 
   const refreshToken = async () => {
     try {
@@ -17,8 +22,21 @@ function EditPoolItem(props) {
     } catch (error) {}
   }
 
+  const getAllChlorine = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/getAllChlorine", {
+        params: { length, width, depth, basinType }
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    
+    }
+  }
+
   useEffect(()=>{
     refreshToken();
+    getAllChlorine();
   },[])
 
   return (
