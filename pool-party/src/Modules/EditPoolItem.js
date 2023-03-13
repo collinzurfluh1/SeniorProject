@@ -8,7 +8,9 @@ import jwt_decode from "jwt-decode";
 
 function EditPoolItem(props) {
   const [username, setName] = useState('');
-  const [chlorine,setPipe]=useState([]);
+  const [chlorineData, setChlorine] = useState('');
+
+
   const length = props.pool.pool.pool.length;
   const width = props.pool.pool.pool.width;
   const depth = props.pool.pool.pool.depth_deep;
@@ -27,9 +29,12 @@ function EditPoolItem(props) {
       const response = await axios.get("http://localhost:4000/getAllChlorine", {
         params: { length, width, depth, basinType }
       });
-      console.log(response.data);
+      const data = response.data;
+      data.map(chlorine => {
+        console.log(chlorine); 
+      });
+      return response;
     } catch (error) {
-      console.log(error);
     
     }
   }
@@ -38,7 +43,6 @@ function EditPoolItem(props) {
     refreshToken();
     getAllChlorine();
   },[])
-
   return (
     <Modal
       {...props}
@@ -63,6 +67,15 @@ function EditPoolItem(props) {
             <div className='poolStat'>Slant Type: <input type="text" defaultValue={props.pool.pool.pool.slant_type}></input></div>
             <div className='poolStat'>Lining Type:  <select name="pool-material" value={props.pool.pool.pool.lining_type} id="pool-material">
                 <option value="Gunnite">Gunnite</option>
+                <option value="Vinyl">Vinyl</option>
+                <option value="Fiber Glass">Fiber Glass</option>
+                </select>
+            </div>
+            <div className='poolStat'>Chlorine:  <select name="pool-material" value={props.pool.pool.pool.chlorine} id="pool-material">
+            {/* {chlorineData.map(chlorine => (
+               <option value={chlorine.name}>{chlorine.name} ${chlorine.price}</option>
+              ))} */}
+                <option value="Gunnite">Gunnite </option>
                 <option value="Vinyl">Vinyl</option>
                 <option value="Fiber Glass">Fiber Glass</option>
                 </select>
