@@ -8,7 +8,7 @@ import jwt_decode from "jwt-decode";
 
 function EditPoolItem(props) {
   const [username, setName] = useState('');
-  const [chlorineData, setChlorine] = useState('');
+  const [chlorine, setChlorineOptions] = useState('');
 
 
   const length = props.pool.pool.pool.length;
@@ -30,10 +30,7 @@ function EditPoolItem(props) {
         params: { length, width, depth, basinType }
       });
       const data = response.data;
-      data.map(chlorine => {
-        console.log(chlorine); 
-      });
-      return response;
+      setChlorineOptions(data);
     } catch (error) {
     
     }
@@ -43,6 +40,7 @@ function EditPoolItem(props) {
     refreshToken();
     getAllChlorine();
   },[])
+  
   return (
     <Modal
       {...props}
@@ -71,15 +69,6 @@ function EditPoolItem(props) {
                 <option value="Fiber Glass">Fiber Glass</option>
                 </select>
             </div>
-            <div className='poolStat'>Chlorine:  <select name="pool-material" value={props.pool.pool.pool.chlorine} id="pool-material">
-            {/* {chlorineData.map(chlorine => (
-               <option value={chlorine.name}>{chlorine.name} ${chlorine.price}</option>
-              ))} */}
-                <option value="Gunnite">Gunnite </option>
-                <option value="Vinyl">Vinyl</option>
-                <option value="Fiber Glass">Fiber Glass</option>
-                </select>
-            </div>
             <div className='poolStat'>Cover 1: <select name="winter-cover" value={props.pool.pool.pool.cover1} id="winter-cover">
                 <option value="null">None</option>
                 <option value="cover2">Cover 1</option>
@@ -87,6 +76,17 @@ function EditPoolItem(props) {
                 <option value="cover4">Cover 3</option>
                 </select>
             </div>
+            <div className='poolStat'>Chlorine: <select name="chlorine" value={props.pool.pool.pool.chlorine} id="chlorine">
+            {chlorine.map((option) => (
+              <option value={option.name}>
+              {option.name} $ {option.price}
+              </option>
+            ))}
+                </select>
+            </div>
+
+            
+
             <div className='poolStat'>Cover 2: <select name="summer-cover" value={props.pool.pool.pool.cover2} id="summer-cover">
                 <option value="null">None</option>
                 <option value="cover2">Cover 1</option>

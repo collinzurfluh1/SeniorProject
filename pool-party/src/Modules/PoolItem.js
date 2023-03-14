@@ -9,9 +9,52 @@ import EditPoolItem from './EditPoolItem';
 
 
 function PoolItem(props) {
+  const navigate = useNavigate();
   const [username, setName] = useState('');
   const [modalShow, setModalShow] = React.useState(false);
-  const navigate = useNavigate();
+  const [chlorine, setChlorineOptions] = useState('');
+  const poolProps = {"owner": props.username,
+    "title": props.pool.pool.title,
+    "original_creator": false,
+    "pulic": true,
+    "length": props.pool.pool.length,
+    "width": props.pool.pool.width,
+    "depth_shallow": props.pool.pool.depth_shallow,
+    "depth_deep": props.pool.pool.depth_deep,
+    "slant_type": props.pool.pool.slant_type,
+    "lining_type": props.pool.pool.lining_type,
+    "cover1": props.pool.pool.cover1,
+    "cover2": props.pool.pool.cover2,
+    "piping": props.pool.pool.piping,
+    "drain": props.pool.pool.drain,
+    "skimmer": props.pool.pool.skimmer,
+    "pump": props.pool.pool.pump,
+    "cost": props.pool.pool.cost,};
+
+
+  const length = props.pool.pool.length;
+  const width = props.pool.pool.width;
+  const depth = props.pool.pool.depth_deep;
+  const basinType = "Gunnite";
+
+
+  const getAllChlorine = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/getAllChlorine", {
+        params: { length, width, depth, basinType }
+      });
+      const data = response.data;
+      setChlorineOptions(data);
+    } catch (error) {
+    
+    }
+  }
+
+  useEffect(()=>{
+    refreshToken();
+    getAllChlorine();
+  },[])
+
   const savePool = async (e) => {
     e.preventDefault();
     try {
@@ -52,6 +95,10 @@ function PoolItem(props) {
         const decoded = jwt_decode(response.data.accessToken);
         setName(decoded.username);
     } catch (error) {}
+  }
+
+  const editPool = () =>{
+    navigate('/creator', { state: { poolProps: poolProps } });
   }
 
   useEffect(()=>{
@@ -118,15 +165,16 @@ function PoolItem(props) {
       </Modal.Body>
       <Modal.Footer>
         {props.pool.pool.owner == username ?
-          <Button variant="contained" color="primary" onClick={(e) => {setModalShow(true) }}>Edit Pool</Button>
+          // <Button variant="contained" color="primary" onClick={(e) => {setModalShow(true) }}>Edit Pool</Button>
+          <Button variant="contained" color="primary" onClick={editPool}>Edit Pool</Button>
         : <Button variant="contained" color="success" onClick={savePool} >Save Pool</Button>}
         <Button variant="contained" onClick={props.onHide} color="error">Close</Button>
       </Modal.Footer>
-      <EditPoolItem
+      {/* <EditPoolItem
       show={modalShow}
       onHide={() => setModalShow(false)}
       pool={props}
-      />
+      /> */}
     </Modal>
   );
 }
