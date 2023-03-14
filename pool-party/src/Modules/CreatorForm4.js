@@ -1,6 +1,7 @@
 import * as React from "react";
 import axios from 'axios';
 import jwt_decode from 'jwt-decode'; 
+import WinterCoverOptions from "./WinterCoverOptions";
 import { Button } from "@mui/material";
 import { createRoutesFromElements, useNavigate } from "react-router-dom";
 import { useRef } from "react";
@@ -66,9 +67,7 @@ class CreatorForm4 extends React.Component {
             
             <h1>Pool Covers</h1>
             <label for="winter-cover" class="CreatorFormLabel">Winter Cover:</label><br></br>
-            <select name="winter-cover" value={this.state.winterCover} id="winter-cover">
-            {this.winterCoverOutput}; 
-            </select><br></br>
+            <WinterCoverOptions width={"5"} length={"5"}/>
           </div>
           <div className="CreatorFormLabel" onChange={this.updatePoolSummerCover}>
             <label for="summer-cover" class="CreatorFormLabel">Summer Cover:</label><br></br>
