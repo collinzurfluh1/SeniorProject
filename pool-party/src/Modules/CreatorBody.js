@@ -37,6 +37,7 @@ When saving data
 class CreatorBody extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props.poolProps);
     this.currIndex = 1;
     this.maxIndex = 12; 
     this.state = {
@@ -64,13 +65,13 @@ class CreatorBody extends React.Component {
         "plaster": null,
         "rebar": null,  
         "shell": null,
-        "lining": null,
+        "lining": props.poolProps?.lining_type ?? null,
         "wall": null,
-        "shallowDepth": null,
-        "deepDepth": null,
-        "slant": null,
-        "width": null,
-        "length": null,
+        "shallowDepth": props.poolProps?.depth_shallow ?? null,
+        "deepDepth": props.poolProps?.depth_deep ?? null,
+        "slant": props.poolProps?.slant_type ?? null,
+        "width": props.poolProps?.width ?? null,
+        "length": props.poolProps?.length ?? null,
         "depth": null,
         "basinLiner": null
     },
@@ -85,13 +86,13 @@ class CreatorBody extends React.Component {
           "length": null,
 
       },
-      _poolSummerCover: null,
-      _poolWinterCover: null,
-      _poolPipe: null,
+      _poolSummerCover: props.poolProps?.cover2 ?? null,
+      _poolWinterCover: props.poolProps?.covert1 ?? null,
+      _poolPipe: props.poolProps?.pipe ?? null,
       _poolBasinLiner: null,
-      _poolDrain: null,
-      _poolSkimmer: null,
-      _poolPump: null,
+      _poolDrain: props.poolProps?.drain ?? null,
+      _poolSkimmer: props.poolProps?.skimmer ?? null,
+      _poolPump: props.poolProps?.pump ?? null,
       _poolLining: null,
       _poolMaterialObject: null
 
@@ -164,7 +165,6 @@ class CreatorBody extends React.Component {
   }
 
   SetPoolChemicals = (chemicals) =>{
-      alert(chemicals['chlorine']);
       this.setState({_poolChemicals: chemicals});
 
 
