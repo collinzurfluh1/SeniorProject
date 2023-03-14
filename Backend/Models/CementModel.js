@@ -24,9 +24,9 @@ const Cement = db.define('cement',{
     freezeTableName:true
 });
  
-// (async () => {
-//     await db.sync();
-// })();
+ (async () => {
+     await db.sync();
+ })();
  
 
 const cement_data = [
@@ -41,11 +41,11 @@ const cement_data = [
                      {'name': 'Sakrete Pro Mix 50 lb. All Purpose Mix', 'type': 'concrete', 'bag_cost': 27.48, 'bag_size_pounds': 50}
                     ]
 
-// db.sync({ force: true }).then(() => {
-//     Cement.bulkCreate(cement_data, { validate: true }).then(() => {
-//     }).catch((err) => { console.log(err); });
-//     }).catch((error) => {
-//     console.error('Unable to create the table : ', error);
-// });
+ db.sync({ force: true }).then(() => {
+     Cement.bulkCreate(cement_data, { validate: true }).then(() => {
+     }).catch((err) => { console.log(err); });
+     }).catch((error) => {
+     console.error('Unable to create the table : ', error);
+ });
 
 export default Cement;
