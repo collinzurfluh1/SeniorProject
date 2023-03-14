@@ -4,7 +4,7 @@ import { getPools, savePools } from "../Controllers/Pools.js"
 import "../Controllers/Materials.js";
 import { verifyToken } from "../Middleware/VerifyToken.js";
 import { refreshToken } from "../Controllers/RefreshToken.js";
-import { getAllChlorinePrices, getAllCyanuricAcidPrices } from "../Middleware/MaterialCalculations.js"; 
+import { calculateShockPrice, getAllChlorinePrices, getAllCyanuricAcidPrices } from "../Middleware/MaterialCalculations.js"; 
 const router = express.Router();
  
 router.get('/users', verifyToken, getUsers);
@@ -44,7 +44,7 @@ router.get('/getAllCyanuricAcidPrices', async (req, res) => {
 
 router.get('/calculateShockPrice', async (req, res) => {
     const { length, width, depth, basinType, product_name } = req.query;
-    const results = await getAllCyanuricAcidPrices(length, width, depth, basinType, product_name);
+    const results = await calculateShockPrice(length, width, depth, basinType, product_name);
     res.json(results);
 });
 
