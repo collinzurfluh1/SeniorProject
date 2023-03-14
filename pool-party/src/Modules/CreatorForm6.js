@@ -4,6 +4,7 @@ import { createRoutesFromElements, useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import ChlorineOptions from './ChlorineOptions.js';
 import CyaneuricAcidOptions from './CyaneuricAcidOptions.js';
+import ShockOptions from "./ShockOptions.js";
 import "../SCSS/creator.scss";
 import { resolveBreakpointValues } from "@mui/system/breakpoints";
 // How to get next/prev working?
@@ -20,7 +21,7 @@ class CreatorForm6 extends React.Component {
         chemicals: {
           'chlorine': props.getPoolChemicals()['chlorine'],
           'cyaneuricAcid': props.getPoolChemicals()['cyaneuricAcid'],
-          'shock': props.getPoolChemicals()['cyaneuricAcid'] 
+          'shock': props.getPoolChemicals()['shock'] 
         }
       };
       this.updateChlorine = this.updateChlorine.bind(this); 
@@ -67,17 +68,10 @@ class CreatorForm6 extends React.Component {
               <ChlorineOptions onChange={this.updateChlorine} chlorine={this.state.chlorine} length={"5"} width={"5"} depth={"5"} basinType={"gunnite"}/>
              <label for="cyaneuricAcid" class="CreatorFormLabel">Cyaneuric Acid</label><br></br>
               <CyaneuricAcidOptions onChange={this.updateCyaneuricAcid} cyaneuricAcid={this.state.cyaneuricAcid} length={"5"} width={"5"} depth={"5"} basinType={"gunnite"}/>
-
+              <label for="shock" class="CreatorFormLabel">Shock</label><br></br>
+              <ShockOptions onChange={this.updateShock} shock={this.state.shock} length={"5"} width={"5"} depth={"5"} basinType={"gunnite"}/>
           </div>
-          <div className="CreatorFormLabel" onChange={this.updateShock}>
-            <label for="shock" class="CreatorFormLabel">Shock</label><br></br>
-            <select name="shock" value={this.state.shock}  id="shock">
-            <option value="Not Selected">Not Selected</option>
-            <option value="shock1">Shock 1</option>
-            <option value="shock2">Shock 2</option>
-            <option value="shock3">Shock 3</option>
-            </select>
-          </div>
+        
         </div>
       );
   

@@ -49,8 +49,8 @@ router.get('/calculateShockPrice', async (req, res) => {
 });
 
 router.get('/getAllShockPrices', async (req, res) => {
-    const { length, width, depth, basinType, name } = req.query;
-    const results = await getAllShockPrices(length, width, depth, basinType, name);
+    const { length, width, depth, basinType} = req.query;
+    const results = await getAllShockPrices(length, width, depth, basinType);
     res.json(results);
 });
 
