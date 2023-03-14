@@ -11,11 +11,9 @@ class CyaneuricAcidOptions extends Component {
 
   async componentDidMount() {
     try {
-        alert("Alert");
       const response = await axios.get("http://localhost:4000/getAllCyanuricAcidPrices", {
         params: { length: this.props.length, width: this.props.width, depth: this.props.depth, basinType: this.props.basinType }
       });
-      alert("Alert!");
       const data = response.data;
       this.setState({ cyaneuricAcid: data });
     } catch (error) {
