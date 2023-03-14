@@ -2,7 +2,7 @@ import * as React from "react";
 import { Button } from "@mui/material";
 import { createRoutesFromElements, useNavigate } from "react-router-dom";
 import { useRef } from "react";
-
+import ChlorineOptions from './ChlorineOptions.js';
 import "../SCSS/creator.scss";
 import { resolveBreakpointValues } from "@mui/system/breakpoints";
 // How to get next/prev working?
@@ -25,9 +25,10 @@ class CreatorForm6 extends React.Component {
       this.updateChlorine = this.updateChlorine.bind(this); 
       this.updateCyaneuricAcid = this.updateCyaneuricAcid.bind(this); 
       this.updateShock = this.updateShock.bind(this); 
+      
 
 
-  }
+  } 
   updateChlorine(event) {
   
     this.props.setPoolChemicals({
@@ -59,15 +60,10 @@ class CreatorForm6 extends React.Component {
   render() {
     return (
         <div id="Creator">
-          <div className="CreatorFormLabel" onChange={this.updateChlorine}>
+          <div className="CreatorFormLabel">
             <h1>Pool Chemicals</h1>
               <label for="chlorine" class="chlorine">Chlorine:</label><br></br>
-              <select name="chlorine" value={this.state.chlorine} id="winter-cover">
-              <option value="Not Selected">Not Selected</option>
-              <option value="chlorine2">Chlorine 1</option>
-              <option value="chlorine3">Chlorine 2</option>
-              <option value="chlorine4">Chlorine 3</option>
-            </select><br></br>
+              <ChlorineOptions onChange={this.updateChlorine} chlorine={this.state.chlorine} length={"5"} width={"5"} depth={"5"} basinType={"gunnite"}/>
           </div>
           <div className="CreatorFormLabel" onChange={this.updateCyaneuricAcid}>
             <label for="cyaneuricAcid" class="CreatorFormLabel">Cyaneuric Acid</label><br></br>
@@ -84,7 +80,7 @@ class CreatorForm6 extends React.Component {
             <option value="Not Selected">Not Selected</option>
             <option value="shock1">Shock 1</option>
             <option value="shock2">Shock 2</option>
-             <option value="shock3">Shock 3</option>
+            <option value="shock3">Shock 3</option>
             </select>
           </div>
         </div>

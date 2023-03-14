@@ -49,7 +49,7 @@ class CreatorBody extends React.Component {
       prevButton: false,
       nextButton: true,
       _poolHasShallowEnd: false,
-      _poolName: null,
+      _poolName: "Jordans Pool",
       _poolWidth: null,
       _poolDepth: null,
       _poolLength: null,
