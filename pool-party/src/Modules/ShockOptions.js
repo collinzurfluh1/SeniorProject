@@ -11,7 +11,7 @@ class ShockOptions extends Component {
 
   async componentDidMount() {
     try {
-      const response = await axios.get("http://localhost:4000/getAllCyanuricAcidPrices", {
+      const response = await axios.get("http://localhost:4000/getAllShockPrices", {
         
         params: { length: this.props.length, width: this.props.width, depth: this.props.depth, basinType: this.props.basinType }
         

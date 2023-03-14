@@ -4,7 +4,7 @@ import { getPools, savePools } from "../Controllers/Pools.js"
 import "../Controllers/Materials.js";
 import { verifyToken } from "../Middleware/VerifyToken.js";
 import { refreshToken } from "../Controllers/RefreshToken.js";
-import { calculateShockPrice, getAllChlorinePrices, getAllCyanuricAcidPrices } from "../Middleware/MaterialCalculations.js"; 
+import { calculateShockPrice, getAllChlorinePrices, getAllCyanuricAcidPrices, getAllShockPrices } from "../Middleware/MaterialCalculations.js"; 
 const router = express.Router();
  
 router.get('/users', verifyToken, getUsers);
