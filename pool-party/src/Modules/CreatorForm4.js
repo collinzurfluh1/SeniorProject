@@ -7,6 +7,7 @@ import { createRoutesFromElements, useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import "../SCSS/creator.scss";
 import { resolveBreakpointValues } from "@mui/system/breakpoints";
+import SummerCoverOptions from "./SummerCoverOptions";
 // How to get next/prev working?
 
 class CreatorForm4 extends React.Component {
@@ -18,31 +19,12 @@ class CreatorForm4 extends React.Component {
         winterCover: props.getPoolWinterCover()
 
       };
-      //this.writePoolWinterCovers = this.writePoolWinterCovers.bind(this);
       this.updatePoolSummerCover = this.updatePoolSummerCover.bind(this); 
       this.updatePoolWinterCover= this.updatePoolWinterCover.bind(this); 
 
   }
   
-  async writePoolWinterCovers(){
-   
-    try {
-        const response = await axios.get('http://localhost:4000/getWinterCovers');
-        const winterCoverJsons = jwt_decode(response.data.accessToken);
-        alert(winterCoverJsons);
 
-
-     var winterCoverOutput = "<option value=\"cover1\">None</option>"; 
-     for(const winterCoverJson of winterCoverJsons){
-        var name = winterCoverJson.name; 
-        winterCoverOutput += "<option value=" + name + ">"+  name + "</option>"; 
-
-     }
-
-    return winterCoverOutput; 
-    } catch (error) {}
-  }
- 
   updatePoolSummerCover(event) {
     
     this.props.setPoolSummerCover(event.target.value); 
@@ -51,6 +33,7 @@ class CreatorForm4 extends React.Component {
     
   }
   updatePoolWinterCover(event) {
+    alert("Pool Winter Cover");
     this.props.setPoolWinterCover(event.target.value); 
     this.setState({ winterCover: event.target.value });
    
@@ -63,23 +46,14 @@ class CreatorForm4 extends React.Component {
     return (
         <div id="Creator">
 
-          <div className="CreatorFormLabel" onChange={this.updatePoolWinterCover}>
+          <div className="CreatorFormLabel">
             
             <h1>Pool Covers</h1>
             <label for="winter-cover" class="CreatorFormLabel">Winter Cover:</label><br></br>
-            <WinterCoverOptions width={"5"} length={"5"}/>
+            <WinterCoverOptions width={"5"} length={"5"} winterCover={this.state.winterCover} onChange={this.updatePoolWinterCover}/>
           </div>
-          <div className="CreatorFormLabel" onChange={this.updatePoolSummerCover}>
             <label for="summer-cover" class="CreatorFormLabel">Summer Cover:</label><br></br>
-            <select name="summer-cover" value={this.state.summerCover}  id="summer-cover">
-            <option value="cover1">None</option>
-            <option value="cover2">Cover 1</option>
-            <option value="cover3">Cover 2</option>
-             <option value="cover4">Cover 3</option>
-            </select>
-             
-             
-          </div>
+            <SummerCoverOptions width={"5"} length={"5"} summerCover={this.state.summerCover} onChange={this.updatePoolSummerCover}/>
         </div>
       );
   

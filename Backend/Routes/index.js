@@ -4,7 +4,7 @@ import { getPools, savePools } from "../Controllers/Pools.js"
 import "../Controllers/Materials.js";
 import { verifyToken } from "../Middleware/VerifyToken.js";
 import { refreshToken } from "../Controllers/RefreshToken.js";
-import { calculateShockPrice, getAllChlorinePrices, getAllCyanuricAcidPrices, getAllShockPrices, getAllWinterCoverPrices } from "../Middleware/MaterialCalculations.js"; 
+import { calculateShockPrice, getAllChlorinePrices, getAllCyanuricAcidPrices, getAllShockPrices, getAllWinterCoverPrices, getAllSolarCoverPrices, getAllConcretePrices } from "../Middleware/MaterialCalculations.js"; 
 const router = express.Router();
  
 router.get('/users', verifyToken, getUsers);
@@ -74,7 +74,7 @@ router.get('/calcualteConcreteCost', async (req, res) => {
 
 router.get('/getAllConcretePrices', async (req, res) => {
     const { length, width, depth, basinType, product_name } = req.query;
-    const results = await getAllConcretePrices(length, width, depth, basinType, product_name );
+    const results = await getAllConcretePrices(length, width, depth, basinType);
     res.json(results);
 });
 
@@ -116,7 +116,7 @@ router.get('/calculatePoolWinterCoverPrice', async (req, res) => {
 
 router.get('/getAllWinterCoverPrices', async (req, res) => {
     const { length, width } = req.query;
-    const results = await getAllWinterCoverPrices(length, width );
+    const results = await getAllWinterCoverPrices(length, width);
     res.json(results);
 });
 
