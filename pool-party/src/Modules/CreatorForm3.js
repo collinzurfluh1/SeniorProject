@@ -4,6 +4,7 @@ import { createRoutesFromElements, useNavigate } from "react-router-dom";
 import { useRef } from "react";
 
 import "../SCSS/creator.scss";
+import ConcreteOptions from "./ConcreteOptions.js";
 import { resolveBreakpointValues } from "@mui/system/breakpoints";
 class CreatorForm3 extends React.Component {
   
@@ -346,13 +347,8 @@ class CreatorForm3 extends React.Component {
             <div id="gunniteDiv">
             <div id="GunniteBrand" onChange={this.updateGunniteBrand}>
             <label for="gunnite-brand" className="CreatorFormLabel">Choose A Concrete</label><br></br>
-            <select name="concrete" value={this.state.materialBrand} id="pool-material">
-            <option value="None">Select a Value</option>
-            <option value="Concrete 1">Concrete 1</option>
-            <option value="Concrete 2">Concrete 2</option>
-            <option value="Concrete 3">Concrete 3</option>
-            </select><br></br>
-            
+            <ConcreteOptions width={"5"} length={"5"} depth={"5"}  basinType={"gunnite"} concrete={this.state.materialBrand} onChange={this.updateGunniteBrand}/>
+
             </div>
             
             <label for="plaster" className="CreatorFormLabel">Plaster:</label><br></br>
