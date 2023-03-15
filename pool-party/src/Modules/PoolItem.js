@@ -120,6 +120,7 @@ function PoolItem(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        <h3>Pool Stats:</h3>
         <div className='poolStatsList'>
             <div className='poolStat'>Price: ${props.pool.pool.cost == null ?
           "N/A"
@@ -160,7 +161,21 @@ function PoolItem(props) {
             <div className='poolStat'>Pump: {props.pool.pool.pump == null ?
           "N/A"
         : props.pool.pool.pump}</div>
-
+      </div>
+      <h3>Material Costs:</h3>
+      <div className='poolStatsList'>
+        <div className='poolStat'>Pump: {props.pool.pool.pump == null ?
+          "N/A"
+        : props.pool.pool.pump}</div>
+        <div className='poolStat'>Pump: {props.pool.pool.pump == null ?
+          "N/A"
+        : props.pool.pool.pump}</div>
+        <div className='poolStat'>Pump: {props.pool.pool.pump == null ?
+          "N/A"
+        : props.pool.pool.pump}</div>
+        <div className='poolStat'>Pump: {props.pool.pool.pump == null ?
+          "N/A"
+        : props.pool.pool.pump}</div>
         </div>
       </Modal.Body>
       <Modal.Footer>
