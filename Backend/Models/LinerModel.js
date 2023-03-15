@@ -27,9 +27,9 @@ const Liners = db.define('liners',{
     freezeTableName:true
 });
  
- (async () => {
-     await db.sync();
- })();
+//  (async () => {
+//      await db.sync();
+//  })();
 
 const liners_data = [
     {'name': '18 x 36 Rectangle Inground Swimming Pool Liners - Cambridge Aquarius', 'type': 'vinyl', 'length_feet': 36, 'width_feet': 18, 'cost:': 1663.00},
@@ -43,11 +43,11 @@ const liners_data = [
     {'name': '20 x 40 Rectangle Inground Swimming Pool Liners - Samara Coast', 'type': 'vinyl', 'length_feet': 40, 'width_feet': 20, 'cost:': 2205.00}
    ]
 
- db.sync({ force: true }).then(() => {
- Liners.bulkCreate(liners_data, { validate: true }).then(() => {
- }).catch((err) => { console.log(err); });
- }).catch((error) => {
- console.error('Unable to create the table : ', error);
- });
+//  db.sync({ force: true }).then(() => {
+//  Liners.bulkCreate(liners_data, { validate: true }).then(() => {
+//  }).catch((err) => { console.log(err); });
+//  }).catch((error) => {
+//  console.error('Unable to create the table : ', error);
+//  });
  
 export default Liners;

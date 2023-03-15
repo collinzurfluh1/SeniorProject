@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class ConcreteOptions extends Component {
+class PlasterOptions extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      concrete: [],
+      plaster: [],
     };
   }
 
@@ -13,16 +13,14 @@ class ConcreteOptions extends Component {
     
 
     try {
-
-      const response = await axios.get("http://localhost:4000/getAllConcretePrices", {
- 
-    
+      const response = await axios.get("http://localhost:4000/getAllPlasterPrices", {
+        
         params: { length: this.props.length, width: this.props.width, depth: this.props.depth, basinType: this.props.basinType}
         
       });
 
       const data = response.data;
-      this.setState({ concrete: data });
+      this.setState({ plaster: data });
     } catch (error) {
     }
   }
@@ -30,10 +28,10 @@ class ConcreteOptions extends Component {
   render() {
     return (
       <div>
-        <select value={this.props.concrete} onChange={this.props.onChange}>
-          {this.state.concrete.map((option) => (
+        <select value={this.props.plaster} onChange={this.props.onChange}>
+          {this.state.plaster.map((option) => (
             <option key={option.name} value={option.name}>
-              {option.name} $ {option.price}
+              {option.name} $ {option.price.toFixed(2)}
             </option>
           ))}
         </select>
@@ -42,4 +40,4 @@ class ConcreteOptions extends Component {
   }
 }
 
-export default ConcreteOptions;
+export default PlasterOptions;

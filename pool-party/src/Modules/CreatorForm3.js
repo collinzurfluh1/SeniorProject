@@ -5,6 +5,9 @@ import { useRef } from "react";
 
 import "../SCSS/creator.scss";
 import ConcreteOptions from "./ConcreteOptions.js";
+import PlasterOptions from "./PlasterOptions.js";
+import LinerOptions from "./LinerOptions.js";
+import SteelWallOptions from "./SteelWallOptions.js";
 import { resolveBreakpointValues } from "@mui/system/breakpoints";
 class CreatorForm3 extends React.Component {
   
@@ -347,18 +350,13 @@ class CreatorForm3 extends React.Component {
             <div id="gunniteDiv">
             <div id="GunniteBrand" onChange={this.updateGunniteBrand}>
             <label for="gunnite-brand" className="CreatorFormLabel">Choose A Concrete</label><br></br>
-            <ConcreteOptions width={"5"} length={"5"} depth={"5"}  basinType={"gunnite"} concrete={this.state.materialBrand} onChange={this.updateGunniteBrand}/>
-
+            <ConcreteOptions width={"5"} length={"5"} depth={"5"}  basinType={"Gunite"} concrete={this.state.materialBrand} onChange={this.updateGunniteBrand}/>
+         
             </div>
             
             <label for="plaster" className="CreatorFormLabel">Plaster:</label><br></br>
-            <select name="plaster" value={this.state.plaster} onChange={this.updatePlaster} id="plaster">
-              <option value="None">Select a Value</option>
-              <option value="plaster1">Plaster 1</option>
-              <option value="plaster2">Plaster 2</option>
-              <option value="plaster3">Plaster 3</option>
-              <option value="plaster4">Plaster 4</option>
-            </select><br></br>
+            <PlasterOptions width={"5"} length={"5"} depth={"5"}  basinType={"Gunite"} plaster={this.state.plaster} onChange={this.updatePlaster}/>
+
 
           <div>
             <label className="CreatorFormLabel">Width: </label><br></br>
@@ -379,20 +377,9 @@ class CreatorForm3 extends React.Component {
             <div id="Vinyl" >
            
             <label for="lining" className="CreatorFormLabel">Pool Lining:</label><br></br>
-            <select name="pool-lining"  value={this.state.lining} onChange={this.updateLining} id="pool-lining">
-              <option value="pool-lining1">Pool Lining 1</option>
-              <option value="pool-lining2">Pool Lining 2</option>
-              <option value="pool-lining3">Pool Lining 3</option>
-              <option value="pool-lining4">Pool Lining 4</option>
-            </select><br></br>
-
+            <LinerOptions width={"5"} length={"5"} depth={"5"}  basinType={"Vinyl"} liner={this.state.lining} onChange={this.updateLining}/>
             <label for="" className="CreatorFormLabel">Steel Walls:</label><br></br>
-            <select name="steel-walls" value={this.state.wall} onChange={this.updateWall} id="steel-walls">
-              <option value="steel-wals1">Steel Walls 1</option>
-              <option value="steel-walls2">Steel Walls 2</option>
-              <option value="steel-walls3">Steel Walls 3</option>
-              <option value="steel-walls4">Steel Walls 4</option>
-            </select><br></br>
+            <SteelWallOptions width={"5"} length={"5"} depth={"5"}  basinType={"vinyl"} liner={this.state.wall} onChange={this.updateWall}/>
 
  
  

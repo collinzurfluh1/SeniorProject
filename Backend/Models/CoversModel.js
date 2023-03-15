@@ -28,9 +28,9 @@ const Covers = db.define('covers',{
     freezeTableName:true
 });
  
- (async () => {
-     await db.sync();
- })();
+//  (async () => {
+//      await db.sync();
+//  })();
 
 const cover_data = [
     {'name': 'Sun2Solar Blue', 'type': 'solar', 'length_feet': 32, 'width_feet': 16, 'cost': 172.92},
@@ -45,11 +45,11 @@ const cover_data = [
     {'name': 'Blue Wave BWC958 Pool Winter Cover', 'type': 'winter', 'length_feet': 32, 'width_feet': 16, 'cost': 164.98}
    ]
 
- db.sync({ force: true }).then(() => {
- Covers.bulkCreate(cover_data, { validate: true }).then(() => {
- }).catch((err) => { console.log(err); });
- }).catch((error) => {
- console.error('Unable to create the table : ', error);
- });
+//  db.sync({ force: true }).then(() => {
+//  Covers.bulkCreate(cover_data, { validate: true }).then(() => {
+//  }).catch((err) => { console.log(err); });
+//  }).catch((error) => {
+//  console.error('Unable to create the table : ', error);
+//  });
  
 export default Covers;

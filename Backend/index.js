@@ -4,12 +4,11 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import db from "./Config/Database.js";
 import router from "./Routes/index.js";
-// import { get_plaster_data, get_cement_data } from "./Controllers/Materials.js";
-// const { get_plaster_data } = require('/Controllers/Materials.js');
-// const { get_plaster_data } = require("./Controllers/Materials.js");
 
 // test for concrete
 // import { calcualteConcreteCost, getAllConcretePrices } from "./Middleware/MaterialCalculations.js";
+
+import { get_plaster_data, get_cement_data, get_winter_covers, get_solar_covers, get_chlorine, get_cyanuric_acid, get_shock, get_piping, get_liner, get_steel_walling } from "./Controllers/Materials.js";
 
 
 dotenv.config();
@@ -25,9 +24,9 @@ app.use(router);
 // console.log(await get_plaster_data('Sider Pool Plaster - 55 lb'));
 // console.log('############');
 
-// console.log('############');
-// console.log(await get_cement_data('Quikrete 50 lb. Fast-Setting Mix'));
-// console.log('############');
+//   console.log('############');
+//     console.log(await get_cement_data());
+//   console.log('############');
 
 //TESTING CONCRETE COST FUNCTION
 // console.log('############################################################');
@@ -44,7 +43,6 @@ app.use(router);
 // }, 5000);
 
 // PIPING TESTS
-// import { get_piping } from "./Controllers/Materials.js";
 // console.log('############');
 // console.log(await get_piping('Rigid PVC'));
 // console.log('############');
@@ -151,13 +149,12 @@ app.use(router);
 // }, 5000);
 
 //liner data access
-// import { get_liner } from "./Controllers/Materials.js";
 // console.log('############');
 // console.log(await get_liner());
 // console.log('############');
 
 // Liner
-import { calcualtePoolLinerPrice, getAllPoolLinerPrices } from "./Middleware/MaterialCalculations.js";
+// import { calcualtePoolLinerPrice, getAllPoolLinerPrices } from "./Middleware/MaterialCalculations.js";
 // console.log('############################################################');
 // console.log(await calcualtePoolLinerPrice(20, 10, 6, 'Gunnite', '20 x 40 Rectangle Inground Swimming Pool Liners - Samara Coast'));
 // console.log('############################################################');
@@ -171,13 +168,12 @@ import { calcualtePoolLinerPrice, getAllPoolLinerPrices } from "./Middleware/Mat
 // }, 5000);
 
 //steel walling db access
-// import { get_steel_walling } from "./Controllers/Materials.js";
 // console.log('############');
 // console.log(await get_steel_walling());
 // console.log('############');
 
 //Steel Walling
-// import { calcuateSteelWallingPrice, getAllSteelWallingPrices } from "./Middleware/MaterialCalculations.js";
+//  import { calcuateSteelWallingPrice, getAllSteelWallingPrices } from "./Middleware/MaterialCalculations.js";
 // console.log('############################################################');
 // console.log(await calcuateSteelWallingPrice(20, 10, 'Pool Warehouse walling'));
 // console.log('############################################################');
