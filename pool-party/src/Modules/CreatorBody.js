@@ -674,12 +674,6 @@ this.setState({_deepDepth: deepDepth}, function() {
             getPool={this.GetPool}
             getPoolMaterial={this.GetPoolMaterial}
             />}
-            {creatorFormSubmit2 && <CreatorFormFinal2
-            getPool={this.GetPool}
-            />}
-            {creatorFormSubmit3 && <CreatorFormFinal3
-            getPool={this.GetPool}
-            />}
             </form>
           </div>
 
@@ -687,7 +681,7 @@ this.setState({_deepDepth: deepDepth}, function() {
             {prevButton && <Button variant="contained" onClick={() => this.prev()}>
               Prev
             </Button>}
-            {nextButton && <Button variant="contained" onClick={() => this.next()}>
+            {nextButton && <Button variant="contained" id="nextButton" onClick={() => this.next()}>
               {this.state.nextButtonText}
             </Button>}
           </div>
