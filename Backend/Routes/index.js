@@ -1,10 +1,10 @@
 import express from "express";
 import { getUsers, Register, Login, Logout, UpdateUsername, UpdateEmail } from "../Controllers/Users.js";
-import { getPools, savePools } from "../Controllers/Pools.js"
+import { getPools, savePools } from "../Controllers/Pools.js";
 import "../Controllers/Materials.js";
 import { verifyToken } from "../Middleware/VerifyToken.js";
 import { refreshToken } from "../Controllers/RefreshToken.js";
-import { calculateShockPrice, getAllChlorinePrices, getAllCyanuricAcidPrices, getAllShockPrices, getAllWinterCoverPrices, getAllSolarCoverPrices, getAllConcretePrices, getAllPlasterPrices, getAllPoolLinerPrices, getAllSteelWallingPrices } from "../Middleware/MaterialCalculations.js"; 
+import { calculateShockPrice, getAllChlorinePrices, getAllCyanuricAcidPrices, getAllShockPrices, getAllWinterCoverPrices, getAllSolarCoverPrices, getAllConcretePrices, getAllPlasterPrices, getAllPoolLinerPrices, getAllSteelWallingPrices, getAllPipesPrices } from "../Middleware/MaterialCalculations.js"; 
 const router = express.Router();
  
 router.get('/users', verifyToken, getUsers);
@@ -62,7 +62,7 @@ router.get('/calculatePipesCost', async (req, res) => {
 
 router.get('/getAllPipesPrices', async (req, res) => {
     const { depth, length, width } = req.query;
-    const results = await getAllPipesPrices(depth, length, width );
+    const results = await getAllPipesPrices(depth, length, width);
     res.json(results);
 });
 
