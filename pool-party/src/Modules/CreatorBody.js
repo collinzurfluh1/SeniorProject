@@ -678,7 +678,7 @@ this.setState({_deepDepth: deepDepth}, function() {
             {prevButton && <Button variant="contained" onClick={() => this.prev()}>
               Prev
             </Button>}
-            {nextButton && <Button variant="contained" onClick={() => this.next()}>
+            {nextButton && <Button variant="contained" id="nextButton" onClick={() => this.next()}>
               {this.state.nextButtonText}
             </Button>}
           </div>

@@ -35,6 +35,8 @@ class CreatorFormFinal extends React.Component {
       creatorFormScss.style.borderRadius = "unset";
       const creatorBody = document.getElementsByClassName("creator-body")[0];
       creatorBody.style.height = "unset";
+      const submitButton = document.getElementById("nextButton");
+      submitButton.style.width = "100%";
 
 
   }
