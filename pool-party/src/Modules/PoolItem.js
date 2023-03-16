@@ -35,7 +35,20 @@ function PoolItem(props) {
   const length = props.pool.pool.length;
   const width = props.pool.pool.width;
   const depth = props.pool.pool.depth_deep;
-  const basinType = "Gunnite";
+  const basinType = props.pool.pool.basinType;
+  console.log(props);
+
+  const waterCost = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/calculateWaterPrice", {
+        params: { length, width, depth, basinType }
+      });
+      const data = response.data;
+      setChlorineOptions(data);
+    } catch (error) {
+      waterCost=null;
+    }
+  }
 
 
   const getAllChlorine = async () => {
@@ -164,9 +177,9 @@ function PoolItem(props) {
       </div>
       <h3>Material Costs:</h3>
       <div className='poolStatsList'>
-        <div className='poolStat'>Pump: {props.pool.pool.pump == null ?
+        <div className='poolStat'>Water: ${waterCost == null ?
           "N/A"
-        : props.pool.pool.pump}</div>
+        : waterCost}</div>
         <div className='poolStat'>Pump: {props.pool.pool.pump == null ?
           "N/A"
         : props.pool.pool.pump}</div>
