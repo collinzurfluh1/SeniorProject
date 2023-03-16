@@ -24,21 +24,27 @@ class CreatorFormFinal extends React.Component {
       chlorine: pool['chemicals']['chlorine'],
       cyaneuricAcid: pool['chemicals']['cyaneuricAcid'],
       shock: pool['chemicals']['shock']
+      
 
        
       };
 
-     
+      const creatorFormScss = document.getElementsByClassName("creatorForm")[0];
+      creatorFormScss.style.width = "100%";
+      creatorFormScss.style.maxWidth = "100%";
+      creatorFormScss.style.borderRadius = "unset";
+      const creatorBody = document.getElementsByClassName("creator-body")[0];
+      creatorBody.style.height = "unset";
+
 
   }
-
 
 
   
   render() {
     return (
         <div id="Creator">
-          <h1>{this.state.name}: Page 1</h1>
+          <h1>Pool Summary:</h1>
           <p>Pool Name: {this.state.name}</p>
           <p>Pool Material: {this.state.material}</p>
           <h4>Fiber Glass Options</h4>
@@ -55,7 +61,26 @@ class CreatorFormFinal extends React.Component {
           <p>Pool Chlorine: {this.state.chlorine}</p>
           <p>Pool Cyaneuric Acid: {this.state.cyaneuricAcid}</p>
           <p>Pool Shock: {this.state.shock}</p>
-
+          <h4>Gunnite Options</h4>
+          <p>Pool Concrete: {this.state.materialBrand}</p>
+          <p>Pool Plaster: {this.state.plaster}</p>
+          <h4>Vinyl Options</h4>
+          <p>Pool Wall: {this.state.wall}</p>
+          <p>Pool Lining: {this.state.lining}</p>
+          <h4>All-Pool Options</h4>
+          <p>Pool Summer Cover: {this.state.summerCover}</p>
+          <p>Pool Winter Cover: {this.state.winterCover}</p>
+          <p>Pool Pipe: {this.state.pipe}</p>
+          <p>Pool Drain: {this.state.drain}</p>
+          <p>Pool Skimmer: {this.state.skimmer}</p>
+          <p>Pool Pump: {this.state.pump}</p>
+          <h4>Chemicals</h4>
+          <p>Pool Chlorine: {this.state.chlorine}</p>
+          <p>Pool Cyaneuric Acid: {this.state.cyaneuricAcid}</p>
+          <p>Pool Shock: {this.state.shock}</p>
+          <p>Pool Chlorine: {this.state.chlorine}</p>
+          <p>Pool Cyaneuric Acid: {this.state.cyaneuricAcid}</p>
+          <p>Pool Shock: {this.state.shock}</p>
         </div>
       );
   
