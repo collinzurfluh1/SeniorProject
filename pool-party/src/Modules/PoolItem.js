@@ -77,7 +77,7 @@ function PoolItem(props) {
   const chlorineCost = async () => {
     try {
       const response = await axios.get("http://localhost:4000/calculateChlorinePrice", {
-        params: { length, width, depth, basinType }
+        params: { length, width, depth, depth_deep, basinType }
       });
       const data = response.data;
       setChlorineOptions(data);
@@ -133,7 +133,7 @@ function PoolItem(props) {
       waterCost=null;
     }
   }
-  
+
   const plasterPrice = async () => {
     try {
       const response = await axios.get("http://localhost:4000/calculatePlasterCost", {
