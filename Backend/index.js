@@ -108,7 +108,7 @@ import {calculateChlorinePrice, getAllChlorinePrices, calculateCyanuricAcidPrice
 // Water test
 // import { calculateWaterPrice } from "./Middleware/MaterialCalculations.js";
 // console.log('############################################################');
-// console.log(await calculateWaterPrice(20, 10, 6, 'Gunnite'));
+// console.log(await calculateWaterPrice(40, 10, 10, 20, 'Vinyl'));
 // console.log('############################################################');
 
 // Covers
@@ -162,13 +162,13 @@ import { calcualtePoolLinerPrice, getAllPoolLinerPrices } from "./Middleware/Mat
 // console.log(await calcualtePoolLinerPrice(20, 10, 6, 'Gunnite', '20 x 40 Rectangle Inground Swimming Pool Liners - Samara Coast'));
 // console.log('############################################################');
 
-setTimeout(async function() {
-    console.log('############################################################');
-    // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
-    var all_options = await getAllPoolLinerPrices(20, 10, 6, 12, 'Gunnite');
-    console.log(all_options);
-    console.log('############################################################');
-}, 5000);
+// setTimeout(async function() {
+//     console.log('############################################################');
+//     // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
+//     var all_options = await getAllPoolLinerPrices(20, 10, 6, 12, 'Gunnite');
+//     console.log(all_options);
+//     console.log('############################################################');
+// }, 5000);
 
 //steel walling db access
 // console.log('############');
@@ -262,16 +262,16 @@ console.log(await calculatePlaster(40, 20, 4, 10, "Diver"));
 
 console.log('############');
 */
-console.log('############');
-console.log(getAllSkimmerPrices()[0].Price);
-console.log('############');
+// console.log('############');
+// console.log(getAllSkimmerPrices()[0].Price);
+// console.log('############');
 
-console.log('############');
-console.log(getSkimmerPrice("Hayward SP1091LX Dyna-Skim Above-Ground Pool Skimmer"));
-console.log('############');
+// console.log('############');
+// console.log(getSkimmerPrice("Hayward SP1091LX Dyna-Skim Above-Ground Pool Skimmer"));
+// console.log('############');
 
-console.log('############');
-console.log(getDrainPrice("Tongoss 8 Bottom Pool Drain Cover"));
-console.log('############');
+// console.log('############');
+// console.log(getDrainPrice("Tongoss 8 Bottom Pool Drain Cover"));
+// console.log('############');
 
 app.listen(4000, ()=> console.log('Server running at port 4000'));
