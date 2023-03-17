@@ -364,7 +364,7 @@ export function calculateConcretePounds(length, width, depth, deepDepth, floorTy
     }
 }
 
-export async function calcualteConcreteCost(length, width, depth, deepDepth, basinType, floorType, product_name)
+export async function calculateConcreteCost(length, width, depth, deepDepth, basinType, floorType, product_name)
 {
 
     var concretelbs = calculateConcretePounds(length, width, depth, deepDepth, floorType, basinType);
@@ -722,7 +722,7 @@ export async function calculatePlasterCost(length, width, depth, deepDepth, floo
     }
     return unitsNeeded * plasterJson.bag_cost;
 }
-export async function getAllPlasterPrices(length, width, deth, deepDepth, floorType)
+export async function getAllPlasterPrices(length, width, depth, deepDepth, floorType)
 {
 
     var plasterOptions = []
