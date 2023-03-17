@@ -17,7 +17,7 @@ class ConcreteOptions extends Component {
       const response = await axios.get("http://localhost:4000/getAllConcretePrices", {
  
     
-        params: { length: this.props.length, width: this.props.width, depth: this.props.depth, basinType: this.props.basinType}
+        params: { length: this.props.length, width: this.props.width, depth: this.props.depth, deepDepth: this.props.deepDepth, floorType: this.props.floorType, basinType: this.props.basinType}
         
       });
 
@@ -33,7 +33,7 @@ class ConcreteOptions extends Component {
         <select value={this.props.concrete} onChange={this.props.onChange}>
           {this.state.concrete.map((option) => (
             <option key={option.name} value={option.name}>
-              {option.name} ${option.price.toFixed(2)}
+              {option.name} ${option.price}
             </option>
           ))}
         </select>

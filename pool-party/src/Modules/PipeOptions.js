@@ -16,7 +16,7 @@ class PipeOptions extends Component {
       const response = await axios.get("http://localhost:4000/getAllPipesPrices", {
  
     
-        params: { length: this.props.length, width: this.props.width, depth: this.props.depth}
+        params: { length: this.props.length, width: this.props.width, deepDepth: this.props.depth}
         
       });
 

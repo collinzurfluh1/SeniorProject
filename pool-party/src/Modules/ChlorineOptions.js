@@ -12,7 +12,7 @@ class ChlorineOptions extends Component {
   async componentDidMount() {
     try {
       const response = await axios.get("http://localhost:4000/getAllChlorine", {
-        params: { length: this.props.length, width: this.props.width, depth: this.props.depth, basinType: this.props.basinType }
+        params: { length: this.props.length, width: this.props.width, depth: this.props.depth, deepDepth: this.props.deepDepth, floorType: this.props.floorType, basinType: this.props.basinType }
       });
       const data = response.data;
       this.setState({ chlorine: data });
@@ -27,7 +27,7 @@ class ChlorineOptions extends Component {
         <select value={this.props.chlorine} onChange={this.props.onChange}>
           {this.state.chlorine.map((option) => (
             <option key={option.name} value={option.name}>
-              {option.name} $ {option.price.toFixed(2)}
+              {option.name} $ {option.price}
             </option>
           ))}
         </select>

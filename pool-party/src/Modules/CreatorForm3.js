@@ -350,12 +350,12 @@ class CreatorForm3 extends React.Component {
             <div id="gunniteDiv">
             <div id="GunniteBrand" onChange={this.updateGunniteBrand}>
             <label for="gunnite-brand" className="CreatorFormLabel">Choose A Concrete</label><br></br>
-            <ConcreteOptions width={"5"} length={"5"} depth={"5"}  basinType={"Gunite"} concrete={this.state.materialBrand} onChange={this.updateGunniteBrand}/>
+            <ConcreteOptions width={"5"} length={"5"} depth={"5"} deepDepth={"5"} floorType={"Slant"} basinType={"Gunite"}  concrete={this.state.materialBrand} onChange={this.updateGunniteBrand}/>
          
             </div>
             
             <label for="plaster" className="CreatorFormLabel">Plaster:</label><br></br>
-            <PlasterOptions width={"5"} length={"5"} depth={"5"}  basinType={"Gunite"} plaster={this.state.plaster} onChange={this.updatePlaster}/>
+            <PlasterOptions width={"5"} length={"5"} depth={"5"}  basinType={"Gunite"} deepDepth={"5"} floorType={"Slant"} plaster={this.state.plaster} onChange={this.updatePlaster}/>
 
 
           <div>
@@ -377,9 +377,9 @@ class CreatorForm3 extends React.Component {
             <div id="Vinyl" >
            
             <label for="lining" className="CreatorFormLabel">Pool Lining:</label><br></br>
-            <LinerOptions width={"5"} length={"5"} depth={"5"}  basinType={"Vinyl"} liner={this.state.lining} onChange={this.updateLining}/>
+            <LinerOptions width={"5"} length={"5"} depth={"5"} deepDepth={"5"}  basinType={"Vinyl"} floorType={"Slant"} liner={this.state.lining} onChange={this.updateLining}/>
             <label for="" className="CreatorFormLabel">Steel Walls:</label><br></br>
-            <SteelWallOptions width={"5"} length={"5"} depth={"5"}  basinType={"vinyl"} liner={this.state.wall} onChange={this.updateWall}/>
+            <SteelWallOptions width={"5"} length={"5"} depth={"5"}  basinType={"vinyl"} wall={this.state.wall} onChange={this.updateWall}/>
 
  
  
