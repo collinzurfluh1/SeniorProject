@@ -12,7 +12,7 @@ class ChlorineOptions extends Component {
   async componentDidMount() {
     try {
       const response = await axios.get("http://localhost:4000/getAllChlorine", {
-        params: { length: this.props.length, width: this.props.width, depth: this.props.depth, deepDepth: this.props.deepDepth, floorType: this.props.floorType, basinType: this.props.basinType }
+        params: { length: this.props.length, width: this.props.width, depth: this.props.depth, deepDepth: this.props.deepDepth, floorType: this.props.floorType }
       });
       const data = response.data;
       this.setState({ chlorine: data });

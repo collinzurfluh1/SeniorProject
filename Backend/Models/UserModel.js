@@ -29,7 +29,7 @@ const Users = db.define('users',{
 });
  
 //  (async () => {
-//      await db.sync({ force: false, logging: true });
+//      await db.sync({ force: true, logging: true });
 //  })();
  
 export default Users;

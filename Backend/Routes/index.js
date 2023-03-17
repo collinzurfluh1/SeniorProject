@@ -5,7 +5,7 @@ import "../Controllers/Materials.js";
 import { verifyToken } from "../Middleware/VerifyToken.js";
 import { refreshToken } from "../Controllers/RefreshToken.js";
 
-import { calculateShockPrice, getAllChlorinePrices, getAllCyanuricAcidPrices, getAllShockPrices, getAllPipesPrices, getAllWinterCoverPrices, getAllSolarCoverPrices, getAllConcretePrices, getAllPlasterPrices, getAllPoolLinerPrices, getAllSteelWallingPrices, calculateRebar, calculatePoolPumpPrice, calculatePoolFilterPrice, getFiberglassShellDetails, getSkimmerPrice, getDrainPrice } from "../Middleware/MaterialCalculations.js"; 
+import { getAllSkimmerPrices, getAllDrainPrices, calculateShockPrice, getAllChlorinePrices, getAllCyanuricAcidPrices, getAllShockPrices, getAllPipesPrices, getAllWinterCoverPrices, getAllSolarCoverPrices, getAllConcretePrices, getAllPlasterPrices, getAllPoolLinerPrices, getAllSteelWallingPrices, calculateRebar, calculatePoolPumpPrice, calculatePoolFilterPrice, getFiberglassShellDetails, getSkimmerPrice, getDrainPrice } from "../Middleware/MaterialCalculations.js"; 
 
 const router = express.Router();
  
@@ -69,9 +69,9 @@ router.get('/getAllPipesPrices', async (req, res) => {
     res.json(results);
 });
 
-router.get('/calcualteConcreteCost', async (req, res) => {
+router.get('/calculateConcreteCost', async (req, res) => {
     const { length, width, depth, deepDepth, floorType, basinType, product_name } = req.query;
-    const results = await calcualteConcreteCost(length, width, depth, deepDepth, floorType, basinType, product_name );
+    const results = await calculateConcreteCost(length, width, depth, deepDepth, floorType, basinType, product_name );
     res.json(results);
 });
 
@@ -190,4 +190,15 @@ router.get('/getDrainPrice', async (req, res) => {
     res.json(results);
 });
 
+router.get('/getSkmmerPrices', async (req, res) => {
+    const { } = req.query;
+    const results = await getDrainPrice();
+    res.json(results);
+});
+
+router.get('/getAllDrainPrices', async (req, res) => {
+    const { } = req.query;
+    const results = await getDrainPrice();
+    res.json(results);
+});
 export default router;

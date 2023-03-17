@@ -21,12 +21,13 @@ const SteelWalling = db.define('steelwalling',{
 //  (async () => {
 //      await db.sync();
 //  })();
+
 const steelwalling_data = [
     {'name': 'National Pool Whole Salers walling', 'sqft_cost': 44.86},
     {'name': 'Pool Warehouse walling', 'sqft_cost': 42.35}
    ]
 
-//  db.sync({ force:false }).then(() => {
+//  db.sync({ force:true }).then(() => {
 //  SteelWalling.bulkCreate(steelwalling_data, { validate: true }).then(() => {
 //  }).catch((err) => { console.log(err); });
 //  }).catch((error) => {
