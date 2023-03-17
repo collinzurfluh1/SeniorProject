@@ -187,8 +187,8 @@ app.use(router);
 // }, 5000);
 
 // Fiberglass Shells
-console.log('############');
-console.log(await get_fiberglass_shell());
-console.log('############');
+// console.log('############');
+// console.log(await get_fiberglass_shell());
+// console.log('############');
 
 app.listen(4000, ()=> console.log('Server running at port 4000'));
