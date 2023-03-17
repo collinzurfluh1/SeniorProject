@@ -257,9 +257,10 @@ export function calculateShockLbs(gallons)
 }
 export async function calculateShockPrice(length, width, depth, deepDepth, floorType, product_name)
 {
-    var gallons = calculateGallons(length, width, depth, deepDepth, floorType)
-   
-    var shocklbs = calculateShockLbs(gallons);
+    var gallons = await calculateGallons(length, width, depth, deepDepth, floorType)
+    // console.log(gallons);
+    var shocklbs = await calculateShockLbs(gallons);
+    // console.log(shocklbs);
     var shockJson = (await get_shock(product_name))[0];
 
     var units;
@@ -273,13 +274,14 @@ export async function calculateShockPrice(length, width, depth, deepDepth, floor
 }
 export async function getAllShockPrices(length, width, depth, deepDepth, floorType)
 {
-    var gallons = calculateGallons(length, width, depth, deepDepth, floorType)
+    var gallons = await calculateGallons(length, width, depth, deepDepth, floorType)
+
     var shockOptions = [];
     var shockJsons = await get_shock();
 
     for (const shockJson of shockJsons) {
         var name = await shockJson.name;
-        const price = await calculateShockPrice(gallons, name)
+        const price = await calculateShockPrice(length, width, depth, deepDepth, floorType, name)
         
         // Create a new JSON object with the name and price fields
         const option = { "name": name, "price": price };
@@ -437,16 +439,16 @@ export async function getAllConcretePrices(length, width, depth, deepDepth, floo
 ////////// WATER //////////
 ///////////////////////////
 
-export function calculateGallons(length, width, depth, deepDepth, floorType)
+export async function calculateGallons(length, width, depth, deepDepth, floorType)
 {
-    var volume = calculatePoolVolume(length, width, depth, deepDepth, floorType);
+    var volume = await calculatePoolVolume(length, width, depth, deepDepth, floorType);
     return (volume * 7.48);
 }
-export function calculateWaterPrice(length, width, depth, deepDepth, floorType) // will this need to be acessed?
+export async function calculateWaterPrice(length, width, depth, deepDepth, floorType) // will this need to be acessed?
 {
     //This calculates the total cost of water for a pool based on the pools volume.
     //Inputs: Pools Volume
-    var gallons = calculateGallons(length, width, depth, deepDepth, floorType);
+    var gallons = await calculateGallons(length, width, depth, deepDepth, floorType);
     var waterPrice = 0.005;//set price
     var varprice = gallons * waterPrice;
     return varprice;

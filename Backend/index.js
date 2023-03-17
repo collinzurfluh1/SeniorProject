@@ -65,7 +65,7 @@ app.use(router);
 // console.log('############################################################');
 
 // Chlorine
-// import {calculateChlorinePrice, getAllChlorinePrices, calculateCyanuricAcidPrice, getAllCyanuricAcidPrices, calculateShockPrice, getAllShockPrices} from "./Middleware/MaterialCalculations.js";
+import {calculateChlorinePrice, getAllChlorinePrices, calculateCyanuricAcidPrice, getAllCyanuricAcidPrices, calculateShockPrice, getAllShockPrices} from "./Middleware/MaterialCalculations.js";
 // console.log('############################################################');
 // console.log(await calculateChlorinePrice(20, 10, 6, 'Gunnite', 'In The Swim Chlorine Tablets'));
 // console.log('############################################################');
@@ -91,16 +91,16 @@ app.use(router);
 // }, 5000);
 
 // console.log('############################################################');
-// console.log(await calculateShockPrice(20, 10, 6, 'Gunnite', 'In The Swim Super Pool Shock'));
+// console.log(await calculateShockPrice(20, 10, 6, 12, 'Gunnite', 'In The Swim Super Pool Shock'));
 // console.log('############################################################');
 
-// setTimeout(async function() {
-//     console.log('############################################################');
-//     // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
-//     var all_options = await getAllShockPrices(20, 10, 6, 'Gunnite');
-//     console.log(all_options);
-//     console.log('############################################################');
-// }, 5000);
+setTimeout(async function() {
+    console.log('############################################################');
+    console.log(await getAllConcretePrices(10, 20, 6, 12, 'Slant', 'Gunite'));
+    var all_options = await getAllShockPrices(20, 10, 6, 12, 'Slant', 'Gunite');
+    console.log(all_options);
+    console.log('############################################################');
+}, 5000);
 
 // Water test
 // import { calculateWaterPrice } from "./Middleware/MaterialCalculations.js";
