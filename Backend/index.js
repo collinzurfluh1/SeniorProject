@@ -154,18 +154,18 @@ import {calculateChlorinePrice, getAllChlorinePrices, calculateCyanuricAcidPrice
 // console.log('############');
 
 // Liner
-// import { calcualtePoolLinerPrice, getAllPoolLinerPrices } from "./Middleware/MaterialCalculations.js";
+import { calcualtePoolLinerPrice, getAllPoolLinerPrices } from "./Middleware/MaterialCalculations.js";
 // console.log('############################################################');
 // console.log(await calcualtePoolLinerPrice(20, 10, 6, 'Gunnite', '20 x 40 Rectangle Inground Swimming Pool Liners - Samara Coast'));
 // console.log('############################################################');
 
-// setTimeout(async function() {
-//     console.log('############################################################');
-//     // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
-//     var all_options = await getAllPoolLinerPrices(20, 10, 6, 'Gunnite');
-//     console.log(all_options);
-//     console.log('############################################################');
-// }, 5000);
+setTimeout(async function() {
+    console.log('############################################################');
+    // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
+    var all_options = await getAllPoolLinerPrices(20, 10, 6, 12, 'Gunnite');
+    console.log(all_options);
+    console.log('############################################################');
+}, 5000);
 
 //steel walling db access
 // console.log('############');
