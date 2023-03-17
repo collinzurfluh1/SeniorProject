@@ -179,11 +179,11 @@ export async function get_fiberglass_shell(fiberglass_shell_name) {
     var fiberglass_shell_data = null;
 
     if(fiberglass_shell_name == null) {
-        const fiberglass_shell_sequelize = await SteelWalling.findAll()
+        const fiberglass_shell_sequelize = await FiberglassShell.findAll()
         fiberglass_shell_data = fiberglass_shell_sequelize.map(shell => shell.get({ plain: true }));
         
     } else {
-        const fiberglass_shell_sequelize = await SteelWalling.findAll({ where: { name: fiberglass_shell_name } })
+        const fiberglass_shell_sequelize = await FiberglassShell.findAll({ where: { name: fiberglass_shell_name } })
         fiberglass_shell_data = fiberglass_shell_sequelize.map(shell => shell.get({ plain: true }));
     }
 

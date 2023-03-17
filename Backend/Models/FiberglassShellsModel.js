@@ -3,7 +3,7 @@ import db from "../config/Database.js";
  
 const { DataTypes } = Sequelize;
  
-const FiberglassShell = db.define('steelwalling',{
+const FiberglassShell = db.define('fiberglassshells',{
     name:{
         type: DataTypes.STRING,
         unique: {

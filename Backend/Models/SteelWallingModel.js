@@ -26,7 +26,7 @@ const steelwalling_data = [
     {'name': 'Pool Warehouse walling', 'sqft_cost': 42.35}
    ]
 
-//  db.sync({ force:true }).then(() => {
+//  db.sync({ force:false }).then(() => {
 //  SteelWalling.bulkCreate(steelwalling_data, { validate: true }).then(() => {
 //  }).catch((err) => { console.log(err); });
 //  }).catch((error) => {
