@@ -10,9 +10,14 @@ export const savePools = async(req, res) => {
     try{
         await Pool.create({
             owner: req.body.owner,
-            original_creator: false,
             title: req.body.title,
-            pulic: true,
+            original_creator: req.body.original_creator,
+            pulic: req.body.pulic,
+            concrete: req.body.concrete,
+            plaster: req.body.plaster,
+            fiberglass_shell: req.body.fiberglass_shell,
+            steel_wall: req.body.steel_wall,
+            basin_type: req.body.basin_type,
             length: req.body.length,
             width: req.body.width,
             depth_shallow: req.body.depth_shallow,
@@ -25,7 +30,11 @@ export const savePools = async(req, res) => {
             drain: req.body.drain,
             skimmer: req.body.skimmer,
             pump: req.body.pump,
+            shock: req.body.shock,
+            cyanuricAcid: req.body.cyanuricAcid,
+            chlorine: req.body.chlorine,
             cost: req.body.cost,
+
         });
         res.json({msg: "Pool Save Successful"});
     }catch (error) {

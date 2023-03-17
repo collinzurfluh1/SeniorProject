@@ -137,7 +137,7 @@ class CreatorBody extends React.Component {
             //Error because username is not defined
             owner: props.username,
             title: this.GetPool()["name"],
-            original_creator: false,
+            original_creator: true,
             pulic: true,
             concrete: this.GetPool()['materialData']['materialBrand'],
             plaster: this.GetPool()['materialData']['plaster'],

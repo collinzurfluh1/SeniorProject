@@ -12,15 +12,21 @@ function PoolItem(props) {
   const navigate = useNavigate();
   const [username, setName] = useState('');
   const [modalShow, setModalShow] = React.useState(false);
-  const [chlorine, setChlorineOptions] = useState('');
-  const poolProps = {"owner": props.username,
+  const [chlorinePrice, setChlorinePrice] = useState('');
+  const [waterPrice, setWaterPrice] = useState('');
+
+  const poolProps = {"owner": props.pool.pool.owner,
     "title": props.pool.pool.title,
-    "original_creator": false,
-    "pulic": true,
+    "original_creator": props.pool.pool.original_creator,
+    "pulic": props.pool.pool.pulic,
+    "concrete": props.pool.pool.concrete,
+    "plaster": props.pool.pool.plaster,
+    "fiberglass_shell": props.pool.pool.fiberglass_shell,
+    "steel_wall": props.pool.pool.steel_wall,
+    "basin_type": props.pool.pool.basin_type,
     "length": props.pool.pool.length,
     "width": props.pool.pool.width,
     "depth_shallow": props.pool.pool.depth_shallow,
-    "depth": props.pool.pool.depth,
     "depth_deep": props.pool.pool.depth_deep,
     "slant_type": props.pool.pool.slant_type,
     "lining_type": props.pool.pool.lining_type,
@@ -30,143 +36,161 @@ function PoolItem(props) {
     "drain": props.pool.pool.drain,
     "skimmer": props.pool.pool.skimmer,
     "pump": props.pool.pool.pump,
-    "cost": props.pool.pool.cost,
-    "floorType": props.pool.pool.floorType};
+    "shock": props.pool.pool.shock,
+    "cyanuricAcid": props.pool.pool.cyanuricAcid,
+    "chlorine": props.pool.pool.chlorine,
+    "cost": props.pool.pool.cost,};
 
 
+  const title = poolProps.title;
+  const original_creator = poolProps.original_creator;
+  const pulic = poolProps.pulic;
+  const concrete = poolProps.concrete;
+  const plaster = poolProps.plaster;
+  const fiberglass_shell = poolProps.fiberglass_shell;
+  const steel_wall = poolProps.steel_wall;
+  const basin_type = poolProps.basin_type;
   const length = poolProps.length;
   const width = poolProps.width;
-  const depth = poolProps.depth;
-  const deepDepth = poolProps.depth_deep
-  const basinType = poolProps.basinType;
-  const floorType = poolProps.floorType;
+  const depth_shallow = poolProps.depth_shallow;
+  const depth_deep = poolProps.depth_deep;
+  const slant_type = poolProps.slant_type;
+  const lining_type = poolProps.lining_type;
+  const cover1 = poolProps.cover1;
+  const cover2 = poolProps.cover2;
+  const piping = poolProps.piping;
+  const drain = poolProps.drain;
+  const skimmer = poolProps.skimmer;
+  const pump = poolProps.pump;
+  const shock = poolProps.shock;
+  const cyanuricAcid = poolProps.cyanuricAcid;
+  const chlorine = poolProps.chlorine;
+  const cost = poolProps.cost;
 
-  console.log(props);
-
-  const waterCost = async () => {
+  const getWaterCost = async () => {
     try {
       const response = await axios.get("http://localhost:4000/calculateWaterPrice", {
-        params: { length, width, depth, basinType }
+        params: { length, width, depth_shallow, depth_deep, basin_type }
       });
       const data = response.data;
-      setChlorineOptions(data);
+      setWaterPrice(data);
     } catch (error) {
-      waterCost=null;
     }
   }
 
-  const pipesCost = async () => {
-    try {
-      const response = await axios.get("http://localhost:4000/calculatePipesCost", {
-        params: { length, width, depth, basinType }
-      });
-      const data = response.data;
-      setChlorineOptions(data);
-    } catch (error) {
-      waterCost=null;
-    }
-  }
+  // const pipesCost = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:4000/calculatePipesCost", {
+  //       params: { length, width, depth, basinType }
+  //     });
+  //     const data = response.data;
+  //     setChlorineOptions(data);
+  //   } catch (error) {
+  //     waterCost=null;
+  //   }
+  // }
 
-  const concreteCost = async () => {
-    try {
-      const response = await axios.get("http://localhost:4000/calculateConcreteCost", {
-        params: { length, width, depth, basinType }
-      });
-      const data = response.data;
-      setChlorineOptions(data);
-    } catch (error) {
-      waterCost=null;
-    }
-  }
+  // const concreteCost = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:4000/calculateConcreteCost", {
+  //       params: { length, width, depth, basinType }
+  //     });
+  //     const data = response.data;
+  //     setChlorineOptions(data);
+  //   } catch (error) {
+  //     waterCost=null;
+  //   }
+  // }
 
-  const chlorineCost = async () => {
-    try {
-      const response = await axios.get("http://localhost:4000/calculateChlorinePrice", {
-        params: { length, width, depth, deepDepth, floorType }
-      });
-      const data = response.data;
-      setChlorineOptions(data);
-    } catch (error) {
-      waterCost=null;
-    }
-  }
+  // const chlorineCost = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:4000/calculateChlorinePrice", {
+  //       params: { length, width, depth, deepDepth, floorType }
+  //     });
+  //     const data = response.data;
+  //     setChlorineOptions(data);
+  //   } catch (error) {
+  //     waterCost=null;
+  //   }
+  // }
 
-  const steelwallingCost = async () => {
-    try {
-      const response = await axios.get("http://localhost:4000/calcuateSteelWallingPrice", {
-        params: { length, width, depth, basinType }
-      });
-      const data = response.data;
-      setChlorineOptions(data);
-    } catch (error) {
-      waterCost=null;
-    }
-  }
+  // const steelwallingCost = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:4000/calcuateSteelWallingPrice", {
+  //       params: { length, width, depth, basinType }
+  //     });
+  //     const data = response.data;
+  //     setChlorineOptions(data);
+  //   } catch (error) {
+  //     waterCost=null;
+  //   }
+  // }
 
-  const poolliningPrice = async () => {
-    try {
-      const response = await axios.get("http://localhost:4000/calcualtePoolLinerPrice", {
-        params: { length, width, depth, basinType }
-      });
-      const data = response.data;
-      setChlorineOptions(data);
-    } catch (error) {
-      waterCost=null;
-    }
-  }
+  // const poolliningPrice = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:4000/calcualtePoolLinerPrice", {
+  //       params: { length, width, depth, basinType }
+  //     });
+  //     const data = response.data;
+  //     setChlorineOptions(data);
+  //   } catch (error) {
+  //     waterCost=null;
+  //   }
+  // }
   
-  const wintercoverPrice = async () => {
-    try {
-      const response = await axios.get("http://localhost:4000/calculatePoolWinterCoverPrice", {
-        params: { length, width, depth, basinType }
-      });
-      const data = response.data;
-      setChlorineOptions(data);
-    } catch (error) {
-      waterCost=null;
-    }
-  }
+  // const wintercoverPrice = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:4000/calculatePoolWinterCoverPrice", {
+  //       params: { length, width, depth, basinType }
+  //     });
+  //     const data = response.data;
+  //     setChlorineOptions(data);
+  //   } catch (error) {
+  //     waterCost=null;
+  //   }
+  // }
 
-  const summercoverPrice = async () => {
-    try {
-      const response = await axios.get("http://localhost:4000/calculatePoolSolarCoverPrice", {
-        params: { length, width, depth, basinType }
-      });
-      const data = response.data;
-      setChlorineOptions(data);
-    } catch (error) {
-      waterCost=null;
-    }
-  }
+  // const summercoverPrice = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:4000/calculatePoolSolarCoverPrice", {
+  //       params: { length, width, depth, basinType }
+  //     });
+  //     const data = response.data;
+  //     setChlorineOptions(data);
+  //   } catch (error) {
+  //     waterCost=null;
+  //   }
+  // }
 
-  const plasterPrice = async () => {
-    try {
-      const response = await axios.get("http://localhost:4000/calculatePlasterCost", {
-        params: { length, width, depth, basinType }
-      });
-      const data = response.data;
-      setChlorineOptions(data);
-    } catch (error) {
-      waterCost=null;
-    }
-  }
+  // const plasterPrice = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:4000/calculatePlasterCost", {
+  //       params: { length, width, depth, basinType }
+  //     });
+  //     const data = response.data;
+  //     setChlorineOptions(data);
+  //   } catch (error) {
+  //     waterCost=null;
+  //   }
+  // }
 
-  const getAllChlorine = async () => {
-    try {
-      const response = await axios.get("http://localhost:4000/getAllChlorine", {
-        params: { length, width, depth, basinType }
-      });
-      const data = response.data;
-      setChlorineOptions(data);
-    } catch (error) {
+  // const getAllChlorine = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:4000/getAllChlorine", {
+  //       params: { length, width, depth, basinType }
+  //     });
+  //     const data = response.data;
+  //     setChlorineOptions(data);
+  //   } catch (error) {
     
-    }
-  }
+  //   }
+  // }
 
 
   useEffect(()=>{
     refreshToken();
-    getAllChlorine();
+    getWaterCost();
+    // getAllChlorine();
   },[])
 
   const savePool = async (e) => {
@@ -278,9 +302,9 @@ function PoolItem(props) {
       </div>
       <h3>Material Costs:</h3>
       <div className='poolStatsList'>
-        <div className='poolStat'>Water: ${waterCost == null ?
+        <div className='poolStat'>Water: ${waterPrice == null ?
           "N/A"
-        : waterCost}</div>
+        : waterPrice}</div>
         <div className='poolStat'>Pump: {props.pool.pool.pump == null ?
           "N/A"
         : props.pool.pool.pump}</div>
