@@ -127,6 +127,10 @@ class CreatorBody extends React.Component {
   
   UploadPool =  async (props) =>{
     alert("Pool Uploading");
+    alert(this.GetPool()['materialData']['wall']);
+    alert(this.GetPool()['materialData']['shell']);
+    alert(this.GetPool()['materialData']['concrete']);
+    alert(this.GetPool()['materialData']['plaster']);
 
       try {
           await axios.post('http://localhost:4000/savePools', {
@@ -152,13 +156,13 @@ class CreatorBody extends React.Component {
             drain: this.GetPool()['drain'],
             skimmer:this.GetPool()['skimmer'],
             pump: this.GetPool()['pump'],
-            //shock: this.GetPool()['chemicals']['chlorine'],
-            //cyanuricAcid: this.GetPool()['chemicals']['cyaneuricAcid'],
-            //chlorine: this.GetPool()['chemicals']['chlorine'],
+            shock: this.GetPool()['chemicals']['chlorine'],
+            cyanuricAcid: this.GetPool()['chemicals']['cyaneuricAcid'],
+            chlorine: this.GetPool()['chemicals']['chlorine'],
             cost: 0,
 
           });
-          alert("Your new pool is now saved!")
+        
           window.location.href = '/my-pools';
       } catch (error) {
         alert("Sorry the pool was not able to be saved! Try again later");
