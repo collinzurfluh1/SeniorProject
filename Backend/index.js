@@ -262,16 +262,13 @@ console.log('############');
 console.log('############');
 
 console.log(await calculateRebar(40, 20, 10));
-
+*/
 console.log('############');
 console.log('############');
 console.log(await calculatePlaster(40, 20, 4, 10, "Flatbed"));
-console.log(await calculatePlaster(40, 20, 4, 10, "Slant"));
-
-console.log(await calculatePlaster(40, 20, 4, 10, "Diver"));
 
 console.log('############');
-*/
+
 // console.log('############');
 // console.log(getAllSkimmerPrices());
 // console.log('############');
