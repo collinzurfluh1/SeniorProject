@@ -7,6 +7,7 @@ class ConcreteOptions extends Component {
     this.state = {
       concrete: [],
     };
+    console.log(props);
   }
 
   async componentDidMount() {

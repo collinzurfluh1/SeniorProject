@@ -33,6 +33,7 @@ const FiberglassShell = db.define('fiberglassshells',{
 //  (async () => {
 //      await db.sync();
 //  })();
+
 const fiberglass_shell_data = [
     {'name': 'Free Form Fiberglass', 'length': 30, 'width': 14, 'depth_shallow': 3.3, 'depth_deep': 5.5, 'cost': 19979},
     {'name': 'Lazy L Fiberglass', 'length': 30, 'width': 14, 'depth_shallow': 3.5, 'depth_deep': 6, 'cost': 20979},

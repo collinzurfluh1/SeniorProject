@@ -45,7 +45,7 @@ const cover_data = [
     {'name': 'Blue Wave BWC958 Pool Winter Cover', 'type': 'winter', 'length_feet': 32, 'width_feet': 16, 'cost': 164.98}
    ]
 
-//  db.sync({ force: false }).then(() => {
+//  db.sync({ force: true }).then(() => {
 //  Covers.bulkCreate(cover_data, { validate: true }).then(() => {
 //  }).catch((err) => { console.log(err); });
 //  }).catch((error) => {

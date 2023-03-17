@@ -6,11 +6,9 @@ import db from "./Config/Database.js";
 import router from "./Routes/index.js";
 
 // test for concrete
-<<<<<<< Updated upstream
-// import { calcualteConcreteCost, getAllConcretePrices } from "./Middleware/MaterialCalculations.js";
-=======
+
  import { getDrainPrice, getSkimmerPrice, getAllSkimmerPrices, calculatePoolLinerArea, calculateCyanuricAcidPounds, calculateChlorineTablets, calculateShockLbs, calculatePipesAmount, calculateRebar, calculatePlaster, calculatePoolSurfaceArea, calculateConcretePounds, getAllConcretePrices, calculateGallons, calculatePoolVolume, calculateWaterPrice } from "./Middleware/MaterialCalculations.js";
->>>>>>> Stashed changes
+
 
 import { get_plaster_data, get_cement_data, get_winter_covers, get_solar_covers, get_chlorine, get_cyanuric_acid, get_shock, get_piping, get_liner, get_steel_walling, get_fiberglass_shell } from "./Controllers/Materials.js";
 
@@ -34,14 +32,14 @@ app.use(router);
 
 //TESTING CONCRETE COST FUNCTION
 // console.log('############################################################');
-// console.log(await calcualteConcreteCost(10, 20, 6, 'Gunite', 'Quikrete 50 lb. Fast-Setting Mix'));
+// console.log(await calculateConcreteCost(10, 20, 6, 'Gunite', 'Quikrete 50 lb. Fast-Setting Mix'));
 // console.log('############################################################');
 
 // TESTING CONCRETE COST FUNCTION
 // setTimeout(async function() {
 //     console.log('############################################################');
 //     // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
-//     var all_options = await getAllConcretePrices(10, 20, 6, 'Gunite');
+//     var all_options = await getAllConcretePrices(10, 20, 6, 10, 'Slant', 'Gunite');
 //     console.log(all_options);
 //     console.log('############################################################');
 // }, 5000);
@@ -69,21 +67,9 @@ app.use(router);
 // console.log('############################################################');
 
 // Chlorine
-// import {calculateChlorinePrice, getAllChlorinePrices, calculateCyanuricAcidPrice, getAllCyanuricAcidPrices, calculateShockPrice, getAllShockPrices} from "./Middleware/MaterialCalculations.js";
+import {calculateChlorinePrice, getAllChlorinePrices, calculateCyanuricAcidPrice, getAllCyanuricAcidPrices, calculateShockPrice, getAllShockPrices} from "./Middleware/MaterialCalculations.js";
 // console.log('############################################################');
-// console.log(await calculateChlorinePrice(20, 10, 6, 'Gunnite', 'In The Swim Chlorine Tablets'));
-// console.log('############################################################');
-
-// setTimeout(async function() {
-//     console.log('############################################################');
-//     // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
-//     var all_options = await getAllCyanuricAcidPrices(20, 10, 6, 'Gunnite');
-//     console.log(all_options);
-//     console.log('############################################################');
-// }, 5000);
-
-// console.log('############################################################');
-// console.log(await getAllChlorinePrices(20, 10, 6, 'Gunnite', 'Pool Mate Stabilizer and Conditioner'));
+// console.log(await calculateChlorinePrice(20, 10, 6, 12, 'Gunnite', 'In The Swim Chlorine Tablets'));
 // console.log('############################################################');
 
 // setTimeout(async function() {
@@ -95,13 +81,25 @@ app.use(router);
 // }, 5000);
 
 // console.log('############################################################');
-// console.log(await calculateShockPrice(20, 10, 6, 'Gunnite', 'In The Swim Super Pool Shock'));
+// console.log(await getAllChlorinePrices(20, 10, 6, 12, 'Gunnite'));
 // console.log('############################################################');
 
 // setTimeout(async function() {
 //     console.log('############################################################');
 //     // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
-//     var all_options = await getAllShockPrices(20, 10, 6, 'Gunnite');
+//     var all_options = await getAllCyanuricAcidPrices(20, 10, 6, 'Gunnite');
+//     console.log(all_options);
+//     console.log('############################################################');
+// }, 5000);
+
+// console.log('############################################################');
+// console.log(await calculateShockPrice(20, 10, 6, 12, 'Gunnite', 'In The Swim Super Pool Shock'));
+// console.log('############################################################');
+
+// setTimeout(async function() {
+//     console.log('############################################################');
+//     console.log(await getAllConcretePrices(10, 20, 6, 12, 'Slant', 'Gunite'));
+//     var all_options = await getAllShockPrices(20, 10, 6, 12, 'Slant', 'Gunite');
 //     console.log(all_options);
 //     console.log('############################################################');
 // }, 5000);
@@ -158,18 +156,18 @@ app.use(router);
 // console.log('############');
 
 // Liner
-// import { calcualtePoolLinerPrice, getAllPoolLinerPrices } from "./Middleware/MaterialCalculations.js";
+import { calcualtePoolLinerPrice, getAllPoolLinerPrices } from "./Middleware/MaterialCalculations.js";
 // console.log('############################################################');
 // console.log(await calcualtePoolLinerPrice(20, 10, 6, 'Gunnite', '20 x 40 Rectangle Inground Swimming Pool Liners - Samara Coast'));
 // console.log('############################################################');
 
-// setTimeout(async function() {
-//     console.log('############################################################');
-//     // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
-//     var all_options = await getAllPoolLinerPrices(20, 10, 6, 'Gunnite');
-//     console.log(all_options);
-//     console.log('############################################################');
-// }, 5000);
+setTimeout(async function() {
+    console.log('############################################################');
+    // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
+    var all_options = await getAllPoolLinerPrices(20, 10, 6, 12, 'Gunnite');
+    console.log(all_options);
+    console.log('############################################################');
+}, 5000);
 
 //steel walling db access
 // console.log('############');

@@ -173,7 +173,7 @@ export function calculateChlorineTablets(length, width, depth, deepDepth, floorT
 export async function calculateChlorinePrice(length, width, depth, deepDepth, floorType, product_name)
 {
 
-    var tablets = calculateChlorineTablets(length, width, depth, deepDepth, floorType);
+    var tablets = await calculateChlorineTablets(length, width, depth, deepDepth, floorType);
 
     var chlorineJson = (await get_chlorine(product_name))[0];
 
@@ -189,14 +189,14 @@ export async function calculateChlorinePrice(length, width, depth, deepDepth, fl
 export async function getAllChlorinePrices(length, width, depth, deepDepth, floorType)
 {
     var gallons = calculateGallons(length, width, depth, deepDepth, floorType)
-
+    console.log(gallons);
     var chlorineOptions = [];
     var chlorineJsons = await get_chlorine();
 
     for (const chlorineJson of chlorineJsons) {
         var name = await chlorineJson.name;
-        const price = await calculateChlorinePrice(gallons, name)
-        
+        const price = await calculateChlorinePrice(length, width, depth, deepDepth, floorType, name)
+
         // Create a new JSON object with the name and price fields
         const option = { "name": name, "price": price };
         
@@ -257,9 +257,8 @@ export function calculateShockLbs(gallons)
 }
 export async function calculateShockPrice(length, width, depth, deepDepth, floorType, product_name)
 {
-    var gallons = calculateGallons(length, width, depth, deepDepth, floorType)
-   
-    var shocklbs = calculateShockLbs(gallons);
+    var gallons = await calculateGallons(length, width, depth, deepDepth, floorType)
+    var shocklbs = await calculateShockLbs(gallons);
     var shockJson = (await get_shock(product_name))[0];
 
     var units;
@@ -273,13 +272,12 @@ export async function calculateShockPrice(length, width, depth, deepDepth, floor
 }
 export async function getAllShockPrices(length, width, depth, deepDepth, floorType)
 {
-    var gallons = calculateGallons(length, width, depth, deepDepth, floorType)
     var shockOptions = [];
     var shockJsons = await get_shock();
 
     for (const shockJson of shockJsons) {
         var name = await shockJson.name;
-        const price = await calculateShockPrice(gallons, name)
+        const price = await calculateShockPrice(length, width, depth, deepDepth, floorType, name)
         
         // Create a new JSON object with the name and price fields
         const option = { "name": name, "price": price };
@@ -364,12 +362,12 @@ export function calculateConcretePounds(length, width, depth, deepDepth, floorTy
     }
 }
 
-export async function calcualteConcreteCost(length, width, depth, deepDepth, basinType, floorType, product_name)
+export async function calculateConcreteCost(length, width, depth, deepDepth, basinType, floorType, product_name)
 {
 
-    var concretelbs = calculateConcretePounds(length, width, depth, deepDepth, floorType, basinType);
-
+    var concretelbs = await calculateConcretePounds(length, width, depth, deepDepth, basinType, floorType);
     var concreteJson = await get_cement_data(product_name);
+
     concreteJson = concreteJson[0] // only one json in the list
 
     // return concreteJson[0]['bag_size_pounds'];
@@ -393,7 +391,7 @@ export async function getAllConcretePrices(length, width, depth, deepDepth, floo
     //     console.log(concreteJson)
     //     var name = await concreteJson.name;
     //     console.log(name)
-    //     const price = await calcualteConcreteCost(length, width, depth, basinType, name)
+    //     const price = await calculateConcreteCost(length, width, depth, basinType, name)
     //     console.log(price)
         
     //     // Create a new JSON object with the name and price fields
@@ -405,7 +403,7 @@ export async function getAllConcretePrices(length, width, depth, deepDepth, floo
 
     for (const concreteJson of concreteJsons) {
         var name = await concreteJson.name;
-        const price = await calcualteConcreteCost(length, width, depth, deepDepth, floorType, basinType, name)
+        const price = await calculateConcreteCost(length, width, depth, deepDepth, floorType, basinType, name)
         
         // Create a new JSON object with the name and price fields
         const option = { "name": name, "price": price };
@@ -420,7 +418,7 @@ export async function getAllConcretePrices(length, width, depth, deepDepth, floo
     //     console.log(concreteJson)
     //     var name = concreteJson.name;
     //     console.log(name)
-    //     const price = await calcualteConcreteCost(length, width, depth, basinType, name)
+    //     const price = await calculateConcreteCost(length, width, depth, basinType, name)
     //     console.log(price)
         
     //     // Create a new JSON object with the name and price fields
@@ -437,16 +435,16 @@ export async function getAllConcretePrices(length, width, depth, deepDepth, floo
 ////////// WATER //////////
 ///////////////////////////
 
-export function calculateGallons(length, width, depth, deepDepth, floorType)
+export  function calculateGallons(length, width, depth, deepDepth, floorType)
 {
-    var volume = calculatePoolVolume(length, width, depth, deepDepth, floorType);
+    var volume =  calculatePoolVolume(length, width, depth, deepDepth, floorType);
     return (volume * 7.48);
 }
-export function calculateWaterPrice(length, width, depth, deepDepth, floorType) // will this need to be acessed?
+export async function calculateWaterPrice(length, width, depth, deepDepth, floorType) // will this need to be acessed?
 {
     //This calculates the total cost of water for a pool based on the pools volume.
     //Inputs: Pools Volume
-    var gallons = calculateGallons(length, width, depth, deepDepth, floorType);
+    var gallons = await calculateGallons(length, width, depth, deepDepth, floorType);
     var waterPrice = 0.005;//set price
     var varprice = gallons * waterPrice;
     return varprice;
@@ -513,6 +511,7 @@ export async function calcualtePoolLinerPrice(length, width, depth, deepDepth, f
 {
 
     var poolLinerSize = calculatePoolLinerArea(length, width, depth, deepDepth, floorType);
+
     var poolLinerJson = (await get_liner(product_name))[0];
 
     var linerWidth = poolLinerJson.width_feet;
@@ -534,8 +533,8 @@ export async function getAllPoolLinerPrices(length, width, depth, deepDepth, flo
 
     for (const poolLinerJson of poolLinerJsons) {
         var name = await poolLinerJson.name;
-        const price = await calcualtePoolLinerPrice(depth, length, width, basinType, name)
-        
+        const price = await calcualtePoolLinerPrice(length, width, depth, deepDepth, floorType, name)
+  
         // Create a new JSON object with the name and price fields
         const option = { "name": name, "price": price };
         
@@ -836,7 +835,7 @@ export async function calculatePlasterCost(length, width, depth, deepDepth, floo
     }
     return unitsNeeded * plasterJson.bag_cost;
 }
-export async function getAllPlasterPrices(length, width, deth, deepDepth, floorType)
+export async function getAllPlasterPrices(length, width, depth, deepDepth, floorType)
 {
 
     var plasterOptions = []

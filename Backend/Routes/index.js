@@ -69,9 +69,9 @@ router.get('/getAllPipesPrices', async (req, res) => {
     res.json(results);
 });
 
-router.get('/calcualteConcreteCost', async (req, res) => {
+router.get('/calculateConcreteCost', async (req, res) => {
     const { length, width, depth, deepDepth, floorType, basinType, product_name } = req.query;
-    const results = await calcualteConcreteCost(length, width, depth, deepDepth, floorType, basinType, product_name );
+    const results = await calculateConcreteCost(length, width, depth, deepDepth, floorType, basinType, product_name );
     res.json(results);
 });
 

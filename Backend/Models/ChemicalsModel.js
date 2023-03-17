@@ -44,7 +44,7 @@ const chemicals_data = [
     {'name': 'Clorox Pool Aand Spa Pool Shock Xtrablue ', 'type': 'shock', 'quantity': 12, 'cost': 94.50}
    ]
 
-//  db.sync({ force:false }).then(() => {
+//  db.sync({ force:true }).then(() => {
 //  Chemicals.bulkCreate(chemicals_data, { validate: true }).then(() => {
 //  }).catch((err) => { console.log(err); });
 //  }).catch((error) => {
