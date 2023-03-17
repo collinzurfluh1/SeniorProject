@@ -188,14 +188,12 @@ export async function calculateChlorinePrice(length, width, depth, deepDepth, fl
 }
 export async function getAllChlorinePrices(length, width, depth, deepDepth, floorType)
 {
-    var gallons = calculateGallons(length, width, depth, deepDepth, floorType)
-
     var chlorineOptions = [];
     var chlorineJsons = await get_chlorine();
 
     for (const chlorineJson of chlorineJsons) {
         var name = await chlorineJson.name;
-        const price = await calculateChlorinePrice(gallons, name)
+        const price = await calculateChlorinePrice(length, width, depth, deepDepth, floorType, name)
         
         // Create a new JSON object with the name and price fields
         const option = { "name": name, "price": price };
@@ -279,7 +277,7 @@ export async function getAllShockPrices(length, width, depth, deepDepth, floorTy
 
     for (const shockJson of shockJsons) {
         var name = await shockJson.name;
-        const price = await calculateShockPrice(gallons, name)
+        const price = await calculateShockPrice(length, width, depth, deepDepth, floorType, name)
         
         // Create a new JSON object with the name and price fields
         const option = { "name": name, "price": price };
