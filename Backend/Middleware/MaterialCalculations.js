@@ -1,4 +1,4 @@
-//Things still needed to be added in during calculations 
+1//Things still needed to be added in during calculations 
 //Drains, Pumps, Skimmer
 
 import { get_plaster_data, get_cement_data, get_piping, get_chlorine, get_cyanuric_acid, get_shock, get_winter_covers, get_solar_covers, get_liner, get_steel_walling } from "../Controllers/Materials.js";
@@ -10,12 +10,12 @@ function calculatePrice(poolMaterials, basinType)
     //This funciton is the main function that will set which pool type to calculate for
     //This function will take in an array of values that are passed in from the front end based on user selection including all of thier selections
     //Then after it has the values it will pass the values into their appropriate pool type.
-    if(basinType.equal("Fiberglass"))
+    if(basinType == "Fiberglass")
     {
         var poolObject = calculateFiberglass(poolMaterials);
         return poolObject;
     }
-    else if(basinType.equals("Vinyl"))
+    else if(basinType == "Vinyl")
     {
         var poolObject = calculateVinyl(poolMaterials);
         return poolObject;
@@ -153,12 +153,11 @@ function calculateFiberglass(poolMaterials)
 ////////// CHEMICALS //////////
 ///////////////////////////////
 
-function calculateChlorineTablets(length, width, depth, basinType)
+export function calculateChlorineTablets(length, width, depth, deepDepth, floorType)
 {
     //This function calculates the cost based on the volume of the pool
     //Inputs: Pools Gallons of Water, chlorine tablet name, shock name, cyanuric acid name, ppm is from user input
-
-    var gallons = calcualteGallons(length, width, depth, basinType);
+    var gallons = calculateGallons(length, width, depth, deepDepth, floorType)
 
     var tabletCount;
     if(gallons < 20000)
@@ -169,12 +168,12 @@ function calculateChlorineTablets(length, width, depth, basinType)
     {
         tabletCount = 3 * (gallons / 10000);
     }
-    return tabletCount;
+    return Math.ceil(tabletCount);
 }
-export async function calculateChlorinePrice(length, width, depth, basinType, product_name)
+export async function calculateChlorinePrice(length, width, depth, deepDepth, floorType, product_name)
 {
 
-    var tablets = calculateChlorineTablets(length, width, depth, basinType);
+    var tablets = calculateChlorineTablets(length, width, depth, deepDepth, floorType);
 
     var chlorineJson = (await get_chlorine(product_name))[0];
 
@@ -187,15 +186,16 @@ export async function calculateChlorinePrice(length, width, depth, basinType, pr
     var price = units * chlorineJson.cost;
     return price;
 }
-export async function getAllChlorinePrices(length, width, depth, basinType)
+export async function getAllChlorinePrices(length, width, depth, deepDepth, floorType)
 {
+    var gallons = calculateGallons(length, width, depth, deepDepth, floorType)
 
     var chlorineOptions = [];
     var chlorineJsons = await get_chlorine();
 
     for (const chlorineJson of chlorineJsons) {
         var name = await chlorineJson.name;
-        const price = await calculateChlorinePrice(length, width, depth, basinType, name)
+        const price = await calculateChlorinePrice(gallons, name)
         
         // Create a new JSON object with the name and price fields
         const option = { "name": name, "price": price };
@@ -206,18 +206,18 @@ export async function getAllChlorinePrices(length, width, depth, basinType)
 
     return chlorineOptions;  
 }
-function calculateCyanuricAcidPounds(length, width, depth, basinType)
+export function calculateCyanuricAcidPounds(length, width, depth, deepDepth, floorType)
 {
-
-    var gallons = calcualteGallons(length, width, depth, basinType);
+    var gallons = calculateGallons(length, width, depth, deepDepth, floorType)
 
     var cyanuricAcid = 1.75 + (((gallons - 10000) / 5000) * .75);
     return cyanuricAcid;
 }
-export async function calculateCyanuricAcidPrice(length, width, depth, basinType, product_name)
+export async function calculateCyanuricAcidPrice(length, width, depth, deepDepth, floorType, product_name)
 {
+    var gallons = calculateGallons(length, width, depth, deepDepth, floorType)
 
-    var cyanuricAcidlbs = calculateCyanuricAcidPounds(length, width, depth, basinType);
+    var cyanuricAcidlbs = calculateCyanuricAcidPounds(length, width, depth, deepDepth, floorType);
 
     var cyanuricAcidJson = (await get_cyanuric_acid(product_name))[0];
 
@@ -230,15 +230,16 @@ export async function calculateCyanuricAcidPrice(length, width, depth, basinType
     var price = units * cyanuricAcidJson.cost;
     return price;
 }
-export async function getAllCyanuricAcidPrices(length, width, depth, basinType)
+export async function getAllCyanuricAcidPrices(length, width, depth, deepDepth, floorType)
 {
+    var gallons = calculateGallons(length, width, depth, deepDepth, floorType)
 
     var cyanuricAcidOptions = [];
     var cyanuricAcidJsons = await get_cyanuric_acid();
 
     for (const cyanuricAcidJson of cyanuricAcidJsons) {
         var name = await cyanuricAcidJson.name;
-        const price = await calculateCyanuricAcidPrice(length, width, depth, basinType, name)
+        const price = await calculateCyanuricAcidPrice(length, width, depth, deepDepth, floorType, name)
         
         // Create a new JSON object with the name and price fields
         const option = { "name": name, "price": price };
@@ -249,18 +250,16 @@ export async function getAllCyanuricAcidPrices(length, width, depth, basinType)
 
     return cyanuricAcidOptions; 
 }
-function calculateShockLbs(length, width, depth, basinType)
+export function calculateShockLbs(gallons)
 {
-
-    var gallons = calcualteGallons(length, width, depth, basinType);
-
     var lbsOfShock = gallons / 5000;
     return lbsOfShock;
 }
-export async function calculateShockPrice(length, width, depth, basinType, product_name)
+export async function calculateShockPrice(length, width, depth, deepDepth, floorType, product_name)
 {
-
-    var shocklbs = calculateShockLbs(length, width, depth, basinType);
+    var gallons = calculateGallons(length, width, depth, deepDepth, floorType)
+   
+    var shocklbs = calculateShockLbs(gallons);
     var shockJson = (await get_shock(product_name))[0];
 
     var units;
@@ -272,15 +271,15 @@ export async function calculateShockPrice(length, width, depth, basinType, produ
     var price = units * shockJson.cost;
     return price;
 }
-export async function getAllShockPrices(length, width, depth, basinType)
+export async function getAllShockPrices(length, width, depth, deepDepth, floorType)
 {
-
+    var gallons = calculateGallons(length, width, depth, deepDepth, floorType)
     var shockOptions = [];
     var shockJsons = await get_shock();
 
     for (const shockJson of shockJsons) {
         var name = await shockJson.name;
-        const price = await calculateShockPrice(length, width, depth, basinType, name)
+        const price = await calculateShockPrice(gallons, name)
         
         // Create a new JSON object with the name and price fields
         const option = { "name": name, "price": price };
@@ -296,23 +295,23 @@ export async function getAllShockPrices(length, width, depth, basinType)
 ////////// PIPING //////////
 ////////////////////////////
 
-function calculatePipesAmount(depth, length, width)
+export function calculatePipesAmount(deepDepth, length, width)
 {
     //This function calculates the length and cost of pipe based on the type of pipe and perimeter of the pool
     //Inputs: Pipe Price/Name, Pools Max Depth, Length, and Width
-    var pipeLength = (length * 1.75) + (width * 2) + (depth * 1.1) + 20;
+    var pipeLength = (length * 1.75) + (width * 2) + (deepDepth * 1.1) + 20;
     return pipeLength;
 }
-export async function calculatePipesCost(depth, length, width, pipe_type)
+export async function calculatePipesCost(deepDepth, length, width, pipe_type)
 {
 
     var price_per_linear_foot =  (await get_piping(pipe_type))[0]['linft_cost'];
 
-    var pipeLength = calculatePipesAmount(depth, length, width);
+    var pipeLength = calculatePipesAmount(deepDepth, length, width);
 
     return (pipeLength * price_per_linear_foot);
 }
-export async function getAllPipesPrices(depth, length, width)
+export async function getAllPipesPrices(deepDepth, length, width)
 {
 
     var PipingOptions = [];
@@ -320,7 +319,7 @@ export async function getAllPipesPrices(depth, length, width)
 
     for (const pipingJson of pipingJsons) {
         var type = await pipingJson.type;
-        const price = await calculatePipesCost(depth, length, width, type)
+        const price = await calculatePipesCost(deepDepth, length, width, type)
         
         // Create a new JSON object with the name and price fields
         const option = { "type": type, "price": price };
@@ -335,13 +334,11 @@ export async function getAllPipesPrices(depth, length, width)
 ////////// CONCRETE //////////
 //////////////////////////////
 
-function calculateConcretePounds(length, width, depth, basinType)
+export function calculateConcretePounds(length, width, depth, deepDepth, floorType, basinType)
 {
     //This calculates the total cost of concrete through cubic and square feet cost around and inside the pool.
     //Inputs: Length, Width, Depth, Surface Area, Concrete Price, BasinType
     //database call for concrete price
-
-    var surfaceArea = calculatePoolSurfaceArea(length, width, depth, basinType);
 
     if(basinType == "Gunite")//pool gunite
     { 
@@ -351,23 +348,26 @@ function calculateConcretePounds(length, width, depth, basinType)
     }
     if (basinType == "Fiberglass")//pool fiberglass
     {
-        var totallbs = (surfaceArea * 1.1) * 75 * 0.5;
-        totallbs = 75 * ((length + 3) * (width + 3)) - (length * width) * 0.5;
+        var dd = (deepDepth * depth) / 2;
+        var depthDiff = deepDepth - depth;
+        var surfaceArea = 2 * (length * dd) + (width * depth) + (width * deepDepth) + (Math.sqrt(Math.pow(depthDiff, 2) + Math.pow(length, 2)));
+        var totallbs = ((surfaceArea * 1.1) * 75 * 0.5);
+        totallbs = totallbs + (75 * ((length + 3) * (width + 3)) - (length * width) * 0.5);
         return totallbs;
     }
     if (basinType == "Vinyl")//pool vinyl
     {
-        var totallbs = calculatePoolFloor(length, width, depth) * 75; 
+        var totallbs = calculatePoolFloor(length, width, depth, deepDepth, floorType) * 75; 
         totallbs = 64.21 * ((length + 1) * (width + 1) * depth) - (length * width * depth);
-        totallbs = 75 * ((length + 3) * (width + 3)) - (length * width) * 0.5;
+        totallbs = totallbs + (75 * ((length + 3) * (width + 3)) - (length * width) * 0.5);
         return totallbs;
     }
 }
 
-export async function calcualteConcreteCost(length, width, depth, basinType, product_name)
+export async function calcualteConcreteCost(length, width, depth, deepDepth, basinType, floorType, product_name)
 {
 
-    var concretelbs = calculateConcretePounds(length, width, depth, basinType);
+    var concretelbs = calculateConcretePounds(length, width, depth, deepDepth, floorType, basinType);
 
     var concreteJson = await get_cement_data(product_name);
     concreteJson = concreteJson[0] // only one json in the list
@@ -383,7 +383,7 @@ export async function calcualteConcreteCost(length, width, depth, basinType, pro
     var price = units * concreteJson['bag_cost'];
     return price;
 }
-export async function getAllConcretePrices(length, width, depth, basinType)
+export async function getAllConcretePrices(length, width, depth, deepDepth, floorType, basinType)
 {
 
     var concreteOptions = [];
@@ -405,7 +405,7 @@ export async function getAllConcretePrices(length, width, depth, basinType)
 
     for (const concreteJson of concreteJsons) {
         var name = await concreteJson.name;
-        const price = await calcualteConcreteCost(length, width, depth, basinType, name)
+        const price = await calcualteConcreteCost(length, width, depth, deepDepth, floorType, basinType, name)
         
         // Create a new JSON object with the name and price fields
         const option = { "name": name, "price": price };
@@ -437,17 +437,16 @@ export async function getAllConcretePrices(length, width, depth, basinType)
 ////////// WATER //////////
 ///////////////////////////
 
-function calcualteGallons(length, width, depth, basinType)
+export function calculateGallons(length, width, depth, deepDepth, floorType)
 {
-    var volume = calculatePoolVolume(length, width, depth, basinType);
+    var volume = calculatePoolVolume(length, width, depth, deepDepth, floorType);
     return (volume * 7.48);
 }
-export function calculateWaterPrice(length, width, depth, basinType) // will this need to be acessed?
+export function calculateWaterPrice(length, width, depth, deepDepth, floorType) // will this need to be acessed?
 {
-
-    var gallons = calcualteGallons(length, width, depth, basinType);
     //This calculates the total cost of water for a pool based on the pools volume.
     //Inputs: Pools Volume
+    var gallons = calculateGallons(length, width, depth, deepDepth, floorType);
     var waterPrice = 0.005;//set price
     var varprice = gallons * waterPrice;
     return varprice;
@@ -463,11 +462,11 @@ function calculateSteelWallingSqFT(length, width)
     //Inputs: Pools Length, Width, Depth 1, Price/Name of side walling
     //database call for sidewalling price
     //Database call for sidewalling price based on name;
-    var sqFt = (2 * width + 2 * length);
+    var sqFt = (2 * width) + (2 * length);
     return sqFt;
 }
 
-export async function calcuateSteelWallingPrice(length, width, product_name)
+export async function calculateSteelWallingPrice(length, width, product_name)
 {
 
     var sqFt = calculateSteelWallingSqFT(length, width);
@@ -483,7 +482,7 @@ export async function getAllSteelWallingPrices(length, width)
 
     for (const SteelWallingJson of SteelWallingJsons) {
         var name = await SteelWallingJson.name;
-        const price = await calcuateSteelWallingPrice(length, width, name)
+        const price = await calculateSteelWallingPrice(length, width, name)
         
         // Create a new JSON object with the name and price fields
         const option = { "name": name, "price": price };
@@ -499,21 +498,21 @@ export async function getAllSteelWallingPrices(length, width)
 ////////// VINYL LINING //////////
 //////////////////////////////////
 
-function calculatePoolLinerArea(length, width, depth, basinType)
+export function calculatePoolLinerArea(length, width, depth, deepDepth, floorType)
 {
     //This calculates the cost of a vinyl pools liner based on its surface area.
     //Inputs: Pools Surface Area, Liner price/name
     //Database call for liner price
 
-    var surfaceArea = calculatePoolSurfaceArea(length, width, depth, basinType);
+    var surfaceArea = calculatePoolSurfaceArea(length, width, depth, deepDepth, floorType);
 
     var poolLinerSize = surfaceArea * 1.05;
-    return poolLinerSize;
+    return Math.ceil(poolLinerSize);
 }
-export async function calcualtePoolLinerPrice(length, width, depth, basinType, product_name)
+export async function calcualtePoolLinerPrice(length, width, depth, deepDepth, floorType, product_name)
 {
 
-    var poolLinerSize = calculatePoolLinerArea(length, width, depth, basinType);
+    var poolLinerSize = calculatePoolLinerArea(length, width, depth, deepDepth, floorType);
     var poolLinerJson = (await get_liner(product_name))[0];
 
     var linerWidth = poolLinerJson.width_feet;
@@ -527,7 +526,7 @@ export async function calcualtePoolLinerPrice(length, width, depth, basinType, p
     
     return unitsNeeded * poolLinerJson.cost;
 }
-export async function getAllPoolLinerPrices(length, width, depth, basinType)
+export async function getAllPoolLinerPrices(length, width, depth, deepDepth, floorType)
 {
 
     var poolLinerOptions = [];
@@ -641,10 +640,8 @@ export async function getAllSolarCoverPrices(length, width)
 ////////// MISC INTERNAL USE //////////
 ///////////////////////////////////////
 
-function calculatePoolFilter(length, width, depth, basinType)
+function calculatePoolFilter(gallons)
 {
-
-    var gallons = calcualteGallons(length, width, depth, basinType);
 
     //This calculatees the appropriate filter based on the pools volume
     //Inputs: Pool Gallons
@@ -654,10 +651,8 @@ function calculatePoolFilter(length, width, depth, basinType)
     return price;
 
 }
-function calculatePoolPump(length, width, depth, basinType)
+function calculatePoolPump(gallons)
 {
-    var gallons = calcualteGallons(length, width, depth, basinType)
-
     //this calculates the pools pumps needed. 
     //Inputs: gallons
     var hpNeeded = (gallons / 24) / 60;
@@ -667,35 +662,56 @@ function calculatePoolPump(length, width, depth, basinType)
 
     return toReturn;
 }
-function calculateRebar(length, width, depth)
+export function calculateRebar(length, width, depth)
 {
     //This calculates the rebar needed with 2 inch spacing from its depth 1, length, and width
     //Inputs:Pool Length, Width, Depth, Rebar name/price
     //call to get rebar price if not included
     //database call to get the price of rebar based on name
-    var areaForBar = 2.33 * (2(length * 6 * depth) + 2(width * 6 * depth));
-
+    var areaForBar = (2 * (length * 6 * depth) + 2 * (width * 6 * depth));
+    areaForBar = areaForBar * 0.71;
     return areaForBar;
 }
-
+export async function calculatePoolPumpPrice(length, width, depth, deepDepth, floorType)
+{
+    var gallons = calculateGallons(length, width, depth, deepDepth, floorType);
+    return calculatePoolPump(gallons);
+}
+export async function calculatePoolFilterPrice(length, width, depth, deepDepth, floorType)
+{
+    var gallons = calculateGallons(length, width, depth, deepDepth, floorType);
+    return calculatePoolFilter(gallons);
+}
+export async function getFiberglassShellDetails(name)
+{
+    //database call for a fiberglass shell based on the input name and returns the json
+}
+export async function getSkimmerPrice(name)
+{
+    //db call for price
+}
+export async function getDrainPrice(name)
+{
+    //db call for price
+}
 /////////////////////////////
 ////////// PLASTER //////////
 /////////////////////////////
 
-function calculatePlaster(length, width, depth, basinType)
+export function calculatePlaster(length, width, depth, deepDepth, floorType)
 {
     //This calculates the cost of plaster - No it doesn't it calculates how much plaster is needed - devin
     //Inputs: Pools Surface Area, Cost of Plaster/Name of Plaster
     //Call to get Plaster(Or pass in plaster price)
     //database call for plaster price
 
-    var surfaceArea = calculatePoolSurfaceArea(length, width, depth, basinType);
+    var surfaceArea = calculatePoolSurfaceArea(length, width, depth, deepDepth, floorType);
     return (surfaceArea / (1/3));
 }
-export async function calculatePlasterCost(length, width, depth, basinType, product_name)
+export async function calculatePlasterCost(length, width, depth, deepDepth, floorType, product_name)
 {
 
-    var plasterlbsNeeded = calculatePlaster(length, width, depth, basinType);
+    var plasterlbsNeeded = calculatePlaster(length, width, depth, deepDepth, floorType);
     var plasterJson = (await get_plaster_data(product_name))[0];
 
     var plasterlbs = plasterJson.bag_size_pounds;
@@ -706,7 +722,7 @@ export async function calculatePlasterCost(length, width, depth, basinType, prod
     }
     return unitsNeeded * plasterJson.bag_cost;
 }
-export async function getAllPlasterPrices(length, width, depth, basinType)
+export async function getAllPlasterPrices(length, width, deth, deepDepth, floorType)
 {
 
     var plasterOptions = []
@@ -714,7 +730,7 @@ export async function getAllPlasterPrices(length, width, depth, basinType)
 
     for (const plasterJson of plasterJsons) {
         var name = await plasterJson.name;
-        const price = await calculatePlasterCost(length, width, depth, basinType, name);
+        const price = await calculatePlasterCost(length, width, depth, deepDepth, floorType, name);
         
         // Create a new JSON object with the name and price fields
         const option = { "name": name, "price": price };
@@ -729,18 +745,19 @@ export async function getAllPlasterPrices(length, width, depth, basinType)
 ////////// POOL MEASURMENT TOOLS //////////
 ///////////////////////////////////////////
 
-function calculatePoolSurfaceArea(length, width, depth, basinType)
+export function calculatePoolSurfaceArea(length, width, depth, deepDepth, floorType)
 {
     //This calculates the pools surface area
     //Inputs: Pools Length, Depth's, Widths, Type of Basin
 
-    if(basinType == "Diver")
+    if(floorType == "Diver")
     {
-        var volume = 2(width * depth[0]) + 2(length * depth[0]) + calculatePoolFloor(length, width, depth);
+        var surfaceArea = 2 * (width * depth) + 2 * (length * depth) + calculatePoolFloor(length, width, depth, deepDepth, floorType);
+        return surfaceArea;
     }
-    else if(basinType == "Slant")
+    else if(floorType == "Slant")
     {
-        var surfaceArea = (width * depth[0]) + (width * depth[1]) + 2(length * ((depth[1] - depth[0]) / 2)) + (width * Math.sqrt(Math.pow(width, 2) + Math.pow((depth[1] - depth[0]), 2)));
+        var surfaceArea = (width * depth) + (width * deepDepth) + 2 * (length * ((deepDepth - depth) / 2)) + calculatePoolFloor(length, width, depth, deepDepth, floorType);
         return surfaceArea;
     }
     else
@@ -750,20 +767,19 @@ function calculatePoolSurfaceArea(length, width, depth, basinType)
     }
 
 }
-function calculatePoolVolume(length, width, depth, basinType)
+export function calculatePoolVolume(length, width, depth, deepDepth, floorType)
 {
     //this calculates the pools volume
     //Inputs:Pools Length, Width, Depth, Basin Type
 
-    if(basinType == "Diver")
+    if(floorType == "Diver")
     {
-        //later
-        var volume = length * width * depth[0] + ((width * (length * .75) * (depth[1] - depth[0]))/3);
+        var volume = length * width * depth + ((width * (length * .75) * (deepDepth - depth))/3);
         return volume;
     }
-    else if(basinType == "Slant")
+    else if(floorType == "Slant")
     {
-        var volume = length * width * ((depth[0] + depth[1] - .75)/2);
+        var volume = length * width * ((depth + deepDepth - .75) / 2);
         return volume;
     }
     else
@@ -772,16 +788,28 @@ function calculatePoolVolume(length, width, depth, basinType)
         return volume;
     }
 }
-function calculatePoolFloor(length, width, depth)
+function calculatePoolFloor(length, width, depth, deepDepth, floorType)
 {
-    var shallow = width * (length/4);
-    var baseWidth = width / 2;
-    var baseLength = length * (7/40);
-    var dd = depth[1] - depth[0];
-    var trapizoid1 = ((baseWidth + width)/2) * Math.pow((Math.pow(dd, 2) + Math.pow((length/2), 2)), .5);
-    var trapizoid2 = 2 * (((0.75 * length) + length)/2) * Math.pow((Math.pow(dd,2) + Math.pow((.25 * width), 2)), 0.5);
-    var base = baseLength * baseWidth;
-    var trapizoid3 = ((baseWidth + width) / 2) * Math.pow((Math.pow(dd, 2) + Math.pow(((3 & length)/40), 2)), .5); 
-    var poolFloorSurfaceArea = shallow + trapizoid1 + trapizoid2 + base + trapizoid3;
-    return poolFloorSurfaceArea;
+    if(floorType == "Diver")
+    {
+        var shallow = width * (length/4);
+        var baseWidth = width / 2;
+        var baseLength = length * (7/40);
+        var dd = deepDepth - depth;
+        var trapizoid1 = ((baseWidth + width)/2) * Math.pow((Math.pow(dd, 2) + Math.pow((length/2), 2)), .5);
+        var trapizoid2 = 2 * (((0.75 * length) + length)/2) * Math.pow((Math.pow(dd,2) + Math.pow((.25 * width), 2)), 0.5);
+        var base = baseLength * baseWidth;
+        var trapizoid3 = ((baseWidth + width) / 2) * Math.pow((Math.pow(dd, 2) + Math.pow(((3 & length)/40), 2)), .5); 
+        var poolFloorSurfaceArea = shallow + trapizoid1 + trapizoid2 + base + trapizoid3;
+        return poolFloorSurfaceArea;
+    }
+    if(floorType == "Slant")
+    {
+        var depthDiff = deepDepth - depth;
+        return (Math.sqrt(Math.pow(depthDiff, 2) + Math.pow(length, 2)) * width);
+    }
+    else
+    {
+        return (length * width);
+    }
 }

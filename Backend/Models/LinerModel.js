@@ -43,7 +43,7 @@ const liners_data = [
     {'name': '20 x 40 Rectangle Inground Swimming Pool Liners - Samara Coast', 'type': 'vinyl', 'length_feet': 40, 'width_feet': 20, 'cost:': 2205.00}
    ]
 
-//  db.sync({ force: true }).then(() => {
+//  db.sync({ force: false }).then(() => {
 //  Liners.bulkCreate(liners_data, { validate: true }).then(() => {
 //  }).catch((err) => { console.log(err); });
 //  }).catch((error) => {

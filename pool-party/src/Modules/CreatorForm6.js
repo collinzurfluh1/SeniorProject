@@ -65,12 +65,13 @@ class CreatorForm6 extends React.Component {
           <div className="CreatorFormLabel">
             <h1>Pool Chemicals</h1>
               <label for="chlorine" class="chlorine">Chlorine:</label><br></br>
-              <ChlorineOptions onChange={this.updateChlorine} chlorine={this.state.chlorine} length={"5"} width={"5"} depth={"5"} basinType={"gunnite"}/>
+              <ChlorineOptions onChange={this.updateChlorine} chlorine={this.state.chlorine} deepDepth={"5"} floorType={"Slant"} length={"5"} width={"5"} depth={"5"} basinType={"gunnite"}/>
+             </div>
              <label for="cyaneuricAcid" class="CreatorFormLabel">Cyaneuric Acid</label><br></br>
-              <CyaneuricAcidOptions onChange={this.updateCyaneuricAcid} cyaneuricAcid={this.state.cyaneuricAcid} length={"5"} width={"5"} depth={"5"} basinType={"gunnite"}/>
-              <label for="shock" class="CreatorFormLabel">Shock</label><br></br>
-              <ShockOptions onChange={this.updateShock} shock={this.state.shock} length={"5"} width={"5"} depth={"5"} basinType={"gunnite"}/>
-          </div>
+             <CyaneuricAcidOptions onChange={this.updateCyaneuricAcid} cyaneuricAcid={this.state.cyaneuricAcid} length={"5"} width={"5"} depth={"5"} deepDepth={"5"} floorType={"Slant"} basinType={"gunnite"}/>
+             <label for="shock" class="CreatorFormLabel">Shock</label><br></br>
+             <ShockOptions onChange={this.updateShock} shock={this.state.shock} length={"5"} width={"5"} depth={"5"} deepDepth={"5"} floorType={"Slant"} basinType={"gunnite"}/>
+        
         
         </div>
       );
