@@ -58,35 +58,51 @@ const Pools = db.define('pools',{
         type: DataTypes.DOUBLE // should be same as shallow if no slant.
     },
     slant_type:{
-        type: DataTypes.STRING // can be None if shallow == deep
+        type: DataTypes.STRING // can be flatbed, slant, diver
+    },
+    basin_type:{
+        type: DataTypes.STRING // can be Gunnite, Vinyl, or Fiberglass
     },
     // Lining/Construction of the pool
     lining_type:{
-        type: DataTypes.STRING  
+        type: DataTypes.STRING  // name of product
+    },
+    fiberglass_shell:{
+        type: DataTypes.STRING  // name of product
+    },
+    steel_wall:{
+        type: DataTypes.STRING  // name of product
+    },
+    // Materials
+    concrete:{
+        type: DataTypes.STRING  // name of product
+    },
+    plaster:{
+        type: DataTypes.STRING  // name of product
     },
     //There are more columns we will need to include
     //Other Elemtns of the pool
     cover1:{
-        type: DataTypes.STRING  // ID for product
+        type: DataTypes.STRING  // name of product
     },
     cover2:{
-        type: DataTypes.STRING  // ID for product
+        type: DataTypes.STRING  // name of product
     },
     piping:{
-        type: DataTypes.STRING  // ID for product
+        type: DataTypes.STRING  // name of product
     },
     drain:{
-        type: DataTypes.STRING  // ID for product
+        type: DataTypes.STRING  // name of product
     },
     skimmer:{
-        type: DataTypes.STRING  // ID for product
+        type: DataTypes.STRING  // name of product
     },
     pump:{
-        type: DataTypes.STRING  // ID for product
+        type: DataTypes.STRING  // name of product
     },
     //Cost, this is the last column that will be filled.
     cost:{
-        type: DataTypes.DOUBLE  // 
+        type: DataTypes.DOUBLE  // total cost of the pool from MaterialCalculations.js
     }
 },{
     freezeTableName:true
