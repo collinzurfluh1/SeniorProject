@@ -1,7 +1,7 @@
 1//Things still needed to be added in during calculations 
 //Drains, Pumps, Skimmer
 
-import { get_plaster_data, get_cement_data, get_piping, get_chlorine, get_cyanuric_acid, get_shock, get_winter_covers, get_solar_covers, get_liner, get_steel_walling } from "../Controllers/Materials.js";
+import { get_plaster_data, get_cement_data, get_piping, get_chlorine, get_cyanuric_acid, get_shock, get_winter_covers, get_solar_covers, get_liner, get_steel_walling, get_fiberglass_shell } from "../Controllers/Materials.js";
 
 
 
@@ -173,7 +173,7 @@ export function calculateChlorineTablets(length, width, depth, deepDepth, floorT
 export async function calculateChlorinePrice(length, width, depth, deepDepth, floorType, product_name)
 {
 
-    var tablets = await calculateChlorineTablets(length, width, depth, deepDepth, floorType);
+    var tablets = calculateChlorineTablets(length, width, depth, deepDepth, floorType);
 
     var chlorineJson = (await get_chlorine(product_name))[0];
 
@@ -189,14 +189,14 @@ export async function calculateChlorinePrice(length, width, depth, deepDepth, fl
 export async function getAllChlorinePrices(length, width, depth, deepDepth, floorType)
 {
     var gallons = calculateGallons(length, width, depth, deepDepth, floorType)
-    console.log(gallons);
+
     var chlorineOptions = [];
     var chlorineJsons = await get_chlorine();
 
     for (const chlorineJson of chlorineJsons) {
         var name = await chlorineJson.name;
-        const price = await calculateChlorinePrice(length, width, depth, deepDepth, floorType, name)
-
+        const price = await calculateChlorinePrice(gallons, name)
+        
         // Create a new JSON object with the name and price fields
         const option = { "name": name, "price": price };
         
@@ -257,8 +257,9 @@ export function calculateShockLbs(gallons)
 }
 export async function calculateShockPrice(length, width, depth, deepDepth, floorType, product_name)
 {
-    var gallons = await calculateGallons(length, width, depth, deepDepth, floorType)
-    var shocklbs = await calculateShockLbs(gallons);
+    var gallons = calculateGallons(length, width, depth, deepDepth, floorType)
+   
+    var shocklbs = calculateShockLbs(gallons);
     var shockJson = (await get_shock(product_name))[0];
 
     var units;
@@ -272,12 +273,13 @@ export async function calculateShockPrice(length, width, depth, deepDepth, floor
 }
 export async function getAllShockPrices(length, width, depth, deepDepth, floorType)
 {
+    var gallons = calculateGallons(length, width, depth, deepDepth, floorType)
     var shockOptions = [];
     var shockJsons = await get_shock();
 
     for (const shockJson of shockJsons) {
         var name = await shockJson.name;
-        const price = await calculateShockPrice(length, width, depth, deepDepth, floorType, name)
+        const price = await calculateShockPrice(gallons, name)
         
         // Create a new JSON object with the name and price fields
         const option = { "name": name, "price": price };
@@ -362,12 +364,12 @@ export function calculateConcretePounds(length, width, depth, deepDepth, floorTy
     }
 }
 
-export async function calculateConcreteCost(length, width, depth, deepDepth, basinType, floorType, product_name)
+export async function calcualteConcreteCost(length, width, depth, deepDepth, basinType, floorType, product_name)
 {
 
-    var concretelbs = await calculateConcretePounds(length, width, depth, deepDepth, basinType, floorType);
-    var concreteJson = await get_cement_data(product_name);
+    var concretelbs = calculateConcretePounds(length, width, depth, deepDepth, floorType, basinType);
 
+    var concreteJson = await get_cement_data(product_name);
     concreteJson = concreteJson[0] // only one json in the list
 
     // return concreteJson[0]['bag_size_pounds'];
@@ -391,7 +393,7 @@ export async function getAllConcretePrices(length, width, depth, deepDepth, floo
     //     console.log(concreteJson)
     //     var name = await concreteJson.name;
     //     console.log(name)
-    //     const price = await calculateConcreteCost(length, width, depth, basinType, name)
+    //     const price = await calcualteConcreteCost(length, width, depth, basinType, name)
     //     console.log(price)
         
     //     // Create a new JSON object with the name and price fields
@@ -403,7 +405,7 @@ export async function getAllConcretePrices(length, width, depth, deepDepth, floo
 
     for (const concreteJson of concreteJsons) {
         var name = await concreteJson.name;
-        const price = await calculateConcreteCost(length, width, depth, deepDepth, floorType, basinType, name)
+        const price = await calcualteConcreteCost(length, width, depth, deepDepth, floorType, basinType, name)
         
         // Create a new JSON object with the name and price fields
         const option = { "name": name, "price": price };
@@ -418,7 +420,7 @@ export async function getAllConcretePrices(length, width, depth, deepDepth, floo
     //     console.log(concreteJson)
     //     var name = concreteJson.name;
     //     console.log(name)
-    //     const price = await calculateConcreteCost(length, width, depth, basinType, name)
+    //     const price = await calcualteConcreteCost(length, width, depth, basinType, name)
     //     console.log(price)
         
     //     // Create a new JSON object with the name and price fields
@@ -435,16 +437,16 @@ export async function getAllConcretePrices(length, width, depth, deepDepth, floo
 ////////// WATER //////////
 ///////////////////////////
 
-export  function calculateGallons(length, width, depth, deepDepth, floorType)
+export function calculateGallons(length, width, depth, deepDepth, floorType)
 {
-    var volume =  calculatePoolVolume(length, width, depth, deepDepth, floorType);
+    var volume = calculatePoolVolume(length, width, depth, deepDepth, floorType);
     return (volume * 7.48);
 }
-export async function calculateWaterPrice(length, width, depth, deepDepth, floorType) // will this need to be acessed?
+export function calculateWaterPrice(length, width, depth, deepDepth, floorType) // will this need to be acessed?
 {
     //This calculates the total cost of water for a pool based on the pools volume.
     //Inputs: Pools Volume
-    var gallons = await calculateGallons(length, width, depth, deepDepth, floorType);
+    var gallons = calculateGallons(length, width, depth, deepDepth, floorType);
     var waterPrice = 0.005;//set price
     var varprice = gallons * waterPrice;
     return varprice;
@@ -511,7 +513,6 @@ export async function calcualtePoolLinerPrice(length, width, depth, deepDepth, f
 {
 
     var poolLinerSize = calculatePoolLinerArea(length, width, depth, deepDepth, floorType);
-
     var poolLinerJson = (await get_liner(product_name))[0];
 
     var linerWidth = poolLinerJson.width_feet;
@@ -533,8 +534,8 @@ export async function getAllPoolLinerPrices(length, width, depth, deepDepth, flo
 
     for (const poolLinerJson of poolLinerJsons) {
         var name = await poolLinerJson.name;
-        const price = await calcualtePoolLinerPrice(length, width, depth, deepDepth, floorType, name)
-  
+        const price = await calcualtePoolLinerPrice(depth, length, width, basinType, name)
+        
         // Create a new JSON object with the name and price fields
         const option = { "name": name, "price": price };
         
@@ -544,9 +545,23 @@ export async function getAllPoolLinerPrices(length, width, depth, deepDepth, flo
     return poolLinerOptions;
 }
 
-////////////////////////////
+////////////////////////////////
 ////////// FIBERGLASS //////////
-////////////////////////////
+////////////////////////////////
+
+export async function calcualtePoolFiberglassShellPrice(product_name)
+{
+
+    var fiberglassShellJson = (await get_fiberglass_shell(product_name))[0];
+    
+    return fiberglassShellJson['cost'];
+}
+export async function getAllFiberglassShellPrices()
+{
+    var fiberglassShellOptions = (await get_fiberglass_shell());
+    
+    return fiberglassShellOptions;
+}
 
 ////////////////////////////
 ////////// COVERS //////////
@@ -642,16 +657,115 @@ export async function getAllSolarCoverPrices(length, width)
 ///////////////////////////////////////
 ////////// MISC INTERNAL USE //////////
 ///////////////////////////////////////
+export function getFilter(name)
+{
+    const filters = [
+        {
+          "Filter": "ProSeries 24 in. 3.14 sq. ft. Pool Sand Filter with 2 in. Valve",
+          "Cost": 599.00,
+          "Square Feet": 3.14
+        },
+        {
+          "Filter": "425 sq. ft. SwimClear Cartridge Filter",
+          "Cost": 1368.87,
+          "Square Feet": 425
+        },
+        {
+          "Filter": "24 in. Swimming Pool Sand Filter System with 7-Way Valve In-Ground",
+          "Cost": 349.95,
+          "Square Feet": 2
+        },
+        {
+          "Filter": "36 sq. ft. ProGrid D.E. Filter",
+          "Cost": 1008.99,
+          "Square Feet": 4
+        },
+        {
+          "Filter": "ProSeries 21 in. 2.20 sq. ft. Pool Sand Filter with 1.5 HP Matrix Pump",
+          "Cost": 796.00,
+          "Square Feet": 2.2
+        },
+        {
+          "Filter": "40 sq. ft. Perflex D.E. Filter",
+          "Cost": 959.00,
+          "Square Feet": 40
+        }
+      ];
+      return filters.find(item => item.Filter == name).Cost;
 
+}
 function calculatePoolFilter(gallons)
 {
 
     //This calculatees the appropriate filter based on the pools volume
     //Inputs: Pool Gallons
     var filterSqFt = gallons / 10000;
-    //database call for filter of that size&Name and returns both to be returned
-    var price;
-    return price;
+    const filters = [
+        {
+          "Filter": "ProSeries 24 in. 3.14 sq. ft. Pool Sand Filter with 2 in. Valve",
+          "Cost": 599.00,
+          "Square Feet": 3.14
+        },
+        {
+          "Filter": "425 sq. ft. SwimClear Cartridge Filter",
+          "Cost": 1368.87,
+          "Square Feet": 425
+        },
+        {
+          "Filter": "24 in. Swimming Pool Sand Filter System with 7-Way Valve In-Ground",
+          "Cost": 349.95,
+          "Square Feet": 2
+        },
+        {
+          "Filter": "36 sq. ft. ProGrid D.E. Filter",
+          "Cost": 1008.99,
+          "Square Feet": 4
+        },
+        {
+          "Filter": "ProSeries 21 in. 2.20 sq. ft. Pool Sand Filter with 1.5 HP Matrix Pump",
+          "Cost": 796.00,
+          "Square Feet": 2.2
+        },
+        {
+          "Filter": "40 sq. ft. Perflex D.E. Filter",
+          "Cost": 959.00,
+          "Square Feet": 40
+        }
+      ]
+      filters.sort((a, b) => Math.abs(filterSqFt - a["Square Feet"]) - Math.abs(filterSqFt - b["Square Feet"]));
+      return filters[0].Cost;
+}
+export function calculatePoolFilterPrice(length, width, depth, deepDepth, floorType)
+{
+    var gallons = calculateGallons(length, width, depth, deepDepth, floorType);
+    return calculatePoolFilter(gallons);
+}
+export function calculatePoolPumpPrice(length, width, depth, deepDepth, floorType)
+{
+    var gallons = calculateGallons(length, width, depth, deepDepth, floorType);
+    return calculatePoolPump(gallons);
+}
+export function getPump(name)
+{
+    const pumps = [
+        {
+          "Pumps": "Self-Priming Dual Speed In-Ground Pool Pump 2 in",
+          "Cost": 407.55,
+          "Horsepower": 2
+        },
+        {
+          "Pumps": "PowerFlo LX 115-Volt 1½ in. Plumbing",
+          "Cost": 371.88,
+          "Horsepower": 1.5
+        },
+        {
+          "Pumps": "Energy Efficient Variable Dual Speed Swimming Pool Pump Strainer",
+          "Cost": 214.07,
+          "Horsepower": 1
+        }
+      ];
+      return pumps.find(item => item.Pumps == name).Cost;
+
 
 }
 function calculatePoolPump(gallons)
@@ -660,10 +774,26 @@ function calculatePoolPump(gallons)
     //Inputs: gallons
     var hpNeeded = (gallons / 24) / 60;
     hpNeeded = hpNeeded / 15;
-    //Database call to get a pump with a horsepower closest but not less than needed.
-    toReturn = hpNeeded;
+    const pumps = [
+        {
+          "Pumps": "Self-Priming Dual Speed In-Ground Pool Pump 2 in",
+          "Cost": 407.55,
+          "Horsepower": 2
+        },
+        {
+          "Pumps": "PowerFlo LX 115-Volt 1½ in. Plumbing",
+          "Cost": 371.88,
+          "Horsepower": 1.5
+        },
+        {
+          "Pumps": "Energy Efficient Variable Dual Speed Swimming Pool Pump Strainer",
+          "Cost": 214.07,
+          "Horsepower": 1
+        }
+      ];
+      pumps.sort((a, b) => Math.abs(hpNeeded - a.Horsepower) - Math.abs(hpNeeded - b.Horsepower))
+      return pumps[0].Cost;
 
-    return toReturn;
 }
 export function calculateRebar(length, width, depth)
 {
@@ -675,16 +805,6 @@ export function calculateRebar(length, width, depth)
     areaForBar = areaForBar * 0.71;
     return areaForBar;
 }
-export async function calculatePoolPumpPrice(length, width, depth, deepDepth, floorType)
-{
-    var gallons = calculateGallons(length, width, depth, deepDepth, floorType);
-    return calculatePoolPump(gallons);
-}
-export async function calculatePoolFilterPrice(length, width, depth, deepDepth, floorType)
-{
-    var gallons = calculateGallons(length, width, depth, deepDepth, floorType);
-    return calculatePoolFilter(gallons);
-}
 export async function getFiberglassShellDetails(name)
 {
     
@@ -694,90 +814,75 @@ export function getSkimmerPrice(name)
     const skims = [
         {
           "Name": "Hayward SP1091LX Dyna-Skim Above-Ground Pool Skimmer",
-          "Type": "Skimmer",
-          "Price": "$54.41"
+          "Price": 54.41
         },
         {
           "Name": "Swimline 8940 Complete Standard Thru-Wall Skimmer, One Size, Multi",
-          "Type": "Skimmer",
-          "Price": "$44.95"
+          "Price": 44.95
         },
         {
           "Name": "Swimline SPAG8939 Complete Wide Mouth Thru-Wall Skimmer, One Size, Multi",
-          "Type": "Skimmer",
-          "Price": "$59.95"
+          "Price": 59.95
         },
         {
           "Name": "Hayward SP1091WM Dyna-Skim Above-Ground Pool Skimmer",
-          "Type": "Skimmer",
-          "Price": "$94.99"
+          "Price": 94.99
         },
         {
           "Name": "Hayward SP10841 Auto-Skim In-Ground Pool Skimmer, Square",
-          "Type": "Skimmer",
-          "Price": "$195.01"
+          "Price": 195.01
         }
       ];
-      return skims.find(item => item.Name == name);
+      return skims.find(item => item.Name == name).Price;
 }
 export function getDrainPrice(name)
 {
     const drains = [
         {
           "Name": "Tongoss 8 Bottom Pool Drain Cover",
-          "Type": "Drain",
-          "Price": "$14.99"
+          "Price": 14.99
         },
         {
           "Name": "Polaris 5820 Main Drain Cover",
-          "Type": "Drain",
-          "Price": "$84.98"
+          "Price": 84.98
         },
         {
           "Name": "Hayward WG1030AVDGRPAK2 Dark Gray Dual Suction Flow Drain Cover and Frame",
-          "Type": "Drain",
-          "Price": "$48.99"
+          "Price": 48.99
         },
         {
           "Name": "Anti-Vortex Main Drain Suction Cover Plate For In-Ground Swimming Pools",
-          "Type": "Drain",
-          "Price": "$22.97"
+          "Price": 22.97
         },
         {
           "Name": "Color Match Pool Fittings 8-inch VGB Retro-Fit Universal Drain Cover & Adaptor Plate (White)",
-          "Type": "Drain",
-          "Price": "$38.95"
+          "Price": 38.95
         }
       ];
-      return drains.find(item => item.Name = name);
+      return drains.find(item => item.Name = name).Price;
 }
 export function getAllSkimmerPrices()
 {
     return [
         {
           "Name": "Hayward SP1091LX Dyna-Skim Above-Ground Pool Skimmer",
-          "Type": "Skimmer",
-          "Price": "$54.41"
+          "Price": 54.41
         },
         {
           "Name": "Swimline 8940 Complete Standard Thru-Wall Skimmer, One Size, Multi",
-          "Type": "Skimmer",
-          "Price": "$44.95"
+          "Price": 44.95
         },
         {
           "Name": "Swimline SPAG8939 Complete Wide Mouth Thru-Wall Skimmer, One Size, Multi",
-          "Type": "Skimmer",
-          "Price": "$59.95"
+          "Price": 59.95
         },
         {
           "Name": "Hayward SP1091WM Dyna-Skim Above-Ground Pool Skimmer",
-          "Type": "Skimmer",
-          "Price": "$94.99"
+          "Price": 94.99
         },
         {
           "Name": "Hayward SP10841 Auto-Skim In-Ground Pool Skimmer, Square",
-          "Type": "Skimmer",
-          "Price": "$195.01"
+          "Price": 195.01
         }
       ];
 }
@@ -786,28 +891,23 @@ export function getAllDrainPrices()
     return [
         {
           "Name": "Tongoss 8 Bottom Pool Drain Cover",
-          "Type": "Drain",
-          "Price": "$14.99"
+          "Price": 14.99
         },
         {
           "Name": "Polaris 5820 Main Drain Cover",
-          "Type": "Drain",
-          "Price": "$84.98"
+          "Price": 84.98
         },
         {
           "Name": "Hayward WG1030AVDGRPAK2 Dark Gray Dual Suction Flow Drain Cover and Frame",
-          "Type": "Drain",
-          "Price": "$48.99"
+          "Price": 48.99
         },
         {
           "Name": "Anti-Vortex Main Drain Suction Cover Plate For In-Ground Swimming Pools",
-          "Type": "Drain",
-          "Price": "$22.97"
+          "Price": 22.97
         },
         {
           "Name": "Color Match Pool Fittings 8-inch VGB Retro-Fit Universal Drain Cover & Adaptor Plate (White)",
-          "Type": "Drain",
-          "Price": "$38.95"
+          "Price": 38.95
         }
       ];
 }
@@ -839,7 +939,7 @@ export async function calculatePlasterCost(length, width, depth, deepDepth, floo
     }
     return unitsNeeded * plasterJson.bag_cost;
 }
-export async function getAllPlasterPrices(length, width, depth, deepDepth, floorType)
+export async function getAllPlasterPrices(length, width, deth, deepDepth, floorType)
 {
 
     var plasterOptions = []
