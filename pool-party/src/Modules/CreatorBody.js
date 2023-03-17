@@ -133,7 +133,7 @@ class CreatorBody extends React.Component {
             //Error because username is not defined
             owner: props.username,
             title: this.GetPool()["name"],
-            original_creator: false,
+            original_creator: true,
             pulic: true,
             concrete: this.GetPool()['materialData']['materialBrand'],
             plaster: this.GetPool()['materialData']['plaster'],
@@ -152,9 +152,9 @@ class CreatorBody extends React.Component {
             drain: this.GetPool()['drain'],
             skimmer:this.GetPool()['skimmer'],
             pump: this.GetPool()['pump'],
-            //shock: this.GetPool()['chemicals']['chlorine'],
-            //cyanuricAcid: this.GetPool()['chemicals']['cyaneuricAcid'],
-            //chlorine: this.GetPool()['chemicals']['chlorine'],
+            shock: this.GetPool()['chemicals']['chlorine'],
+            cyanuricAcid: this.GetPool()['chemicals']['cyaneuricAcid'],
+            chlorine: this.GetPool()['chemicals']['chlorine'],
             cost: 0,
 
           });
