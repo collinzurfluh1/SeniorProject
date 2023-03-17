@@ -6,7 +6,11 @@ import db from "./Config/Database.js";
 import router from "./Routes/index.js";
 
 // test for concrete
+<<<<<<< Updated upstream
 // import { calcualteConcreteCost, getAllConcretePrices } from "./Middleware/MaterialCalculations.js";
+=======
+ import { getDrainPrice, getSkimmerPrice, getAllSkimmerPrices, calculatePoolLinerArea, calculateCyanuricAcidPounds, calculateChlorineTablets, calculateShockLbs, calculatePipesAmount, calculateRebar, calculatePlaster, calculatePoolSurfaceArea, calculateConcretePounds, getAllConcretePrices, calculateGallons, calculatePoolVolume, calculateWaterPrice } from "./Middleware/MaterialCalculations.js";
+>>>>>>> Stashed changes
 
 import { get_plaster_data, get_cement_data, get_winter_covers, get_solar_covers, get_chlorine, get_cyanuric_acid, get_shock, get_piping, get_liner, get_steel_walling, get_fiberglass_shell } from "./Controllers/Materials.js";
 
@@ -190,5 +194,85 @@ app.use(router);
 // console.log('############');
 // console.log(await get_fiberglass_shell());
 // console.log('############');
+/*
+Collyn Backend Test Functions
+console.log('############');
+console.log(await calculatePoolVolume(40, 20, 4, 10, "Flatbed"));
+console.log(await calculatePoolVolume(40, 20, 4, 10, "Slant"));
+
+console.log(await calculatePoolVolume(40, 20, 4, 10, "Diver"));
+
+console.log('############');
+console.log('############');
+console.log(await calculatePoolSurfaceArea(40, 20, 4, 10, "Flatbed"));
+console.log(await calculatePoolSurfaceArea(40, 20, 4, 10, "Slant"));
+
+console.log(await calculatePoolSurfaceArea(40, 20, 4, 10, "Diver"));
+
+console.log('############');
+
+
+console.log('############');
+console.log(await calculateChlorineTablets(40, 20, 4, 10, "Flatbed"));
+console.log(await calculateChlorineTablets(40, 20, 4, 10, "Slant"));
+
+console.log(await calculateChlorineTablets(40, 20, 4, 10, "Diver"));
+
+console.log('############');
+console.log('############');
+console.log(await calculateCyanuricAcidPounds(40, 20, 4, 10, "Flatbed"));
+console.log(await calculateCyanuricAcidPounds(40, 20, 4, 10, "Slant"));
+
+console.log(await calculateCyanuricAcidPounds(40, 20, 4, 10, "Diver"));
+
+console.log('############');
+console.log('############');
+console.log(await calculateGallons(40, 20, 4, 10, "Flatbed"));
+console.log(await calculateGallons(40, 20, 4, 10, "Slant"));
+
+console.log(await calculateGallons(40, 20, 4, 10, "Diver"));
+
+console.log('############');
+
+
+console.log('############');
+console.log(await calculatePoolVolume(40, 20, 4, 10, "Flatbed"));
+console.log(await calculatePoolVolume(40, 20, 4, 10, "Slant"));
+
+console.log(await calculatePoolVolume(40, 20, 4, 10, "Diver"));
+
+console.log('############');
+console.log('############');
+console.log(await calculatePoolLinerArea(40, 20, 4, 10, "Flatbed"));
+console.log(await calculatePoolLinerArea(40, 20, 4, 10, "Slant"));
+
+console.log(await calculatePoolLinerArea(40, 20, 4, 10, "Diver"));
+
+console.log('############');
+
+console.log('############');
+
+console.log(await calculateRebar(40, 20, 10));
+
+console.log('############');
+console.log('############');
+console.log(await calculatePlaster(40, 20, 4, 10, "Flatbed"));
+console.log(await calculatePlaster(40, 20, 4, 10, "Slant"));
+
+console.log(await calculatePlaster(40, 20, 4, 10, "Diver"));
+
+console.log('############');
+*/
+console.log('############');
+console.log(getAllSkimmerPrices()[0].Price);
+console.log('############');
+
+console.log('############');
+console.log(getSkimmerPrice("Hayward SP1091LX Dyna-Skim Above-Ground Pool Skimmer"));
+console.log('############');
+
+console.log('############');
+console.log(getDrainPrice("Tongoss 8 Bottom Pool Drain Cover"));
+console.log('############');
 
 app.listen(4000, ()=> console.log('Server running at port 4000'));
