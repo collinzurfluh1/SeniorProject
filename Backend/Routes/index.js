@@ -5,8 +5,8 @@ import "../Controllers/Materials.js";
 import { verifyToken } from "../Middleware/VerifyToken.js";
 import { refreshToken } from "../Controllers/RefreshToken.js";
 
-import { getAllSkimmerPrices, getAllDrainPrices, calculateShockPrice, getAllChlorinePrices, getAllCyanuricAcidPrices, getAllShockPrices, getAllPipesPrices, getAllWinterCoverPrices, getAllSolarCoverPrices, getAllConcretePrices, getAllPlasterPrices, getAllPoolLinerPrices, getAllSteelWallingPrices, calculateRebar, calculatePoolPumpPrice, calculatePoolFilterPrice, getFiberglassShellDetails, getSkimmerPrice, getDrainPrice } from "../Middleware/MaterialCalculations.js"; 
-
+import { getPump, getFilter, calculatePoolPumpPrice, calculatePoolFilterPrice, getDrainPrice, getAllSkimmerPrices, getAllDrainPrices, calculateShockPrice, getAllChlorinePrices, getAllCyanuricAcidPrices, getAllShockPrices, getAllPipesPrices, getAllWinterCoverPrices, getAllSolarCoverPrices, getAllConcretePrices, getAllPlasterPrices, getAllPoolLinerPrices, getAllSteelWallingPrices, calculateRebar, getFiberglassShellDetails, getSkimmerPrice } from "../Middleware/MaterialCalculations.js"; 
+//Make for getPump, getFilter, 
 const router = express.Router();
  
 router.get('/users', verifyToken, getUsers);
@@ -69,9 +69,9 @@ router.get('/getAllPipesPrices', async (req, res) => {
     res.json(results);
 });
 
-router.get('/calculateConcreteCost', async (req, res) => {
+router.get('/calcualteConcreteCost', async (req, res) => {
     const { length, width, depth, deepDepth, floorType, basinType, product_name } = req.query;
-    const results = await calculateConcreteCost(length, width, depth, deepDepth, floorType, basinType, product_name );
+    const results = await calcualteConcreteCost(length, width, depth, deepDepth, floorType, basinType, product_name );
     res.json(results);
 });
 
@@ -172,12 +172,6 @@ router.get('/getFiberglassShellDetails', async (req, res) => {
     res.json(results);
 });
 
-router.get('/getFiberglassShellDetails', async (req, res) => {
-    const { name } = req.query;
-    const results = await getFiberglassShellDetails(name);
-    res.json(results);
-});
-
 router.get('/getSkimmerPrice', async (req, res) => {
     const { name } = req.query;
     const results = await getSkimmerPrice(name);
@@ -190,15 +184,27 @@ router.get('/getDrainPrice', async (req, res) => {
     res.json(results);
 });
 
-router.get('/getSkmmerPrices', async (req, res) => {
+router.get('/getAllSkimmerPrices', async (req, res) => {
     const { } = req.query;
-    const results = await getDrainPrice();
+    const results = await getAllSkimmerPrices();
     res.json(results);
 });
 
 router.get('/getAllDrainPrices', async (req, res) => {
     const { } = req.query;
-    const results = await getDrainPrice();
+    const results = await getAllDrainPrices();
+    res.json(results);
+});
+
+router.get('/getPump', async (req, res) => {
+    const { name } = req.query;
+    const results = await getPumpPrice(name);
+    res.json(results);
+});
+
+router.get('/getFilter', async (req, res) => {
+    const { name } = req.query;
+    const results = await getFilterPrice(name);
     res.json(results);
 });
 export default router;
