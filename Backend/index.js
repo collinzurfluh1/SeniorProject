@@ -37,9 +37,10 @@ app.use(router);
 // TESTING CONCRETE COST FUNCTION
 // setTimeout(async function() {
 //     console.log('############################################################');
-//     // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
-//     var all_options = await getAllConcretePrices(10, 20, 6, 'Gunite');
-//     console.log(all_options);
+//  console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
+//      var all_options = await getAllConcretePrices(10, 20, 6, 'Gunite');
+//      console.log(all_options);
+
 //     console.log('############################################################');
 // }, 5000);
 
@@ -189,8 +190,19 @@ app.use(router);
 
 // Fiberglass Shells
 // console.log('############');
-// console.log(await get_fiberglass_shell());
+// console.log(await get_fiberglass_shell('Lazy L Fiberglass'));
 // console.log('############');
+
+import { calcualtePoolFiberglassShellPrice, getAllFiberglassShellPrices } from "./Middleware/MaterialCalculations.js";
+
+// console.log('############');
+// console.log(await calcualtePoolFiberglassShellPrice('Lazy L Fiberglass'));
+// console.log('############');
+
+// console.log('############');
+// console.log(await getAllFiberglassShellPrices());
+// console.log('############');
+
 /*
 Collyn Backend Test Functions
 console.log('############');
@@ -264,13 +276,14 @@ console.log('############');
 console.log(getAllSkimmerPrices());
 console.log('############');
 
-console.log('############');
-console.log(getSkimmerPrice("Hayward SP1091LX Dyna-Skim Above-Ground Pool Skimmer"));
-console.log('############');
 
-console.log('############');
-console.log(getDrainPrice("Tongoss 8 Bottom Pool Drain Cover"));
-console.log('############');
+// console.log('############');
+// console.log(getSkimmerPrice("Hayward SP1091LX Dyna-Skim Above-Ground Pool Skimmer"));
+// console.log('############');
+
+// console.log('############');
+// console.log(getDrainPrice("Tongoss 8 Bottom Pool Drain Cover"));
+// console.log('############');
 
 console.log('############');
 console.log(await calculatePoolPumpPrice(40, 20, 4, 10, "Flatbed"));

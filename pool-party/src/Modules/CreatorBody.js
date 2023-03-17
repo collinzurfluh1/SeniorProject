@@ -17,8 +17,7 @@ import CreatorForm7 from "../Modules/CreatorForm7";
 import CreatorForm8 from "../Modules/CreatorForm8";
 import CreatorForm9 from "../Modules/CreatorForm9";
 import CreatorFormFinal from "../Modules/CreatorFormFinal";
-import CreatorFormFinal2 from "../Modules/CreatorFormFinal2";
-import CreatorFormFinal3 from "../Modules/CreatorFormFinal3";
+
 
 import "../SCSS/creator.scss";
 
@@ -39,7 +38,7 @@ class CreatorBody extends React.Component {
     super(props);
     console.log(props.poolProps);
     this.currIndex = 1;
-    this.maxIndex = 12; 
+    this.maxIndex = 10; 
     this.state = {
       username: props.username,
       nextButtonText: "Next",
@@ -136,10 +135,15 @@ class CreatorBody extends React.Component {
             title: this.GetPool()["name"],
             original_creator: false,
             pulic: true,
+            concrete: this.GetPool()['materialData']['materialBrand'],
+            plaster: this.GetPool()['materialData']['plaster'],
+            fiberglass_shell: this.GetPool()['materialData']['shell'],
+            steel_wall: this.GetPool()['materialData']['wall'],
+            basin_type: this.GetPool()['material'],
             length: this.GetPool()['materialData']['length'],
             width: this.GetPool()['materialData']['width'],
-            depth_shallow: this.GetPool()['materialData']['shallowDepth'],
-            depth_deep: this.GetPool()['materialData']['deepDepth'],
+            depth_shallow: (this.GetPool()['materialData']['shallowDepth'] != null) ? this.GetPool()['materialData']['shallowDepth'] : this.GetPool()['materialData']['depth'],
+            depth_deep: (this.GetPool()['materialData']['deepDepth'] != null) ? this.GetPool()['materialData']['deepDepth'] : this.GetPool()['materialData']['deepDepth'],
             slant_type: this.GetPool()['materialData']['slant'],
             lining_type: this.GetPool()['materialData']['lining'],
             cover1: this.GetPool()['winterCover'],
@@ -148,6 +152,9 @@ class CreatorBody extends React.Component {
             drain: this.GetPool()['drain'],
             skimmer:this.GetPool()['skimmer'],
             pump: this.GetPool()['pump'],
+            //shock: this.GetPool()['chemicals']['chlorine'],
+            //cyanuricAcid: this.GetPool()['chemicals']['cyaneuricAcid'],
+            //chlorine: this.GetPool()['chemicals']['chlorine'],
             cost: 0,
 
           });
@@ -568,36 +575,11 @@ this.setState({_deepDepth: deepDepth}, function() {
         this.setState({ creatorForm8: false});
         this.setState({ creatorForm9: false});
         this.setState({ prevButton: false });
-
-        this.setState({ nextButton: true});
+        this.setState({ nextButtonText: 'Submit' });
         this.setState({ creatorFormSubmit: true});
-        this.setState({ creatorFormSubmit2: false});
-        this.setState({ creatorFormSubmit3: false});
 
         break;
-        case 11:
-          this.setState({ creatorForm1: false });
-          this.setState({ creatorForm2: false });
-          this.setState({ creatorForm3: false });
-          this.setState({ creatorForm4: false });
-          this.setState({ creatorForm5: false});
-          this.setState({ creatorForm6: false});
-          this.setState({ creatorForm7: false});
-          this.setState({ creatorForm8: false});
-          this.setState({ creatorForm9: false});
-          this.setState({ prevButton: true });
-          this.setState({ nextButton: true});
-          this.setState({ creatorFormSubmit: false});
-          this.setState({ creatorFormSubmit2: true});
-          this.setState({ nextButtonText: 'Next'});
-          this.setState({ prevButton: true });
-          break;
-        case 12: 
-          this.setState({ creatorFormSubmit: false});
-          this.setState({ creatorFormSubmit2: false});
-          this.setState({ nextButtonText: 'Submit' });
-          this.setState({ creatorFormSubmit3: true }); 
-          break;  
+
       default:
        this.setState({ creatorForm1: false });
        this.setState({ creatorForm2: false });
@@ -608,13 +590,13 @@ this.setState({_deepDepth: deepDepth}, function() {
        this.setState({ creatorForm7: false});
        this.setState({ creatorForm8: false});
        this.setState({ creatorForm9: false});
-       this.setState({ creatorFormSubmit: false});
+       this.setState({ creatorFormSubmit: true});
        this.setState({ nextButtonText: 'Submit'});
         return;
     }
   }
   render() {
-    const { prevButton, nextButton, creatorForm1, creatorForm2, creatorForm3, creatorForm4, creatorForm5, creatorForm6, creatorForm7, creatorForm8, creatorForm9, creatorFormSubmit, creatorFormSubmit2, creatorFormSubmit3 } = this.state;
+    const { prevButton, nextButton, creatorForm1, creatorForm2, creatorForm3, creatorForm4, creatorForm5, creatorForm6, creatorForm7, creatorForm8, creatorForm9, creatorFormSubmit } = this.state;
     var currIndex = 0;
     
     return (
