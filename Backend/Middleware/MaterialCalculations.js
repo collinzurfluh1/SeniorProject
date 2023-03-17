@@ -1,4 +1,4 @@
-//Things still needed to be added in during calculations 
+1//Things still needed to be added in during calculations 
 //Drains, Pumps, Skimmer
 
 import { get_plaster_data, get_cement_data, get_piping, get_chlorine, get_cyanuric_acid, get_shock, get_winter_covers, get_solar_covers, get_liner, get_steel_walling } from "../Controllers/Materials.js";
@@ -153,7 +153,7 @@ function calculateFiberglass(poolMaterials)
 ////////// CHEMICALS //////////
 ///////////////////////////////
 
-function calculateChlorineTablets(length, width, depth, deepDepth, floorType)
+export function calculateChlorineTablets(length, width, depth, deepDepth, floorType)
 {
     //This function calculates the cost based on the volume of the pool
     //Inputs: Pools Gallons of Water, chlorine tablet name, shock name, cyanuric acid name, ppm is from user input
@@ -168,7 +168,7 @@ function calculateChlorineTablets(length, width, depth, deepDepth, floorType)
     {
         tabletCount = 3 * (gallons / 10000);
     }
-    return tabletCount;
+    return Math.ceil(tabletCount);
 }
 export async function calculateChlorinePrice(length, width, depth, deepDepth, floorType, product_name)
 {
@@ -206,7 +206,7 @@ export async function getAllChlorinePrices(length, width, depth, deepDepth, floo
 
     return chlorineOptions;  
 }
-function calculateCyanuricAcidPounds(length, width, depth, deepDepth, floorType)
+export function calculateCyanuricAcidPounds(length, width, depth, deepDepth, floorType)
 {
     var gallons = calculateGallons(length, width, depth, deepDepth, floorType)
 
@@ -250,7 +250,7 @@ export async function getAllCyanuricAcidPrices(length, width, depth, deepDepth, 
 
     return cyanuricAcidOptions; 
 }
-function calculateShockLbs(gallons)
+export function calculateShockLbs(gallons)
 {
     var lbsOfShock = gallons / 5000;
     return lbsOfShock;
@@ -295,7 +295,7 @@ export async function getAllShockPrices(length, width, depth, deepDepth, floorTy
 ////////// PIPING //////////
 ////////////////////////////
 
-function calculatePipesAmount(deepDepth, length, width)
+export function calculatePipesAmount(deepDepth, length, width)
 {
     //This function calculates the length and cost of pipe based on the type of pipe and perimeter of the pool
     //Inputs: Pipe Price/Name, Pools Max Depth, Length, and Width
@@ -334,7 +334,7 @@ export async function getAllPipesPrices(deepDepth, length, width)
 ////////// CONCRETE //////////
 //////////////////////////////
 
-function calculateConcretePounds(length, width, depth, deepDepth, floorType, basinType)
+export function calculateConcretePounds(length, width, depth, deepDepth, floorType, basinType)
 {
     //This calculates the total cost of concrete through cubic and square feet cost around and inside the pool.
     //Inputs: Length, Width, Depth, Surface Area, Concrete Price, BasinType
@@ -350,7 +350,7 @@ function calculateConcretePounds(length, width, depth, deepDepth, floorType, bas
     {
         var dd = (deepDepth * depth) / 2;
         var depthDiff = deepDepth - depth;
-        var surfaceArea = 2(length * dd) + (width * depth) + (width * deepDepth) + (Math.sqrt(Math.pow(depthDiff, 2) + Math.pow(length, 2)));
+        var surfaceArea = 2 * (length * dd) + (width * depth) + (width * deepDepth) + (Math.sqrt(Math.pow(depthDiff, 2) + Math.pow(length, 2)));
         var totallbs = ((surfaceArea * 1.1) * 75 * 0.5);
         totallbs = totallbs + (75 * ((length + 3) * (width + 3)) - (length * width) * 0.5);
         return totallbs;
@@ -437,7 +437,7 @@ export async function getAllConcretePrices(length, width, depth, deepDepth, floo
 ////////// WATER //////////
 ///////////////////////////
 
-function calculateGallons(length, width, depth, deepDepth, floorType)
+export function calculateGallons(length, width, depth, deepDepth, floorType)
 {
     var volume = calculatePoolVolume(length, width, depth, deepDepth, floorType);
     return (volume * 7.48);
@@ -462,7 +462,7 @@ function calculateSteelWallingSqFT(length, width)
     //Inputs: Pools Length, Width, Depth 1, Price/Name of side walling
     //database call for sidewalling price
     //Database call for sidewalling price based on name;
-    var sqFt = (2 * width + 2 * length);
+    var sqFt = (2 * width) + (2 * length);
     return sqFt;
 }
 
@@ -498,7 +498,7 @@ export async function getAllSteelWallingPrices(length, width)
 ////////// VINYL LINING //////////
 //////////////////////////////////
 
-function calculatePoolLinerArea(length, width, depth, deepDepth, floorType)
+export function calculatePoolLinerArea(length, width, depth, deepDepth, floorType)
 {
     //This calculates the cost of a vinyl pools liner based on its surface area.
     //Inputs: Pools Surface Area, Liner price/name
@@ -507,7 +507,7 @@ function calculatePoolLinerArea(length, width, depth, deepDepth, floorType)
     var surfaceArea = calculatePoolSurfaceArea(length, width, depth, deepDepth, floorType);
 
     var poolLinerSize = surfaceArea * 1.05;
-    return poolLinerSize;
+    return Math.ceil(poolLinerSize);
 }
 export async function calcualtePoolLinerPrice(length, width, depth, deepDepth, floorType, product_name)
 {
@@ -668,7 +668,7 @@ export function calculateRebar(length, width, depth)
     //Inputs:Pool Length, Width, Depth, Rebar name/price
     //call to get rebar price if not included
     //database call to get the price of rebar based on name
-    var areaForBar = 2.33 * (2(length * 6 * depth) + 2(width * 6 * depth));
+    var areaForBar = (2 * (length * 6 * depth) + 2 * (width * 6 * depth));
     areaForBar = areaForBar * 0.71;
     return areaForBar;
 }
@@ -698,7 +698,7 @@ export async function getDrainPrice(name)
 ////////// PLASTER //////////
 /////////////////////////////
 
-function calculatePlaster(length, width, depth, deepDepth, floorType)
+export function calculatePlaster(length, width, depth, deepDepth, floorType)
 {
     //This calculates the cost of plaster - No it doesn't it calculates how much plaster is needed - devin
     //Inputs: Pools Surface Area, Cost of Plaster/Name of Plaster
@@ -722,7 +722,7 @@ export async function calculatePlasterCost(length, width, depth, deepDepth, floo
     }
     return unitsNeeded * plasterJson.bag_cost;
 }
-export async function getAllPlasterPrices(length, width, depth, deepDepth, floorType)
+export async function getAllPlasterPrices(length, width, deth, deepDepth, floorType)
 {
 
     var plasterOptions = []
@@ -745,18 +745,19 @@ export async function getAllPlasterPrices(length, width, depth, deepDepth, floor
 ////////// POOL MEASURMENT TOOLS //////////
 ///////////////////////////////////////////
 
-function calculatePoolSurfaceArea(length, width, depth, deepDepth, floorType)
+export function calculatePoolSurfaceArea(length, width, depth, deepDepth, floorType)
 {
     //This calculates the pools surface area
     //Inputs: Pools Length, Depth's, Widths, Type of Basin
 
     if(floorType == "Diver")
     {
-        var volume = 2(width * depth) + 2(length * depth) + calculatePoolFloor(length, width, depth, deepDepth, floorType);
+        var surfaceArea = 2 * (width * depth) + 2 * (length * depth) + calculatePoolFloor(length, width, depth, deepDepth, floorType);
+        return surfaceArea;
     }
-    else if(basinType == "Slant")
+    else if(floorType == "Slant")
     {
-        var surfaceArea = (width * depth) + (width * deepDepth) + 2(length * ((deepDepth - depth) / 2)) + (width * Math.sqrt(Math.pow(width, 2) + Math.pow((deepDepth - depth), 2)));
+        var surfaceArea = (width * depth) + (width * deepDepth) + 2 * (length * ((deepDepth - depth) / 2)) + calculatePoolFloor(length, width, depth, deepDepth, floorType);
         return surfaceArea;
     }
     else
@@ -766,7 +767,7 @@ function calculatePoolSurfaceArea(length, width, depth, deepDepth, floorType)
     }
 
 }
-function calculatePoolVolume(length, width, depth, deepDepth, floorType)
+export function calculatePoolVolume(length, width, depth, deepDepth, floorType)
 {
     //this calculates the pools volume
     //Inputs:Pools Length, Width, Depth, Basin Type
@@ -805,7 +806,7 @@ function calculatePoolFloor(length, width, depth, deepDepth, floorType)
     if(floorType == "Slant")
     {
         var depthDiff = deepDepth - depth;
-        return Math.sqrt(Math.pow(depthDiff, 2) + Math.pow(length, 2));
+        return (Math.sqrt(Math.pow(depthDiff, 2) + Math.pow(length, 2)) * width);
     }
     else
     {
