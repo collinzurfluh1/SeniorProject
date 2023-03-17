@@ -6,7 +6,7 @@ import db from "./Config/Database.js";
 import router from "./Routes/index.js";
 
 // test for concrete
-// import { calculateConcreteCost, getAllConcretePrices } from "./Middleware/MaterialCalculations.js";
+import { calculateConcreteCost, getAllConcretePrices } from "./Middleware/MaterialCalculations.js";
 
 import { get_plaster_data, get_cement_data, get_winter_covers, get_solar_covers, get_chlorine, get_cyanuric_acid, get_shock, get_piping, get_liner, get_steel_walling, get_fiberglass_shell } from "./Controllers/Materials.js";
 
@@ -37,7 +37,7 @@ app.use(router);
 // setTimeout(async function() {
 //     console.log('############################################################');
 //     // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
-//     var all_options = await getAllConcretePrices(10, 20, 6, 'Gunite');
+//     var all_options = await getAllConcretePrices(10, 20, 6, null, 'Gunite');
 //     console.log(all_options);
 //     console.log('############################################################');
 // }, 5000);
