@@ -173,7 +173,7 @@ export function calculateChlorineTablets(length, width, depth, deepDepth, floorT
 export async function calculateChlorinePrice(length, width, depth, deepDepth, floorType, product_name)
 {
 
-    var tablets = calculateChlorineTablets(length, width, depth, deepDepth, floorType);
+    var tablets = await calculateChlorineTablets(length, width, depth, deepDepth, floorType);
 
     var chlorineJson = (await get_chlorine(product_name))[0];
 
@@ -189,14 +189,14 @@ export async function calculateChlorinePrice(length, width, depth, deepDepth, fl
 export async function getAllChlorinePrices(length, width, depth, deepDepth, floorType)
 {
     var gallons = calculateGallons(length, width, depth, deepDepth, floorType)
-
+    console.log(gallons);
     var chlorineOptions = [];
     var chlorineJsons = await get_chlorine();
 
     for (const chlorineJson of chlorineJsons) {
         var name = await chlorineJson.name;
-        const price = await calculateChlorinePrice(gallons, name)
-        
+        const price = await calculateChlorinePrice(length, width, depth, deepDepth, floorType, name)
+
         // Create a new JSON object with the name and price fields
         const option = { "name": name, "price": price };
         
@@ -439,9 +439,9 @@ export async function getAllConcretePrices(length, width, depth, deepDepth, floo
 ////////// WATER //////////
 ///////////////////////////
 
-export async function calculateGallons(length, width, depth, deepDepth, floorType)
+export  function calculateGallons(length, width, depth, deepDepth, floorType)
 {
-    var volume = await calculatePoolVolume(length, width, depth, deepDepth, floorType);
+    var volume =  calculatePoolVolume(length, width, depth, deepDepth, floorType);
     return (volume * 7.48);
 }
 export async function calculateWaterPrice(length, width, depth, deepDepth, floorType) // will this need to be acessed?

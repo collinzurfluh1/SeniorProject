@@ -67,7 +67,7 @@ app.use(router);
 // Chlorine
 import {calculateChlorinePrice, getAllChlorinePrices, calculateCyanuricAcidPrice, getAllCyanuricAcidPrices, calculateShockPrice, getAllShockPrices} from "./Middleware/MaterialCalculations.js";
 // console.log('############################################################');
-// console.log(await calculateChlorinePrice(20, 10, 6, 'Gunnite', 'In The Swim Chlorine Tablets'));
+// console.log(await calculateChlorinePrice(20, 10, 6, 12, 'Gunnite', 'In The Swim Chlorine Tablets'));
 // console.log('############################################################');
 
 // setTimeout(async function() {
@@ -79,7 +79,7 @@ import {calculateChlorinePrice, getAllChlorinePrices, calculateCyanuricAcidPrice
 // }, 5000);
 
 // console.log('############################################################');
-// console.log(await getAllChlorinePrices(20, 10, 6, 'Gunnite', 'Pool Mate Stabilizer and Conditioner'));
+// console.log(await getAllChlorinePrices(20, 10, 6, 12, 'Gunnite'));
 // console.log('############################################################');
 
 // setTimeout(async function() {
@@ -94,13 +94,13 @@ import {calculateChlorinePrice, getAllChlorinePrices, calculateCyanuricAcidPrice
 // console.log(await calculateShockPrice(20, 10, 6, 12, 'Gunnite', 'In The Swim Super Pool Shock'));
 // console.log('############################################################');
 
-setTimeout(async function() {
-    console.log('############################################################');
-    console.log(await getAllConcretePrices(10, 20, 6, 12, 'Slant', 'Gunite'));
-    var all_options = await getAllShockPrices(20, 10, 6, 12, 'Slant', 'Gunite');
-    console.log(all_options);
-    console.log('############################################################');
-}, 5000);
+// setTimeout(async function() {
+//     console.log('############################################################');
+//     console.log(await getAllConcretePrices(10, 20, 6, 12, 'Slant', 'Gunite'));
+//     var all_options = await getAllShockPrices(20, 10, 6, 12, 'Slant', 'Gunite');
+//     console.log(all_options);
+//     console.log('############################################################');
+// }, 5000);
 
 // Water test
 // import { calculateWaterPrice } from "./Middleware/MaterialCalculations.js";
