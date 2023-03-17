@@ -4,6 +4,7 @@ import Piping from "../Models/PipingModel.js";
 import Covers from "../Models/CoversModel.js";
 import Liners from "../Models/LinerModel.js";
 import SteelWalling from "../Models/SteelWallingModel.js";
+import FiberglassShell from "../Models/FiberglassShellsModel.js";
 
 export async function get_plaster_data(plaster_name) {
     // This function will return a JSON of plaster data. If you pass None you will get all plaster options. 
@@ -171,4 +172,20 @@ export async function get_steel_walling(steel_wall_name) {
     }
 
     return steel_wall_data
+}
+
+export async function get_fiberglass_shell(fiberglass_shell_name) {
+
+    var fiberglass_shell_data = null;
+
+    if(fiberglass_shell_name == null) {
+        const fiberglass_shell_sequelize = await SteelWalling.findAll()
+        fiberglass_shell_data = fiberglass_shell_sequelize.map(shell => shell.get({ plain: true }));
+        
+    } else {
+        const fiberglass_shell_sequelize = await SteelWalling.findAll({ where: { name: fiberglass_shell_name } })
+        fiberglass_shell_data = fiberglass_shell_sequelize.map(shell => shell.get({ plain: true }));
+    }
+
+    return fiberglass_shell_data
 }
