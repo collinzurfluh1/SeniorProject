@@ -683,15 +683,129 @@ export async function calculatePoolFilterPrice(length, width, depth, deepDepth, 
 }
 export async function getFiberglassShellDetails(name)
 {
-    //database call for a fiberglass shell based on the input name and returns the json
+    
 }
-export async function getSkimmerPrice(name)
+export function getSkimmerPrice(name)
 {
-    //db call for price
+    const skims = [
+        {
+          "Name": "Hayward SP1091LX Dyna-Skim Above-Ground Pool Skimmer",
+          "Type": "Skimmer",
+          "Price": "$54.41"
+        },
+        {
+          "Name": "Swimline 8940 Complete Standard Thru-Wall Skimmer, One Size, Multi",
+          "Type": "Skimmer",
+          "Price": "$44.95"
+        },
+        {
+          "Name": "Swimline SPAG8939 Complete Wide Mouth Thru-Wall Skimmer, One Size, Multi",
+          "Type": "Skimmer",
+          "Price": "$59.95"
+        },
+        {
+          "Name": "Hayward SP1091WM Dyna-Skim Above-Ground Pool Skimmer",
+          "Type": "Skimmer",
+          "Price": "$94.99"
+        },
+        {
+          "Name": "Hayward SP10841 Auto-Skim In-Ground Pool Skimmer, Square",
+          "Type": "Skimmer",
+          "Price": "$195.01"
+        }
+      ];
+      return skims.find(item => item.Name == name);
 }
-export async function getDrainPrice(name)
+export function getDrainPrice(name)
 {
-    //db call for price
+    const drains = [
+        {
+          "Name": "Tongoss 8 Bottom Pool Drain Cover",
+          "Type": "Drain",
+          "Price": "$14.99"
+        },
+        {
+          "Name": "Polaris 5820 Main Drain Cover",
+          "Type": "Drain",
+          "Price": "$84.98"
+        },
+        {
+          "Name": "Hayward WG1030AVDGRPAK2 Dark Gray Dual Suction Flow Drain Cover and Frame",
+          "Type": "Drain",
+          "Price": "$48.99"
+        },
+        {
+          "Name": "Anti-Vortex Main Drain Suction Cover Plate For In-Ground Swimming Pools",
+          "Type": "Drain",
+          "Price": "$22.97"
+        },
+        {
+          "Name": "Color Match Pool Fittings 8-inch VGB Retro-Fit Universal Drain Cover & Adaptor Plate (White)",
+          "Type": "Drain",
+          "Price": "$38.95"
+        }
+      ];
+      return drains.find(item => item.Name = name);
+}
+export function getAllSkimmerPrices()
+{
+    return [
+        {
+          "Name": "Hayward SP1091LX Dyna-Skim Above-Ground Pool Skimmer",
+          "Type": "Skimmer",
+          "Price": "$54.41"
+        },
+        {
+          "Name": "Swimline 8940 Complete Standard Thru-Wall Skimmer, One Size, Multi",
+          "Type": "Skimmer",
+          "Price": "$44.95"
+        },
+        {
+          "Name": "Swimline SPAG8939 Complete Wide Mouth Thru-Wall Skimmer, One Size, Multi",
+          "Type": "Skimmer",
+          "Price": "$59.95"
+        },
+        {
+          "Name": "Hayward SP1091WM Dyna-Skim Above-Ground Pool Skimmer",
+          "Type": "Skimmer",
+          "Price": "$94.99"
+        },
+        {
+          "Name": "Hayward SP10841 Auto-Skim In-Ground Pool Skimmer, Square",
+          "Type": "Skimmer",
+          "Price": "$195.01"
+        }
+      ];
+}
+export function getAllDrainPrices()
+{
+    return [
+        {
+          "Name": "Tongoss 8 Bottom Pool Drain Cover",
+          "Type": "Drain",
+          "Price": "$14.99"
+        },
+        {
+          "Name": "Polaris 5820 Main Drain Cover",
+          "Type": "Drain",
+          "Price": "$84.98"
+        },
+        {
+          "Name": "Hayward WG1030AVDGRPAK2 Dark Gray Dual Suction Flow Drain Cover and Frame",
+          "Type": "Drain",
+          "Price": "$48.99"
+        },
+        {
+          "Name": "Anti-Vortex Main Drain Suction Cover Plate For In-Ground Swimming Pools",
+          "Type": "Drain",
+          "Price": "$22.97"
+        },
+        {
+          "Name": "Color Match Pool Fittings 8-inch VGB Retro-Fit Universal Drain Cover & Adaptor Plate (White)",
+          "Type": "Drain",
+          "Price": "$38.95"
+        }
+      ];
 }
 /////////////////////////////
 ////////// PLASTER //////////
