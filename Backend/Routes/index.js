@@ -5,7 +5,7 @@ import "../Controllers/Materials.js";
 import { verifyToken } from "../Middleware/VerifyToken.js";
 import { refreshToken } from "../Controllers/RefreshToken.js";
 
-import { getAllSkimmerPrices, getAllDrainPrices, calculateShockPrice, getAllChlorinePrices, getAllCyanuricAcidPrices, getAllShockPrices, getAllPipesPrices, getAllWinterCoverPrices, getAllSolarCoverPrices, getAllConcretePrices, getAllPlasterPrices, getAllPoolLinerPrices, getAllSteelWallingPrices, calculateRebar, calculatePoolPumpPrice, calculatePoolFilterPrice, getFiberglassShellDetails, getSkimmerPrice, getDrainPrice } from "../Middleware/MaterialCalculations.js"; 
+import { getAllSkimmerPrices, getAllDrainPrices, calculateWaterPrice, calculateShockPrice, getAllChlorinePrices, getAllCyanuricAcidPrices, getAllShockPrices, getAllPipesPrices, getAllWinterCoverPrices, getAllSolarCoverPrices, getAllConcretePrices, getAllPlasterPrices, getAllPoolLinerPrices, getAllSteelWallingPrices, calculateRebar, calculatePoolPumpPrice, calculatePoolFilterPrice, getFiberglassShellDetails, getSkimmerPrice, getDrainPrice } from "../Middleware/MaterialCalculations.js"; 
 
 const router = express.Router();
  
@@ -83,8 +83,8 @@ router.get('/getAllConcretePrices', async (req, res) => {
 });
 
 router.get('/calculateWaterPrice', async (req, res) => {
-    const { length, width, depth, deepDepth, floorType } = req.query;
-    const results = await calculateWaterPrice( length, width, depth, deepDepth, floorType, floorType);
+    const { length, width, depth_shallow, depth_deep, basin_type } = req.query;
+    const results = await calculateWaterPrice( length, width, depth_shallow, depth_deep, basin_type);
     res.json(results);
 });
 
