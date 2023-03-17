@@ -1,7 +1,7 @@
 1//Things still needed to be added in during calculations 
 //Drains, Pumps, Skimmer
 
-import { get_plaster_data, get_cement_data, get_piping, get_chlorine, get_cyanuric_acid, get_shock, get_winter_covers, get_solar_covers, get_liner, get_steel_walling } from "../Controllers/Materials.js";
+import { get_plaster_data, get_cement_data, get_piping, get_chlorine, get_cyanuric_acid, get_shock, get_winter_covers, get_solar_covers, get_liner, get_steel_walling, get_fiberglass_shell } from "../Controllers/Materials.js";
 
 
 
@@ -544,9 +544,23 @@ export async function getAllPoolLinerPrices(length, width, depth, deepDepth, flo
     return poolLinerOptions;
 }
 
-////////////////////////////
+////////////////////////////////
 ////////// FIBERGLASS //////////
-////////////////////////////
+////////////////////////////////
+
+export async function calcualtePoolFiberglassShellPrice(product_name)
+{
+
+    var fiberglassShellJson = (await get_fiberglass_shell(product_name))[0];
+    
+    return fiberglassShellJson['cost'];
+}
+export async function getAllFiberglassShellPrices()
+{
+    var fiberglassShellOptions = (await get_fiberglass_shell());
+    
+    return fiberglassShellOptions;
+}
 
 ////////////////////////////
 ////////// COVERS //////////

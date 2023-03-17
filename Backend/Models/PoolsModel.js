@@ -100,6 +100,16 @@ const Pools = db.define('pools',{
     pump:{
         type: DataTypes.STRING  // name of product
     },
+    //chemicals
+    chlorine:{
+        type: DataTypes.STRING  // name of product
+    },
+    cyanuric_acid:{
+        type: DataTypes.STRING  // name of product
+    },
+    shock:{
+        type: DataTypes.STRING  // name of product
+    },
     //Cost, this is the last column that will be filled.
     cost:{
         type: DataTypes.DOUBLE  // total cost of the pool from MaterialCalculations.js
