@@ -50,6 +50,101 @@ function PoolItem(props) {
     }
   }
 
+  const pipesCost = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/calculatePipesCost", {
+        params: { length, width, depth, basinType }
+      });
+      const data = response.data;
+      setChlorineOptions(data);
+    } catch (error) {
+      waterCost=null;
+    }
+  }
+
+  const concreteCost = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/calculateConcreteCost", {
+        params: { length, width, depth, basinType }
+      });
+      const data = response.data;
+      setChlorineOptions(data);
+    } catch (error) {
+      waterCost=null;
+    }
+  }
+
+  const chlorineCost = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/calculateChlorinePrice", {
+        params: { length, width, depth, basinType }
+      });
+      const data = response.data;
+      setChlorineOptions(data);
+    } catch (error) {
+      waterCost=null;
+    }
+  }
+
+  const steelwallingCost = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/calcuateSteelWallingPrice", {
+        params: { length, width, depth, basinType }
+      });
+      const data = response.data;
+      setChlorineOptions(data);
+    } catch (error) {
+      waterCost=null;
+    }
+  }
+
+  const poolliningPrice = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/calcualtePoolLinerPrice", {
+        params: { length, width, depth, basinType }
+      });
+      const data = response.data;
+      setChlorineOptions(data);
+    } catch (error) {
+      waterCost=null;
+    }
+  }
+  
+  const wintercoverPrice = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/calculatePoolWinterCoverPrice", {
+        params: { length, width, depth, basinType }
+      });
+      const data = response.data;
+      setChlorineOptions(data);
+    } catch (error) {
+      waterCost=null;
+    }
+  }
+
+  const summercoverPrice = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/calculatePoolSolarCoverPrice", {
+        params: { length, width, depth, basinType }
+      });
+      const data = response.data;
+      setChlorineOptions(data);
+    } catch (error) {
+      waterCost=null;
+    }
+  }
+  
+  const plasterPrice = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/calculatePlasterCost", {
+        params: { length, width, depth, basinType }
+      });
+      const data = response.data;
+      setChlorineOptions(data);
+    } catch (error) {
+      waterCost=null;
+    }
+  }
 
   const getAllChlorine = async () => {
     try {
@@ -62,6 +157,7 @@ function PoolItem(props) {
     
     }
   }
+
 
   useEffect(()=>{
     refreshToken();
