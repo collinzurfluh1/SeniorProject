@@ -43,7 +43,7 @@ const cement_data = [
                     ]
 
                     
-//  db.sync({ force: true }).then(() => {
+//  db.sync({ force: false }).then(() => {
 //      Cement.bulkCreate(cement_data, { validate: true }).then(() => {
 //      }).catch((err) => { console.log(err); });
 //      }).catch((error) => {

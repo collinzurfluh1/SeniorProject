@@ -8,7 +8,7 @@ import router from "./Routes/index.js";
 // test for concrete
 // import { calcualteConcreteCost, getAllConcretePrices } from "./Middleware/MaterialCalculations.js";
 
-import { get_plaster_data, get_cement_data, get_winter_covers, get_solar_covers, get_chlorine, get_cyanuric_acid, get_shock, get_piping, get_liner, get_steel_walling } from "./Controllers/Materials.js";
+import { get_plaster_data, get_cement_data, get_winter_covers, get_solar_covers, get_chlorine, get_cyanuric_acid, get_shock, get_piping, get_liner, get_steel_walling, get_fiberglass_shell } from "./Controllers/Materials.js";
 
 
 dotenv.config();
@@ -185,5 +185,10 @@ app.use(router);
 //     console.log(all_options);
 //     console.log('############################################################');
 // }, 5000);
+
+// Fiberglass Shells
+// console.log('############');
+// console.log(await get_fiberglass_shell());
+// console.log('############');
 
 app.listen(4000, ()=> console.log('Server running at port 4000'));
