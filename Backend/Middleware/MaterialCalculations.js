@@ -367,8 +367,9 @@ export function calculateConcretePounds(length, width, depth, deepDepth, floorTy
 export async function calculateConcreteCost(length, width, depth, deepDepth, basinType, floorType, product_name)
 {
 
-    var concretelbs = await calculateConcretePounds(length, width, depth, deepDepth, floorType, basinType);
+    var concretelbs = await calculateConcretePounds(length, width, depth, deepDepth, basinType, floorType);
     var concreteJson = await get_cement_data(product_name);
+
     concreteJson = concreteJson[0] // only one json in the list
 
     // return concreteJson[0]['bag_size_pounds'];
