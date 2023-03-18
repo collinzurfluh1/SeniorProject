@@ -8,7 +8,7 @@ import router from "./Routes/index.js";
 // test for concrete
 // import { calculatePrice, getPump, getFilter, calculatePoolPumpPrice, calculatePoolFilterPrice, getDrainPrice, getSkimmerPrice, getAllSkimmerPrices, calculatePoolLinerArea, calculateCyanuricAcidPounds, calculateChlorineTablets, calculateShockLbs, calculatePipesAmount, calculateRebar, calculatePlaster, calculatePoolSurfaceArea, calculateConcretePounds, calculateConcreteCost, getAllConcretePrices, calculateGallons, calculatePoolVolume, calculateWaterPrice } from "./Middleware/MaterialCalculations.js";
 
-// import { get_plaster_data, get_cement_data, get_winter_covers, get_solar_covers, get_chlorine, get_cyanuric_acid, get_shock, get_piping, get_liner, get_steel_walling, get_fiberglass_shell } from "./Controllers/Materials.js";
+import { get_plaster_data, get_cement_data, get_winter_covers, get_solar_covers, get_chlorine, get_cyanuric_acid, get_shock, get_piping, get_liner, get_steel_walling, get_fiberglass_shell } from "./Controllers/Materials.js";
 
 dotenv.config();
 const app = express();
@@ -148,13 +148,13 @@ app.use(router);
 
 //liner data access
 // console.log('############');
-// console.log(await get_liner());
+// console.log(await get_liner('20 x 40 Rectangle Inground Swimming Pool Liners - Samara Coast'));
 // console.log('############');
 
 // Liner
-// import { calculatePoolLinerPrice, getAllPoolLinerPrices } from "./Middleware/MaterialCalculations.js";
+import { calculatePoolLinerPrice, getAllPoolLinerPrices } from "./Middleware/MaterialCalculations.js";
 // console.log('############################################################');
-// console.log(await calculatePoolLinerPrice(20, 10, 6, 'Gunnite', '20 x 40 Rectangle Inground Swimming Pool Liners - Samara Coast'));
+// console.log(await calculatePoolLinerPrice(20, 10, 6, 6, 'Flatbed', '20 x 40 Rectangle Inground Swimming Pool Liners - Samara Coast'));
 // console.log('############################################################');
 
 // setTimeout(async function() {
