@@ -49,7 +49,7 @@ function calculateVinyl(poolMaterials)
     var price = calculateWater(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType);
     price = price + calculateChlorinePrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType, poolMaterials.chlorine);
     price = price + calculatePipesCost(poolMaterials.deepDepth, poolMaterials.length, poolMaterials.width, poolMaterials.pipes);
-    price = price + calcualteConcreteCost(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.basinType, poolMaterials.floorType, poolMaterials.concrete)
+    price = price + calculateConcreteCost(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.basinType, poolMaterials.floorType, poolMaterials.concrete)
     price = price + calculateSteelWallingPrice(poolMaterials.length, poolMaterials.width, poolMaterials.steelWall);
     price = price + calcualtePoolLinerPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType, poolMaterials.liner);
     price = price + calculatePoolSolarCoverPrice(poolMaterials.length, poolMaterials.width, poolMaterials.solarCover);
@@ -83,7 +83,7 @@ function calculateGunite(poolMaterials)
     var price = calculateWater(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType);
     price = price + calculateChlorinePrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType, poolMaterials.chlorine);
     price = price + calculatePipesCost(poolMaterials.deepDepth, poolMaterials.length, poolMaterials.width, poolMaterials.pipes);
-    price = price + calcualteConcreteCost(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.basinType, poolMaterials.floorType, poolMaterials.concrete)
+    price = price + calculateConcreteCost(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.basinType, poolMaterials.floorType, poolMaterials.concrete)
     price = price + calculateRebar(poolMaterials.length, poolMaterials.width, poolMaterials.depth);
     price = price + calculatePlasterCost(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType, poolMaterials.plaster);
     price = price + calculatePoolSolarCoverPrice(poolMaterials.length, poolMaterials.width, poolMaterials.solarCover);
@@ -112,7 +112,7 @@ function calculateFiberglass(poolMaterials)
     price = price + calcualtePoolFiberglassShellPrice(poolMaterials.fiberglass);
     price = price + calculateChlorinePrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType, poolMaterials.chlorine);
     price = price + calculatePipesCost(poolMaterials.deepDepth, poolMaterials.length, poolMaterials.width, poolMaterials.pipes);
-    price = price + calcualteConcreteCost(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.basinType, poolMaterials.floorType, poolMaterials.concrete)
+    price = price + calculateConcreteCost(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.basinType, poolMaterials.floorType, poolMaterials.concrete)
     price = price + calculatePoolSolarCoverPrice(poolMaterials.length, poolMaterials.width, poolMaterials.solarCover);
     price = price + calculatePoolWinterCoverPrice(poolMaterials.length, poolMaterials.width, poolMaterials.winterCover);
     price = price + calculatePoolFilterPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType);
@@ -343,7 +343,7 @@ export function calculateConcretePounds(length, width, depth, deepDepth, floorTy
     }
 }
 
-export async function calcualteConcreteCost(length, width, depth, deepDepth, floorType, basinType, product_name)
+export async function calculateConcreteCost(length, width, depth, deepDepth, floorType, basinType, product_name)
 {
 
     var concretelbs = calculateConcretePounds(length, width, depth, deepDepth, floorType, basinType);

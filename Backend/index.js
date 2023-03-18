@@ -171,9 +171,9 @@ app.use(router);
 // console.log('############');
 
 //Steel Walling
-//  import { calcuateSteelWallingPrice, getAllSteelWallingPrices } from "./Middleware/MaterialCalculations.js";
+//  import { calculateSteelWallingPrice, getAllSteelWallingPrices } from "./Middleware/MaterialCalculations.js";
 // console.log('############################################################');
-// console.log(await calcuateSteelWallingPrice(20, 10, 'Pool Warehouse walling'));
+// console.log(await calculateSteelWallingPrice(20, 10, 'Pool Warehouse walling'));
 // console.log('############################################################');
 
 // setTimeout(async function() {
@@ -259,11 +259,11 @@ console.log('############');
 
 console.log(await calculateRebar(40, 20, 10));
 */
-console.log('############');
-console.log('############');
-console.log(await calculatePlaster(40, 20, 4, 10, "Flatbed"));
+// console.log('############');
+// console.log('############');
+// console.log(await calculatePlaster(40, 20, 4, 10, "Flatbed"));
 
-console.log('############');
+// console.log('############');
 
 // console.log('############');
 // console.log(getAllSkimmerPrices());
