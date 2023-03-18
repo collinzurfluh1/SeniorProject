@@ -5,7 +5,7 @@ import "../Controllers/Materials.js";
 import { verifyToken } from "../Middleware/VerifyToken.js";
 import { refreshToken } from "../Controllers/RefreshToken.js";
 
-import { calculatePrice, calcualtePoolFiberglassShellPrice, calculatePipesCost, calculatePoolLinerPrice, calculateSteelWallingPrice, calculatePlasterCost, calculateConcreteCost, calculateCyanuricAcidPrice, calculatePoolWinterCoverPrice, calculatePoolSolarCoverPrice, calculateChlorinePrice, getPump, getFilter, getAllSkimmerPrices, getAllDrainPrices, calculateWaterPrice, calculateShockPrice, getAllChlorinePrices, getAllCyanuricAcidPrices, getAllShockPrices, getAllPipesPrices, getAllWinterCoverPrices, getAllSolarCoverPrices, getAllConcretePrices, getAllPlasterPrices, getAllPoolLinerPrices, getAllSteelWallingPrices, calculateRebar, calculatePoolPumpPrice, calculatePoolFilterPrice, getFiberglassShellDetails, getSkimmerPrice, getDrainPrice } from "../Middleware/MaterialCalculations.js"; 
+import { getAllFiberglassShellPrices, calculatePrice, calcualtePoolFiberglassShellPrice, calculatePipesCost, calculatePoolLinerPrice, calculateSteelWallingPrice, calculatePlasterCost, calculateConcreteCost, calculateCyanuricAcidPrice, calculatePoolWinterCoverPrice, calculatePoolSolarCoverPrice, calculateChlorinePrice, getPump, getFilter, getAllSkimmerPrices, getAllDrainPrices, calculateWaterPrice, calculateShockPrice, getAllChlorinePrices, getAllCyanuricAcidPrices, getAllShockPrices, getAllPipesPrices, getAllWinterCoverPrices, getAllSolarCoverPrices, getAllConcretePrices, getAllPlasterPrices, getAllPoolLinerPrices, getAllSteelWallingPrices, calculateRebar, calculatePoolPumpPrice, calculatePoolFilterPrice, getFiberglassShellDetails, getSkimmerPrice, getDrainPrice } from "../Middleware/MaterialCalculations.js"; 
 
 //Make for getPump, getFilter, 
 const router = express.Router();
@@ -200,9 +200,9 @@ router.get('/getDrainPrice', async (req, res) => {
     res.json(results);
 });
 
-router.get('/getSkimmerCost', async (req, res) => {
+router.get('/getSkimmerPrice', async (req, res) => {
     const { name } = req.query;
-    const results = await getSkimmerCost(name);
+    const results = await getSkimmerPrice(name);
     res.json(results);
 });
 
@@ -237,7 +237,6 @@ router.get('/calculatePrice', async (req, res) => {
 });
 
 router.get('/getAllFiberGlassShellPrices', async (req, res) => {
-    const { name } = req.query;
     const results = await getAllFiberglassShellPrices();
     res.json(results);
 });
