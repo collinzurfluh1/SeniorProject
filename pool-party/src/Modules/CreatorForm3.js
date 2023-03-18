@@ -416,8 +416,8 @@ class CreatorForm3 extends React.Component {
           } 
           { this.state.material == "Fiber Glass" && 
             <div id="Fiber Glass" onChange={this.updateShell}>
-            <label className="CreatorFormLabel">Deep Depth: </label><br></br>
-            <FiberGlassOptions/>
+            <label className="CreatorFormLabel">Fiber Glass Shell:</label><br></br>
+            <FiberGlassOptions onChange={this.updateShell} shell={this.state.shell}/>
             </div>
           }     
           </div>
