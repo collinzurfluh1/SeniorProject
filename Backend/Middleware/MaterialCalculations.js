@@ -51,7 +51,7 @@ function calculateVinyl(poolMaterials)
     price = price + calculatePipesCost(poolMaterials.deepDepth, poolMaterials.length, poolMaterials.width, poolMaterials.pipes);
     price = price + calculateConcreteCost(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.basinType, poolMaterials.floorType, poolMaterials.concrete)
     price = price + calculateSteelWallingPrice(poolMaterials.length, poolMaterials.width, poolMaterials.steelWall);
-    price = price + calcualtePoolLinerPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType, poolMaterials.liner);
+    price = price + calculatePoolLinerPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType, poolMaterials.liner);
     price = price + calculatePoolSolarCoverPrice(poolMaterials.length, poolMaterials.width, poolMaterials.solarCover);
     price = price + calculatePoolWinterCoverPrice(poolMaterials.length, poolMaterials.width, poolMaterials.winterCover);
     price = price + calculatePoolFilterPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType);
@@ -488,7 +488,7 @@ export function calculatePoolLinerArea(length, width, depth, deepDepth, floorTyp
     var poolLinerSize = surfaceArea * 1.05;
     return Math.ceil(poolLinerSize);
 }
-export async function calcualtePoolLinerPrice(length, width, depth, deepDepth, floorType, product_name)
+export async function calculatePoolLinerPrice(length, width, depth, deepDepth, floorType, product_name)
 {
 
     var poolLinerSize = calculatePoolLinerArea(length, width, depth, deepDepth, floorType);
@@ -513,7 +513,7 @@ export async function getAllPoolLinerPrices(length, width, depth, deepDepth, flo
 
     for (const poolLinerJson of poolLinerJsons) {
         var name = await poolLinerJson.name;
-        const price = await calcualtePoolLinerPrice(length, width, depth, deepDepth, floorType, name)
+        const price = await calculatePoolLinerPrice(length, width, depth, deepDepth, floorType, name)
         
         // Create a new JSON object with the name and price fields
         const option = { "name": name, "price": price };

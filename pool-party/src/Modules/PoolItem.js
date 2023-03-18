@@ -23,6 +23,9 @@ function PoolItem(props) {
   const [plasterPrice, setPlasterPrice] = useState('');
   const [rebarPrice, setRebarPrice] = useState('');
   const [steelWallingPrice, setSteelWallingPrice] = useState('');
+  const [poolLiningPrice, setPoolLiningPrice] = useState('');
+  const [pipesPrice, setPipesPrice] = useState('');
+  const [filterPrice, setFilterPrice] = useState('');
 
   
   console.log(props);
@@ -91,12 +94,22 @@ function PoolItem(props) {
     }
   }
 
+  const getPoolFilterPrice = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/calculatePoolFilterPrice", {
+        params: { length, width, depth_shallow, depth_deep, basin_type }
+      });
+      const data = response.data;
+      setFilterPrice(data);
+    } catch (error) {
+    }
+  }
+
   const getPumpCost = async () => {
     try {
       const response = await axios.get("http://localhost:4000/getPump", {
         params: { pump }
       });
-      console.log(response);
       const data = response.data;
       setPumpPrice(data);
     } catch (error) {
@@ -108,36 +121,22 @@ function PoolItem(props) {
       const response = await axios.get("http://localhost:4000/getSkimmerCost", {
         params: { skimmer }
       });
-      console.log(response);
       const data = response.data;
       setSkimmerPrice(data);
     } catch (error) {
     }
   }
 
-  // const pipesCost = async () => {
-  //   try {
-  //     const response = await axios.get("http://localhost:4000/calculatePipesCost", {
-  //       params: { length, width, depth, basinType }
-  //     });
-  //     const data = response.data;
-  //     setChlorineOptions(data);
-  //   } catch (error) {
-  //     waterCost=null;
-  //   }
-  // }
-
-  // const pipesCost = async () => {
-  //   try {
-  //     const response = await axios.get("http://localhost:4000/calculatePipesCost", {
-  //       params: { length, width, depth, basinType }
-  //     });
-  //     const data = response.data;
-  //     setChlorineOptions(data);
-  //   } catch (error) {
-  //     waterCost=null;
-  //   }
-  // }
+  const pipesCost = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/calculatePipesCost", {
+        params: { depth_deep, length, width, piping }
+      });
+      const data = response.data;
+      setPipesPrice(data);
+    } catch (error) {
+    }
+  }
 
   const rebarCost = async () => {
     try {
@@ -195,16 +194,16 @@ function PoolItem(props) {
     }
   }
 
-  // const poolliningPrice = async () => {
-  //   try {
-  //     const response = await axios.get("http://localhost:4000/calcualtePoolLinerPrice", {
-  //       params: { length, width, depth, basinType }
-  //     });
-  //     const data = response.data;
-  //     setChlorineOptions(data);
-  //   } catch (error) {
-  //   }
-  // }
+  const poolliningCost = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/calculatePoolLinerPrice", {
+        params: { length, width, depth_shallow, depth_deep, basin_type, lining_type }
+      });
+      const data = response.data;
+      setPoolLiningPrice(data);
+    } catch (error) {
+    }
+  }
   
   const wintercoverCost = async () => {
     try {
@@ -252,6 +251,9 @@ function PoolItem(props) {
     plasterCost();
     rebarCost();
     steelwallingCost();
+    poolliningCost();
+    pipesCost();
+    getPoolFilterPrice();
   },[])
 
   const savePool = async (e) => {
@@ -359,40 +361,49 @@ function PoolItem(props) {
       </div>
       <h3>Costs:</h3>
       <div className='poolStatsList'>
-        <div className='poolStat'>Water: ${waterPrice == null ?
+        <div className='poolStat'>Water: ${parseFloat(waterPrice).toFixed(2) == null ?
           "N/A"
-        : waterPrice}</div>
-        <div className='poolStat'>Pump: ${pumpPrice == null ?
+        : parseFloat(waterPrice).toFixed(2)}</div>
+        <div className='poolStat'>Pump: ${parseFloat(pumpPrice).toFixed(2) == null ?
           "N/A"
-        : pumpPrice}</div>
-        <div className='poolStat'>Skimmer: ${skimmerPrice == null ?
+        : parseFloat(pumpPrice).toFixed(2)}</div>
+        <div className='poolStat'>Filter: ${parseFloat(filterPrice).toFixed(2) == null ?
           "N/A"
-        : skimmerPrice}</div>
-        <div className='poolStat'>Summer Cover: ${summercoverPrice == null ?
+        : parseFloat(filterPrice).toFixed(2)}</div>
+        <div className='poolStat'>Skimmer: ${parseFloat(skimmerPrice).toFixed(2) == null ?
           "N/A"
-        : summercoverPrice}</div>
-        <div className='poolStat'>Winter Cover: ${wintercoverPrice == null ?
+        : parseFloat(skimmerPrice).toFixed(2)}</div>
+        <div className='poolStat'>Summer Cover: ${parseFloat(summercoverPrice).toFixed(2) == null ?
           "N/A"
-        : wintercoverPrice}</div>
-        <div className='poolStat'>Concrete: ${concretePrice == null ?
+        : parseFloat(summercoverPrice).toFixed(2)}</div>
+        <div className='poolStat'>Winter Cover: ${parseFloat(wintercoverPrice).toFixed(2) == null ?
           "N/A"
-        : concretePrice}</div>
-        <div className='poolStat'>Plaster: ${plasterPrice == null ?
+        : parseFloat(wintercoverPrice).toFixed(2)}</div>
+        <div className='poolStat'>Concrete: ${parseFloat(concretePrice).toFixed(2) == null ?
           "N/A"
-        : plasterPrice}</div>
-        <div className='poolStat'>Chlorine: ${chlroinePrice == null ?
+        : parseFloat(concretePrice).toFixed(2)}</div>
+        <div className='poolStat'>Plaster: ${parseFloat(plasterPrice).toFixed(2) == null ?
           "N/A"
-        : chlroinePrice}</div>
-        <div className='poolStat'>CyanuricAcid: ${cyanuricAcidPrice == null ?
+        : parseFloat(plasterPrice).toFixed(2)}</div>
+        <div className='poolStat'>Chlorine: ${parseFloat(chlroinePrice).toFixed(2) == null ?
           "N/A"
-        : cyanuricAcidPrice}</div>
-        <div className='poolStat'>Rebar: ${rebarPrice == null ?
+        : parseFloat(chlroinePrice).toFixed(2)}</div>
+        <div className='poolStat'>CyanuricAcid: ${parseFloat(cyanuricAcidPrice).toFixed(2) == null ?
           "N/A"
-        : rebarPrice}</div>
-        <div className='poolStat'>Steel Walling: ${steelWallingPrice == null ?
+        : parseFloat(cyanuricAcidPrice).toFixed(2)}</div>
+        <div className='poolStat'>Rebar: ${parseFloat(rebarPrice).toFixed(2) == null ?
           "N/A"
-        : steelWallingPrice}</div>
-       
+        : parseFloat(rebarPrice).toFixed(2)}</div>
+        <div className='poolStat'>Steel Walling: ${parseFloat(steelWallingPrice).toFixed(2) == null ?
+          "N/A"
+        : parseFloat(steelWallingPrice)}</div>
+        <div className='poolStat'>Pool Liner: ${parseFloat(poolLiningPrice).toFixed(2) == null ?
+          "N/A"
+        : parseFloat(poolLiningPrice).toFixed(2)}</div>
+        <div className='poolStat'>Pipes: ${parseFloat(pipesPrice).toFixed(2) == null ?
+          "N/A"
+        : parseFloat(pipesPrice).toFixed(2)}</div>
+
         </div>
       </Modal.Body>
       <Modal.Footer>

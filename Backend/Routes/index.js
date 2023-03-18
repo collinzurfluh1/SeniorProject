@@ -5,7 +5,7 @@ import "../Controllers/Materials.js";
 import { verifyToken } from "../Middleware/VerifyToken.js";
 import { refreshToken } from "../Controllers/RefreshToken.js";
 
-import { calculateSteelWallingPrice, calculatePlasterCost, calculateConcreteCost, calculateCyanuricAcidPrice, calculatePoolWinterCoverPrice, calculatePoolSolarCoverPrice, calculateChlorinePrice, getPump, getFilter, getAllSkimmerPrices, getAllDrainPrices, calculateWaterPrice, calculateShockPrice, getAllChlorinePrices, getAllCyanuricAcidPrices, getAllShockPrices, getAllPipesPrices, getAllWinterCoverPrices, getAllSolarCoverPrices, getAllConcretePrices, getAllPlasterPrices, getAllPoolLinerPrices, getAllSteelWallingPrices, calculateRebar, calculatePoolPumpPrice, calculatePoolFilterPrice, getFiberglassShellDetails, getSkimmerPrice, getDrainPrice } from "../Middleware/MaterialCalculations.js"; 
+import { calculatePipesCost, calculatePoolLinerPrice, calculateSteelWallingPrice, calculatePlasterCost, calculateConcreteCost, calculateCyanuricAcidPrice, calculatePoolWinterCoverPrice, calculatePoolSolarCoverPrice, calculateChlorinePrice, getPump, getFilter, getAllSkimmerPrices, getAllDrainPrices, calculateWaterPrice, calculateShockPrice, getAllChlorinePrices, getAllCyanuricAcidPrices, getAllShockPrices, getAllPipesPrices, getAllWinterCoverPrices, getAllSolarCoverPrices, getAllConcretePrices, getAllPlasterPrices, getAllPoolLinerPrices, getAllSteelWallingPrices, calculateRebar, calculatePoolPumpPrice, calculatePoolFilterPrice, getFiberglassShellDetails, getSkimmerPrice, getDrainPrice } from "../Middleware/MaterialCalculations.js"; 
 
 //Make for getPump, getFilter, 
 const router = express.Router();
@@ -58,8 +58,8 @@ router.get('/getAllShockPrices', async (req, res) => {
 });
 
 router.get('/calculatePipesCost', async (req, res) => {
-    const { deepDepth, length, width, pipe_type } = req.query;
-    const results = await calculatePipesCost(deepDepth, length, width, pipe_type );
+    const { depth_deep, length, width, pipe_type } = req.query;
+    const results = await calculatePipesCost(depth_deep, length, width, pipe_type );
     res.json(results);
 });
 
@@ -101,9 +101,9 @@ router.get('/getAllSteelWallingPrices', async (req, res) => {
     res.json(results);
 });
 
-router.get('/calcualtePoolLinerPrice', async (req, res) => {
-    const { length, width, depth, deepDepth, floorType, product_name } = req.query;
-    const results = await calcualtePoolLinerPrice(length, width, depth, deepDepth, floorType, product_name );
+router.get('/calculatePoolLinerPrice', async (req, res) => {
+    const { length, width, depth_shallow, depth_deep, basin_type, lining_type } = req.query;
+    const results = await calculatePoolLinerPrice(length, width, depth_shallow, depth_deep, basin_type, lining_type );
     res.json(results);
 });
 
@@ -162,8 +162,8 @@ router.get('/calculatePoolPumpPrice', async (req, res) => {
 });
 
 router.get('/calculatePoolFilterPrice', async (req, res) => {
-    const { length, width, depth, deepDepth, floorType } = req.query;
-    const results = await calculatePoolFilterPrice(length, width, depth, deepDepth, floorType);
+    const { length, width, depth_shallow, depth_deep, basin_type } = req.query;
+    const results = await calculatePoolFilterPrice(length, width, depth_shallow, depth_deep, basin_type);
     res.json(results);
 });
 
