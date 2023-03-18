@@ -27,6 +27,8 @@ class SummerCoverOptions extends Component {
     return (
       <div>
         <select value={this.props.summerCover} onChange={this.props.onChange}>
+        <option value="none">Please Select</option>
+
           {this.state.summerCover.map((option) => (
             <option key={option.name} value={option.name}>
               {option.name} $ {option.price.toFixed(2)}

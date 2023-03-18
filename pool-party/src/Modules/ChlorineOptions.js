@@ -25,9 +25,10 @@ class ChlorineOptions extends Component {
     return (
       <div>
         <select value={this.props.chlorine} onChange={this.props.onChange}>
+        <option value="none">Please Select</option>
           {this.state.chlorine.map((option) => (
             <option key={option.name} value={option.name}>
-              {option.name} $ {option.price}
+              {option.name} $ {option.price.toFixed(2)}
             </option>
           ))}
         </select>

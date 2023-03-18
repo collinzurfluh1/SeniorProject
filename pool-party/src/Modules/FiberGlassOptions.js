@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class CyaneuricAcidOptions extends Component {
+class FiberGlassOptions extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cyaneuricAcid: [],
+      shell: [],
     };
   }
 
   async componentDidMount() {
     try {
-      const response = await axios.get("http://localhost:4000/getAllCyanuricAcidPrices", {
+      const response = await axios.get("http://localhost:4000/getAllShellPrices", {
         params: { length: this.props.length, width: this.props.width, depth: this.props.depth, deepDepth: this.props.deepDepth, basinType: this.props.basinType }
       });
       const data = response.data;
-      this.setState({ cyaneuricAcid: data });
+      this.setState({ shell: data });
     } catch (error) {
 
     }
@@ -24,11 +24,11 @@ class CyaneuricAcidOptions extends Component {
   render() {
     return (
       <div>
-        <select value={this.props.cyaneuricAcid} onChange={this.props.onChange}>
+        <select value={this.props.shell} onChange={this.props.onChange}>
         <option value="none">Please Select</option>
-          {this.state.cyaneuricAcid.map((option) => (
+          {this.state.shell.map((option) => (
             <option key={option.name} value={option.name}>
-              {option.name} $ {option.price.toFixed(2)}
+              {option.name} $ {option.price}
             </option>
           ))}
         </select>
@@ -37,4 +37,4 @@ class CyaneuricAcidOptions extends Component {
   }
 }
 
-export default CyaneuricAcidOptions;
+export default FiberGlassOptions;

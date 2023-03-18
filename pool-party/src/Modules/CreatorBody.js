@@ -128,6 +128,7 @@ class CreatorBody extends React.Component {
   UploadPool =  async (props) =>{
     alert("Pool Uploading");
 
+
       try {
           await axios.post('http://localhost:4000/savePools', {
             //Error because username is not defined
@@ -158,7 +159,7 @@ class CreatorBody extends React.Component {
             cost: 0,
 
           });
-          alert("Your new pool is now saved!")
+        
           window.location.href = '/my-pools';
       } catch (error) {
         alert("Sorry the pool was not able to be saved! Try again later");

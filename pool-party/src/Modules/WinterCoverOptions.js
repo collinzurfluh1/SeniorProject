@@ -27,6 +27,7 @@ class WinterCoverOptions extends Component {
     return (
       <div>
         <select value={this.props.winterCover} onChange={this.props.onChange}>
+        <option value="none">Please Select</option>
           {this.state.winterCover.map((option) => (
             <option key={option.name} value={option.name}>
               {option.name} $ {option.price.toFixed(2)}

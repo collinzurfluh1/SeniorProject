@@ -6,11 +6,7 @@ import db from "./Config/Database.js";
 import router from "./Routes/index.js";
 
 // test for concrete
- import { getPump, getFilter, calculatePoolPumpPrice, calculatePoolFilterPrice, getDrainPrice, getSkimmerPrice, getAllSkimmerPrices, calculatePoolLinerArea, calculateCyanuricAcidPounds, calculateChlorineTablets, calculateShockLbs, calculatePipesAmount, calculateRebar, calculatePlaster, calculatePoolSurfaceArea, calculateConcretePounds, getAllConcretePrices, calculateGallons, calculatePoolVolume, calculateWaterPrice, calculateChlorinePrice } from "./Middleware/MaterialCalculations.js";
-
-
-import { get_plaster_data, get_cement_data, get_winter_covers, get_solar_covers, get_chlorine, get_cyanuric_acid, get_shock, get_piping, get_liner, get_steel_walling, get_fiberglass_shell } from "./Controllers/Materials.js";
-
+ import { calculatePrice, getPump, getFilter, calculatePoolPumpPrice, calculatePoolFilterPrice, getDrainPrice, getSkimmerPrice, getAllSkimmerPrices, calculatePoolLinerArea, calculateCyanuricAcidPounds, calculateChlorineTablets, calculateShockLbs, calculatePipesAmount, calculateRebar, calculatePlaster, calculatePoolSurfaceArea, calculateConcretePounds, getAllConcretePrices, calculateGallons, calculatePoolVolume, calculateWaterPrice } from "./Middleware/MaterialCalculations.js";
 
 dotenv.config();
 const app = express();
@@ -262,16 +258,13 @@ console.log('############');
 console.log('############');
 
 console.log(await calculateRebar(40, 20, 10));
-
+*/
 console.log('############');
 console.log('############');
 console.log(await calculatePlaster(40, 20, 4, 10, "Flatbed"));
-console.log(await calculatePlaster(40, 20, 4, 10, "Slant"));
-
-console.log(await calculatePlaster(40, 20, 4, 10, "Diver"));
 
 console.log('############');
-*/
+
 // console.log('############');
 // console.log(getAllSkimmerPrices());
 // console.log('############');
