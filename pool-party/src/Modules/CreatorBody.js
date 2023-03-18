@@ -127,10 +127,7 @@ class CreatorBody extends React.Component {
   
   UploadPool =  async (props) =>{
     alert("Pool Uploading");
-    alert(this.GetPool()['materialData']['wall']);
-    alert(this.GetPool()['materialData']['shell']);
-    alert(this.GetPool()['materialData']['concrete']);
-    alert(this.GetPool()['materialData']['plaster']);
+
 
       try {
           await axios.post('http://localhost:4000/savePools', {

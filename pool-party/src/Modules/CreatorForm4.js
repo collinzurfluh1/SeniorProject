@@ -33,7 +33,6 @@ class CreatorForm4 extends React.Component {
     
   }
   updatePoolWinterCover(event) {
-    alert("Pool Winter Cover");
     this.props.setPoolWinterCover(event.target.value); 
     this.setState({ winterCover: event.target.value });
    
