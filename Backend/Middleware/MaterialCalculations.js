@@ -10,12 +10,12 @@ export function calculatePrice(poolMaterials)
     //This funciton is the main function that will set which pool type to calculate for
     //This function will take in an array of values that are passed in from the front end based on user selection including all of thier selections
     //Then after it has the values it will pass the values into their appropriate pool type.
-    if(poolMaterials.basinType == "Fiberglass")
+    if(poolMaterials.basin_type == "Fiberglass")
     {
         var poolPrice = calculateFiberglass(poolMaterials);
         return poolPrice;
     }
-    else if(poolMaterials.basinType == "Vinyl")
+    else if(poolMaterials.basin_type == "Vinyl")
     {
         var poolPrice = calculateVinyl(poolMaterials);
         return poolPrice;
