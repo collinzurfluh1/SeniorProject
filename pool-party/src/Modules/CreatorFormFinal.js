@@ -16,7 +16,7 @@ class CreatorFormFinal extends React.Component {
       materialBrand: (pool['material'] == 'Fiber Glass') ? "Not Applicable" : pool['materialData']['materialBrand'],
       width: (pool['material'] == 'Fiber Glass') ? 'Not Applicable' : pool['materialData']['width'],
       length:  (pool['material'] == 'Fiber Glass') ? 'Not Applicable' : pool['materialData']['length'],
-      depth:  (pool['material'] != 'Gunnite') ? 'Not Applicable' : pool['materialData']['depth'],
+      depth:  (pool['material'] != 'Gunite') ? 'Not Applicable' : pool['materialData']['depth'],
       shallowDepth: (pool['material'] == 'Vinyl') ? pool['materialData']['shallowDepth'] : "Not Applicable",
       deepDepth: (pool['material'] == 'Vinyl') ? pool['materialData']['deepDepth'] : "Not Applicable",
       slant: (pool['material'] == 'Vinyl') ? pool['materialData']['slant'] : "Not Applicable",
@@ -63,7 +63,7 @@ class CreatorFormFinal extends React.Component {
           <p>Pool Chlorine: {this.state.chlorine}</p>
           <p>Pool Cyaneuric Acid: {this.state.cyaneuricAcid}</p>
           <p>Pool Shock: {this.state.shock}</p>
-          <h4>Gunnite Options</h4>
+          <h4>Gunite Options</h4>
           <p>Pool Concrete: {this.state.materialBrand}</p>
           <p>Pool Plaster: {this.state.plaster}</p>
           <h4>Vinyl Options</h4>

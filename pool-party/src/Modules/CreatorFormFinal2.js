@@ -13,7 +13,7 @@ class CreatorFormFinal2 extends React.Component {
     this.state = {
         name: pool['name'],
         lining: (pool['material'] == 'Vinyl') ? pool['materialData']['lining'] : "Not Applicable",
-        plaster: (pool['material'] == 'Gunnite') ? pool['materialData']['plaster'] : 'Not Applicable',
+        plaster: (pool['material'] == 'Gunite') ? pool['materialData']['plaster'] : 'Not Applicable',
         wall: (pool['material'] == 'Vinyl') ? pool['materialData']['wall'] : "Not Applicable",
         material: pool['materialData']['materialBrand'],
         summerCover: pool['summerCover'],
@@ -35,7 +35,7 @@ class CreatorFormFinal2 extends React.Component {
     return (
         <div id="Creator">
           <h1>{this.state.name}: Page 2</h1>
-          <h4>Gunnite Options</h4>
+          <h4>Gunite Options</h4>
           <p>Pool Concrete: {this.state.materialBrand}</p>
           <p>Pool Plaster: {this.state.plaster}</p>
           <h4>Vinyl Options</h4>

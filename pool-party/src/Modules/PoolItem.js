@@ -28,10 +28,6 @@ function PoolItem(props) {
   const [filterPrice, setFilterPrice] = useState('');
   const [fiberglassPrice, setFiberglassPrice] = useState('');
 
-
-  
-  console.log(props);
-
   const poolProps = {"owner": props.pool.pool.owner,
     "title": props.pool.pool.title,
     "original_creator": props.pool.pool.original_creator,
@@ -85,11 +81,12 @@ function PoolItem(props) {
   const cyanuricAcid = poolProps.cyanuricAcid;
   const chlorine = poolProps.chlorine;
   const cost = poolProps.cost;
+  console.log(props);
 
   const getWaterCost = async () => {
     try {
       const response = await axios.get("http://localhost:4000/calculateWaterPrice", {
-        params: { length, width, depth_shallow, depth_deep, basin_type }
+        params: { length, width, depth_shallow, depth_deep, slant_type }
       });
       const data = response.data;
       setWaterPrice(data);
@@ -100,17 +97,20 @@ function PoolItem(props) {
   const getPoolFilterPrice = async () => {
     try {
       const response = axios.get("http://localhost:4000/calculatePoolFilterPrice", {
-        params: { length, width, depth_shallow, depth_deep, basin_type }
+        params: { length, width, depth_shallow, depth_deep, slant_type }
       });
+      console.log(" length: "+ length + " width: "+ width + " depth_shallow: "+depth_shallow + " depth_deep: "+depth_deep + " basin_type: "+basin_type);
+
       const data = response.data;
       setFilterPrice(data);
     } catch (error) {
+      console.log(error);
     }
   }
 
   const getFiberGlassShellCost = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/calcualtePoolFiberglassShellPrice", {
+      const response = await axios.get("http://localhost:4000/calculatePoolFiberglassShellPrice", {
         params: { fiberglass_shell }
       });
       const data = response.data;
@@ -126,36 +126,11 @@ function PoolItem(props) {
         params: { pump }
       });
       const data = response.data;
-      console.log(data);
       setPumpPrice(data);
     } catch (error) {
     }
   }
 
-  // const poolliningPrice = async () => {
-  //   try {
-  //     const response = await axios.get("http://localhost:4000/calculatePoolLinerPrice", {
-  //       params: { length, width, depth, basinType }
-  //     });
-  //     const data = response.data;
-  //     setChlorineOptions(data);
-  //   } catch (error) {
-  //     waterCost=null;
-  //   }
-  // }
-  
-  // const wintercoverPrice = async () => {
-  //   try {
-  //     const response = await axios.get("http://localhost:4000/calculatePoolWinterCoverPrice", {
-  //       params: { length, width, depth, basinType }
-  //     });
-  //     const data = response.data;
-  //     setChlorineOptions(data);
-  //   } catch (error) {
-  //     waterCost=null;
-  //   }
-  // }
-  
   const getSkimmerCost = async () => {
     try {
       const response = axios.get("http://localhost:4000/getSkimmerPrice", {
@@ -193,8 +168,9 @@ function PoolItem(props) {
   const concreteCost = async () => {
     try {
       const response = await axios.get("http://localhost:4000/calculateConcreteCost", {
-        params: { length, width, depth_shallow, depth_deep, lining_type, basin_type, concrete }
+        params: { length, width, depth_shallow, depth_deep, slant_type, basin_type, concrete }
       });
+      console.log(" length: "+ length + " width: "+ width +" depth_shallow: "+ depth_shallow +" depth_deep: "+ depth_deep +" slant_type: "+ slant_type +" basin_type: "+ basin_type +" concrete: "+ concrete);
       const data = response.data;
       setConcretePrice(data);
     } catch (error) {
@@ -204,7 +180,7 @@ function PoolItem(props) {
   const chlorineCost = async () => {
     try {
       const response = await axios.get("http://localhost:4000/calculateChlorinePrice", {
-        params: { length, width, depth_shallow, depth_deep, lining_type, chlorine }
+        params: { length, width, depth_shallow, depth_deep, slant_type, chlorine }
       });
       const data = response.data;
       setChlorineCost(data);
@@ -215,7 +191,7 @@ function PoolItem(props) {
   const cyanuricAcidCost = async () => {
     try {
       const response = await axios.get("http://localhost:4000/calculateCyanuricAcidPrice", {
-        params: { length, width, depth_shallow, depth_deep, lining_type, cyanuricAcid }
+        params: { length, width, depth_shallow, depth_deep, slant_type, cyanuricAcid }
       });
       const data = response.data;
       setCyanuricAcidPrice(data);
@@ -237,7 +213,7 @@ function PoolItem(props) {
   const poolliningCost = async () => {
     try {
       const response = await axios.get("http://localhost:4000/calculatePoolLinerPrice", {
-        params: { length, width, depth_shallow, depth_deep, basin_type, lining_type }
+        params: { length, width, depth_shallow, depth_deep, slant_type, lining_type }
       });
       const data = response.data;
       setPoolLiningPrice(data);
@@ -259,7 +235,7 @@ function PoolItem(props) {
   const summercoverCost = async () => {
     try {
       const response = await axios.get("http://localhost:4000/calculatePoolSolarCoverPrice", {
-        params: { length, width, cover1 }
+        params: { length, width, cover2 }
       });
       const data = response.data;
       setSummercoverPrice(data);
@@ -270,7 +246,7 @@ function PoolItem(props) {
   const plasterCost = async () => {
     try {
       const response = await axios.get("http://localhost:4000/calculatePlasterCost", {
-        params: { length, width, depth_shallow, depth_deep, lining_type, plaster }
+        params: { length, width, depth_shallow, depth_deep, slant_type, plaster }
       });
       const data = response.data;
       setPlasterPrice(data);
@@ -281,8 +257,8 @@ function PoolItem(props) {
   useEffect(()=>{
     refreshToken();
     getWaterCost();
-    getPumpCost();
-    getSkimmerCost();
+    // getPumpCost();
+    // getSkimmerCost();
     concreteCost();
     chlorineCost();
     summercoverCost();
@@ -328,6 +304,29 @@ function PoolItem(props) {
 
     } catch (error) {
       alert("Sorry the pool was not able to be saved! Try again later!");
+    }
+}
+
+const deletePool = async (e) => {
+  e.preventDefault();
+  try {
+      var areyousure = prompt('Are you sure you want to delete '+title+"? If so type YES.")
+      if(areyousure == "YES"){
+        try {
+          await axios.post('http://localhost:4000/deletePools', {
+            id: props.pool.pool.id
+          });
+          alert(title + " has been deleted!");
+          window.location.reload(false);
+        } catch (error) {
+          console.error(error);
+          alert("Error deleting pool");
+        }
+      }
+
+    } catch (error) {
+      console.log(error);
+      alert("Sorry the pool was not able to be deleted! Try again later!");
     }
 }
 
@@ -378,9 +377,9 @@ function PoolItem(props) {
             <div className='poolStat'>Slant Type: {props.pool.pool.slant_type == null ?
           "N/A"
         : props.pool.pool.slant_type}</div>
-            <div className='poolStat'>Basin Liner: {props.pool.pool.lining_type == null ?
+            <div className='poolStat'>Basin: {props.pool.pool.basin_type == null ?
           "N/A"
-        : props.pool.pool.lining_type}</div>
+        : props.pool.pool.basin_type}</div>
             <div className='poolStat'>Cover 1: {props.pool.pool.cover1 == null ?
           "N/A"
         : props.pool.pool.cover1}</div>
@@ -453,7 +452,10 @@ function PoolItem(props) {
       <Modal.Footer>
         {props.pool.pool.owner == username ?
           // <Button variant="contained" color="primary" onClick={(e) => {setModalShow(true) }}>Edit Pool</Button>
-          <Button variant="contained" color="primary" onClick={editPool}>Edit Pool</Button>
+          <>
+            <Button variant="contained" color="error" onClick={deletePool}>Delete Pool</Button>
+            <Button variant="contained" color="primary" onClick={editPool}>Edit Pool</Button>
+          </>
         : <Button variant="contained" color="success" onClick={savePool} >Save Pool</Button>}
         <Button variant="contained" onClick={props.onHide} color="error">Close</Button>
       </Modal.Footer>

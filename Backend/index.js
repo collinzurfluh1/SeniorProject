@@ -6,7 +6,7 @@ import db from "./Config/Database.js";
 import router from "./Routes/index.js";
 
 // test for concrete
-// import { calculatePrice, getPump, getFilter, calculatePoolPumpPrice, calculatePoolFilterPrice, getDrainPrice, getSkimmerPrice, getAllSkimmerPrices, calculatePoolLinerArea, calculateCyanuricAcidPounds, calculateChlorineTablets, calculateShockLbs, calculatePipesAmount, calculateRebar, calculatePlaster, calculatePoolSurfaceArea, calculateConcretePounds, calculateConcreteCost, getAllConcretePrices, calculateGallons, calculatePoolVolume, calculateWaterPrice } from "./Middleware/MaterialCalculations.js";
+import { calculatePrice, getPump, getFilter, calculatePoolPumpPrice, calculatePoolFilterPrice, getDrainPrice, getSkimmerPrice, getAllSkimmerPrices, calculateConcreteCost, getAllConcretePrices, calculateWaterPrice } from "./Middleware/MaterialCalculations.js";
 
 import { get_plaster_data, get_cement_data, get_winter_covers, get_solar_covers, get_chlorine, get_cyanuric_acid, get_shock, get_piping, get_liner, get_steel_walling, get_fiberglass_shell } from "./Controllers/Materials.js";
 
@@ -28,7 +28,7 @@ app.use(router);
 
 // TESTING CONCRETE COST FUNCTION
 // console.log('############################################################');
-// console.log(await calculateConcreteCost(10, 20, 6, 6, 'Flatbed', 'Gunite', 'Quikrete 50 lb. Fast-Setting Mix'));
+// console.log(await calculateConcreteCost(20, 10, 30, 30, 'Flatbed', 'Gunite', 'Quikrete 50 lb. Fast-Setting Mix'));
 // console.log('############################################################');
 
 // TESTING CONCRETE COST FUNCTION
@@ -65,37 +65,37 @@ app.use(router);
 // Chlorine
 // import {calculateChlorinePrice, getAllChlorinePrices, calculateCyanuricAcidPrice, getAllCyanuricAcidPrices, calculateShockPrice, getAllShockPrices} from "./Middleware/MaterialCalculations.js";
 // console.log('############################################################');
-// console.log(await calculateChlorinePrice(20, 10, 6, 'Gunnite', 'In The Swim Chlorine Tablets'));
+// console.log(await calculateChlorinePrice(20, 10, 6, 'Gunite', 'In The Swim Chlorine Tablets'));
 // console.log('############################################################');
 
 // setTimeout(async function() {
 //     console.log('############################################################');
 //     // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
-//     var all_options = await getAllCyanuricAcidPrices(20, 10, 6, 'Gunnite');
+//     var all_options = await getAllCyanuricAcidPrices(20, 10, 6, 'Gunite');
 //     console.log(all_options);
 //     console.log('############################################################');
 // }, 5000);
 
 // console.log('############################################################');
-// console.log(await getAllChlorinePrices(20, 10, 6, 'Gunnite', 'Pool Mate Stabilizer and Conditioner'));
+// console.log(await getAllChlorinePrices(20, 10, 6, 'Gunite', 'Pool Mate Stabilizer and Conditioner'));
 // console.log('############################################################');
 
 // setTimeout(async function() {
 //     console.log('############################################################');
 //     // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
-//     var all_options = await getAllCyanuricAcidPrices(20, 10, 6, 'Gunnite');
+//     var all_options = await getAllCyanuricAcidPrices(20, 10, 6, 'Gunite');
 //     console.log(all_options);
 //     console.log('############################################################');
 // }, 5000);
 
 // console.log('############################################################');
-// console.log(await calculateShockPrice(20, 10, 6, 'Gunnite', 'In The Swim Super Pool Shock'));
+// console.log(await calculateShockPrice(20, 10, 6, 'Gunite', 'In The Swim Super Pool Shock'));
 // console.log('############################################################');
 
 // setTimeout(async function() {
 //     console.log('############################################################');
 //     // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
-//     var all_options = await getAllShockPrices(20, 10, 6, 'Gunnite');
+//     var all_options = await getAllShockPrices(20, 10, 6, 'Gunite');
 //     console.log(all_options);
 //     console.log('############################################################');
 // }, 5000);
@@ -135,13 +135,13 @@ app.use(router);
 //Plaster
 // import { calculatePlasterCost, getAllPlasterPrices } from "./Middleware/MaterialCalculations.js";
 // console.log('############################################################');
-// console.log(await calculatePlasterCost(20, 10, 6, 'Gunnite', 'Sider Pool Plaster - 55 lb'));
+// console.log(await calculatePlasterCost(20, 10, 6, 'Gunite', 'Sider Pool Plaster - 55 lb'));
 // console.log('############################################################');
 
 // setTimeout(async function() {
 //     console.log('############################################################');
 //     // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
-//     var all_options = await getAllPlasterPrices(20, 10, 6, 'Gunnite');
+//     var all_options = await getAllPlasterPrices(20, 10, 6, 'Gunite');
 //     console.log(all_options);
 //     console.log('############################################################');
 // }, 5000);
@@ -160,7 +160,7 @@ import { calculatePoolLinerPrice, getAllPoolLinerPrices } from "./Middleware/Mat
 // setTimeout(async function() {
 //     console.log('############################################################');
 //     // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
-//     var all_options = await getAllPoolLinerPrices(20, 10, 6, 'Gunnite');
+//     var all_options = await getAllPoolLinerPrices(20, 10, 6, 'Gunite');
 //     console.log(all_options);
 //     console.log('############################################################');
 // }, 5000);
@@ -180,7 +180,7 @@ import { calculatePoolLinerPrice, getAllPoolLinerPrices } from "./Middleware/Mat
 // setTimeout(async function() {
 //     console.log('############################################################');
 //     // console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
-//     var all_options = await getAllSteelWallingPrices(20, 10, 6, 'Gunnite');
+//     var all_options = await getAllSteelWallingPrices(20, 10, 6, 'Gunite');
 //     console.log(all_options);
 //     console.log('############################################################');
 // }, 5000);
@@ -190,7 +190,7 @@ import { calculatePoolLinerPrice, getAllPoolLinerPrices } from "./Middleware/Mat
 // console.log(await get_fiberglass_shell('Lazy L Fiberglass'));
 // console.log('############');
 
-import { calculatePoolFiberglassShellPrice, calculatePrice, getAllFiberglassShellPrices } from "./Middleware/MaterialCalculations.js";
+// import { calculatePoolFiberglassShellPrice, calculatePrice, getAllFiberglassShellPrices } from "./Middleware/MaterialCalculations.js";
 
 // console.log('############');
 // console.log(await calculatePoolFiberglassShellPrice('Lazy L Fiberglass'));
@@ -303,9 +303,9 @@ console.log(await calculateRebar(40, 20, 10));
 ////////////////////////// TESTING MASTER CALCULATION FUNCTIONS //////////////////////////
 
 // console.log("#######################################");
-// console.log("############### Gunnite ###############");
+// console.log("############### Gunite ###############");
 // console.log("#######################################");
-// var gunnitePoolMaterialsJson = {'length': 20,
+// var gunitePoolMaterialsJson = {'length': 20,
 //                                 'width': 10,
 //                                 'depth_shallow': 6,
 //                                 'depth_deep': 6,
@@ -323,9 +323,9 @@ console.log(await calculateRebar(40, 20, 10));
 //                                 'cyanuric_acid': 'Leisure Pool Chlorine Stabilizer',
 //                                 'shock': 'Leslie\'s Power Powder'
 //                             }
-// console.log(await calculatePrice(gunnitePoolMaterialsJson))
+// console.log(await calculatePrice(gunitePoolMaterialsJson))
 // console.log("#######################################");
-// console.log("############### Gunnite ###############");
+// console.log("############### Gunite ###############");
 // console.log("#######################################");
 
 

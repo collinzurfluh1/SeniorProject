@@ -14,7 +14,7 @@ function EditPoolItem(props) {
   const length = props.pool.pool.pool.length;
   const width = props.pool.pool.pool.width;
   const depth = props.pool.pool.pool.depth_deep;
-  const basinType = "Gunnite";
+  const basinType = "Gunite";
 
   const refreshToken = async () => {
     try {
@@ -64,7 +64,7 @@ function EditPoolItem(props) {
             <div className='poolStat'>Depth Deep: <input type="text" defaultValue={props.pool.pool.pool.depth_deep}></input></div>
             <div className='poolStat'>Slant Type: <input type="text" defaultValue={props.pool.pool.pool.slant_type}></input></div>
             <div className='poolStat'>Lining Type:  <select name="pool-material" value={props.pool.pool.pool.lining_type} id="pool-material">
-                <option value="Gunnite">Gunnite</option>
+                <option value="Gunite">Gunite</option>
                 <option value="Vinyl">Vinyl</option>
                 <option value="Fiber Glass">Fiber Glass</option>
                 </select>
