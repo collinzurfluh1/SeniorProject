@@ -128,7 +128,7 @@ function PoolItem(props) {
 
   // const poolliningPrice = async () => {
   //   try {
-  //     const response = await axios.get("http://localhost:4000/calcualtePoolLinerPrice", {
+  //     const response = await axios.get("http://localhost:4000/calculatePoolLinerPrice", {
   //       params: { length, width, depth, basinType }
   //     });
   //     const data = response.data;

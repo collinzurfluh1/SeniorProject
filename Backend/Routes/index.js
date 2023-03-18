@@ -5,7 +5,7 @@ import "../Controllers/Materials.js";
 import { verifyToken } from "../Middleware/VerifyToken.js";
 import { refreshToken } from "../Controllers/RefreshToken.js";
 
-import { calculatePrice, getPump, getFilter, getAllSkimmerPrices, getAllDrainPrices, calculateWaterPrice, calculateShockPrice, getAllChlorinePrices, getAllCyanuricAcidPrices, getAllShockPrices, getAllPipesPrices, getAllWinterCoverPrices, getAllSolarCoverPrices, getAllConcretePrices, getAllPlasterPrices, getAllPoolLinerPrices, getAllSteelWallingPrices, calculateRebar, calculatePoolPumpPrice, calculatePoolFilterPrice, getFiberglassShellDetails, getSkimmerPrice, getDrainPrice } from "../Middleware/MaterialCalculations.js"; 
+import { calculatePrice, getPump, getFilter, getAllSkimmerPrices, getAllDrainPrices, calculateWaterPrice, calculateShockPrice, getAllChlorinePrices, getAllCyanuricAcidPrices, getAllShockPrices, getAllPipesPrices, getAllWinterCoverPrices, getAllSolarCoverPrices, getAllConcretePrices, getAllPlasterPrices, getAllPoolLinerPrices, getAllSteelWallingPrices, calculateRebar, calculatePoolPumpPrice, calculatePoolFilterPrice, getAllFiberglassShellPrices, getSkimmerPrice, getDrainPrice } from "../Middleware/MaterialCalculations.js"; 
 
 //Make for getPump, getFilter, 
 const router = express.Router();
@@ -70,9 +70,9 @@ router.get('/getAllPipesPrices', async (req, res) => {
     res.json(results);
 });
 
-router.get('/calcualteConcreteCost', async (req, res) => {
+router.get('/calculateConcreteCost', async (req, res) => {
     const { length, width, depth, deepDepth, floorType, basinType, product_name } = req.query;
-    const results = await calcualteConcreteCost(length, width, depth, deepDepth, floorType, basinType, product_name );
+    const results = await calculateConcreteCost(length, width, depth, deepDepth, floorType, basinType, product_name );
     res.json(results);
 });
 
@@ -101,9 +101,9 @@ router.get('/getAllSteelWallingPrices', async (req, res) => {
     res.json(results);
 });
 
-router.get('/calcualtePoolLinerPrice', async (req, res) => {
+router.get('/calculatePoolLinerPrice', async (req, res) => {
     const { length, width, depth, deepDepth, floorType, product_name } = req.query;
-    const results = await calcualtePoolLinerPrice(length, width, depth, deepDepth, floorType, product_name );
+    const results = await calculatePoolLinerPrice(length, width, depth, deepDepth, floorType, product_name );
     res.json(results);
 });
 

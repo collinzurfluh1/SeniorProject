@@ -6,7 +6,7 @@ import db from "./Config/Database.js";
 import router from "./Routes/index.js";
 
 // test for concrete
- import { calculatePrice, getPump, getFilter, calculatePoolPumpPrice, calculatePoolFilterPrice, getDrainPrice, getSkimmerPrice, getAllSkimmerPrices, calculatePoolLinerArea, calculateCyanuricAcidPounds, calculateChlorineTablets, calculateShockLbs, calculatePipesAmount, calculateRebar, calculatePlaster, calculatePoolSurfaceArea, calculateConcretePounds, getAllConcretePrices, calculateGallons, calculatePoolVolume, calculateWaterPrice } from "./Middleware/MaterialCalculations.js";
+import { calculatePrice, getPump, getFilter, calculatePoolPumpPrice, calculatePoolFilterPrice, getDrainPrice, getSkimmerPrice, getAllSkimmerPrices, calculatePoolLinerArea, calculateCyanuricAcidPounds, calculateChlorineTablets, calculateShockLbs, calculatePipesAmount, calculateRebar, calculatePlaster, calculatePoolSurfaceArea, calculateConcretePounds, calculateConcreteCost, getAllConcretePrices, calculateGallons, calculatePoolVolume, calculateWaterPrice } from "./Middleware/MaterialCalculations.js";
 
 
 import { get_plaster_data, get_cement_data, get_winter_covers, get_solar_covers, get_chlorine, get_cyanuric_acid, get_shock, get_piping, get_liner, get_steel_walling, get_fiberglass_shell } from "./Controllers/Materials.js";
@@ -20,27 +20,25 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(router);
 
-// testing material data access
 // console.log('############');
 // console.log(await get_plaster_data('Sider Pool Plaster - 55 lb'));
 // console.log('############');
 
-//   console.log('############');
-//     console.log(await get_cement_data());
-//   console.log('############');
+// console.log('############');
+// console.log(await get_cement_data());
+// console.log('############');
 
-//TESTING CONCRETE COST FUNCTION
-// console.log('############################################################');
-// console.log(await calcualteConcreteCost(10, 20, 6, 'Gunite', 'Quikrete 50 lb. Fast-Setting Mix'));
-// console.log('############################################################');
+// TESTING CONCRETE COST FUNCTION
+console.log('############################################################');
+console.log(await calculateConcreteCost(10, 20, 6, 6, 'Flatbed', 'Gunite', 'Quikrete 50 lb. Fast-Setting Mix'));
+console.log('############################################################');
 
 // TESTING CONCRETE COST FUNCTION
 // setTimeout(async function() {
 //     console.log('############################################################');
-//  console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
-//      var all_options = await getAllConcretePrices(10, 20, 6, 'Gunite');
-//      console.log(all_options);
-
+//     console.log(await getAllConcretePrices(10, 20, 6, 'Gunite'));
+//     var all_options = await getAllConcretePrices(10, 20, 6, 'Gunite');
+//     console.log(all_options);
 //     console.log('############################################################');
 // }, 5000);
 
@@ -156,9 +154,9 @@ app.use(router);
 // console.log('############');
 
 // Liner
-// import { calcualtePoolLinerPrice, getAllPoolLinerPrices } from "./Middleware/MaterialCalculations.js";
+// import { calculatePoolLinerPrice, getAllPoolLinerPrices } from "./Middleware/MaterialCalculations.js";
 // console.log('############################################################');
-// console.log(await calcualtePoolLinerPrice(20, 10, 6, 'Gunnite', '20 x 40 Rectangle Inground Swimming Pool Liners - Samara Coast'));
+// console.log(await calculatePoolLinerPrice(20, 10, 6, 'Gunnite', '20 x 40 Rectangle Inground Swimming Pool Liners - Samara Coast'));
 // console.log('############################################################');
 
 // setTimeout(async function() {
@@ -193,10 +191,10 @@ app.use(router);
 // console.log(await get_fiberglass_shell('Lazy L Fiberglass'));
 // console.log('############');
 
-import { calcualtePoolFiberglassShellPrice, getAllFiberglassShellPrices } from "./Middleware/MaterialCalculations.js";
+import { calculatePoolFiberglassShellPrice, getAllFiberglassShellPrices } from "./Middleware/MaterialCalculations.js";
 
 // console.log('############');
-// console.log(await calcualtePoolFiberglassShellPrice('Lazy L Fiberglass'));
+// console.log(await calculatePoolFiberglassShellPrice('Lazy L Fiberglass'));
 // console.log('############');
 
 // console.log('############');
@@ -263,11 +261,10 @@ console.log('############');
 
 console.log(await calculateRebar(40, 20, 10));
 */
-console.log('############');
-console.log('############');
-console.log(await calculatePlaster(40, 20, 4, 10, "Flatbed"));
-
-console.log('############');
+// console.log('############');
+// console.log('############');
+// console.log(await calculatePlaster(40, 20, 4, 10, "Flatbed"));
+// console.log('############');
 
 // console.log('############');
 // console.log(getAllSkimmerPrices());
@@ -287,20 +284,63 @@ console.log('############');
 // console.log(await calculatePoolPumpPrice(40, 10, 4, 10, "Slant"));
 // console.log(await calculatePoolPumpPrice(35, 20, 4, 10, "Diver"));
 // console.log('############');
+
 // console.log("############");
 // console.log(await getFilter("425 sq. ft. SwimClear Cartridge Filter"))
 // console.log("############");
+
 // console.log('############');
 // console.log(await calculatePoolFilterPrice(40, 20, 4, 10, "Flatbed"));
 // console.log(await calculatePoolFilterPrice(40, 10, 4, 10, "Slant"));
 // console.log(await calculatePoolFilterPrice(35, 20, 4, 10, "Diver"));
 // console.log('############');
+
 // console.log("############");
 // console.log(await getPump("Energy Efficient Variable Dual Speed Swimming Pool Pump Strainer"))
 // console.log(await getPump("PowerFlo LX 115-Volt 1½ in. Plumbing"))
 // console.log(await getPump("Self-Priming Dual Speed In-Ground Pool Pump 2 in"))
-
-
 // console.log("############");
+
+////////////////////////// TESTING MASTER CALCULATION FUNCTIONS //////////////////////////
+import { calculateVinyl, calculateGunite, calculateFiberglass } from "./Middleware/MaterialCalculations.js";
+
+console.log("#######################################");
+console.log("############### Gunnite ###############");
+console.log("#######################################");
+    // name: pool['name'],
+    // material: pool['material'],
+    // materialBrand: (pool['material'] == 'Fiber Glass') ? "Not Applicable" : pool['materialData']['materialBrand'],
+    // width: (pool['material'] == 'Fiber Glass') ? 'Not Applicable' : pool['materialData']['width'],
+    // length:  (pool['material'] == 'Fiber Glass') ? 'Not Applicable' : pool['materialData']['length'],
+    // depth:  (pool['material'] != 'Gunnite') ? 'Not Applicable' : pool['materialData']['depth'],
+    // shallowDepth: (pool['material'] == 'Vinyl') ? pool['materialData']['shallowDepth'] : "Not Applicable",
+    // deepDepth: (pool['material'] == 'Vinyl') ? pool['materialData']['deepDepth'] : "Not Applicable",
+    // slant: (pool['material'] == 'Vinyl') ? pool['materialData']['slant'] : "Not Applicable",
+    // shell: (pool['material'] == 'Fiber Glass') ? pool['materialData']['shell'] : "Not Applicable",
+    // chlorine: pool['chemicals']['chlorine'],
+    // cyaneuricAcid: pool['chemicals']['cyaneuricAcid'],
+    // shock: pool['chemicals']['shock']
+var gunnitePoolMaterialsJson = {'length': 20,
+                                'width': 10,
+                                'depth': 6,
+                                'deepDepth': 6,
+                                'floorType': 'Flatbed',
+                                'concrete': 'Quikrete 50 lb. Fast-Setting Mix',
+                                'plaster': 'Sider Pool Plaster - 55 lb',
+                                'pipes': 'Rigid PVC',
+                                'solarCover': 'Blue Wave',
+                                'winterCover': 'Vevor Winter Cover',
+                                'skimmer': 'Hayward SP1091WM Dyna-Skim Above-Ground Pool Skimmer',
+                                'drain': 'Polaris 5820 Main Drain Cover',
+                                'filter': '36 sq. ft. ProGrid D.E. Filter',
+                                'chlorine': 'RAYYAKICG 3 in tablets',
+                                'cyanuric_acid': 'Leisure Pool Chlorine Stabilizer',
+                                'shock': 'Leslie\'s Power Powder'
+                            }
+console.log(await calculateGunite(gunnitePoolMaterialsJson))
+console.log("#######################################");
+console.log("############### Gunnite ###############");
+console.log("#######################################");
+
 
 app.listen(4000, ()=> console.log('Server running at port 4000'));
