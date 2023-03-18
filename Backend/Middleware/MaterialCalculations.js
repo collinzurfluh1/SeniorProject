@@ -321,7 +321,7 @@ export function calculateConcretePounds(length, width, depth, deepDepth, floorTy
     //1 cubic foot of concrete = 133, 1 square foot of concrete assuming 6" thick is 66.5
     if(basinType == "Gunite")//pool gunite
     { 
-        var concretelbsCbFT = 133 * ((length + 1) * (width + 1) * depth) - (length * width * depth);
+        var concretelbsCbFT = 133 * (((length + 1) * (width + 1) * depth) - (length * width * depth));
         var concretelbsSqFT = 66.5 * ((length + 3) * (width + 3)) - (length * width);
         return (concretelbsCbFT + concretelbsSqFT);
     }
@@ -329,7 +329,7 @@ export function calculateConcretePounds(length, width, depth, deepDepth, floorTy
     {
         var dd = (deepDepth * depth) / 2;
         var depthDiff = deepDepth - depth;
-        var surfaceArea = 2 * (length * dd) + (width * depth) + (width * deepDepth) + (Math.sqrt(Math.pow(depthDiff, 2) + Math.pow(length, 2)));
+        var surfaceArea = (length * dd) + (width * depth) + (width * deepDepth) + (Math.sqrt(Math.pow(depthDiff, 2) + Math.pow(length, 2)));
         var totallbs = ((surfaceArea * 1.1) * 66.5);
         totallbs = totallbs + (66.5 * ((length + 3) * (width + 3)) - (length * width));
         return totallbs;
@@ -343,7 +343,7 @@ export function calculateConcretePounds(length, width, depth, deepDepth, floorTy
     }
 }
 
-export async function calcualteConcreteCost(length, width, depth, deepDepth, basinType, floorType, product_name)
+export async function calcualteConcreteCost(length, width, depth, deepDepth, floorType, basinType, product_name)
 {
 
     var concretelbs = calculateConcretePounds(length, width, depth, deepDepth, floorType, basinType);
@@ -513,7 +513,7 @@ export async function getAllPoolLinerPrices(length, width, depth, deepDepth, flo
 
     for (const poolLinerJson of poolLinerJsons) {
         var name = await poolLinerJson.name;
-        const price = await calcualtePoolLinerPrice(depth, length, width, basinType, name)
+        const price = await calcualtePoolLinerPrice(length, width, depth, deepDepth, floorType, name)
         
         // Create a new JSON object with the name and price fields
         const option = { "name": name, "price": price };
@@ -918,7 +918,7 @@ export async function calculatePlasterCost(length, width, depth, deepDepth, floo
     }
     return unitsNeeded * plasterJson.bag_cost;
 }
-export async function getAllPlasterPrices(length, width, deth, deepDepth, floorType)
+export async function getAllPlasterPrices(length, width, depth, deepDepth, floorType)
 {
 
     var plasterOptions = []
