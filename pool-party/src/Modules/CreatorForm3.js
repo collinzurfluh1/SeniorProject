@@ -36,7 +36,6 @@ class CreatorForm3 extends React.Component {
         shell: props.getPoolMaterialData()["shell"]
         
       };
-
       this.updateShell = this.updateShell.bind(this);
       this.updateSlant = this.updateSlant.bind(this);
       this.updateDeepDepth = this.updateDeepDepth.bind(this);
@@ -379,7 +378,7 @@ class CreatorForm3 extends React.Component {
             <label for="lining" className="CreatorFormLabel">Pool Lining:</label><br></br>
             <LinerOptions width={"5"} length={"5"} depth={"5"} deepDepth={"5"}  basinType={"Vinyl"} floorType={"Slant"} liner={this.state.lining} onChange={this.updateLining}/>
             <label for="" className="CreatorFormLabel">Steel Walls:</label><br></br>
-            <SteelWallOptions width={"5"} length={"5"} depth={"5"}  basinType={"vinyl"} wall={this.state.wall} onChange={this.updateWall}/>
+            <SteelWallOptions width={"5"} length={"5"} depth={"5"}  basinType={"Vinyl"} wall={this.state.wall} onChange={this.updateWall}/>
 
  
  

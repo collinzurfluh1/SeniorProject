@@ -26,7 +26,7 @@ class SteelWallOptions extends Component {
   render() {
     return (
       <div>
-        <select value={this.props.steelWalling} onChange={this.props.onChange}>
+        <select value={this.props.wall} onChange={this.props.onChange}>
         <option value="none">Please Select</option>
           {this.state.steelWalling.map((option) => (
             <option key={option.name} value={option.name}>
