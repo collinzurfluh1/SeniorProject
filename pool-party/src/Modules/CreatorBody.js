@@ -127,6 +127,7 @@ class CreatorBody extends React.Component {
   
   UploadPool =  async (props) =>{
     alert("Pool Uploading");
+    console.log(this.GetCost(props.poolProps));
       try {
           await axios.post('http://localhost:4000/savePools', {
             //Error because username is not defined
@@ -154,7 +155,7 @@ class CreatorBody extends React.Component {
             shock: this.GetPool()['chemicals']['chlorine'],
             cyanuricAcid: this.GetPool()['chemicals']['cyaneuricAcid'],
             chlorine: this.GetPool()['chemicals']['chlorine'],
-            cost: 0,
+            cost: this.GetCost(props.poolProps),
 
           });
         
@@ -433,6 +434,21 @@ this.setState({_deepDepth: deepDepth}, function() {
         'chemicals': this.GetPoolChemicals()
       }; 
 
+  }
+
+  GetCost = (poolProps) => {
+    const getCost = async (poolProps) => {
+      try {
+        const response = await axios.get("http://localhost:4000/calculatePrice", {
+          params: { poolProps }
+        });
+        const data = response.data;
+        return data;
+      } catch (error) {
+        return 0;
+      }
+    }
+    getCost(poolProps);
   }
 
 
