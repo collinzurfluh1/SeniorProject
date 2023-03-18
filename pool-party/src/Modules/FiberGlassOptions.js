@@ -11,11 +11,12 @@ class FiberGlassOptions extends Component {
 
   async componentDidMount() {
     try {
-      const response = await axios.get("http://localhost:4000/getAllShellPrices", {
-        params: { length: this.props.length, width: this.props.width, depth: this.props.depth, deepDepth: this.props.deepDepth, basinType: this.props.basinType }
+      const response = await axios.get("http://localhost:4000/getAllFiberGlassShellPrices", {
+        params: {}
       });
       const data = response.data;
       this.setState({ shell: data });
+      alert(this.state.shell);
     } catch (error) {
 
     }
@@ -24,14 +25,7 @@ class FiberGlassOptions extends Component {
   render() {
     return (
       <div>
-        <select value={this.props.shell} onChange={this.props.onChange}>
-        <option value="none">Please Select</option>
-          {this.state.shell.map((option) => (
-            <option key={option.name} value={option.name}>
-              {option.name} $ {option.price}
-            </option>
-          ))}
-        </select>
+
       </div>
     );
   }

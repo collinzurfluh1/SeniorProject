@@ -8,6 +8,7 @@ import ConcreteOptions from "./ConcreteOptions.js";
 import PlasterOptions from "./PlasterOptions.js";
 import LinerOptions from "./LinerOptions.js";
 import SteelWallOptions from "./SteelWallOptions.js";
+import FiberGlassOptions from "./FiberGlassOptions";
 import { resolveBreakpointValues } from "@mui/system/breakpoints";
 class CreatorForm3 extends React.Component {
   
@@ -36,7 +37,6 @@ class CreatorForm3 extends React.Component {
         shell: props.getPoolMaterialData()["shell"]
         
       };
-      alert(props.getPoolMaterialData["shallowDepth"]);
       this.updateShell = this.updateShell.bind(this);
       this.updateSlant = this.updateSlant.bind(this);
       this.updateDeepDepth = this.updateDeepDepth.bind(this);
@@ -416,13 +416,8 @@ class CreatorForm3 extends React.Component {
           } 
           { this.state.material == "Fiber Glass" && 
             <div id="Fiber Glass" onChange={this.updateShell}>
-              <input type="radio" id="fg1" name="fg" value="fg1" defaultChecked={this.state.shell=== "fg1"}></input>
-              <label for="fg1">Fiber Glass 1</label><br></br>
-              <input type="radio" id="fg2" name="fg" value="fg2" defaultChecked={this.state.shell=== "fg2"}></input>
-              <label for="fg2">Fiber Glass 2</label><br></br>
-              <input type="radio" id="fg3" name="fg" value="fg3" defaultChecked={this.state.shell === "fg3"}></input>
-              <label for="fg3">Fiber Glass 3</label><br></br>
-            
+            <label className="CreatorFormLabel">Deep Depth: </label><br></br>
+            <FiberGlassOptions/>
             </div>
           }     
           </div>
