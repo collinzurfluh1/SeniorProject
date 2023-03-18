@@ -27,6 +27,7 @@ class ShockOptions extends Component {
     return (
       <div>
         <select value={this.props.shock} onChange={this.props.onChange}>
+        <option value="none">Please Select</option>
           {this.state.shock.map((option) => (
             <option key={option.name} value={option.name}>
               {option.name} $ {option.price}
