@@ -47,11 +47,17 @@ export async function calculateVinyl(poolMaterials)
     //poolMaterials = {length, width, depth, type, pipes, chlorineTablet, shockName, ppm, cyanuricAcidName, concrete, poolLiner, steelWalling, solarCover, winterCover, basinType, Skimmer, drain, numDrains}
     
     var price = calculateWaterPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType);
+    // return price;
     price = price + await calculateChlorinePrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType, poolMaterials.chlorine);
+    // return price;
     price = price + await calculatePipesCost(poolMaterials.deepDepth, poolMaterials.length, poolMaterials.width, poolMaterials.pipes);
+    // return price;
     price = price + await calculateConcreteCost(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType, poolMaterials.basinType, poolMaterials.concrete)
+    // return price;
     price = price + await calculateSteelWallingPrice(poolMaterials.length, poolMaterials.width, poolMaterials.steelWall);
+    // return price;
     price = price + await calculatePoolLinerPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType, poolMaterials.liner);
+    // return price
     price = price + await calculatePoolSolarCoverPrice(poolMaterials.length, poolMaterials.width, poolMaterials.solarCover);
     price = price + await calculatePoolWinterCoverPrice(poolMaterials.length, poolMaterials.width, poolMaterials.winterCover);
     price = price + calculatePoolFilterPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType);
@@ -60,7 +66,7 @@ export async function calculateVinyl(poolMaterials)
     price = price + getDrainPrice(poolMaterials.drain);
     
 
-    return price;
+    return Math.round(price * 100) / 100;
     
 }
 export async function calculateGunite(poolMaterials)
@@ -99,7 +105,7 @@ export async function calculateGunite(poolMaterials)
 
     return Math.round(price * 100) / 100;
 }   
-export function calculateFiberglass(poolMaterials)
+export async function calculateFiberglass(poolMaterials)
 {
     //This function calculates the cost of a fiberglass pool
     //calculateChemicals()
@@ -112,19 +118,19 @@ export function calculateFiberglass(poolMaterials)
     //calculateFilter()
     
     var price = calculateWaterPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType);
-    price = price + calculatePoolFiberglassShellPrice(poolMaterials.fiberglass);
-    price = price + calculateChlorinePrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType, poolMaterials.chlorine);
-    price = price + calculatePipesCost(poolMaterials.deepDepth, poolMaterials.length, poolMaterials.width, poolMaterials.pipes);
-    price = price + calculateConcreteCost(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.basinType, poolMaterials.floorType, poolMaterials.concrete)
-    price = price + calculatePoolSolarCoverPrice(poolMaterials.length, poolMaterials.width, poolMaterials.solarCover);
-    price = price + calculatePoolWinterCoverPrice(poolMaterials.length, poolMaterials.width, poolMaterials.winterCover);
+    price = price + await calculatePoolFiberglassShellPrice(poolMaterials.fiberglass);
+    price = price + await calculateChlorinePrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType, poolMaterials.chlorine);
+    price = price + await calculatePipesCost(poolMaterials.deepDepth, poolMaterials.length, poolMaterials.width, poolMaterials.pipes);
+    price = price + await calculateConcreteCost(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType, "Fiberglass", poolMaterials.concrete)
+    price = price + await calculatePoolSolarCoverPrice(poolMaterials.length, poolMaterials.width, poolMaterials.solarCover);
+    price = price + await calculatePoolWinterCoverPrice(poolMaterials.length, poolMaterials.width, poolMaterials.winterCover);
     price = price + calculatePoolFilterPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType);
     price = price + calculatePoolPumpPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType);
     price = price + getSkimmerPrice(poolMaterials.skimmer);
     price = price + getDrainPrice(poolMaterials.drain);
     
 
-    return price;
+    return Math.round(price * 100) / 100;
 }
 
 ///////////////////////////////
@@ -150,6 +156,7 @@ export function calculateChlorineTablets(length, width, depth, deepDepth, floorT
 }
 export async function calculateChlorinePrice(length, width, depth, deepDepth, floorType, product_name)
 {
+    if (product_name == null) {return 0}
 
     var tablets = calculateChlorineTablets(length, width, depth, deepDepth, floorType);
 
@@ -191,6 +198,9 @@ export function calculateCyanuricAcidPounds(length, width, depth, deepDepth, flo
 }
 export async function calculateCyanuricAcidPrice(length, width, depth, deepDepth, floorType, product_name)
 {
+
+    if (product_name == null) {return 0}
+
     var gallons = calculateGallons(length, width, depth, deepDepth, floorType)
 
     var cyanuricAcidlbs = calculateCyanuricAcidPounds(length, width, depth, deepDepth, floorType);
@@ -282,10 +292,13 @@ export async function calculatePipesCost(deepDepth, length, width, pipe_type)
 {
 
     var price_per_linear_foot =  (await get_piping(pipe_type))[0]['linft_cost'];
+    // return price_per_linear_foot
 
     var pipeLength = Math.round(calculatePipesAmount(deepDepth, length, width));
+    // return pipeLength
 
-    return (pipeLength * price_per_linear_foot);
+
+    return Math.round(pipeLength * price_per_linear_foot *100) / 100;
 }
 export async function getAllPipesPrices(deepDepth, length, width)
 {
@@ -446,9 +459,9 @@ export async function calculateSteelWallingPrice(length, width, product_name)
 {
 
     var sqFt = calculateSteelWallingSqFT(length, width);
-    var sideWallingJson = (await get_steel_walling(product_name))[0];
+    var sideWallingJson = await get_steel_walling(product_name);
 
-    return (sqFt * sideWallingJson.sqft_cost);
+    return (sqFt * sideWallingJson[0]['sqft_cost']);
 }
 export async function getAllSteelWallingPrices(length, width)
 {
