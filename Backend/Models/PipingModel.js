@@ -34,7 +34,7 @@ const piping_data = [
     {'name': '1in 250 PSI Black Poly Pipe', 'type': 'Black Poly', 'linft_cost': 1.25},
    ]
 
-//   db.sync({ force: true }).then(() => {
+// db.sync({ force: true }).then(() => {
 //  Piping.bulkCreate(piping_data, { validate: true }).then(() => {
 //  }).catch((err) => { console.log(err); });
 //  }).catch((error) => {

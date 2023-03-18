@@ -132,6 +132,30 @@ function PoolItem(props) {
     }
   }
 
+  // const poolliningPrice = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:4000/calculatePoolLinerPrice", {
+  //       params: { length, width, depth, basinType }
+  //     });
+  //     const data = response.data;
+  //     setChlorineOptions(data);
+  //   } catch (error) {
+  //     waterCost=null;
+  //   }
+  // }
+  
+  // const wintercoverPrice = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:4000/calculatePoolWinterCoverPrice", {
+  //       params: { length, width, depth, basinType }
+  //     });
+  //     const data = response.data;
+  //     setChlorineOptions(data);
+  //   } catch (error) {
+  //     waterCost=null;
+  //   }
+  // }
+  
   const getSkimmerCost = async () => {
     try {
       const response = axios.get("http://localhost:4000/getSkimmerPrice", {
