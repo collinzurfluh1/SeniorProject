@@ -61,7 +61,7 @@ const Pools = db.define('pools',{
         type: DataTypes.STRING // can be flatbed, slant, diver
     },
     basin_type:{
-        type: DataTypes.STRING // can be Gunnite, Vinyl, or Fiberglass
+        type: DataTypes.STRING // can be Gunite, Vinyl, or Fiberglass
     },
     // Lining/Construction of the pool
     lining_type:{

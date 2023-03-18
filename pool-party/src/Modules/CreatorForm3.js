@@ -48,14 +48,14 @@ class CreatorForm3 extends React.Component {
       this.updateWidth = this.updateWidth.bind(this);
       this.updateRebar = this.updateRebar.bind(this);
       this.updatePlaster = this.updatePlaster.bind(this);
-      this.updateGunniteBrand = this.updateGunniteBrand.bind(this); 
+      this.updateGuniteBrand = this.updateGuniteBrand.bind(this); 
       this.updatePoolMaterial = this.updatePoolMaterial.bind(this); 
       this.updateBasinLiner = this.updateBasinLiner.bind(this); 
 
 
   }
 
-  updateGunniteBrand(event){
+  updateGuniteBrand(event){
       this.setState({materialBrand: event.target.value}); 
       this.props.setPoolMaterialData({
         "materialBrand": event.target.value, 
@@ -339,7 +339,7 @@ class CreatorForm3 extends React.Component {
           <label for="pool-material" className="CreatorFormLabel">Pool Material:</label><br></br>
             <select name="pool-material" value={this.state.material} id="pool-material">
             <option value="None">Select a Value</option>
-            <option value="Gunnite">Gunnite</option>
+            <option value="Gunite">Gunite</option>
             <option value="Vinyl">Vinyl</option>
             <option value="Fiber Glass">Fiber Glass</option>
             </select><br></br>
@@ -348,11 +348,11 @@ class CreatorForm3 extends React.Component {
          
          
           <div id="Creator">
-          { this.state.material == "Gunnite" && 
-            <div id="gunniteDiv">
-            <div id="GunniteBrand" onChange={this.updateGunniteBrand}>
-            <label for="gunnite-brand" className="CreatorFormLabel">Choose A Concrete</label><br></br>
-            <ConcreteOptions width={"5"} length={"5"} depth={"5"} deepDepth={"5"} floorType={"Slant"} basinType={"Gunite"}  concrete={this.state.materialBrand} onChange={this.updateGunniteBrand}/>
+          { this.state.material == "Gunite" && 
+            <div id="guniteDiv">
+            <div id="GuniteBrand" onChange={this.updateGuniteBrand}>
+            <label for="gunite-brand" className="CreatorFormLabel">Choose A Concrete</label><br></br>
+            <ConcreteOptions width={"5"} length={"5"} depth={"5"} deepDepth={"5"} floorType={"Slant"} basinType={"Gunite"}  concrete={this.state.materialBrand} onChange={this.updateGuniteBrand}/>
          
             </div>
             

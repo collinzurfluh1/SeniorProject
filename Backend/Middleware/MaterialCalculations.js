@@ -348,8 +348,13 @@ function calculateConcretePounds(length, width, depth, deepDepth, floorType, bas
 
 export async function calculateConcreteCost(length, width, depth, deepDepth, floorType, basinType, product_name)
 {
+    console.log("<><><><><<><><><><><>");
+    console.log(basinType);
+    console.log("<><><><><<><><><><><>");
 
-
+    if(product_name == null){
+        return 0;
+    }
     var concretelbs = calculateConcretePounds(length, width, depth, deepDepth, floorType, basinType);
 
     var concreteJson = await get_cement_data(product_name);
@@ -495,6 +500,9 @@ function calculatePoolLinerArea(length, width, depth, deepDepth, floorType)
 }
 export async function calculatePoolLinerPrice(length, width, depth, deepDepth, floorType, product_name)
 {
+    if(product_name == null){
+        return 0;
+    }
 
     var poolLinerSize = calculatePoolLinerArea(length, width, depth, deepDepth, floorType);
     var poolLinerJson = (await get_liner(product_name))[0];
@@ -531,7 +539,9 @@ export async function getAllPoolLinerPrices(length, width, depth, deepDepth, flo
 
 export async function calculatePoolFiberglassShellPrice(product_name)
 {
-
+    if(product_name == null){
+        return 0;
+    }
 
     var fiberglassShellJson = (await get_fiberglass_shell(product_name))[0];
     
@@ -559,8 +569,9 @@ function calculatePoolWinterCoverArea(length, width)
 }
 export async function calculatePoolWinterCoverPrice(length, width, product_name)
 {
-
-
+    if(product_name == null){
+        return 0;
+    }
     var winterCoverSize = calculatePoolWinterCoverArea(length, width);
     var winterCoverJson = (await get_winter_covers(product_name))[0];
 
@@ -603,7 +614,9 @@ function calculatePoolSolarCover(length, width)
 }
 export async function calculatePoolSolarCoverPrice(length, width, product_name)
 {
-
+    if(product_name == null){
+        return 0;
+    }
 
     var solarCoverSize = calculatePoolSolarCover(length, width);
     var solarCoverJson = (await get_solar_covers(product_name))[0];
@@ -791,7 +804,9 @@ export function calculateRebar(length, width, depth)
 }
 export function getSkimmerPrice(name)
 {
-
+    if(name == null){
+        return 0;
+    }
 
     const skims = [
         {

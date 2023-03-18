@@ -6,7 +6,6 @@ export const savePools = async(req, res) => {
     const { owner, length, width, depth_shallow,
          depth_deep, slant_type, lining_type, cover1,
         cover2, piping, drain, skimmer, pump, cost} = req.body;
-        console.log(req.body);
     try{
         await Pool.create({
             owner: req.body.owner,
@@ -55,11 +54,26 @@ export const getPools = async(req, res) => {
     }
 }
 
+export const deletePools = async(req, res) => {
+    const { id } = req.body;
+
+    try {
+        const pools = await Pool.destroy({
+            where: {
+                id: req.body.id
+            }
+        });
+        res.json({msg: "Pool Delete Successful"});
+    } catch (error) {
+        console.log(error);
+
+    }
+}
+
 export const editPools = async(req, res) => {
     const { owner, length, width, depth_shallow,
          depth_deep, slant_type, lining_type, cover1,
         cover2, piping, drain, skimmer, pump, cost} = req.body;
-        console.log(req.body);
     try{
         await Pool.update({
             owner: req.body.owner,

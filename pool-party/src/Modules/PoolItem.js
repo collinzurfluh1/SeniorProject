@@ -170,6 +170,7 @@ function PoolItem(props) {
       const response = await axios.get("http://localhost:4000/calculateConcreteCost", {
         params: { length, width, depth_shallow, depth_deep, slant_type, basin_type, concrete }
       });
+      console.log(" length: "+ length + " width: "+ width +" depth_shallow: "+ depth_shallow +" depth_deep: "+ depth_deep +" slant_type: "+ slant_type +" basin_type: "+ basin_type +" concrete: "+ concrete);
       const data = response.data;
       setConcretePrice(data);
     } catch (error) {
@@ -234,7 +235,7 @@ function PoolItem(props) {
   const summercoverCost = async () => {
     try {
       const response = await axios.get("http://localhost:4000/calculatePoolSolarCoverPrice", {
-        params: { length, width, cover1 }
+        params: { length, width, cover2 }
       });
       const data = response.data;
       setSummercoverPrice(data);
@@ -306,6 +307,29 @@ function PoolItem(props) {
     }
 }
 
+const deletePool = async (e) => {
+  e.preventDefault();
+  try {
+      var areyousure = prompt('Are you sure you want to delete '+title+"? If so type YES.")
+      if(areyousure == "YES"){
+        try {
+          await axios.post('http://localhost:4000/deletePools', {
+            id: props.pool.pool.id
+          });
+          alert(title + " has been deleted!");
+          window.location.reload(false);
+        } catch (error) {
+          console.error(error);
+          alert("Error deleting pool");
+        }
+      }
+
+    } catch (error) {
+      console.log(error);
+      alert("Sorry the pool was not able to be deleted! Try again later!");
+    }
+}
+
   const refreshToken = async () => {
     try {
         const response = await axios.get('http://localhost:4000/token');
@@ -353,9 +377,9 @@ function PoolItem(props) {
             <div className='poolStat'>Slant Type: {props.pool.pool.slant_type == null ?
           "N/A"
         : props.pool.pool.slant_type}</div>
-            <div className='poolStat'>Basin Liner: {props.pool.pool.lining_type == null ?
+            <div className='poolStat'>Basin: {props.pool.pool.basin_type == null ?
           "N/A"
-        : props.pool.pool.lining_type}</div>
+        : props.pool.pool.basin_type}</div>
             <div className='poolStat'>Cover 1: {props.pool.pool.cover1 == null ?
           "N/A"
         : props.pool.pool.cover1}</div>
@@ -428,7 +452,10 @@ function PoolItem(props) {
       <Modal.Footer>
         {props.pool.pool.owner == username ?
           // <Button variant="contained" color="primary" onClick={(e) => {setModalShow(true) }}>Edit Pool</Button>
-          <Button variant="contained" color="primary" onClick={editPool}>Edit Pool</Button>
+          <>
+            <Button variant="contained" color="error" onClick={deletePool}>Delete Pool</Button>
+            <Button variant="contained" color="primary" onClick={editPool}>Edit Pool</Button>
+          </>
         : <Button variant="contained" color="success" onClick={savePool} >Save Pool</Button>}
         <Button variant="contained" onClick={props.onHide} color="error">Close</Button>
       </Modal.Footer>

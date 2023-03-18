@@ -1,6 +1,6 @@
 import express from "express";
 import { getUsers, Register, Login, Logout, UpdateUsername, UpdateEmail } from "../Controllers/Users.js";
-import { editPools, getPools, savePools } from "../Controllers/Pools.js";
+import { editPools, getPools, savePools, deletePools } from "../Controllers/Pools.js";
 import "../Controllers/Materials.js";
 import { verifyToken } from "../Middleware/VerifyToken.js";
 import { refreshToken } from "../Controllers/RefreshToken.js";
@@ -22,6 +22,7 @@ router.delete('/logout', Logout);
 router.get('/getPools', getPools);
 router.post('/savePools', savePools);
 router.post('/editPools', editPools);
+router.post('/deletePools', deletePools);
 
 
 router.get('/getAllChlorine', async (req, res) => {
@@ -87,8 +88,8 @@ router.get('/getAllPipesPrices', async (req, res) => {
 });
 
 router.get('/calculateConcreteCost', async (req, res) => {
-    const { ength, width, depth_shallow, depth_deep, slant_type, basin_type, product_name } = req.query;
-    const results = await calculateConcreteCost(ength, width, depth_shallow, depth_deep, slant_type, basin_type, product_name );
+    const { length, width, depth_shallow, depth_deep, slant_type, basin_type, concrete } = req.query;
+    const results = await calculateConcreteCost(length, width, depth_shallow, depth_deep, slant_type, basin_type, concrete );
     10, 20, 6, 6, 'Flatbed', 'Gunite', 'Quikrete 50 lb. Fast-Setting Mix'
     res.json(results);
 });
@@ -131,8 +132,8 @@ router.get('/getAllPoolLinerPrices', async (req, res) => {
 });
 
 router.get('/calculatePoolWinterCoverPrice', async (req, res) => {
-    const { length, width, product_name } = req.query;
-    const results = await calculatePoolWinterCoverPrice(length, width, product_name );
+    const { length, width, cover1 } = req.query;
+    const results = await calculatePoolWinterCoverPrice(length, width, cover1 );
     res.json(results);
 });
 
@@ -143,8 +144,8 @@ router.get('/getAllWinterCoverPrices', async (req, res) => {
 });
 
 router.get('/calculatePoolSolarCoverPrice', async (req, res) => {
-    const { length, width, product_name } = req.query;
-    const results = await calculatePoolSolarCoverPrice(length, width, product_name );
+    const { length, width, cover2 } = req.query;
+    const results = await calculatePoolSolarCoverPrice(length, width, cover2 );
     res.json(results);
 });
 
