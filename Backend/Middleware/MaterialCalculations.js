@@ -372,7 +372,7 @@ export async function getAllConcretePrices(length, width, depth, deepDepth, floo
     //     console.log(concreteJson)
     //     var name = await concreteJson.name;
     //     console.log(name)
-    //     const price = await calcualteConcreteCost(length, width, depth, basinType, name)
+    //     const price = await calculateConcreteCost(length, width, depth, basinType, name)
     //     console.log(price)
         
     //     // Create a new JSON object with the name and price fields
@@ -384,7 +384,7 @@ export async function getAllConcretePrices(length, width, depth, deepDepth, floo
 
     for (const concreteJson of concreteJsons) {
         var name = await concreteJson.name;
-        const price = await calcualteConcreteCost(length, width, depth, deepDepth, floorType, basinType, name)
+        const price = await calculateConcreteCost(length, width, depth, deepDepth, floorType, basinType, name)
         
         // Create a new JSON object with the name and price fields
         const option = { "name": name, "price": price };
@@ -399,7 +399,7 @@ export async function getAllConcretePrices(length, width, depth, deepDepth, floo
     //     console.log(concreteJson)
     //     var name = concreteJson.name;
     //     console.log(name)
-    //     const price = await calcualteConcreteCost(length, width, depth, basinType, name)
+    //     const price = await calculateConcreteCost(length, width, depth, basinType, name)
     //     console.log(price)
         
     //     // Create a new JSON object with the name and price fields
