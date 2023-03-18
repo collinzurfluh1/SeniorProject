@@ -27,7 +27,7 @@ export function calculatePrice(poolMaterials)
     }
 
 }
-export async function calculateVinyl(poolMaterials)
+async function calculateVinyl(poolMaterials)
 {
     //This function is to calculate the cost of a vinyl pool by calling the functions needed
     //This function will need to calculate its surface area and volume and call
@@ -69,7 +69,7 @@ export async function calculateVinyl(poolMaterials)
     return Math.round(price * 100) / 100;
     
 }
-export async function calculateGunite(poolMaterials)
+async function calculateGunite(poolMaterials)
 {
     //This function calculates the cost of a gunite pool
     /*
@@ -105,7 +105,7 @@ export async function calculateGunite(poolMaterials)
 
     return Math.round(price * 100) / 100;
 }   
-export async function calculateFiberglass(poolMaterials)
+async function calculateFiberglass(poolMaterials)
 {
     //This function calculates the cost of a fiberglass pool
     //calculateChemicals()
@@ -137,7 +137,7 @@ export async function calculateFiberglass(poolMaterials)
 ////////// CHEMICALS //////////
 ///////////////////////////////
 
-export function calculateChlorineTablets(length, width, depth, deepDepth, floorType)
+function calculateChlorineTablets(length, width, depth, deepDepth, floorType)
 {
     //This function calculates the cost based on the volume of the pool
     //Inputs: Pools Gallons of Water, chlorine tablet name, shock name, cyanuric acid name, ppm is from user input
@@ -189,7 +189,7 @@ export async function getAllChlorinePrices(length, width, depth, deepDepth, floo
 
     return chlorineOptions;  
 }
-export function calculateCyanuricAcidPounds(length, width, depth, deepDepth, floorType)
+function calculateCyanuricAcidPounds(length, width, depth, deepDepth, floorType)
 {
     var gallons = calculateGallons(length, width, depth, deepDepth, floorType)
 
@@ -236,7 +236,7 @@ export async function getAllCyanuricAcidPrices(length, width, depth, deepDepth, 
 
     return cyanuricAcidOptions; 
 }
-export function calculateShockLbs(gallons)
+function calculateShockLbs(gallons)
 {
     var lbsOfShock = gallons / 5000;
     return lbsOfShock;
@@ -284,7 +284,7 @@ export async function getAllShockPrices(length, width, depth, deepDepth, floorTy
 ////////// PIPING //////////
 ////////////////////////////
 
-export function calculatePipesAmount(deepDepth, length, width)
+function calculatePipesAmount(deepDepth, length, width)
 {
     //This function calculates the length and cost of pipe based on the type of pipe and perimeter of the pool
     //Inputs: Pipe Price/Name, Pools Max Depth, Length, and Width
@@ -327,7 +327,7 @@ export async function getAllPipesPrices(deepDepth, length, width)
 ////////// CONCRETE //////////
 //////////////////////////////
 
-export function calculateConcretePounds(length, width, depth, deepDepth, floorType, basinType)
+function calculateConcretePounds(length, width, depth, deepDepth, floorType, basinType)
 {
     //This calculates the total cost of concrete through cubic and square feet cost around and inside the pool.
     //Inputs: Length, Width, Depth, Surface Area, Concrete Price, BasinType
@@ -432,7 +432,7 @@ export async function getAllConcretePrices(length, width, depth, deepDepth, floo
 ////////// WATER //////////
 ///////////////////////////
 
-export function calculateGallons(length, width, depth, deepDepth, floorType)
+function calculateGallons(length, width, depth, deepDepth, floorType)
 {
     var volume = calculatePoolVolume(length, width, depth, deepDepth, floorType);
     return (volume * 7.48);
@@ -495,7 +495,7 @@ export async function getAllSteelWallingPrices(length, width)
 ////////// VINYL LINING //////////
 //////////////////////////////////
 
-export function calculatePoolLinerArea(length, width, depth, deepDepth, floorType)
+function calculatePoolLinerArea(length, width, depth, deepDepth, floorType)
 {
     //This calculates the cost of a vinyl pools liner based on its surface area.
     //Inputs: Pools Surface Area, Liner price/name
@@ -924,7 +924,7 @@ export function getAllDrainPrices()
 ////////// PLASTER //////////
 /////////////////////////////
 
-export function calculatePlaster(length, width, depth, deepDepth, floorType)
+function calculatePlaster(length, width, depth, deepDepth, floorType)
 {
     //This calculates the cost of plaster - No it doesn't it calculates how much plaster is needed - devin
     //Inputs: Pools Surface Area, Cost of Plaster/Name of Plaster
@@ -973,7 +973,7 @@ export async function getAllPlasterPrices(length, width, depth, deepDepth, floor
 ////////// POOL MEASURMENT TOOLS //////////
 ///////////////////////////////////////////
 
-export function calculatePoolSurfaceArea(length, width, depth, deepDepth, floorType)
+function calculatePoolSurfaceArea(length, width, depth, deepDepth, floorType)
 {
     //This calculates the pools surface area
     //Inputs: Pools Length, Depth's, Widths, Type of Basin
@@ -995,7 +995,7 @@ export function calculatePoolSurfaceArea(length, width, depth, deepDepth, floorT
     }
 
 }
-export function calculatePoolVolume(length, width, depth, deepDepth, floorType)
+function calculatePoolVolume(length, width, depth, deepDepth, floorType)
 {
     //this calculates the pools volume
     //Inputs:Pools Length, Width, Depth, Basin Type

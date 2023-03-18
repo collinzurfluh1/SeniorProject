@@ -6,10 +6,10 @@ import db from "./Config/Database.js";
 import router from "./Routes/index.js";
 
 // test for concrete
-import { calculatePrice, getPump, getFilter, calculatePoolPumpPrice, calculatePoolFilterPrice, getDrainPrice, getSkimmerPrice, getAllSkimmerPrices, calculatePoolLinerArea, calculateCyanuricAcidPounds, calculateChlorineTablets, calculateShockLbs, calculatePipesAmount, calculateRebar, calculatePlaster, calculatePoolSurfaceArea, calculateConcretePounds, calculateConcreteCost, getAllConcretePrices, calculateGallons, calculatePoolVolume, calculateWaterPrice } from "./Middleware/MaterialCalculations.js";
+// import { calculatePrice, getPump, getFilter, calculatePoolPumpPrice, calculatePoolFilterPrice, getDrainPrice, getSkimmerPrice, getAllSkimmerPrices, calculatePoolLinerArea, calculateCyanuricAcidPounds, calculateChlorineTablets, calculateShockLbs, calculatePipesAmount, calculateRebar, calculatePlaster, calculatePoolSurfaceArea, calculateConcretePounds, calculateConcreteCost, getAllConcretePrices, calculateGallons, calculatePoolVolume, calculateWaterPrice } from "./Middleware/MaterialCalculations.js";
 
 
-import { get_plaster_data, get_cement_data, get_winter_covers, get_solar_covers, get_chlorine, get_cyanuric_acid, get_shock, get_piping, get_liner, get_steel_walling, get_fiberglass_shell } from "./Controllers/Materials.js";
+// import { get_plaster_data, get_cement_data, get_winter_covers, get_solar_covers, get_chlorine, get_cyanuric_acid, get_shock, get_piping, get_liner, get_steel_walling, get_fiberglass_shell } from "./Controllers/Materials.js";
 
 
 dotenv.config();
@@ -191,7 +191,7 @@ app.use(router);
 // console.log(await get_fiberglass_shell('Lazy L Fiberglass'));
 // console.log('############');
 
-import { calculatePoolFiberglassShellPrice, getAllFiberglassShellPrices } from "./Middleware/MaterialCalculations.js";
+import { calculatePoolFiberglassShellPrice, calculatePrice, getAllFiberglassShellPrices } from "./Middleware/MaterialCalculations.js";
 
 // console.log('############');
 // console.log(await calculatePoolFiberglassShellPrice('Lazy L Fiberglass'));
@@ -302,33 +302,32 @@ console.log(await calculateRebar(40, 20, 10));
 // console.log("############");
 
 ////////////////////////// TESTING MASTER CALCULATION FUNCTIONS //////////////////////////
-import { calculateVinyl, calculateGunite, calculateFiberglass } from "./Middleware/MaterialCalculations.js";
 
-console.log("#######################################");
-console.log("############### Gunnite ###############");
-console.log("#######################################");
-var gunnitePoolMaterialsJson = {'length': 20,
-                                'width': 10,
-                                'depth_shallow': 6,
-                                'depth_deep': 6,
-                                'basin_type': 'Gunite',
-                                'slant_type': 'Flatbed',
-                                'concrete': 'Quikrete 50 lb. Fast-Setting Mix',
-                                'plaster': 'Sider Pool Plaster - 55 lb',
-                                'piping': 'Rigid PVC',
-                                'cover2': 'Blue Wave',
-                                'cover1': 'Vevor Winter Cover',
-                                'skimmer': 'Hayward SP1091WM Dyna-Skim Above-Ground Pool Skimmer',
-                                'drain': 'Polaris 5820 Main Drain Cover',
-                                'filter': '36 sq. ft. ProGrid D.E. Filter',
-                                'chlorine': 'RAYYAKICG 3 in tablets',
-                                'cyanuric_acid': 'Leisure Pool Chlorine Stabilizer',
-                                'shock': 'Leslie\'s Power Powder'
-                            }
-console.log(await calculateGunite(gunnitePoolMaterialsJson))
-console.log("#######################################");
-console.log("############### Gunnite ###############");
-console.log("#######################################");
+// console.log("#######################################");
+// console.log("############### Gunnite ###############");
+// console.log("#######################################");
+// var gunnitePoolMaterialsJson = {'length': 20,
+//                                 'width': 10,
+//                                 'depth_shallow': 6,
+//                                 'depth_deep': 6,
+//                                 'basin_type': 'Gunite',
+//                                 'slant_type': 'Flatbed',
+//                                 'concrete': 'Quikrete 50 lb. Fast-Setting Mix',
+//                                 'plaster': 'Sider Pool Plaster - 55 lb',
+//                                 'piping': 'Rigid PVC',
+//                                 'cover2': 'Blue Wave',
+//                                 'cover1': 'Vevor Winter Cover',
+//                                 'skimmer': 'Hayward SP1091WM Dyna-Skim Above-Ground Pool Skimmer',
+//                                 'drain': 'Polaris 5820 Main Drain Cover',
+//                                 'filter': '36 sq. ft. ProGrid D.E. Filter',
+//                                 'chlorine': 'RAYYAKICG 3 in tablets',
+//                                 'cyanuric_acid': 'Leisure Pool Chlorine Stabilizer',
+//                                 'shock': 'Leslie\'s Power Powder'
+//                             }
+// console.log(await calculatePrice(gunnitePoolMaterialsJson))
+// console.log("#######################################");
+// console.log("############### Gunnite ###############");
+// console.log("#######################################");
 
 
 // console.log("#####################################");
