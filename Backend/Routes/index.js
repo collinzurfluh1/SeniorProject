@@ -5,11 +5,8 @@ import "../Controllers/Materials.js";
 import { verifyToken } from "../Middleware/VerifyToken.js";
 import { refreshToken } from "../Controllers/RefreshToken.js";
 
-<<<<<<< HEAD
-import { calculatePrice, getPump, getFilter, getAllSkimmerPrices, getAllDrainPrices, calculateWaterPrice, calculateShockPrice, getAllChlorinePrices, getAllCyanuricAcidPrices, getAllShockPrices, getAllPipesPrices, getAllWinterCoverPrices, getAllSolarCoverPrices, getAllConcretePrices, getAllPlasterPrices, getAllPoolLinerPrices, getAllSteelWallingPrices, calculateRebar, calculatePoolPumpPrice, calculatePoolFilterPrice, getFiberglassShellDetails, getSkimmerPrice, getDrainPrice, getAllFiberglassShellPrices } from "../Middleware/MaterialCalculations.js"; 
-=======
+
 import { calculateCyanuricAcidPrice, calculatePoolWinterCoverPrice, calculatePoolSolarCoverPrice, calculateChlorinePrice, getPump, getFilter, getAllSkimmerPrices, getAllDrainPrices, calculateWaterPrice, calculateShockPrice, getAllChlorinePrices, getAllCyanuricAcidPrices, getAllShockPrices, getAllPipesPrices, getAllWinterCoverPrices, getAllSolarCoverPrices, getAllConcretePrices, getAllPlasterPrices, getAllPoolLinerPrices, getAllSteelWallingPrices, calculateRebar, calculatePoolPumpPrice, calculatePoolFilterPrice, getFiberglassShellDetails, getSkimmerPrice, getDrainPrice } from "../Middleware/MaterialCalculations.js"; 
->>>>>>> 40fc9fe5673d942a95717474f99e31f9bfc88c28
 
 //Make for getPump, getFilter, 
 const router = express.Router();
@@ -227,7 +224,7 @@ router.get('/calculatePrice', async (req, res) => {
 
 router.get('/getAllFiberGlassShellPrices', async (req, res) => {
     const { name } = req.query;
-    const results = await getAllFiberglassShellPrices;
+    const results = await getAllFiberglassShellPrices();
     res.json(results);
 });
 
