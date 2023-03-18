@@ -221,4 +221,12 @@ router.get('/calculatePrice', async (req, res) => {
     res.json(results);
 });
 
+router.get('/getAllFiberGlassShellPrices', async (req, res) => {
+    const { name } = req.query;
+    const results = await getAllFiberglassShellPrices();
+    res.json(results);
+});
+
+
+
 export default router;
