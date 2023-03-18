@@ -301,23 +301,44 @@ class CreatorForm3 extends React.Component {
 
   }
   updateShell(event){
-    this.setState({shell: event.target.value}); 
+    var shellValues = event.target[event.target.selectedIndex].id.split(',');
+
+    var name = shellValues[0];
+    var width = shellValues[1];
+    var length = shellValues[2];
+    var depth = shellValues[3];
+    var deepDepth = shellValues[4];
+
+    this.setState({shell: name}, function() {
+
+
+    });
+    this.setState({length: length}, function() {});
+    this.setState({width: width}, function() {});
+    this.setState({shallowDepth: depth}, function() {});
+    this.setState({depth: depth}, function() {});
+    this.setState({deepDepth: deepDepth}, function() {
+
+    });
+
     this.props.setPoolMaterialData({
       "materialBrand": this.state.materialBrand, 
       "plaster": this.state.plaster,
       "rebar": this.state.rebar,  
-      "shell": event.target.value,
+      "shell": name,
       "lining": this.state.lining,
       "wall": this.state.wall,
-      "shallowDepth": this.state.shallowDepth,
-      "deepDepth": this.state.deepDepth,
+      "shallowDepth": depth,
+      "deepDepth": deepDepth,
       "slant": this.state.shell,
-      "width": this.state.width,
-      "length": this.state.length,
-      "depth": this.state.depth,
+      "width": width,
+      "length": length,
+      "depth": depth,
       "basinLiner": this.state.basinLiner
 
     });
+
+    
   }
 
   
@@ -417,7 +438,18 @@ class CreatorForm3 extends React.Component {
           { this.state.material == "Fiber Glass" && 
             <div id="Fiber Glass" onChange={this.updateShell}>
             <label className="CreatorFormLabel">Fiber Glass Shell:</label><br></br>
-            <FiberGlassOptions onChange={this.updateShell} shell={this.state.shell}/>
+            <FiberGlassOptions onChange={this.updateShell} width={this.state.width} length={this.state.length} deepDepth ={this.state.deepDepth} shallowDepth={this.state.depth}shell={this.state.shell}/>
+           { this.state.shell != "none" && this.state.shell != null && 
+            <div>
+            <p>Width: {this.state.width}</p>
+            <p>Length: {this.state.length}</p>
+            <p>Depth: {this.state.depth}</p>
+            <p>Deep Depth: {this.state.deepDepth}</p>
+            </div>
+
+
+           }
+           
             </div>
           }     
           </div>
