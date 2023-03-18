@@ -307,30 +307,17 @@ import { calculateVinyl, calculateGunite, calculateFiberglass } from "./Middlewa
 // console.log("#######################################");
 // console.log("############### Gunnite ###############");
 // console.log("#######################################");
-//     // name: pool['name'],
-//     // material: pool['material'],
-//     // materialBrand: (pool['material'] == 'Fiber Glass') ? "Not Applicable" : pool['materialData']['materialBrand'],
-//     // width: (pool['material'] == 'Fiber Glass') ? 'Not Applicable' : pool['materialData']['width'],
-//     // length:  (pool['material'] == 'Fiber Glass') ? 'Not Applicable' : pool['materialData']['length'],
-//     // depth:  (pool['material'] != 'Gunnite') ? 'Not Applicable' : pool['materialData']['depth'],
-//     // shallowDepth: (pool['material'] == 'Vinyl') ? pool['materialData']['shallowDepth'] : "Not Applicable",
-//     // deepDepth: (pool['material'] == 'Vinyl') ? pool['materialData']['deepDepth'] : "Not Applicable",
-//     // slant: (pool['material'] == 'Vinyl') ? pool['materialData']['slant'] : "Not Applicable",
-//     // shell: (pool['material'] == 'Fiber Glass') ? pool['materialData']['shell'] : "Not Applicable",
-//     // chlorine: pool['chemicals']['chlorine'],
-//     // cyaneuricAcid: pool['chemicals']['cyaneuricAcid'],
-//     // shock: pool['chemicals']['shock']
 // var gunnitePoolMaterialsJson = {'length': 20,
 //                                 'width': 10,
-//                                 'depth': 6,
-//                                 'deepDepth': 6,
-//                                 'basinType': 'Gunite',
-//                                 'floorType': 'Flatbed',
+//                                 'depth_shallow': 6,
+//                                 'depth_deep': 6,
+//                                 'basin_type': 'Gunite',
+//                                 'slant_type': 'Flatbed',
 //                                 'concrete': 'Quikrete 50 lb. Fast-Setting Mix',
 //                                 'plaster': 'Sider Pool Plaster - 55 lb',
-//                                 'pipes': 'Rigid PVC',
-//                                 'solarCover': 'Blue Wave',
-//                                 'winterCover': 'Vevor Winter Cover',
+//                                 'piping': 'Rigid PVC',
+//                                 'cover2': 'Blue Wave',
+//                                 'cover1': 'Vevor Winter Cover',
 //                                 'skimmer': 'Hayward SP1091WM Dyna-Skim Above-Ground Pool Skimmer',
 //                                 'drain': 'Polaris 5820 Main Drain Cover',
 //                                 'filter': '36 sq. ft. ProGrid D.E. Filter',
@@ -350,16 +337,16 @@ import { calculateVinyl, calculateGunite, calculateFiberglass } from "./Middlewa
 
 // var vinylPoolMaterialsJson = {'length': 20,
 //                                 'width': 10,
-//                                 'depth': 6,
-//                                 'deepDepth': 6,
-//                                 'basinType': 'Vinyl',
-//                                 'floorType': 'Flatbed',
+//                                 'depth_shallow': 6,
+//                                 'depth_deep': 6,
+//                                 'basin_type': 'Vinyl',
+//                                 'slant_type': 'Flatbed',
 //                                 'concrete': 'Quikrete 50 lb. Fast-Setting Mix',
-//                                 'steelWall': 'Pool Warehouse walling',
-//                                 'liner': '18 x 36 Rectangle Inground Swimming Pool Liners - Cambridge Aquarius',
-//                                 'pipes': 'Rigid PVC',
-//                                 'solarCover': 'Blue Wave',
-//                                 'winterCover': 'Vevor Winter Cover',
+//                                 'steel_wall': 'Pool Warehouse walling',
+//                                 'lining_type': '18 x 36 Rectangle Inground Swimming Pool Liners - Cambridge Aquarius',
+//                                 'piping': 'Rigid PVC',
+//                                 'cover2': 'Blue Wave',
+//                                 'cover1': 'Vevor Winter Cover',
 //                                 'skimmer': 'Hayward SP1091WM Dyna-Skim Above-Ground Pool Skimmer',
 //                                 'drain': 'Polaris 5820 Main Drain Cover',
 //                                 'filter': '36 sq. ft. ProGrid D.E. Filter',
@@ -373,33 +360,33 @@ import { calculateVinyl, calculateGunite, calculateFiberglass } from "./Middlewa
 // console.log("############### VINYL ###############");
 // console.log("#####################################");
 
-console.log("##########################################");
-console.log("############### FIBERGLASS ###############");
-console.log("##########################################");
+// console.log("##########################################");
+// console.log("############### FIBERGLASS ###############");
+// console.log("##########################################");
 
-var fiberglassPoolMaterialsJson = {'length': 30,
-                                'width': 14,
-                                'depth': 3.5,
-                                'deepDepth': 6,
-                                'basinType': 'Vinyl',
-                                'floorType': 'Slant',
-                                'concrete': 'Quikrete 50 lb. Fast-Setting Mix',
-                                'fiberglass': 'Lazy L Fiberglass',
-                                'pipes': 'Rigid PVC',
-                                'solarCover': 'Blue Wave',
-                                'winterCover': 'Vevor Winter Cover',
-                                'skimmer': 'Hayward SP1091WM Dyna-Skim Above-Ground Pool Skimmer',
-                                'drain': 'Polaris 5820 Main Drain Cover',
-                                'filter': '36 sq. ft. ProGrid D.E. Filter',
-                                'chlorine': 'RAYYAKICG 3 in tablets',
-                                'cyanuric_acid': 'Leisure Pool Chlorine Stabilizer',
-                                'shock': 'Leslie\'s Power Powder'
-                            };
-console.log(await calculateFiberglass(fiberglassPoolMaterialsJson));
+// var fiberglassPoolMaterialsJson = {'length': 30,
+//                                 'width': 14,
+//                                 'depth_shallow': 3.5,
+//                                 'depth_deep': 6,
+//                                 'basin_type': 'Vinyl',
+//                                 'slant_type': 'Slant',
+//                                 'concrete': 'Quikrete 50 lb. Fast-Setting Mix',
+//                                 'fiberglass_shell': 'Lazy L Fiberglass',
+//                                 'piping': 'Rigid PVC',
+//                                 'cover2': 'Blue Wave',
+//                                 'cover1': 'Vevor Winter Cover',
+//                                 'skimmer': 'Hayward SP1091WM Dyna-Skim Above-Ground Pool Skimmer',
+//                                 'drain': 'Polaris 5820 Main Drain Cover',
+//                                 'filter': '36 sq. ft. ProGrid D.E. Filter',
+//                                 'chlorine': 'RAYYAKICG 3 in tablets',
+//                                 'cyanuric_acid': 'Leisure Pool Chlorine Stabilizer',
+//                                 'shock': 'Leslie\'s Power Powder'
+//                             };
+// console.log(await calculateFiberglass(fiberglassPoolMaterialsJson));
 
-console.log("##########################################");
-console.log("############### FIBERGLASS ###############");
-console.log("##########################################");
+// console.log("##########################################");
+// console.log("############### FIBERGLASS ###############");
+// console.log("##########################################");
 
 
 

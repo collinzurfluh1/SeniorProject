@@ -46,22 +46,22 @@ export async function calculateVinyl(poolMaterials)
    //                   0       1       2       3   4           5           6          7        8               9       10            11         12          13              14      15      16      17
     //poolMaterials = {length, width, depth, type, pipes, chlorineTablet, shockName, ppm, cyanuricAcidName, concrete, poolLiner, steelWalling, solarCover, winterCover, basinType, Skimmer, drain, numDrains}
     
-    var price = calculateWaterPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType);
+    var price = calculateWaterPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth_shallow, poolMaterials.depth_deep, poolMaterials.floorType);
     // return price;
-    price = price + await calculateChlorinePrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType, poolMaterials.chlorine);
+    price = price + await calculateChlorinePrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth_shallow, poolMaterials.depth_deep, poolMaterials.floorType, poolMaterials.chlorine);
     // return price;
-    price = price + await calculatePipesCost(poolMaterials.deepDepth, poolMaterials.length, poolMaterials.width, poolMaterials.pipes);
+    price = price + await calculatePipesCost(poolMaterials.depth_deep, poolMaterials.length, poolMaterials.width, poolMaterials.piping);
     // return price;
-    price = price + await calculateConcreteCost(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType, poolMaterials.basinType, poolMaterials.concrete)
+    price = price + await calculateConcreteCost(poolMaterials.length, poolMaterials.width, poolMaterials.depth_shallow, poolMaterials.depth_deep, poolMaterials.slant_type, 'Vinyl', poolMaterials.concrete)
     // return price;
     price = price + await calculateSteelWallingPrice(poolMaterials.length, poolMaterials.width, poolMaterials.steelWall);
     // return price;
-    price = price + await calculatePoolLinerPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType, poolMaterials.liner);
+    price = price + await calculatePoolLinerPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth_shallow, poolMaterials.depth_deep, poolMaterials.floorType, poolMaterials.lining_type);
     // return price
-    price = price + await calculatePoolSolarCoverPrice(poolMaterials.length, poolMaterials.width, poolMaterials.solarCover);
-    price = price + await calculatePoolWinterCoverPrice(poolMaterials.length, poolMaterials.width, poolMaterials.winterCover);
-    price = price + calculatePoolFilterPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType);
-    price = price + calculatePoolPumpPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType);
+    price = price + await calculatePoolSolarCoverPrice(poolMaterials.length, poolMaterials.width, poolMaterials.cover2);
+    price = price + await calculatePoolWinterCoverPrice(poolMaterials.length, poolMaterials.width, poolMaterials.cover1);
+    price = price + calculatePoolFilterPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth_shallow, poolMaterials.depth_deep, poolMaterials.floorType);
+    price = price + calculatePoolPumpPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth_shallow, poolMaterials.depth_deep, poolMaterials.floorType);
     price = price + getSkimmerPrice(poolMaterials.skimmer);
     price = price + getDrainPrice(poolMaterials.drain);
     
@@ -86,19 +86,19 @@ export async function calculateGunite(poolMaterials)
     calculatePlaster()
     *///                0       1       2       3   4           5           6          7        8               9       10      11      12          13              14      15      16      17
     //poolMaterials = {length, width, depth, type, pipes, chlorineTablet, shockName, ppm, cyanuricAcidName, concrete, plaster, rebar, solarCover, winterCover, basinType, Skimmer, drain, numDrains}
-    var price = calculateWaterPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType);
-    price = price + await calculatePipesCost(poolMaterials.deepDepth, poolMaterials.length, poolMaterials.width, poolMaterials.pipes);
-    price = price + await calculateConcreteCost(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType, "Gunite", poolMaterials.concrete);
-    price = price + calculateRebar(poolMaterials.length, poolMaterials.width, poolMaterials.depth);
-    price = price + await calculatePoolSolarCoverPrice(poolMaterials.length, poolMaterials.width, poolMaterials.solarCover);
-    price = price + await calculatePoolWinterCoverPrice(poolMaterials.length, poolMaterials.width, poolMaterials.winterCover);
-    price = price + calculatePoolFilterPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType);
-    price = price + calculatePoolPumpPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType);
+    var price = calculateWaterPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth_shallow, poolMaterials.depth_deep, poolMaterials.slant_type);
+    price = price + await calculatePipesCost(poolMaterials.depth_deep, poolMaterials.length, poolMaterials.width, poolMaterials.piping);
+    price = price + await calculateConcreteCost(poolMaterials.length, poolMaterials.width, poolMaterials.depth_shallow, poolMaterials.depth_deep, poolMaterials.slant_type, "Gunite", poolMaterials.concrete);
+    price = price + calculateRebar(poolMaterials.length, poolMaterials.width, poolMaterials.depth_shallow);
+    price = price + await calculatePoolSolarCoverPrice(poolMaterials.length, poolMaterials.width, poolMaterials.cover2);
+    price = price + await calculatePoolWinterCoverPrice(poolMaterials.length, poolMaterials.width, poolMaterials.cover1);
+    price = price + calculatePoolFilterPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth_shallow, poolMaterials.depth_deep, poolMaterials.slant_type);
+    price = price + calculatePoolPumpPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth_shallow, poolMaterials.depth_deep, poolMaterials.slant_type);
     price = price + getSkimmerPrice(poolMaterials.skimmer);
     price = price + getDrainPrice(poolMaterials.drain);
-    price = price + await calculateChlorinePrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType, poolMaterials.chlorine);
-    price = price + await calculateCyanuricAcidPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType, poolMaterials.cyanuric_acid);
-    price = price + await calculateShockPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType, poolMaterials.shock);
+    price = price + await calculateChlorinePrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth_shallow, poolMaterials.depth_deep, poolMaterials.slant_type, poolMaterials.chlorine);
+    price = price + await calculateCyanuricAcidPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth_shallow, poolMaterials.depth_deep, poolMaterials.slant_type, poolMaterials.cyanuric_acid);
+    price = price + await calculateShockPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth_shallow, poolMaterials.depth_deep, poolMaterials.slant_type, poolMaterials.shock);
 
 
     
@@ -117,15 +117,15 @@ export async function calculateFiberglass(poolMaterials)
     //calculateWinterCover()
     //calculateFilter()
     
-    var price = calculateWaterPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType);
-    price = price + await calculatePoolFiberglassShellPrice(poolMaterials.fiberglass);
-    price = price + await calculateChlorinePrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType, poolMaterials.chlorine);
-    price = price + await calculatePipesCost(poolMaterials.deepDepth, poolMaterials.length, poolMaterials.width, poolMaterials.pipes);
-    price = price + await calculateConcreteCost(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType, "Fiberglass", poolMaterials.concrete)
-    price = price + await calculatePoolSolarCoverPrice(poolMaterials.length, poolMaterials.width, poolMaterials.solarCover);
-    price = price + await calculatePoolWinterCoverPrice(poolMaterials.length, poolMaterials.width, poolMaterials.winterCover);
-    price = price + calculatePoolFilterPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType);
-    price = price + calculatePoolPumpPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth, poolMaterials.deepDepth, poolMaterials.floorType);
+    var price = calculateWaterPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth_shallow, poolMaterials.depth_deep, poolMaterials.slant_type);
+    price = price + await calculatePoolFiberglassShellPrice(poolMaterials.fiberglass_shell);
+    price = price + await calculateChlorinePrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth_shallow, poolMaterials.depth_deep, poolMaterials.slant_type, poolMaterials.chlorine);
+    price = price + await calculatePipesCost(poolMaterials.depth_deep, poolMaterials.length, poolMaterials.width, poolMaterials.piping);
+    price = price + await calculateConcreteCost(poolMaterials.length, poolMaterials.width, poolMaterials.depth_shallow, poolMaterials.depth_deep, poolMaterials.slant_type, "Fiberglass", poolMaterials.concrete)
+    price = price + await calculatePoolSolarCoverPrice(poolMaterials.length, poolMaterials.width, poolMaterials.cover2);
+    price = price + await calculatePoolWinterCoverPrice(poolMaterials.length, poolMaterials.width, poolMaterials.cover1);
+    price = price + calculatePoolFilterPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth_shallow, poolMaterials.depth_deep, poolMaterials.slant_type);
+    price = price + calculatePoolPumpPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth_shallow, poolMaterials.depth_deep, poolMaterials.slant_type);
     price = price + getSkimmerPrice(poolMaterials.skimmer);
     price = price + getDrainPrice(poolMaterials.drain);
     
