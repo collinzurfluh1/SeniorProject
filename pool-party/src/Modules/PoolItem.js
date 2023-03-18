@@ -3,9 +3,8 @@ import { Button } from '@mui/material';
 import Modal from 'react-bootstrap/Modal';
 import '../SCSS/poolitem.scss'
 import axios from 'axios';
-import { createRoutesFromElements, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import jwt_decode from "jwt-decode";
-import EditPoolItem from './EditPoolItem';
 
 
 function PoolItem(props) {
@@ -14,6 +13,24 @@ function PoolItem(props) {
   const [modalShow, setModalShow] = React.useState(false);
   const [chlorinePrice, setChlorinePrice] = useState('');
   const [waterPrice, setWaterPrice] = useState('');
+  const [pumpPrice, setPumpPrice] = useState('');
+  const [concretePrice, setConcretePrice] = useState('');
+  const [chlroinePrice, setChlorineCost] = useState('');
+  const [summercoverPrice, setSummercoverPrice] = useState('');
+  const [wintercoverPrice, setWintercoverPrice] = useState('');
+  const [skimmerPrice, setSkimmerPrice] = useState('');
+  const [cyanuricAcidPrice, setCyanuricAcidPrice] = useState('');
+  const [plasterPrice, setPlasterPrice] = useState('');
+  const [rebarPrice, setRebarPrice] = useState('');
+  const [steelWallingPrice, setSteelWallingPrice] = useState('');
+  const [poolLiningPrice, setPoolLiningPrice] = useState('');
+  const [pipesPrice, setPipesPrice] = useState('');
+  const [filterPrice, setFilterPrice] = useState('');
+  const [fiberglassPrice, setFiberglassPrice] = useState('');
+
+
+  
+  console.log(props);
 
   const poolProps = {"owner": props.pool.pool.owner,
     "title": props.pool.pool.title,
@@ -39,7 +56,9 @@ function PoolItem(props) {
     "shock": props.pool.pool.shock,
     "cyanuricAcid": props.pool.pool.cyanuricAcid,
     "chlorine": props.pool.pool.chlorine,
-    "cost": props.pool.pool.cost,};
+    "cost": props.pool.pool.cost,
+    "isEdit": true,
+    "id": props.pool.pool.id};
 
 
   const title = poolProps.title;
@@ -78,53 +97,40 @@ function PoolItem(props) {
     }
   }
 
-  // const pipesCost = async () => {
-  //   try {
-  //     const response = await axios.get("http://localhost:4000/calculatePipesCost", {
-  //       params: { length, width, depth, basinType }
-  //     });
-  //     const data = response.data;
-  //     setChlorineOptions(data);
-  //   } catch (error) {
-  //     waterCost=null;
-  //   }
-  // }
+  const getPoolFilterPrice = async () => {
+    try {
+      const response = axios.get("http://localhost:4000/calculatePoolFilterPrice", {
+        params: { length, width, depth_shallow, depth_deep, basin_type }
+      });
+      const data = response.data;
+      setFilterPrice(data);
+    } catch (error) {
+    }
+  }
 
-  // const concreteCost = async () => {
-  //   try {
-  //     const response = await axios.get("http://localhost:4000/calculateConcreteCost", {
-  //       params: { length, width, depth, basinType }
-  //     });
-  //     const data = response.data;
-  //     setChlorineOptions(data);
-  //   } catch (error) {
-  //     waterCost=null;
-  //   }
-  // }
+  const getFiberGlassShellCost = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/calcualtePoolFiberglassShellPrice", {
+        params: { fiberglass_shell }
+      });
+      const data = response.data;
+      setFiberglassPrice(data);
+    } catch (error) {
+    }
+  }
 
-  // const chlorineCost = async () => {
-  //   try {
-  //     const response = await axios.get("http://localhost:4000/calculateChlorinePrice", {
-  //       params: { length, width, depth, deepDepth, floorType }
-  //     });
-  //     const data = response.data;
-  //     setChlorineOptions(data);
-  //   } catch (error) {
-  //     waterCost=null;
-  //   }
-  // }
 
-  // const steelwallingCost = async () => {
-  //   try {
-  //     const response = await axios.get("http://localhost:4000/calcuateSteelWallingPrice", {
-  //       params: { length, width, depth, basinType }
-  //     });
-  //     const data = response.data;
-  //     setChlorineOptions(data);
-  //   } catch (error) {
-  //     waterCost=null;
-  //   }
-  // }
+  const getPumpCost = async () => {
+    try {
+      const response = axios.get("http://localhost:4000/getPump", {
+        params: { pump }
+      });
+      const data = response.data;
+      console.log(data);
+      setPumpPrice(data);
+    } catch (error) {
+    }
+  }
 
   // const poolliningPrice = async () => {
   //   try {
@@ -149,48 +155,146 @@ function PoolItem(props) {
   //     waterCost=null;
   //   }
   // }
+  
+  const getSkimmerCost = async () => {
+    try {
+      const response = axios.get("http://localhost:4000/getSkimmerPrice", {
+        params: { skimmer }
+      });
+      const data = response.data;
+      setSkimmerPrice(data);
+    } catch (error) {
+    }
+  }
 
-  // const summercoverPrice = async () => {
-  //   try {
-  //     const response = await axios.get("http://localhost:4000/calculatePoolSolarCoverPrice", {
-  //       params: { length, width, depth, basinType }
-  //     });
-  //     const data = response.data;
-  //     setChlorineOptions(data);
-  //   } catch (error) {
-  //     waterCost=null;
-  //   }
-  // }
+  const pipesCost = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/calculatePipesCost", {
+        params: { depth_deep, length, width, piping }
+      });
+      const data = response.data;
+      setPipesPrice(data);
+    } catch (error) {
+    }
+  }
 
-  // const plasterPrice = async () => {
-  //   try {
-  //     const response = await axios.get("http://localhost:4000/calculatePlasterCost", {
-  //       params: { length, width, depth, basinType }
-  //     });
-  //     const data = response.data;
-  //     setChlorineOptions(data);
-  //   } catch (error) {
-  //     waterCost=null;
-  //   }
-  // }
+  const rebarCost = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/calculateRebar", {
+        params: { length, width, depth_shallow }
+      });
+      const data = response.data;
+      setRebarPrice(data);
+    } catch (error) {
+    }
+  }
 
-  // const getAllChlorine = async () => {
-  //   try {
-  //     const response = await axios.get("http://localhost:4000/getAllChlorine", {
-  //       params: { length, width, depth, basinType }
-  //     });
-  //     const data = response.data;
-  //     setChlorineOptions(data);
-  //   } catch (error) {
-    
-  //   }
-  // }
 
+  const concreteCost = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/calculateConcreteCost", {
+        params: { length, width, depth_shallow, depth_deep, lining_type, basin_type, concrete }
+      });
+      const data = response.data;
+      setConcretePrice(data);
+    } catch (error) {
+    }
+  }
+
+  const chlorineCost = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/calculateChlorinePrice", {
+        params: { length, width, depth_shallow, depth_deep, lining_type, chlorine }
+      });
+      const data = response.data;
+      setChlorineCost(data);
+    } catch (error) {
+    }
+  }
+
+  const cyanuricAcidCost = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/calculateCyanuricAcidPrice", {
+        params: { length, width, depth_shallow, depth_deep, lining_type, cyanuricAcid }
+      });
+      const data = response.data;
+      setCyanuricAcidPrice(data);
+    } catch (error) {
+    }
+  }
+
+  const steelwallingCost = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/calculateSteelWallingPrice", {
+        params: { length, width, steel_wall }
+      });
+      const data = response.data;
+      setSteelWallingPrice(data);
+    } catch (error) {
+    }
+  }
+
+  const poolliningCost = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/calculatePoolLinerPrice", {
+        params: { length, width, depth_shallow, depth_deep, basin_type, lining_type }
+      });
+      const data = response.data;
+      setPoolLiningPrice(data);
+    } catch (error) {
+    }
+  }
+  
+  const wintercoverCost = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/calculatePoolWinterCoverPrice", {
+        params: { length, width, cover1 }
+      });
+      const data = response.data;
+      setWintercoverPrice(data);
+    } catch (error) {
+    }
+  }
+
+  const summercoverCost = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/calculatePoolSolarCoverPrice", {
+        params: { length, width, cover1 }
+      });
+      const data = response.data;
+      setSummercoverPrice(data);
+    } catch (error) {
+    }
+  }
+
+  const plasterCost = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/calculatePlasterCost", {
+        params: { length, width, depth_shallow, depth_deep, lining_type, plaster }
+      });
+      const data = response.data;
+      setPlasterPrice(data);
+    } catch (error) {
+    }
+  }
 
   useEffect(()=>{
     refreshToken();
     getWaterCost();
-    // getAllChlorine();
+    getPumpCost();
+    getSkimmerCost();
+    concreteCost();
+    chlorineCost();
+    summercoverCost();
+    wintercoverCost();
+    cyanuricAcidCost();
+    plasterCost();
+    rebarCost();
+    steelwallingCost();
+    poolliningCost();
+    pipesCost();
+    getPoolFilterPrice();
+    getFiberGlassShellCost();
   },[])
 
   const savePool = async (e) => {
@@ -238,10 +342,6 @@ function PoolItem(props) {
   const editPool = () =>{
     navigate('/creator', { state: { poolProps: poolProps } });
   }
-
-  useEffect(()=>{
-    refreshToken();
-  },[])
 
   return (
     <Modal
@@ -300,20 +400,54 @@ function PoolItem(props) {
           "N/A"
         : props.pool.pool.pump}</div>
       </div>
-      <h3>Material Costs:</h3>
+      <h3>Costs:</h3>
       <div className='poolStatsList'>
-        <div className='poolStat'>Water: ${waterPrice == null ?
+        <div className='poolStat'>Water: ${parseFloat(waterPrice).toFixed(2) == undefined ?
           "N/A"
-        : waterPrice}</div>
-        <div className='poolStat'>Pump: {props.pool.pool.pump == null ?
+        : parseFloat(waterPrice).toFixed(2)}</div>
+        <div className='poolStat'>Pump: ${parseFloat(pumpPrice).toFixed(2) == undefined ?
           "N/A"
-        : props.pool.pool.pump}</div>
-        <div className='poolStat'>Pump: {props.pool.pool.pump == null ?
+        : parseFloat(pumpPrice).toFixed(2)}</div>
+        <div className='poolStat'>Filter: ${parseFloat(filterPrice).toFixed(2) == undefined ?
           "N/A"
-        : props.pool.pool.pump}</div>
-        <div className='poolStat'>Pump: {props.pool.pool.pump == null ?
+        : parseFloat(filterPrice).toFixed(2)}</div>
+        <div className='poolStat'>Skimmer: ${parseFloat(skimmerPrice).toFixed(2) == undefined ?
           "N/A"
-        : props.pool.pool.pump}</div>
+        : parseFloat(skimmerPrice).toFixed(2)}</div>
+        <div className='poolStat'>Summer Cover: ${parseFloat(summercoverPrice).toFixed(2) == undefined ?
+          "N/A"
+        : parseFloat(summercoverPrice).toFixed(2)}</div>
+        <div className='poolStat'>Winter Cover: ${parseFloat(wintercoverPrice).toFixed(2) == undefined ?
+          "N/A"
+        : parseFloat(wintercoverPrice).toFixed(2)}</div>
+        <div className='poolStat'>Concrete: ${parseFloat(concretePrice).toFixed(2) == undefined ?
+          "N/A"
+        : parseFloat(concretePrice).toFixed(2)}</div>
+        <div className='poolStat'>Plaster: ${parseFloat(plasterPrice).toFixed(2) == undefined ?
+          "N/A"
+        : parseFloat(plasterPrice).toFixed(2)}</div>
+        <div className='poolStat'>Chlorine: ${parseFloat(chlroinePrice).toFixed(2) == undefined ?
+          "N/A"
+        : parseFloat(chlroinePrice).toFixed(2)}</div>
+        <div className='poolStat'>CyanuricAcid: ${parseFloat(cyanuricAcidPrice).toFixed(2) == undefined ?
+          "N/A"
+        : parseFloat(cyanuricAcidPrice).toFixed(2)}</div>
+        <div className='poolStat'>Rebar: ${parseFloat(rebarPrice).toFixed(2) == undefined ?
+          "N/A"
+        : parseFloat(rebarPrice).toFixed(2)}</div>
+        <div className='poolStat'>Steel Walling: ${parseFloat(steelWallingPrice).toFixed(2) == undefined ?
+          "N/A"
+        : parseFloat(steelWallingPrice)}</div>
+        <div className='poolStat'>Pool Liner: ${parseFloat(poolLiningPrice).toFixed(2) == undefined ?
+          "N/A"
+        : parseFloat(poolLiningPrice).toFixed(2)}</div>
+        <div className='poolStat'>Pipes: ${parseFloat(pipesPrice).toFixed(2) == undefined ?
+          "N/A"
+        : parseFloat(pipesPrice).toFixed(2)}</div>
+        <div className='poolStat'>Fiberglass: ${parseFloat(fiberglassPrice).toFixed(2) == undefined ?
+          "N/A"
+        : parseFloat(fiberglassPrice).toFixed(2)}</div>
+
         </div>
       </Modal.Body>
       <Modal.Footer>

@@ -40,6 +40,7 @@ class CreatorBody extends React.Component {
     this.currIndex = 1;
     this.maxIndex = 10; 
     this.state = {
+      isEdit: props.poolProps?.isEdit ?? false,
       username: props.username,
       nextButtonText: "Next",
       name: "React",
@@ -93,7 +94,7 @@ class CreatorBody extends React.Component {
       _poolSkimmer: props.poolProps?.skimmer ?? null,
       _poolPump: props.poolProps?.pump ?? null,
       _poolLining: null,
-      _poolMaterialObject: null
+      _poolMaterialObject: null,
 
     
     };
@@ -124,11 +125,9 @@ class CreatorBody extends React.Component {
     this.GetPoolName = this.GetPoolName.bind(this); 
   }
   
-  
   UploadPool =  async (props) =>{
     alert("Pool Uploading");
-
-
+    console.log(this.GetCost(props.poolProps));
       try {
           await axios.post('http://localhost:4000/savePools', {
             //Error because username is not defined
@@ -156,7 +155,7 @@ class CreatorBody extends React.Component {
             shock: this.GetPool()['chemicals']['chlorine'],
             cyanuricAcid: this.GetPool()['chemicals']['cyaneuricAcid'],
             chlorine: this.GetPool()['chemicals']['chlorine'],
-            cost: 0,
+            cost: this.GetCost(props.poolProps),
 
           });
         
@@ -164,6 +163,46 @@ class CreatorBody extends React.Component {
       } catch (error) {
         alert("Sorry the pool was not able to be saved! Try again later");
       }
+  }
+
+  EditPool =  async (props) =>{
+    alert("Pool Edit Uploading");
+      try {
+          await axios.post('http://localhost:4000/editPools', {
+            //Error because username is not defined
+            owner: props.username,
+            title: this.GetPool()["name"],
+            original_creator: true,
+            pulic: true,
+            concrete: this.GetPool()['materialData']['materialBrand'],
+            plaster: this.GetPool()['materialData']['plaster'],
+            fiberglass_shell: this.GetPool()['materialData']['shell'],
+            steel_wall: this.GetPool()['materialData']['wall'],
+            basin_type: this.GetPool()['material'],
+            length: this.GetPool()['materialData']['length'],
+            width: this.GetPool()['materialData']['width'],
+            depth_shallow: (this.GetPool()['materialData']['shallowDepth'] != null) ? this.GetPool()['materialData']['shallowDepth'] : this.GetPool()['materialData']['depth'],
+            depth_deep: (this.GetPool()['materialData']['deepDepth'] != null) ? this.GetPool()['materialData']['deepDepth'] : this.GetPool()['materialData']['deepDepth'],
+            slant_type: this.GetPool()['materialData']['slant'],
+            lining_type: this.GetPool()['materialData']['lining'],
+            cover1: this.GetPool()['winterCover'],
+            cover2: this.GetPool()['summerCover'],
+            piping: this.GetPool()['piping'],
+            drain: this.GetPool()['drain'],
+            skimmer:this.GetPool()['skimmer'],
+            pump: this.GetPool()['pump'],
+            shock: this.GetPool()['chemicals']['chlorine'],
+            cyanuricAcid: this.GetPool()['chemicals']['cyaneuricAcid'],
+            chlorine: this.GetPool()['chemicals']['chlorine'],
+            cost: 0,
+            id: props.poolProps.id,
+          });
+        
+          window.location.href = '/my-pools';
+      } catch (error) {
+        alert("Sorry the pool was not able to be saved! Try again later");
+      }
+      
 
   }
 
@@ -397,6 +436,21 @@ this.setState({_deepDepth: deepDepth}, function() {
 
   }
 
+  GetCost = (poolProps) => {
+    const getCost = async (poolProps) => {
+      try {
+        const response = await axios.get("http://localhost:4000/calculatePrice", {
+          params: { poolProps }
+        });
+        const data = response.data;
+        return data;
+      } catch (error) {
+        return 0;
+      }
+    }
+    getCost(poolProps);
+  }
+
 
   prev() {
     if(this.currIndex > 1){
@@ -418,8 +472,12 @@ this.setState({_deepDepth: deepDepth}, function() {
       this.hideComponent(this.currIndex);
     }
     else if(this.currIndex == this.maxIndex){
-     this.UploadPool(this.props);
-
+      if(this.state.isEdit){
+        this.EditPool(this.props);
+      }
+      else{
+        this.UploadPool(this.props);
+      }
     }
   }
     
@@ -596,6 +654,7 @@ this.setState({_deepDepth: deepDepth}, function() {
         return;
     }
   }
+  
   render() {
     const { prevButton, nextButton, creatorForm1, creatorForm2, creatorForm3, creatorForm4, creatorForm5, creatorForm6, creatorForm7, creatorForm8, creatorForm9, creatorFormSubmit } = this.state;
     var currIndex = 0;

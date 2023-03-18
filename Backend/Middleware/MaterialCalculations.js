@@ -1,4 +1,4 @@
-1//Things still needed to be added in during calculations 
+//Things still needed to be added in during calculations 
 //Drains, Pumps, Skimmer
 
 import { get_plaster_data, get_cement_data, get_piping, get_chlorine, get_cyanuric_acid, get_shock, get_winter_covers, get_solar_covers, get_liner, get_steel_walling, get_fiberglass_shell } from "../Controllers/Materials.js";
@@ -47,17 +47,11 @@ async function calculateVinyl(poolMaterials)
     //poolMaterials = {length, width, depth, type, pipes, chlorineTablet, shockName, ppm, cyanuricAcidName, concrete, poolLiner, steelWalling, solarCover, winterCover, basinType, Skimmer, drain, numDrains}
     
     var price = calculateWaterPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth_shallow, poolMaterials.depth_deep, poolMaterials.floorType);
-    // return price;
     price = price + await calculateChlorinePrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth_shallow, poolMaterials.depth_deep, poolMaterials.floorType, poolMaterials.chlorine);
-    // return price;
     price = price + await calculatePipesCost(poolMaterials.depth_deep, poolMaterials.length, poolMaterials.width, poolMaterials.piping);
-    // return price;
     price = price + await calculateConcreteCost(poolMaterials.length, poolMaterials.width, poolMaterials.depth_shallow, poolMaterials.depth_deep, poolMaterials.slant_type, 'Vinyl', poolMaterials.concrete)
-    // return price;
     price = price + await calculateSteelWallingPrice(poolMaterials.length, poolMaterials.width, poolMaterials.steelWall);
-    // return price;
     price = price + await calculatePoolLinerPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth_shallow, poolMaterials.depth_deep, poolMaterials.floorType, poolMaterials.lining_type);
-    // return price
     price = price + await calculatePoolSolarCoverPrice(poolMaterials.length, poolMaterials.width, poolMaterials.cover2);
     price = price + await calculatePoolWinterCoverPrice(poolMaterials.length, poolMaterials.width, poolMaterials.cover1);
     price = price + calculatePoolFilterPrice(poolMaterials.length, poolMaterials.width, poolMaterials.depth_shallow, poolMaterials.depth_deep, poolMaterials.floorType);
