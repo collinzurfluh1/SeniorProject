@@ -186,7 +186,6 @@ class CreatorBody extends React.Component {
   
   }
   SetPoolMaterialData = (poolMaterialData) => {
-    alert(poolMaterialData['wall']);
     this.setState({_poolMaterialData: poolMaterialData}, function() {
   }); 
   }

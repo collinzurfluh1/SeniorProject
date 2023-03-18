@@ -27,7 +27,7 @@ class CreatorForm3 extends React.Component {
         rebar: props.getPoolMaterialData()["rebar"],
         width: props.getPoolMaterialData()["width"],
         length: props.getPoolMaterialData()["length"],
-        depth: props.getPoolMaterialData()["depth"],
+        depth: props.getPoolMaterialData()["shallowDepth"],
         lining: props.getPoolMaterialData()["lining"],
         wall: props.getPoolMaterialData()["wall"],
         shallowDepth: props.getPoolMaterialData()["shallowDepth"],
@@ -36,6 +36,7 @@ class CreatorForm3 extends React.Component {
         shell: props.getPoolMaterialData()["shell"]
         
       };
+      alert(props.getPoolMaterialData["shallowDepth"]);
       this.updateShell = this.updateShell.bind(this);
       this.updateSlant = this.updateSlant.bind(this);
       this.updateDeepDepth = this.updateDeepDepth.bind(this);
@@ -176,6 +177,8 @@ class CreatorForm3 extends React.Component {
 
   updateDepth(event){
     this.setState({depth: event.target.value}); 
+    this.setState({shallowDepth: event.target.value});
+    this.setState({deepDepth: event.target.value});
     this.props.setPoolMaterialData({
       "materialBrand": this.state.materialBrand, 
       "plaster": this.state.plaster,
@@ -183,8 +186,8 @@ class CreatorForm3 extends React.Component {
       "shell": this.state.shell,
       "lining": this.state.lining,
       "wall": this.state.wall,
-      "shallowDepth": this.state.shallowDepth,
-      "deepDepth": this.state.deepDepth,
+      "shallowDepth": event.target.value,
+      "deepDepth": event.target.value,
       "slant": this.state.slant,
       "width": this.state.width,
       "length": this.state.length,
@@ -380,24 +383,32 @@ class CreatorForm3 extends React.Component {
             <label for="" className="CreatorFormLabel">Steel Walls:</label><br></br>
             <SteelWallOptions width={"5"} length={"5"} depth={"5"}  basinType={"Vinyl"} wall={this.state.wall} onChange={this.updateWall}/>
 
- 
+            <div  onChange={this.updateSlant}>
+              
+              <label className="CreatorFormLabel">Pool Floor: </label>
+              <select value={this.state.slant} onChange={this.updateSlant}>
+                <option value="Diver">Diver</option>
+                <option value="Slant">Slant</option>
+                <option value="Flatbed">Flatbed</option>
+              </select>
+
+            </div>
  
               <label className="CreatorFormLabel">Width: </label><br></br>
             <input type="number" defaultValue={this.state.width} onChange={this.updateWidth}></input><br></br>
             <label className="CreatorFormLabel">Length: </label><br></br>
             <input type="number" defaultValue={this.state.length} onChange={this.updateLength}></input><br></br>
-            <label className="CreatorFormLabel">Shallow Depth: </label><br></br>
+            <label className="CreatorFormLabel">Depth: </label><br></br>
             <input type="number" defaultValue={this.state.shallowDepth} onChange={this.updateShallowDepth}></input><br></br>
+     
+            {this.state.slant != "Flatbed" &&  
+            <div>
             <label className="CreatorFormLabel">Deep Depth: </label><br></br>
             <input type="number" defaultValue={this.state.deepDepth} onChange={this.updateDeepDepth}></input><br></br>
-            <div  onChange={this.updateSlant}>
-              <label className="CreatorFormLabel">Pool Slant: </label>
-              <input type="radio" id="slant1" value="Diver" name="slant" defaultChecked={this.state.slant == "Diver"}></input>
-              <label for="slant" className="CreatorFormLabel">Diver</label>
-              <input type="radio" id="slant2" value="Slant" name="slant" defaultChecked={this.state.slant == "Slant"}></input>
-              <label for="slant" className="CreatorFormLabel">Slant</label><br></br>
-            </div>
-            <label className="CreatorFormLabel"></label>
+            </div> 
+           }
+          
+          
 
 
             </div>
