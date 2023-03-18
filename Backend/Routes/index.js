@@ -1,6 +1,6 @@
 import express from "express";
 import { getUsers, Register, Login, Logout, UpdateUsername, UpdateEmail } from "../Controllers/Users.js";
-import { getPools, savePools } from "../Controllers/Pools.js";
+import { editPools, getPools, savePools } from "../Controllers/Pools.js";
 import "../Controllers/Materials.js";
 import { verifyToken } from "../Middleware/VerifyToken.js";
 import { refreshToken } from "../Controllers/RefreshToken.js";
@@ -20,6 +20,8 @@ router.delete('/logout', Logout);
 
 router.get('/getPools', getPools);
 router.post('/savePools', savePools);
+router.post('/editPools', editPools);
+
 
 router.get('/getAllChlorine', async (req, res) => {
     const { length, width, depth, deepDepth, floorType } = req.query;

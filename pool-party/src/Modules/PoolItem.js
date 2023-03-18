@@ -55,7 +55,8 @@ function PoolItem(props) {
     "cyanuricAcid": props.pool.pool.cyanuricAcid,
     "chlorine": props.pool.pool.chlorine,
     "cost": props.pool.pool.cost,
-    "isEdit": true};
+    "isEdit": true,
+    "id": props.pool.pool.id};
 
 
   const title = poolProps.title;
