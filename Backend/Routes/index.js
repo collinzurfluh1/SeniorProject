@@ -5,7 +5,7 @@ import "../Controllers/Materials.js";
 import { verifyToken } from "../Middleware/VerifyToken.js";
 import { refreshToken } from "../Controllers/RefreshToken.js";
 
-import { calculatePrice, getPump, getFilter, getAllSkimmerPrices, getAllDrainPrices, calculateWaterPrice, calculateShockPrice, getAllChlorinePrices, getAllCyanuricAcidPrices, getAllShockPrices, getAllPipesPrices, getAllWinterCoverPrices, getAllSolarCoverPrices, getAllConcretePrices, getAllPlasterPrices, getAllPoolLinerPrices, getAllSteelWallingPrices, calculateRebar, calculatePoolPumpPrice, calculatePoolFilterPrice, getAllFiberglassShellPrices, getSkimmerPrice, getDrainPrice } from "../Middleware/MaterialCalculations.js"; 
+import { calculatePipesCost, calculatePoolLinerPrice, calculatePoolFiberglassShellPrice, calculateConcreteCost, calculateChlorinePrice, calculateCyanuricAcidPrice, calculatePoolSolarCoverPrice, calculatePoolWinterCoverPrice, calculateSteelWallingPrice, calculatePlasterCost, calculatePrice, getPump, getFilter, getAllSkimmerPrices, getAllDrainPrices, calculateWaterPrice, calculateShockPrice, getAllChlorinePrices, getAllCyanuricAcidPrices, getAllShockPrices, getAllPipesPrices, getAllWinterCoverPrices, getAllSolarCoverPrices, getAllConcretePrices, getAllPlasterPrices, getAllPoolLinerPrices, getAllSteelWallingPrices, calculateRebar, calculatePoolPumpPrice, calculatePoolFilterPrice, getAllFiberglassShellPrices, getSkimmerPrice, getDrainPrice } from "../Middleware/MaterialCalculations.js"; 
 
 
 //Make for getPump, getFilter, 
@@ -37,21 +37,21 @@ router.get('/calculatePrice', async (req, res) => {
 });
 
 
-router.get('/calcualtePoolFiberglassShellPrice', async (req, res) => {
+router.get('/calculatePoolFiberglassShellPrice', async (req, res) => {
     const { fiberglass_shell } = req.query;
-    const results = await calcualtePoolFiberglassShellPrice(fiberglass_shell);
+    const results = await calculatePoolFiberglassShellPrice(fiberglass_shell);
     res.json(results);
 });
 
 router.get('/calculateChlorinePrice', async (req, res) => {
-    const { length, width, depth_shallow, depth_deep, lining_type, chlorine} = req.query;
-    const results = await calculateChlorinePrice(length, width, depth_shallow, depth_deep, lining_type, chlorine);
+    const { length, width, depth_shallow, depth_deep, slant_type, product_name} = req.query;
+    const results = await calculateChlorinePrice(length, width, depth_shallow, depth_deep, slant_type, product_name);
     res.json(results);
 });
 
 router.get('/calculateCyanuricAcidPrice', async (req, res) => {
-    const { length, width, depth_shallow, depth_deep, lining_type, cyanuricAcid } = req.query;
-    const results = await calculateCyanuricAcidPrice(length, width, depth_shallow, depth_deep, lining_type, cyanuricAcid );
+    const { length, width, depth_shallow, depth_deep, slant_type, product_name } = req.query;
+    const results = await calculateCyanuricAcidPrice(length, width, depth_shallow, depth_deep, slant_type, product_name );
     res.json(results);
 });
 
@@ -87,8 +87,9 @@ router.get('/getAllPipesPrices', async (req, res) => {
 });
 
 router.get('/calculateConcreteCost', async (req, res) => {
-    const { length, width, depth_shallow, depth_deep, lining_type, basin_type, product_name } = req.query;
-    const results = await calculateConcreteCost(length, width, depth_shallow, depth_deep, lining_type, basin_type, product_name );
+    const { ength, width, depth_shallow, depth_deep, slant_type, basin_type, product_name } = req.query;
+    const results = await calculateConcreteCost(ength, width, depth_shallow, depth_deep, slant_type, basin_type, product_name );
+    10, 20, 6, 6, 'Flatbed', 'Gunite', 'Quikrete 50 lb. Fast-Setting Mix'
     res.json(results);
 });
 
@@ -100,8 +101,8 @@ router.get('/getAllConcretePrices', async (req, res) => {
 });
 
 router.get('/calculateWaterPrice', async (req, res) => {
-    const { length, width, depth_shallow, depth_deep, basin_type } = req.query;
-    const results = await calculateWaterPrice( length, width, depth_shallow, depth_deep, basin_type);
+    const { length, width, depth_shallow, depth_deep, slant_type } = req.query;
+    const results = await calculateWaterPrice( length, width, depth_shallow, depth_deep, slant_type);
     res.json(results);
 });
 
@@ -118,8 +119,8 @@ router.get('/getAllSteelWallingPrices', async (req, res) => {
 });
 
 router.get('/calculatePoolLinerPrice', async (req, res) => {
-    const { length, width, depth_shallow, depth_deep, basin_type, lining_type } = req.query;
-    const results = await calculatePoolLinerPrice(length, width, depth_shallow, depth_deep, basin_type, lining_type );
+    const { length, width, depth_shallow, depth_deep, slant_type, lining_type  } = req.query;
+    const results = await calculatePoolLinerPrice(length, width, depth_shallow, depth_deep, slant_type, lining_type  );
     res.json(results);
 });
 
@@ -154,8 +155,8 @@ router.get('/getAllSolarCoverPrices', async (req, res) => {
 });
 
 router.get('/calculatePlasterCost', async (req, res) => {
-    const { length, width, depth_shallow, depth_deep, lining_type, product_name} = req.query;
-    const results = await calculatePlasterCost(length, width, depth_shallow, depth_deep, lining_type, product_name );
+    const { length, width, depth_shallow, depth_deep, slant_type, product_name} = req.query;
+    const results = await calculatePlasterCost(length, width, depth_shallow, depth_deep, slant_type, product_name );
     res.json(results);
 });
  
@@ -178,8 +179,8 @@ router.get('/calculatePoolPumpPrice', async (req, res) => {
 });
 
 router.get('/calculatePoolFilterPrice', async (req, res) => {
-    const { length, width, depth_shallow, depth_deep, basin_type } = req.query;
-    const results = await calculatePoolFilterPrice(length, width, depth_shallow, depth_deep, basin_type);
+    const { length, width, depth_shallow, depth_deep, slant_type } = req.query;
+    const results = await calculatePoolFilterPrice(length, width, depth_shallow, depth_deep, slant_type);
     res.json(results);
 });
 

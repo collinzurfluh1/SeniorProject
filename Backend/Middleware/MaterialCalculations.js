@@ -150,7 +150,6 @@ function calculateChlorineTablets(length, width, depth, deepDepth, floorType)
 }
 export async function calculateChlorinePrice(length, width, depth, deepDepth, floorType, product_name)
 {
-    if (product_name == null) {return 0}
 
     var tablets = calculateChlorineTablets(length, width, depth, deepDepth, floorType);
 
@@ -192,8 +191,6 @@ function calculateCyanuricAcidPounds(length, width, depth, deepDepth, floorType)
 }
 export async function calculateCyanuricAcidPrice(length, width, depth, deepDepth, floorType, product_name)
 {
-
-    if (product_name == null) {return 0}
 
     var gallons = calculateGallons(length, width, depth, deepDepth, floorType)
 
@@ -238,7 +235,6 @@ function calculateShockLbs(gallons)
 export async function calculateShockPrice(length, width, depth, deepDepth, floorType, product_name)
 {
 
-    if (product_name == null) {return 0}
 
     var gallons = calculateGallons(length, width, depth, deepDepth, floorType)
    
@@ -287,7 +283,6 @@ function calculatePipesAmount(deepDepth, length, width)
 }
 export async function calculatePipesCost(deepDepth, length, width, pipe_type)
 {
-    if (pipe_type == null) {return 0}
 
     var price_per_linear_foot =  (await get_piping(pipe_type))[0]['linft_cost'];
     // return price_per_linear_foot
@@ -354,7 +349,6 @@ function calculateConcretePounds(length, width, depth, deepDepth, floorType, bas
 export async function calculateConcreteCost(length, width, depth, deepDepth, floorType, basinType, product_name)
 {
 
-    if (product_name == null) {return 0}
 
     var concretelbs = calculateConcretePounds(length, width, depth, deepDepth, floorType, basinType);
 
@@ -458,7 +452,6 @@ function calculateSteelWallingSqFT(length, width)
 export async function calculateSteelWallingPrice(length, width, product_name)
 {
 
-    if (product_name == null) {return 0}
 
     var sqFt = calculateSteelWallingSqFT(length, width);
     var sideWallingJson = await get_steel_walling(product_name);
@@ -503,8 +496,6 @@ function calculatePoolLinerArea(length, width, depth, deepDepth, floorType)
 export async function calculatePoolLinerPrice(length, width, depth, deepDepth, floorType, product_name)
 {
 
-    if (product_name == null) {return 0}
-
     var poolLinerSize = calculatePoolLinerArea(length, width, depth, deepDepth, floorType);
     var poolLinerJson = (await get_liner(product_name))[0];
 
@@ -545,7 +536,6 @@ export async function getAllPoolLinerPrices(length, width, depth, deepDepth, flo
 export async function calculatePoolFiberglassShellPrice(product_name)
 {
 
-    if (product_name == null) {return 0}
 
     var fiberglassShellJson = (await get_fiberglass_shell(product_name))[0];
     
@@ -574,7 +564,6 @@ function calculatePoolWinterCoverArea(length, width)
 export async function calculatePoolWinterCoverPrice(length, width, product_name)
 {
 
-    if (product_name == null) {return 0}
 
     var winterCoverSize = calculatePoolWinterCoverArea(length, width);
     var winterCoverJson = (await get_winter_covers(product_name))[0];
@@ -619,7 +608,6 @@ function calculatePoolSolarCover(length, width)
 export async function calculatePoolSolarCoverPrice(length, width, product_name)
 {
 
-    if (product_name == null) {return 0}
 
     var solarCoverSize = calculatePoolSolarCover(length, width);
     var solarCoverJson = (await get_solar_covers(product_name))[0];
@@ -747,7 +735,6 @@ export function calculatePoolPumpPrice(length, width, depth, deepDepth, floorTyp
 export function getPump(name)
 {
 
-    if (name == null) {return 0}
     const pumps = [
         {
           "Pumps": "Self-Priming Dual Speed In-Ground Pool Pump 2 in",
@@ -809,7 +796,6 @@ export function calculateRebar(length, width, depth)
 export function getSkimmerPrice(name)
 {
 
-    if (name == null) {return 0}
 
     const skims = [
         {
@@ -863,7 +849,6 @@ export function getAllSkimmerPrices()
 export function getDrainPrice(name)
 {
 
-    if (name == null) {return 0}
 
     const drains = [
         {
@@ -931,7 +916,6 @@ function calculatePlaster(length, width, depth, deepDepth, floorType)
 export async function calculatePlasterCost(length, width, depth, deepDepth, floorType, product_name)
 {
 
-    if (product_name == null) {return 0}
 
     var plasterlbsNeeded = calculatePlaster(length, width, depth, deepDepth, floorType);
     var plasterJson = (await get_plaster_data(product_name))[0];
