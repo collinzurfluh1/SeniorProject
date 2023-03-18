@@ -26,6 +26,8 @@ function PoolItem(props) {
   const [poolLiningPrice, setPoolLiningPrice] = useState('');
   const [pipesPrice, setPipesPrice] = useState('');
   const [filterPrice, setFilterPrice] = useState('');
+  const [fiberglassPrice, setFiberglassPrice] = useState('');
+
 
   
   console.log(props);
@@ -105,6 +107,18 @@ function PoolItem(props) {
     } catch (error) {
     }
   }
+
+  const getFiberGlassShellCost = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/calcualtePoolFiberglassShellPrice", {
+        params: { fiberglass_shell }
+      });
+      const data = response.data;
+      setFiberglassPrice(data);
+    } catch (error) {
+    }
+  }
+
 
   const getPumpCost = async () => {
     try {
@@ -255,6 +269,7 @@ function PoolItem(props) {
     poolliningCost();
     pipesCost();
     getPoolFilterPrice();
+    getFiberGlassShellCost();
   },[])
 
   const savePool = async (e) => {
@@ -404,6 +419,9 @@ function PoolItem(props) {
         <div className='poolStat'>Pipes: ${parseFloat(pipesPrice).toFixed(2) == null ?
           "N/A"
         : parseFloat(pipesPrice).toFixed(2)}</div>
+        <div className='poolStat'>Fiberglass: ${parseFloat(fiberglassPrice).toFixed(2) == null ?
+          "N/A"
+        : parseFloat(fiberglassPrice).toFixed(2)}</div>
 
         </div>
       </Modal.Body>
