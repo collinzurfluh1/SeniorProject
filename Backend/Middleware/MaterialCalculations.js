@@ -502,11 +502,7 @@ export async function calculatePoolLinerPrice(length, width, depth, deepDepth, f
     var linerWidth = poolLinerJson.width_feet;
     var linerLength = poolLinerJson.length_feet;
     var linerCoverArea = linerLength * linerWidth;
-    var unitsNeeded = Math.floor(poolLinerSize / (linerCoverArea));
-    if(!(unitsNeeded % linerCoverArea == 0))
-    {
-        unitsNeeded += 1;
-    }
+    var unitsNeeded = Math.round(poolLinerSize / (linerCoverArea));    
     
     return unitsNeeded * poolLinerJson.cost;
 }

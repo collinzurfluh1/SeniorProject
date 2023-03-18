@@ -69,7 +69,7 @@ class CreatorBody extends React.Component {
         "wall": null,
         "shallowDepth": props.poolProps?.depth_shallow ?? null,
         "deepDepth": props.poolProps?.depth_deep ?? null,
-        "slant": props.poolProps?.slant_type ?? null,
+        "slant": props.poolProps?.slant_type ?? "Flatbed",
         "width": props.poolProps?.width ?? null,
         "length": props.poolProps?.length ?? null,
         "depth": null,
