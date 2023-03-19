@@ -42,13 +42,14 @@ function PoolListBody(pool) {
                     </div>
         
                     <div className="poolListAuthor">
-                        <p>Author: {pool.pool.owner}</p>
+                        <p>Owner: {pool.pool.owner}</p>
                     </div>
         
                     <div className="poolListContent">
-                        <p>Price: ${pool.pool.cost}</p>
+                        <p>Basin Type: {pool.pool.basin_type}</p>
                         <p>Length: {pool.pool.length}ft</p>
                         <p>Width: {pool.pool.width}ft</p>
+
                     </div>
                 </div>
             </div>

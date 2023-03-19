@@ -7,6 +7,11 @@ import { get_plaster_data, get_cement_data, get_piping, get_chlorine, get_cyanur
 
 export function calculatePrice(poolMaterials)
 {
+    console.log("<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>");
+
+    console.log(poolMaterials);
+
+    console.log("<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>");
     //This funciton is the main function that will set which pool type to calculate for
     //This function will take in an array of values that are passed in from the front end based on user selection including all of thier selections
     //Then after it has the values it will pass the values into their appropriate pool type.
@@ -101,6 +106,7 @@ async function calculateGunite(poolMaterials)
 }   
 async function calculateFiberglass(poolMaterials)
 {
+
     //This function calculates the cost of a fiberglass pool
     //calculateChemicals()
     
@@ -150,7 +156,9 @@ function calculateChlorineTablets(length, width, depth, deepDepth, floorType)
 }
 export async function calculateChlorinePrice(length, width, depth, deepDepth, floorType, product_name)
 {
-
+    if(product_name == null){
+        return 0;
+    }
     var tablets = calculateChlorineTablets(length, width, depth, deepDepth, floorType);
 
     var chlorineJson = (await get_chlorine(product_name))[0];
@@ -807,6 +815,7 @@ export function calculateRebar(length, width, depth)
 }
 export function getSkimmerPrice(name)
 {
+
     if(name == null){
         return 0;
     }

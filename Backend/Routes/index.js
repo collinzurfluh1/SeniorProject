@@ -45,8 +45,8 @@ router.get('/calculatePoolFiberglassShellPrice', async (req, res) => {
 });
 
 router.get('/calculateChlorinePrice', async (req, res) => {
-    const { length, width, depth_shallow, depth_deep, slant_type, product_name} = req.query;
-    const results = await calculateChlorinePrice(length, width, depth_shallow, depth_deep, slant_type, product_name);
+    const { length, width, depth_shallow, depth_deep, slant_type, chlorine} = req.query;
+    const results = await calculateChlorinePrice(length, width, depth_shallow, depth_deep, slant_type, chlorine);
     res.json(results);
 });
 
@@ -175,8 +175,12 @@ router.get('/calculateRebar', async (req, res) => {
 });
 
 router.get('/calculatePoolPumpPrice', async (req, res) => {
-    const { length, width, depth, deepDepth, floorType } = req.query;
-    const results = await calculatePoolPumpPrice(length, width, depth, deepDepth, floorType);
+    const { length, width, depth_shallow, depth_deep, slant_type } = req.query;
+    const results = await calculatePoolPumpPrice(length, width, depth_shallow, depth_deep, slant_type);
+    // console.log("<><><><><><><><><><><><><><><><");
+    // console.log(results);
+    // console.log("<><><><><><><><><><><><><><><><");
+
     res.json(results);
 });
 

@@ -155,7 +155,7 @@ class CreatorBody extends React.Component {
             shock: this.GetPool()['chemicals']['shock'],
             cyanuric_acid: this.GetPool()['chemicals']['cyanuricAcid'],
             chlorine: this.GetPool()['chemicals']['chlorine'],
-            cost: this.GetCost(props.poolProps),
+            cost: this.GetCost(props),
 
           });
         
@@ -436,19 +436,29 @@ this.setState({_deepDepth: deepDepth}, function() {
 
   }
 
-  GetCost = (poolProps) => {
-    const getCost = async (poolProps) => {
+  GetCost = () => {
+    const getCost = async () => {
+      const poolProps = this.GetPool();
       try {
+        console.log(" ");
+        console.log(" ");
+        console.log("<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>");
+        console.log(poolProps);
+        console.log("<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>{}<>");
+        console.log(" ");
+        console.log(" ");
+
         const response = await axios.get("http://localhost:4000/calculatePrice", {
           params: { poolProps }
         });
         const data = response.data;
+       
         return data;
       } catch (error) {
         return 0;
       }
     }
-    getCost(poolProps);
+    getCost();
   }
 
 
