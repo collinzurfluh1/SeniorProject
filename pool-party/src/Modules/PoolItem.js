@@ -54,7 +54,7 @@ function PoolItem(props) {
     "skimmer": props.pool.pool.skimmer,
     "pump": props.pool.pool.pump,
     "shock": props.pool.pool.shock,
-    "cyanuricAcid": props.pool.pool.cyanuricAcid,
+    "cyanuric_acid": props.pool.pool.cyanuric_acid,
     "chlorine": props.pool.pool.chlorine,
     "cost": props.pool.pool.cost,
     "isEdit": true,

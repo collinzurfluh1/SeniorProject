@@ -86,6 +86,7 @@ class CreatorBody extends React.Component {
           "length": null,
 
       },
+
       _poolSummerCover: props.poolProps?.cover2 ?? null,
       _poolWinterCover: props.poolProps?.cover1 ?? null,
       _poolPipe: props.poolProps?.piping ?? null,
@@ -463,7 +464,6 @@ this.setState({_deepDepth: deepDepth}, function() {
 
   next() {
 
-    
  
     if(this.currIndex < this.maxIndex){
 
