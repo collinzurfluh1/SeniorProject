@@ -57,7 +57,7 @@ class CreatorBody extends React.Component {
       _poolMaterial: props.poolProps?.basin_type ?? null,
       _poolChemicals: {
         "chlorine": props.poolProps?.chlorine ?? null,
-        "cyaneuricAcid": props.poolProps?.cyanuricAcid ?? null,
+        "cyaneuricAcid": props.poolProps?.cyanuric_acid ?? null,
         "shock": props.poolProps?.shock ?? null
       },
       _poolMaterialData:  {
@@ -98,7 +98,6 @@ class CreatorBody extends React.Component {
 
     
     };
-    console.log("Pool Props: " + props.poolProps);
     this.setState({username: props.username}, function() {});
     this._form1 = React.createRef(); 
     this._form2 = React.createRef(); 
@@ -192,7 +191,7 @@ class CreatorBody extends React.Component {
             skimmer:this.GetPool()['skimmer'],
             pump: this.GetPool()['pump'],
             shock: this.GetPool()['chemicals']['shock'],
-            cyanuricAcid: this.GetPool()['chemicals']['cyaneuricAcid'],
+            cyanuric_acid: this.GetPool()['chemicals']['cyaneuricAcid'],
             chlorine: this.GetPool()['chemicals']['chlorine'],
             cost: 0,
             id: props.poolProps.id,
@@ -463,8 +462,11 @@ this.setState({_deepDepth: deepDepth}, function() {
   }
 
   next() {
+
+    
  
     if(this.currIndex < this.maxIndex){
+
       this.currIndex++;
       if(this.currIndex == 3 && this.GetPoolMaterial() == 'Fiber Glass'){
 
