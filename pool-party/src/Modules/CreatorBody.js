@@ -695,6 +695,7 @@ this.setState({_deepDepth: deepDepth}, function() {
             {creatorForm5 && <CreatorForm5
             setPoolPipe={this.SetPoolPipe} getPoolPipe={this.GetPoolPipe}
             setPoolDrain={this.SetPoolDrain} getPoolDrain={this.GetPoolDrain}
+            setPoolSkimmer={this.SetPoolSkimmer} getPoolSkimmer={this.GetPoolSkimmer}
 
             />}
             {creatorForm6 && <CreatorForm6

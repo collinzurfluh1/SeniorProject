@@ -3,6 +3,9 @@ import { Button } from "@mui/material";
 import { createRoutesFromElements, useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import PipeOptions from "./PipeOptions.js";
+import DrainOptions from './DrainOptions.js'
+import SkimmerOptions from './SkimmerOptions.js'
+
 
 import "../SCSS/creator.scss";
 import { resolveBreakpointValues } from "@mui/system/breakpoints";
@@ -14,11 +17,13 @@ class CreatorForm5 extends React.Component {
     this.state = {
         name: "React",
         pipe: props.getPoolPipe(),
-        drain: props.getPoolDrain()
+        drain: props.getPoolDrain(),
+        skimmer: props.getPoolSkimmer()
 
       };
     this.updatePoolPipe = this.updatePoolPipe.bind(this); 
     this.updatePoolDrain = this.updatePoolDrain.bind(this); 
+    this.updatePoolSkimmer = this.updatePoolSkimmer.bind(this);
 
   }
 
@@ -34,6 +39,12 @@ class CreatorForm5 extends React.Component {
     
   }
 
+  updatePoolSkimmer(event) {
+    this.props.setPoolSkimmer(event.target.value); 
+    this.setState({ skimmer: event.target.value });
+    
+  }
+
 
 
   
@@ -45,17 +56,9 @@ class CreatorForm5 extends React.Component {
               <label for="pipe" className="CreatorFormLabel">Pipes:</label><br></br>
               <PipeOptions width={"5"} length={"5"} depth={"5"} pipe={this.state.pipe} onChange={this.updatePoolPipe}/>
               <label for="drains" className="CreatorFormLabel">Drains:</label><br></br>
-              <div className="CreatorFormLabel" onChange={this.updatePoolDrain}>
-              
-              <h1>Pool Drain</h1>
-              <input type="radio" id="poolDrain1" name="poolDrain" value="Skimmer" defaultChecked={this.state.drain === "Skimmer"}></input>
-              <label for="poolDrain1">Skimmer</label><br></br>
-              <input type="radio" id="poolDrain2" name="poolDrain" value="Gravity" defaultChecked={this.state.drain=== "Gravity"}></input>
-              <label for="poolDrain2"> Gravity</label><br></br>
-              <input type="radio" id="poolDrain3" name="poolDrain" value="Suction-Limiting" defaultChecked={this.state.drain === "Suction-Limiting"}></input>
-              <label for="poolDrain3">Suction Limiting</label><br></br>             
-            </div>
+              <DrainOptions value={this.state.drain} onChange={this.updatePoolDrain}/>
               <label for="skimmer" className="CreatorFormLabel">Skimmer:</label><br></br>
+              <SkimmerOptions value={this.state.skimmer} onChange={this.updatePoolDrain}/>
 
 
 

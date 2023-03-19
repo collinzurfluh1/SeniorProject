@@ -203,11 +203,12 @@ router.get('/getDrainPrice', async (req, res) => {
     res.json(results);
 });
 
+/*
 router.get('/getSkimmerPrice', async (req, res) => {
     const { name } = req.query;
     const results = await getSkimmerPrice(name);
     res.json(results);
-});
+}); */
 
 router.get('/getAllSkimmerPrices', async (req, res) => {
     const { } = req.query;
