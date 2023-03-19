@@ -27,6 +27,10 @@ function PoolItem(props) {
   const [pipesPrice, setPipesPrice] = useState('');
   const [filterPrice, setFilterPrice] = useState('');
   const [fiberglassPrice, setFiberglassPrice] = useState('');
+  const [drainPrice, setDrainPrice] = useState('');
+
+
+  
 
   const poolProps = {"owner": props.pool.pool.owner,
     "title": props.pool.pool.title,
@@ -81,7 +85,6 @@ function PoolItem(props) {
   const cyanuricAcid = poolProps.cyanuricAcid;
   const chlorine = poolProps.chlorine;
   const cost = poolProps.cost;
-  console.log(props);
 
   const getWaterCost = async () => {
     try {
@@ -96,15 +99,13 @@ function PoolItem(props) {
 
   const getPoolFilterPrice = async () => {
     try {
-      const response = axios.get("http://localhost:4000/calculatePoolFilterPrice", {
+      const response = await axios.get("http://localhost:4000/calculatePoolFilterPrice", {
         params: { length, width, depth_shallow, depth_deep, slant_type }
       });
-      console.log(" length: "+ length + " width: "+ width + " depth_shallow: "+depth_shallow + " depth_deep: "+depth_deep + " basin_type: "+basin_type);
 
       const data = response.data;
       setFilterPrice(data);
     } catch (error) {
-      console.log(error);
     }
   }
 
@@ -133,7 +134,7 @@ function PoolItem(props) {
 
   const getSkimmerCost = async () => {
     try {
-      const response = axios.get("http://localhost:4000/getSkimmerPrice", {
+      const response = await axios.get("http://localhost:4000/getSkimmerPrice", {
         params: { skimmer }
       });
       const data = response.data;
@@ -170,9 +171,20 @@ function PoolItem(props) {
       const response = await axios.get("http://localhost:4000/calculateConcreteCost", {
         params: { length, width, depth_shallow, depth_deep, slant_type, basin_type, concrete }
       });
-      console.log(" length: "+ length + " width: "+ width +" depth_shallow: "+ depth_shallow +" depth_deep: "+ depth_deep +" slant_type: "+ slant_type +" basin_type: "+ basin_type +" concrete: "+ concrete);
       const data = response.data;
       setConcretePrice(data);
+    } catch (error) {
+    }
+  }
+
+  const drainCost = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/getDrainPrice", {
+        params: { drain }
+      });
+      // console.log(" length: "+ length + " width: "+ width +" depth_shallow: "+ depth_shallow +" depth_deep: "+ depth_deep +" slant_type: "+ slant_type +" basin_type: "+ basin_type +" concrete: "+ concrete);
+      const data = response.data;
+      setDrainPrice(data);
     } catch (error) {
     }
   }
@@ -257,8 +269,8 @@ function PoolItem(props) {
   useEffect(()=>{
     refreshToken();
     getWaterCost();
-    // getPumpCost();
-    // getSkimmerCost();
+    getPumpCost();
+    getSkimmerCost();
     concreteCost();
     chlorineCost();
     summercoverCost();
@@ -271,6 +283,7 @@ function PoolItem(props) {
     pipesCost();
     getPoolFilterPrice();
     getFiberGlassShellCost();
+    drainCost();
   },[])
 
   const savePool = async (e) => {
@@ -325,7 +338,6 @@ const deletePool = async (e) => {
       }
 
     } catch (error) {
-      console.log(error);
       alert("Sorry the pool was not able to be deleted! Try again later!");
     }
 }
@@ -395,9 +407,9 @@ const deletePool = async (e) => {
             <div className='poolStat'>Skimmer: {props.pool.pool.skimmer == null ?
           "N/A"
         : props.pool.pool.skimmer}</div>
-            <div className='poolStat'>Pump: {props.pool.pool.pump == null ?
+            {/* <div className='poolStat'>Pump: {props.pool.pool.pump == null ?
           "N/A"
-        : props.pool.pool.pump}</div>
+        : props.pool.pool.pump}</div> */}
       </div>
       <h3>Costs:</h3>
       <div className='poolStatsList'>
@@ -413,6 +425,9 @@ const deletePool = async (e) => {
         <div className='poolStat'>Skimmer: ${parseFloat(skimmerPrice).toFixed(2) == undefined ?
           "N/A"
         : parseFloat(skimmerPrice).toFixed(2)}</div>
+          <div className='poolStat'>Drain: ${parseFloat(drainPrice).toFixed(2) == undefined ?
+          "N/A"
+        : parseFloat(drainPrice).toFixed(2)}</div>
         <div className='poolStat'>Summer Cover: ${parseFloat(summercoverPrice).toFixed(2) == undefined ?
           "N/A"
         : parseFloat(summercoverPrice).toFixed(2)}</div>

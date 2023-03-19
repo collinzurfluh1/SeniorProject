@@ -38,7 +38,7 @@ class CreatorBody extends React.Component {
     super(props);
     console.log(props.poolProps);
     this.currIndex = 1;
-    this.maxIndex = 8; 
+    this.maxIndex = 7; 
     this.state = {
       isEdit: props.poolProps?.isEdit ?? false,
       username: props.username,

@@ -348,9 +348,9 @@ function calculateConcretePounds(length, width, depth, deepDepth, floorType, bas
 
 export async function calculateConcreteCost(length, width, depth, deepDepth, floorType, basinType, product_name)
 {
-    console.log("<><><><><<><><><><><>");
-    console.log(basinType);
-    console.log("<><><><><<><><><><><>");
+    // console.log("<><><><><<><><><><><>");
+    // console.log(basinType);
+    // console.log("<><><><><<><><><><><>");
 
     if(product_name == null){
         return 0;
@@ -660,6 +660,9 @@ export function calculatePoolFilterPrice(length, width, depth, deepDepth, floorT
 }
 export function getFilter(name)
 {
+    if(name == null){
+        return 0;
+    }
     const filters = [
         {
           "Filter": "ProSeries 24 in. 3.14 sq. ft. Pool Sand Filter with 2 in. Valve",
@@ -859,7 +862,9 @@ export function getAllSkimmerPrices()
 }
 export function getDrainPrice(name)
 {
-
+    if(name == null){
+        return 0;
+    }
 
     const drains = [
         {
