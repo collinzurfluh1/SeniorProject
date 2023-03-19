@@ -105,11 +105,7 @@ class CreatorFormFinal extends React.Component {
           <p>Pool Pipe: {this.state.pipe}</p>
           <p>Pool Drain: {this.state.drain}</p>
           <p>Pool Skimmer: {this.state.skimmer}</p>
-       
-          <h4>Chemicals</h4>
-          <p>Pool Chlorine: {this.state.chlorine}</p>
-          <p>Pool Cyaneuric Acid: {this.state.cyaneuricAcid}</p>
-          <p>Pool Shock: {this.state.shock}</p>
+      
         </div>
       );
   

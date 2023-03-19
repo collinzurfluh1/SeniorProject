@@ -15,7 +15,7 @@ class PlasterOptions extends Component {
     try {
       const response = await axios.get("http://localhost:4000/getAllPlasterPrices", {
         
-        params: { length: "5", width: "5", depth: "5", deepDepth: "5", floorType: "Flatbed", basinType: "Gunite"}
+        params: { length: this.props.length, width: this.props.width, depth: this.props.depth, deepDepth: this.props.depth, floorType: "Flatbed", basinType: "Gunite"}
         
       });
 

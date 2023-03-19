@@ -38,7 +38,7 @@ class CreatorBody extends React.Component {
     super(props);
     console.log(props.poolProps);
     this.currIndex = 1;
-    this.maxIndex = 8; 
+    this.maxIndex = 7; 
     this.state = {
       isEdit: props.poolProps?.isEdit ?? false,
       username: props.username,
@@ -54,25 +54,25 @@ class CreatorBody extends React.Component {
       _poolWidth: null,
       _poolDepth: null,
       _poolLength: null,
-      _poolMaterial: null,
+      _poolMaterial: props.poolProps?.basin_type ?? null,
       _poolChemicals: {
-        "chlorine": null,
-        "cyaneuricAcid": null,
-        "shock": null
+        "chlorine": props.poolProps?.chlorine ?? null,
+        "cyaneuricAcid": props.poolProps?.cyanuricAcid ?? null,
+        "shock": props.poolProps?.shock ?? null
       },
       _poolMaterialData:  {
-        "materialBrand": null,
-        "plaster": null,
+        "materialBrand": props.poolProps?.concrete ?? null,
+        "plaster": props.poolProps?.plaster ?? null,
         "rebar": null,  
-        "shell": null,
+        "shell": props.poolProps?.fiberglass_shell ?? null,
         "lining": props.poolProps?.lining_type ?? null,
-        "wall": null,
+        "wall": props.poolProps?.steel_wall ?? null,
         "shallowDepth": props.poolProps?.depth_shallow ?? null,
         "deepDepth": props.poolProps?.depth_deep ?? null,
         "slant": props.poolProps?.slant_type ?? "Flatbed",
         "width": props.poolProps?.width ?? null,
         "length": props.poolProps?.length ?? null,
-        "depth": null,
+        "depth": props.poolProps?.depth_shallow ?? null,
         "basinLiner": null
     },
       _shallowDepth: null,
@@ -87,8 +87,8 @@ class CreatorBody extends React.Component {
 
       },
       _poolSummerCover: props.poolProps?.cover2 ?? null,
-      _poolWinterCover: props.poolProps?.covert1 ?? null,
-      _poolPipe: props.poolProps?.pipe ?? null,
+      _poolWinterCover: props.poolProps?.cover1 ?? null,
+      _poolPipe: props.poolProps?.piping ?? null,
       _poolBasinLiner: null,
       _poolDrain: props.poolProps?.drain ?? null,
       _poolSkimmer: props.poolProps?.skimmer ?? null,
@@ -98,6 +98,7 @@ class CreatorBody extends React.Component {
 
     
     };
+    console.log("Pool Props: " + props.poolProps);
     this.setState({username: props.username}, function() {});
     this._form1 = React.createRef(); 
     this._form2 = React.createRef(); 
@@ -151,7 +152,7 @@ class CreatorBody extends React.Component {
             drain: this.GetPool()['drain'],
             skimmer:this.GetPool()['skimmer'],
             pump: this.GetPool()['pump'],
-            shock: this.GetPool()['chemicals']['chlorine'],
+            shock: this.GetPool()['chemicals']['shock'],
             cyanuric_acid: this.GetPool()['chemicals']['cyaneuricAcid'],
             chlorine: this.GetPool()['chemicals']['chlorine'],
             cost: this.GetCost(props.poolProps),
@@ -190,7 +191,7 @@ class CreatorBody extends React.Component {
             drain: this.GetPool()['drain'],
             skimmer:this.GetPool()['skimmer'],
             pump: this.GetPool()['pump'],
-            shock: this.GetPool()['chemicals']['chlorine'],
+            shock: this.GetPool()['chemicals']['shock'],
             cyanuricAcid: this.GetPool()['chemicals']['cyaneuricAcid'],
             chlorine: this.GetPool()['chemicals']['chlorine'],
             cost: 0,
