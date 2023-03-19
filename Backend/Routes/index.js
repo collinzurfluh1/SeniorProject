@@ -89,9 +89,10 @@ router.get('/getAllPipesPrices', async (req, res) => {
 
 router.get('/calculateConcreteCost', async (req, res) => {
     const { length, width, depth_shallow, depth_deep, slant_type, basin_type, concrete } = req.query;
+    // console.log(" length: "+ length + " width: "+ width +" depth_shallow: "+ depth_shallow +" depth_deep: "+ depth_deep +" slant_type: "+ slant_type +" basin_type: "+ basin_type +" concrete: "+ concrete);
     const results = await calculateConcreteCost(length, width, depth_shallow, depth_deep, slant_type, basin_type, concrete );
-    10, 20, 6, 6, 'Flatbed', 'Gunite', 'Quikrete 50 lb. Fast-Setting Mix'
-    res.json(results);
+    res.json(results/1000);
+
 });
 
 router.get('/getAllConcretePrices', async (req, res) => {
@@ -192,23 +193,26 @@ router.get('/getFiberglassShellDetails', async (req, res) => {
 });
 
 router.get('/getSkimmerPrice', async (req, res) => {
-    const { name } = req.query;
-    const results = await getSkimmerPrice(name);
+    const { skimmer } = req.query;
+    // console.log("<><><><><><><><><><><><>")
+    // console.log(skimmer);
+    // console.log("<><><><><><><><><><><><>")
+    const results = await getSkimmerPrice(skimmer);
+    // console.log(results);
     res.json(results);
 });
 
 router.get('/getDrainPrice', async (req, res) => {
-    const { name } = req.query;
-    const results = await getDrainPrice(name);
+    const { drain } = req.query;
+    const results = await getDrainPrice(drain);
     res.json(results);
 });
 
-/*
 router.get('/getSkimmerPrice', async (req, res) => {
-    const { name } = req.query;
-    const results = await getSkimmerPrice(name);
+    const { skimmer } = req.query;
+    const results = await getSkimmerPrice(skimmer);
     res.json(results);
-}); */
+});
 
 router.get('/getAllSkimmerPrices', async (req, res) => {
     const { } = req.query;
@@ -229,9 +233,10 @@ router.get('/getPump', async (req, res) => {
 });
 
 router.get('/getFilter', async (req, res) => {
-    const { name } = req.query;
-    const results = await getFilterPrice(name);
+    const { filter } = req.query;
+    const results = await getFilter(filter);
     res.json(results);
+    
 });
 
 router.get('/calculatePrice', async (req, res) => {
