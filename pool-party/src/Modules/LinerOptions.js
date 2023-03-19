@@ -14,8 +14,7 @@ class LinerOptions extends Component {
 
     try {
       const response = await axios.get("http://localhost:4000/getAllPoolLinerPrices", {
-        
-        params: { length: this.props.length, width: this.props.width, depth: this.props.depth, deepDepth: this.props.deepDepth, floorType: this.props.floorType, basinType: this.props.basinType }
+        params: { length: this.props.length, width: this.props.width, depth: this.props.depth, deepDepth: this.props.deepDepth, floorType: this.props.floorType}
         
       });
 

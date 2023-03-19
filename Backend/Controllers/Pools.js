@@ -98,7 +98,7 @@ export const editPools = async(req, res) => {
             skimmer: req.body.skimmer,
             pump: req.body.pump,
             shock: req.body.shock,
-            cyanuricAcid: req.body.cyanuricAcid,
+            cyanuric_acid: req.body.cyanuric_acid,
             chlorine: req.body.chlorine,
             cost: req.body.cost,
 
