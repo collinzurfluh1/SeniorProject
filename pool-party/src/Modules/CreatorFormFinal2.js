@@ -15,13 +15,8 @@ class CreatorFormFinal2 extends React.Component {
         lining: (pool['material'] == 'Vinyl') ? pool['materialData']['lining'] : "Not Applicable",
         plaster: (pool['material'] == 'Gunite') ? pool['materialData']['plaster'] : 'Not Applicable',
         wall: (pool['material'] == 'Vinyl') ? pool['materialData']['wall'] : "Not Applicable",
-        material: pool['materialData']['materialBrand'],
-        summerCover: pool['summerCover'],
-        winterCover: pool['winterCover'],
-        pipe: pool['pipe'],
-        basinLiner: pool['materialData']['basinLiner'],
-        drain: pool['drain'],
-        skimmer: pool['skimmer'],
+
+     
         pump: pool['pump'],
       };
      

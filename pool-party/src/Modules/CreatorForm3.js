@@ -359,7 +359,7 @@ class CreatorForm3 extends React.Component {
           <div className="CreatorFormLabel" onChange={this.updatePoolMaterial}>
           <label for="pool-material" className="CreatorFormLabel">Pool Material:</label><br></br>
             <select name="pool-material" value={this.state.material} id="pool-material">
-            <option value="None">Select a Value</option>
+            <option value="None">Please Select</option>
             <option value="Gunite">Gunite</option>
             <option value="Vinyl">Vinyl</option>
             <option value="Fiber Glass">Fiber Glass</option>
@@ -373,7 +373,7 @@ class CreatorForm3 extends React.Component {
             <div id="guniteDiv">
             <div id="GuniteBrand" onChange={this.updateGuniteBrand}>
             <label for="gunite-brand" className="CreatorFormLabel">Choose A Concrete</label><br></br>
-            <ConcreteOptions width={"5"} length={"5"} depth={"5"} deepDepth={"5"} floorType={"Slant"} basinType={"Gunite"}  concrete={this.state.materialBrand} onChange={this.updateGuniteBrand}/>
+            <ConcreteOptions width={this.state.length} length={this.state.length} depth={this.state.depth} deepDepth={this.state.deepDepth} floorType={"Flatbed"} basinType={"Gunite"}  concrete={this.state.materialBrand} onChange={this.updateGuniteBrand}/>
          
             </div>
             

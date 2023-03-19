@@ -14,16 +14,25 @@ class CreatorFormFinal extends React.Component {
       name: pool['name'],
       material: pool['material'],
       materialBrand: (pool['material'] == 'Fiber Glass') ? "Not Applicable" : pool['materialData']['materialBrand'],
-      width: (pool['material'] == 'Fiber Glass') ? 'Not Applicable' : pool['materialData']['width'],
-      length:  (pool['material'] == 'Fiber Glass') ? 'Not Applicable' : pool['materialData']['length'],
+      width: pool['materialData']['width'],
+      length: pool['materialData']['length'],
       depth:  (pool['material'] != 'Gunite') ? 'Not Applicable' : pool['materialData']['depth'],
-      shallowDepth: (pool['material'] == 'Vinyl') ? pool['materialData']['shallowDepth'] : "Not Applicable",
-      deepDepth: (pool['material'] == 'Vinyl') ? pool['materialData']['deepDepth'] : "Not Applicable",
+      shallowDepth: (pool['material'] != 'Gunite') ? pool['materialData']['shallowDepth'] : "Not Applicable",
+      deepDepth: (pool['material'] != 'Gunite') ? pool['materialData']['deepDepth'] : "Not Applicable",
       slant: (pool['material'] == 'Vinyl') ? pool['materialData']['slant'] : "Not Applicable",
       shell: (pool['material'] == 'Fiber Glass') ? pool['materialData']['shell'] : "Not Applicable",
       chlorine: pool['chemicals']['chlorine'],
       cyaneuricAcid: pool['chemicals']['cyaneuricAcid'],
-      shock: pool['chemicals']['shock']
+      shock: pool['chemicals']['shock'],
+      summerCover: pool['summerCover'],
+      winterCover: pool['winterCover'],
+      pipe: pool['pipe'],
+      basinLiner: pool['materialData']['basinLiner'],
+      drain: pool['drain'],
+      skimmer: pool['skimmer'],
+      lining: (pool['material'] == 'Vinyl') ? pool['materialData']['lining'] : "Not Applicable",
+      plaster: (pool['material'] == 'Gunite') ? pool['materialData']['plaster'] : 'Not Applicable',
+      wall: (pool['material'] == 'Vinyl') ? pool['materialData']['wall'] : "Not Applicable",
       
 
        
@@ -48,38 +57,56 @@ class CreatorFormFinal extends React.Component {
         <div id="Creator">
           <h1>Pool Summary:</h1>
           <p>Pool Name: {this.state.name}</p>
-          <p>Pool Material: {this.state.material}</p>
-          <h4>Fiber Glass Options</h4>
-          <p>Fiber Glass Shell: {this.state.shell}</p>
-          <h4>Dimensions</h4>
-          <p>Pool Width: {this.state.width}</p>
-          <p>Pool Length: {this.state.length}</p>
-          <h4>Concrete Depth</h4>
-          <p>Pool Depth: {this.state.depth}</p>
-          <h4>Vinyl Depht</h4>
-          <p>Pool Shallow Depth: {this.state.shallowDepth}</p>
-          <p>Pool Deep Depth: {this.state.deepDepth}</p>
-          <p>Pool Slant: {this.state.slant}</p>
-          <p>Pool Chlorine: {this.state.chlorine}</p>
-          <p>Pool Cyaneuric Acid: {this.state.cyaneuricAcid}</p>
-          <p>Pool Shock: {this.state.shock}</p>
-          <h4>Gunite Options</h4>
+          <p>Pool Basin Type: {this.state.material}</p>
+          <h4>Materials & Dimensions</h4>
+
+          {this.state.material == "Fiber Glass" &&
+                <div id="FiberGlassDisplay">
+                <p>Shell: {this.state.shell}</p>
+                <p>Width: {this.state.width}</p>
+                <p>Length: {this.state.length}</p>
+                <p>Shallow Depth: {this.state.shallowDepth}</p>
+                <p>Deep Depth: {this.state.deepDepth}</p>
+
+                </div>
+          }
+          {this.state.material == "Vinyl" &&   
+          <div>
+          <p>Wall: {this.state.wall}</p>
+          <p>Liner: {this.state.lining}</p>
+          <p>Width: {this.state.width}</p>
+          <p>Length: {this.state.length}</p>
+          <p>Shallow Depth: {this.state.shallowDepth}</p>
+          <p>Deep Depth: {this.state.deepDepth}</p>
+          <p>Floor Type: {this.state.slant}</p>
+          </div>      
+       
+        }
+          {this.state.material == "Gunite" &&   
+          <div>
           <p>Pool Concrete: {this.state.materialBrand}</p>
           <p>Pool Plaster: {this.state.plaster}</p>
-          <h4>Vinyl Options</h4>
-          <p>Pool Wall: {this.state.wall}</p>
-          <p>Pool Lining: {this.state.lining}</p>
-          <h4>All-Pool Options</h4>
-          <p>Pool Summer Cover: {this.state.summerCover}</p>
-          <p>Pool Winter Cover: {this.state.winterCover}</p>
-          <p>Pool Pipe: {this.state.pipe}</p>
-          <p>Pool Drain: {this.state.drain}</p>
-          <p>Pool Skimmer: {this.state.skimmer}</p>
-          <p>Pool Pump: {this.state.pump}</p>
+          <p>Width: {this.state.width}</p>
+          <p>Length: {this.state.length}</p>
+          <p>Depth: {this.state.depth}</p>
+          </div>      
+       
+        }
           <h4>Chemicals</h4>
           <p>Pool Chlorine: {this.state.chlorine}</p>
           <p>Pool Cyaneuric Acid: {this.state.cyaneuricAcid}</p>
           <p>Pool Shock: {this.state.shock}</p>
+
+          <h4>Covers</h4>
+          <p>Solar Cover: {this.state.summerCover}</p>
+          <p>Winter Cover: {this.state.winterCover}</p>
+         
+          <h4>Plumbing</h4>
+          <p>Pool Pipe: {this.state.pipe}</p>
+          <p>Pool Drain: {this.state.drain}</p>
+          <p>Pool Skimmer: {this.state.skimmer}</p>
+       
+          <h4>Chemicals</h4>
           <p>Pool Chlorine: {this.state.chlorine}</p>
           <p>Pool Cyaneuric Acid: {this.state.cyaneuricAcid}</p>
           <p>Pool Shock: {this.state.shock}</p>
