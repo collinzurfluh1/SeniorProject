@@ -424,13 +424,34 @@ class CreatorForm3 extends React.Component {
           { this.state.material == "Fiber Glass" && 
             <div id="Fiber Glass" onChange={this.updateShell}>
             <label className="CreatorFormLabel">Fiber Glass Shell:</label><br></br>
-            <FiberGlassOptions onChange={this.updateShell} width={this.state.width} length={this.state.length} deepDepth ={this.state.deepDepth} shallowDepth={this.state.depth}shell={this.state.shell}/>
+            <FiberGlassOptions onChange={this.updateShell} width={this.state.width} length={this.state.length} deepDepth ={this.state.deepDepth} shallowDepth={this.state.depth} shell={this.state.shell}/>
            { this.state.shell != "none" && this.state.shell != null && 
             <div>
-            <p>Width: {this.state.width}</p>
-            <p>Length: {this.state.length}</p>
-            <p>Depth: {this.state.depth}</p>
-            <p>Deep Depth: {this.state.deepDepth}</p>
+                <br></br>
+                <table>
+                <tr>
+                <td><p>Width</p></td>
+              <td><input type="text" name="country" value={this.state.width} readonly></input></td>
+              </tr>
+              <tr>
+              <td><p>Length</p></td>
+              <td><input type="text" name="country" value={this.state.length} readonly></input></td>
+              </tr>
+              <tr>
+              <td><p>Depth</p></td>
+              <td><input type="text" name="country" value={this.state.depth} readonly></input></td>
+              </tr>
+                {this.state.depth != this.state.deepDepth  &&
+
+               <tr>
+                 <td><p>Deep Depth</p></td>
+                 <td><input type="text" name="country" value={this.state.deepDepth} readonly></input></td>
+              </tr>
+
+                }
+              </table>
+              
+ 
             </div>
 
 
