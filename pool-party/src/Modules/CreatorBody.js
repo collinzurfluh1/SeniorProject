@@ -455,7 +455,7 @@ this.setState({_deepDepth: deepDepth}, function() {
   prev() {
     if(this.currIndex > 1){
       this.currIndex--;
-      if(this.currIndex == 2){
+      if(this.currIndex == 3 && this.GetPoolMaterial() == 'Fiber Glass'){
         this.currIndex--; 
       }
       this.hideComponent(this.currIndex);
@@ -465,7 +465,7 @@ this.setState({_deepDepth: deepDepth}, function() {
   next() {
     if(this.currIndex < this.maxIndex){
       this.currIndex++;
-      if(this.currIndex == 2){
+      if(this.currIndex == 3 && this.GetPoolMaterial() == 'Fiber Glass'){
 
         this.currIndex++; 
       }
@@ -634,13 +634,10 @@ this.setState({_deepDepth: deepDepth}, function() {
             <form>
             {creatorForm1 && <CreatorForm1  ref={this._form1} setPoolName={this.SetPoolName} getPoolName={this.GetPoolName}/>}
             {creatorForm2 && <CreatorForm2  ref={this._form2}
-             setPoolWidth={this.SetPoolWidth} getPoolWidth={this.GetPoolWidth}
-             setPoolDepth={this.SetPoolDepth} getPoolDepth={this.GetPoolDepth}
-             setPoolLength={this.SetPoolLength} getPoolLength={this.GetPoolLength}
-             setShallowDepth={this.SetShallowDepth} getShallowDepth={this.GetShallowDepth}
-             setDeepDepth={this.SetDeepDepth} getDeepDepth={this.GetDeepDepth}
-             flipPoolHasShallowEnd={this.FlipPoolHasShallowEnd} getPoolHasShallowEnd={this.GetPoolHasShallowEnd}
-             setPoolSlant={this.SetPoolSlant} getPoolSlant={this.GetPoolSlant}
+            getPoolMaterialData={this.GetPoolMaterialData}
+            setPoolMaterialData={this.SetPoolMaterialData}
+            getPoolMaterial={this.GetPoolMaterial}
+            setPoolMaterial={this.SetPoolMaterial}
             />}
             {creatorForm3 && <CreatorForm3 ref={this._form3} 
               getPoolMaterialData={this.GetPoolMaterialData}

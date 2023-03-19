@@ -356,24 +356,14 @@ class CreatorForm3 extends React.Component {
 
         <div id="Creator">
           <h1>Pool Material</h1>
-          <div className="CreatorFormLabel" onChange={this.updatePoolMaterial}>
-          <label for="pool-material" className="CreatorFormLabel">Pool Material:</label><br></br>
-            <select name="pool-material" value={this.state.material} id="pool-material">
-            <option value="None">Please Select</option>
-            <option value="Gunite">Gunite</option>
-            <option value="Vinyl">Vinyl</option>
-            <option value="Fiber Glass">Fiber Glass</option>
-            </select><br></br>
-            
-          </div>
-         
+
          
           <div id="Creator">
           { this.state.material == "Gunite" && 
             <div id="guniteDiv">
             <div id="GuniteBrand" onChange={this.updateGuniteBrand}>
             <label for="gunite-brand" className="CreatorFormLabel">Choose A Concrete</label><br></br>
-            <ConcreteOptions width={this.state.length} length={this.state.length} depth={this.state.depth} deepDepth={this.state.deepDepth} floorType={"Flatbed"} basinType={"Gunite"}  concrete={this.state.materialBrand} onChange={this.updateGuniteBrand}/>
+            <ConcreteOptions width={this.state.width} length={this.state.length} depth={this.state.depth} deepDepth={this.state.depth} floorType={"Flatbed"} basinType={"Gunite"}  concrete={this.state.materialBrand} onChange={this.updateGuniteBrand}/>
          
             </div>
             
@@ -381,16 +371,7 @@ class CreatorForm3 extends React.Component {
             <PlasterOptions width={"5"} length={"5"} depth={"5"}  basinType={"Gunite"} deepDepth={"5"} floorType={"Slant"} plaster={this.state.plaster} onChange={this.updatePlaster}/>
 
 
-          <div>
-            <label className="CreatorFormLabel">Width: </label><br></br>
-            <input type="number" defaultValue={this.state.width} onChange={this.updateWidth}></input><br></br>
-            <label className="CreatorFormLabel">Length: </label><br></br>
-            <input type="number" defaultValue={this.state.length} onChange={this.updateLength}></input><br></br>
-            <label className="CreatorFormLabel">Depth: </label><br></br>
-            <input type="number" defaultValue={this.state.depth} onChange={this.updateDepth}></input><br></br>    
-            </div>
-           
-            </div>
+          </div>
             
 
 
@@ -403,55 +384,10 @@ class CreatorForm3 extends React.Component {
             <LinerOptions width={"5"} length={"5"} depth={"5"} deepDepth={"5"}  basinType={"Vinyl"} floorType={"Slant"} liner={this.state.lining} onChange={this.updateLining}/>
             <label for="" className="CreatorFormLabel">Steel Walls:</label><br></br>
             <SteelWallOptions width={"5"} length={"5"} depth={"5"}  basinType={"Vinyl"} wall={this.state.wall} onChange={this.updateWall}/>
-
-            <div  onChange={this.updateSlant}>
-              
-              <label className="CreatorFormLabel">Pool Floor: </label>
-              <select value={this.state.slant} onChange={this.updateSlant}>
-                <option value="Diver">Diver</option>
-                <option value="Slant">Slant</option>
-                <option value="Flatbed">Flatbed</option>
-              </select>
-
-            </div>
- 
-              <label className="CreatorFormLabel">Width: </label><br></br>
-            <input type="number" defaultValue={this.state.width} onChange={this.updateWidth}></input><br></br>
-            <label className="CreatorFormLabel">Length: </label><br></br>
-            <input type="number" defaultValue={this.state.length} onChange={this.updateLength}></input><br></br>
-            <label className="CreatorFormLabel">Depth: </label><br></br>
-            <input type="number" defaultValue={this.state.shallowDepth} onChange={this.updateShallowDepth}></input><br></br>
-     
-            {this.state.slant != "Flatbed" &&  
-            <div>
-            <label className="CreatorFormLabel">Deep Depth: </label><br></br>
-            <input type="number" defaultValue={this.state.deepDepth} onChange={this.updateDeepDepth}></input><br></br>
-            </div> 
-           }
-          
-          
-
-
             </div>
             
           } 
-          { this.state.material == "Fiber Glass" && 
-            <div id="Fiber Glass" onChange={this.updateShell}>
-            <label className="CreatorFormLabel">Fiber Glass Shell:</label><br></br>
-            <FiberGlassOptions onChange={this.updateShell} width={this.state.width} length={this.state.length} deepDepth ={this.state.deepDepth} shallowDepth={this.state.depth}shell={this.state.shell}/>
-           { this.state.shell != "none" && this.state.shell != null && 
-            <div>
-            <p>Width: {this.state.width}</p>
-            <p>Length: {this.state.length}</p>
-            <p>Depth: {this.state.depth}</p>
-            <p>Deep Depth: {this.state.deepDepth}</p>
-            </div>
-
-
-           }
-           
-            </div>
-          }     
+         
           </div>
 
           </div>
