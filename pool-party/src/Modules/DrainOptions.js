@@ -34,7 +34,7 @@ class DrianOptions extends Component {
         <select value={this.props.drain} onChange={this.props.onChange}>
         <option value="none">Please Select</option>
           {this.state.drain.map((option) => (
-            <option key={option["Name"]} value={option["Price"]}>
+            <option key={option["Name"]} value={option["Name"]}>
               {option["Name"]} $ {option["Price"]}
             </option>
           ))}

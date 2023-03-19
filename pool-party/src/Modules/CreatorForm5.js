@@ -51,14 +51,14 @@ class CreatorForm5 extends React.Component {
   render() {
     return (
         <div id="Creator">
-          <div className="CreatorFormLabel" onChange={this.updatePoolPipe}>
+          <div className="CreatorFormLabel">
               <h1>Plumbing</h1>
               <label for="pipe" className="CreatorFormLabel">Pipes:</label><br></br>
               <PipeOptions width={"5"} length={"5"} depth={"5"} pipe={this.state.pipe} onChange={this.updatePoolPipe}/>
               <label for="drains" className="CreatorFormLabel">Drains:</label><br></br>
-              <DrainOptions value={this.state.drain} onChange={this.updatePoolDrain}/>
+              <DrainOptions drain={this.state.drain} onChange={this.updatePoolDrain}/>
               <label for="skimmer" className="CreatorFormLabel">Skimmer:</label><br></br>
-              <SkimmerOptions value={this.state.skimmer} onChange={this.updatePoolDrain}/>
+              <SkimmerOptions skimmer={this.state.skimmer} onChange={this.updatePoolSkimmer}/>
 
 
 

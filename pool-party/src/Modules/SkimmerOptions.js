@@ -34,7 +34,7 @@ class SkimmerOptions extends Component {
         <select value={this.props.skimmer} onChange={this.props.onChange}>
         <option value="none">Please Select</option>
           {this.state.skimmer.map((option) => (
-            <option key={option["Name"]} value={option["Price"]}>
+            <option key={option["Name"]} value={option["Name"]}>
               {option["Name"]} $ {option["Price"]}
             </option>
           ))}
