@@ -22,7 +22,7 @@ class CreatorFormFinal extends React.Component {
       slant: (pool['material'] == 'Vinyl') ? pool['materialData']['slant'] : "Not Applicable",
       shell: (pool['material'] == 'Fiber Glass') ? pool['materialData']['shell'] : "Not Applicable",
       chlorine: pool['chemicals']['chlorine'],
-      cyaneuricAcid: pool['chemicals']['cyaneuricAcid'],
+      cyanuricAcid: pool['chemicals']['cyanuricAcid'],
       shock: pool['chemicals']['shock'],
       summerCover: pool['summerCover'],
       winterCover: pool['winterCover'],
@@ -94,7 +94,7 @@ class CreatorFormFinal extends React.Component {
         }
           <h4>Chemicals</h4>
           <p>Pool Chlorine: {this.state.chlorine}</p>
-          <p>Pool Cyaneuric Acid: {this.state.cyaneuricAcid}</p>
+          <p>Pool Cyaneuric Acid: {this.state.cyanuricAcid}</p>
           <p>Pool Shock: {this.state.shock}</p>
 
           <h4>Covers</h4>

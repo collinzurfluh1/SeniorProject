@@ -57,7 +57,7 @@ class CreatorBody extends React.Component {
       _poolMaterial: props.poolProps?.basin_type ?? null,
       _poolChemicals: {
         "chlorine": props.poolProps?.chlorine ?? null,
-        "cyaneuricAcid": props.poolProps?.cyanuric_acid ?? null,
+        "cyanuricAcid": props.poolProps?.cyanuric_acid ?? null,
         "shock": props.poolProps?.shock ?? null
       },
       _poolMaterialData:  {
@@ -152,7 +152,7 @@ class CreatorBody extends React.Component {
             skimmer:this.GetPool()['skimmer'],
             pump: this.GetPool()['pump'],
             shock: this.GetPool()['chemicals']['shock'],
-            cyanuric_acid: this.GetPool()['chemicals']['cyaneuricAcid'],
+            cyanuric_acid: this.GetPool()['chemicals']['cyanuricAcid'],
             chlorine: this.GetPool()['chemicals']['chlorine'],
             cost: this.GetCost(props.poolProps),
 
@@ -191,7 +191,7 @@ class CreatorBody extends React.Component {
             skimmer:this.GetPool()['skimmer'],
             pump: this.GetPool()['pump'],
             shock: this.GetPool()['chemicals']['shock'],
-            cyanuric_acid: this.GetPool()['chemicals']['cyaneuricAcid'],
+            cyanuric_acid: this.GetPool()['chemicals']['cyanuricAcid'],
             chlorine: this.GetPool()['chemicals']['chlorine'],
             cost: 0,
             id: props.poolProps.id,

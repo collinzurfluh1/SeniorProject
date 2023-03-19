@@ -15,12 +15,12 @@ class CreatorForm6 extends React.Component {
     this.state = {
         name: "React",
         chlorine: props.getPoolChemicals()['chlorine'],
-        cyaneuricAcid: props.getPoolChemicals()['cyaneuricAcid'],
+        cyanuricAcid: props.getPoolChemicals()['cyanuricAcid'],
         shock: props.getPoolChemicals()['shock'],
 
         chemicals: {
           'chlorine': props.getPoolChemicals()['chlorine'],
-          'cyaneuricAcid': props.getPoolChemicals()['cyaneuricAcid'],
+          'cyanuricAcid': props.getPoolChemicals()['cyanuricAcid'],
           'shock': props.getPoolChemicals()['shock'] 
         }
       };
@@ -35,7 +35,7 @@ class CreatorForm6 extends React.Component {
   
     this.props.setPoolChemicals({
         'chlorine': event.target.value,
-        'cyaneuricAcid': this.state.cyaneuricAcid,
+        'cyanuricAcid': this.state.cyanuricAcid,
         'shock': this.state.shock
     }); 
     this.setState({ chlorine: event.target.value });
@@ -43,16 +43,16 @@ class CreatorForm6 extends React.Component {
   updateCyaneuricAcid(event) {
     this.props.setPoolChemicals({
         'chlorine': this.state.chlorine,
-        'cyaneuricAcid': event.target.value,
+        'cyanuricAcid': event.target.value,
         'shock': this.state.shock
     }); 
-    this.setState({ cyaneuricAcid: event.target.value });
+    this.setState({ cyanuricAcid: event.target.value });
   }
   
   updateShock(event) {
     this.props.setPoolChemicals({
         'chlorine': this.state.chlorine,
-        'cyaneuricAcid': this.state.cyaneuricAcid,
+        'cyanuricAcid': this.state.cyanuricAcid,
         'shock': event.target.value
     }); 
     this.setState({ shock: event.target.value });
@@ -67,8 +67,8 @@ class CreatorForm6 extends React.Component {
               <label for="chlorine" class="chlorine">Chlorine:</label><br></br>
               <ChlorineOptions onChange={this.updateChlorine} chlorine={this.state.chlorine} deepDepth={this.props.getPoolMaterialData()['deepDepth']} floorType={this.props.getPoolMaterialData()['slant']} length={this.props.getPoolMaterialData()['length']} width={this.props.getPoolMaterialData()['width']} depth={this.props.getPoolMaterialData()['depth']} basinType={"gunite"}/>
              </div>
-             <label for="cyaneuricAcid" class="CreatorFormLabel">Cyaneuric Acid</label><br></br>
-             <CyaneuricAcidOptions onChange={this.updateCyaneuricAcid} cyaneuricAcid={this.state.cyaneuricAcid} length={this.props.getPoolMaterialData()['length']} width={this.props.getPoolMaterialData()['width']} depth={this.props.getPoolMaterialData()['depth']} deepDepth={this.props.getPoolMaterialData()['deepDepth']} floorType={this.props.getPoolMaterialData()['slant']} basinType={"gunite"}/>
+             <label for="cyanuricAcid" class="CreatorFormLabel">Cyaneuric Acid</label><br></br>
+             <CyaneuricAcidOptions onChange={this.updateCyaneuricAcid} cyanuricAcid={this.state.cyanuricAcid} length={this.props.getPoolMaterialData()['length']} width={this.props.getPoolMaterialData()['width']} depth={this.props.getPoolMaterialData()['depth']} deepDepth={this.props.getPoolMaterialData()['deepDepth']} floorType={this.props.getPoolMaterialData()['slant']} basinType={"gunite"}/>
              <label for="shock" class="CreatorFormLabel">Shock</label><br></br>
              <ShockOptions onChange={this.updateShock} shock={this.state.shock} length={this.props.getPoolMaterialData()['length']} width={this.props.getPoolMaterialData()['width']} depth={this.props.getPoolMaterialData()['depth']} deepDepth={this.props.getPoolMaterialData()['deepDepth']} floorType={this.props.getPoolMaterialData()['slant']} basinType={"gunite"}/>
         
