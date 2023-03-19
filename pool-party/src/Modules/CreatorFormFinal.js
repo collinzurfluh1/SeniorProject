@@ -94,7 +94,7 @@ class CreatorFormFinal extends React.Component {
         }
           <h4>Chemicals</h4>
           <p>Pool Chlorine: {this.state.chlorine}</p>
-          <p>Pool Cyaneuric Acid: {this.state.cyanuricAcid}</p>
+          <p>Pool Cyanuric Acid: {this.state.cyanuricAcid}</p>
           <p>Pool Shock: {this.state.shock}</p>
 
           <h4>Covers</h4>

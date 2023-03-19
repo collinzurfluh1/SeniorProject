@@ -67,7 +67,7 @@ class CreatorForm6 extends React.Component {
               <label for="chlorine" class="chlorine">Chlorine:</label><br></br>
               <ChlorineOptions onChange={this.updateChlorine} chlorine={this.state.chlorine} deepDepth={this.props.getPoolMaterialData()['deepDepth']} floorType={this.props.getPoolMaterialData()['slant']} length={this.props.getPoolMaterialData()['length']} width={this.props.getPoolMaterialData()['width']} depth={this.props.getPoolMaterialData()['depth']} basinType={"gunite"}/>
              </div>
-             <label for="cyanuricAcid" class="CreatorFormLabel">Cyaneuric Acid</label><br></br>
+             <label for="cyanuricAcid" class="CreatorFormLabel">Cyanuric Acid</label><br></br>
              <CyaneuricAcidOptions onChange={this.updateCyaneuricAcid} cyanuricAcid={this.state.cyanuricAcid} length={this.props.getPoolMaterialData()['length']} width={this.props.getPoolMaterialData()['width']} depth={this.props.getPoolMaterialData()['depth']} deepDepth={this.props.getPoolMaterialData()['deepDepth']} floorType={this.props.getPoolMaterialData()['slant']} basinType={"gunite"}/>
              <label for="shock" class="CreatorFormLabel">Shock</label><br></br>
              <ShockOptions onChange={this.updateShock} shock={this.state.shock} length={this.props.getPoolMaterialData()['length']} width={this.props.getPoolMaterialData()['width']} depth={this.props.getPoolMaterialData()['depth']} deepDepth={this.props.getPoolMaterialData()['deepDepth']} floorType={this.props.getPoolMaterialData()['slant']} basinType={"gunite"}/>
