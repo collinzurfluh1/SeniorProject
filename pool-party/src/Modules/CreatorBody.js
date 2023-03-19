@@ -38,7 +38,7 @@ class CreatorBody extends React.Component {
     super(props);
     console.log(props.poolProps);
     this.currIndex = 1;
-    this.maxIndex = 10; 
+    this.maxIndex = 8; 
     this.state = {
       isEdit: props.poolProps?.isEdit ?? false,
       username: props.username,
@@ -127,7 +127,6 @@ class CreatorBody extends React.Component {
   
   UploadPool =  async (props) =>{
     alert("Pool Uploading");
-    console.log(this.GetCost(props.poolProps));
       try {
           await axios.post('http://localhost:4000/savePools', {
             //Error because username is not defined
@@ -148,12 +147,12 @@ class CreatorBody extends React.Component {
             lining_type: this.GetPool()['materialData']['lining'],
             cover1: this.GetPool()['winterCover'],
             cover2: this.GetPool()['summerCover'],
-            piping: this.GetPool()['piping'],
+            piping: this.GetPool()['pipe'],
             drain: this.GetPool()['drain'],
             skimmer:this.GetPool()['skimmer'],
             pump: this.GetPool()['pump'],
             shock: this.GetPool()['chemicals']['chlorine'],
-            cyanuricAcid: this.GetPool()['chemicals']['cyaneuricAcid'],
+            cyanuric_acid: this.GetPool()['chemicals']['cyaneuricAcid'],
             chlorine: this.GetPool()['chemicals']['chlorine'],
             cost: this.GetCost(props.poolProps),
 
@@ -187,7 +186,7 @@ class CreatorBody extends React.Component {
             lining_type: this.GetPool()['materialData']['lining'],
             cover1: this.GetPool()['winterCover'],
             cover2: this.GetPool()['summerCover'],
-            piping: this.GetPool()['piping'],
+            piping: this.GetPool()['pipe'],
             drain: this.GetPool()['drain'],
             skimmer:this.GetPool()['skimmer'],
             pump: this.GetPool()['pump'],
@@ -463,6 +462,7 @@ this.setState({_deepDepth: deepDepth}, function() {
   }
 
   next() {
+ 
     if(this.currIndex < this.maxIndex){
       this.currIndex++;
       if(this.currIndex == 3 && this.GetPoolMaterial() == 'Fiber Glass'){
