@@ -31,7 +31,7 @@ class SummerCoverOptions extends Component {
 
           {this.state.summerCover.map((option) => (
             <option key={option.name} value={option.name}>
-              {option.name} $ {option.price.toFixed(2)}
+              {option.name} {(option.price == null) ? '': '$' + option.price.toFixed(2)}
             </option>
           ))}
         </select>

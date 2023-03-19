@@ -28,7 +28,7 @@ class CyaneuricAcidOptions extends Component {
         <option value="none">Please Select</option>
           {this.state.cyaneuricAcid.map((option) => (
             <option key={option.name} value={option.name}>
-              {option.name} $ {option.price.toFixed(2)}
+              {option.name} {(option.price == null) ? '': '$' + option.price.toFixed(2)}
             </option>
           ))}
         </select>

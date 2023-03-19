@@ -34,7 +34,7 @@ class PipeOptions extends Component {
         <option value="none">Please Select</option>
           {this.state.pipe.map((option) => (
             <option key={option.type} value={option.type}>
-              {option.type} $ {option.price.toFixed(2)}
+              {option.type} {(option.price == null) ? '': '$' + option.price.toFixed(2) }
             </option>
           ))}
         </select>

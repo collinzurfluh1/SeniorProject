@@ -65,12 +65,12 @@ class CreatorForm6 extends React.Component {
           <div className="CreatorFormLabel">
             <h1>Pool Chemicals</h1>
               <label for="chlorine" class="chlorine">Chlorine:</label><br></br>
-              <ChlorineOptions onChange={this.updateChlorine} chlorine={this.state.chlorine} deepDepth={"5"} floorType={"Slant"} length={"5"} width={"5"} depth={"5"} basinType={"gunite"}/>
+              <ChlorineOptions onChange={this.updateChlorine} chlorine={this.state.chlorine} deepDepth={this.props.getPoolMaterialData()['deepDepth']} floorType={this.props.getPoolMaterialData()['slant']} length={this.props.getPoolMaterialData()['length']} width={this.props.getPoolMaterialData()['width']} depth={this.props.getPoolMaterialData()['depth']} basinType={"gunite"}/>
              </div>
              <label for="cyaneuricAcid" class="CreatorFormLabel">Cyaneuric Acid</label><br></br>
-             <CyaneuricAcidOptions onChange={this.updateCyaneuricAcid} cyaneuricAcid={this.state.cyaneuricAcid} length={"5"} width={"5"} depth={"5"} deepDepth={"5"} floorType={"Slant"} basinType={"gunite"}/>
+             <CyaneuricAcidOptions onChange={this.updateCyaneuricAcid} cyaneuricAcid={this.state.cyaneuricAcid} length={this.props.getPoolMaterialData()['length']} width={this.props.getPoolMaterialData()['width']} depth={this.props.getPoolMaterialData()['depth']} deepDepth={this.props.getPoolMaterialData()['deepDepth']} floorType={this.props.getPoolMaterialData()['slant']} basinType={"gunite"}/>
              <label for="shock" class="CreatorFormLabel">Shock</label><br></br>
-             <ShockOptions onChange={this.updateShock} shock={this.state.shock} length={"5"} width={"5"} depth={"5"} deepDepth={"5"} floorType={"Slant"} basinType={"gunite"}/>
+             <ShockOptions onChange={this.updateShock} shock={this.state.shock} length={this.props.getPoolMaterialData()['length']} width={this.props.getPoolMaterialData()['width']} depth={this.props.getPoolMaterialData()['depth']} deepDepth={this.props.getPoolMaterialData()['deepDepth']} floorType={this.props.getPoolMaterialData()['slant']} basinType={"gunite"}/>
         
         
         </div>

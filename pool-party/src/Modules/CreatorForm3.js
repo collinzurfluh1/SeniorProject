@@ -368,7 +368,7 @@ class CreatorForm3 extends React.Component {
             </div>
             
             <label for="plaster" className="CreatorFormLabel">Plaster:</label><br></br>
-            <PlasterOptions width={"5"} length={"5"} depth={"5"}  basinType={"Gunite"} deepDepth={"5"} floorType={"Slant"} plaster={this.state.plaster} onChange={this.updatePlaster}/>
+            <PlasterOptions width={this.state.width} length={this.state.length} depth={this.state.depth}  basinType={"Gunite"} deepDepth={this.state.depth} floorType={"Flatbed"} plaster={this.state.plaster} onChange={this.updatePlaster}/>
 
 
           </div>
@@ -381,9 +381,9 @@ class CreatorForm3 extends React.Component {
             <div id="Vinyl" >
            
             <label for="lining" className="CreatorFormLabel">Pool Lining:</label><br></br>
-            <LinerOptions width={"5"} length={"5"} depth={"5"} deepDepth={"5"}  basinType={"Vinyl"} floorType={"Slant"} liner={this.state.lining} onChange={this.updateLining}/>
+            <LinerOptions width={this.state.width} length={this.state.length} depth={this.state.shallowDepth} deepDepth={this.state.deepDepth}  basinType={"Vinyl"} floorType={this.state.slant} liner={this.state.lining} onChange={this.updateLining}/>
             <label for="" className="CreatorFormLabel">Steel Walls:</label><br></br>
-            <SteelWallOptions width={"5"} length={"5"} depth={"5"}  basinType={"Vinyl"} wall={this.state.wall} onChange={this.updateWall}/>
+            <SteelWallOptions width={this.state.width} length={this.state.length} depth={this.state.shallowDepth}  wall={this.state.wall} onChange={this.updateWall}/>
             </div>
             
           } 

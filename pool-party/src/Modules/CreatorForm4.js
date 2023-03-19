@@ -49,10 +49,10 @@ class CreatorForm4 extends React.Component {
             
             <h1>Pool Covers</h1>
             <label for="winter-cover" class="CreatorFormLabel">Winter Cover:</label><br></br>
-            <WinterCoverOptions width={"5"} length={"5"} winterCover={this.state.winterCover} onChange={this.updatePoolWinterCover}/>
+            <WinterCoverOptions width={this.props.getPoolMaterialData()['width']} length={this.props.getPoolMaterialData()['length']} winterCover={this.state.winterCover} onChange={this.updatePoolWinterCover}/>
           </div>
             <label for="summer-cover" class="CreatorFormLabel">Summer Cover:</label><br></br>
-            <SummerCoverOptions width={"5"} length={"5"} summerCover={this.state.summerCover} onChange={this.updatePoolSummerCover}/>
+            <SummerCoverOptions width={this.props.getPoolMaterialData()['width']} length={this.props.getPoolMaterialData()['length']} summerCover={this.state.summerCover} onChange={this.updatePoolSummerCover}/>
         </div>
       );
   

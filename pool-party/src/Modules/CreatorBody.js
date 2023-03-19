@@ -649,28 +649,24 @@ this.setState({_deepDepth: deepDepth}, function() {
             {creatorForm4 && <CreatorForm4
             setPoolWinterCover={this.SetPoolWinterCover} getPoolWinterCover={this.GetPoolWinterCover}
             setPoolSummerCover={this.SetPoolSummerCover} getPoolSummerCover={this.GetPoolSummerCover}
+            getPoolMaterialData={this.GetPoolMaterialData}
+
             />}
             {creatorForm5 && <CreatorForm5
             setPoolPipe={this.SetPoolPipe} getPoolPipe={this.GetPoolPipe}
             setPoolDrain={this.SetPoolDrain} getPoolDrain={this.GetPoolDrain}
             setPoolSkimmer={this.SetPoolSkimmer} getPoolSkimmer={this.GetPoolSkimmer}
+            getPoolMaterialData={this.GetPoolMaterialData}
 
             />}
             {creatorForm6 && <CreatorForm6
             setPoolChemicals={this.SetPoolChemicals} getPoolChemicals={this.GetPoolChemicals}
+            getPoolMaterialData={this.GetPoolMaterialData}
 
 
+
             />}
-            {creatorForm7 && <CreatorForm7
-            setPoolDrain={this.SetPoolDrain} getPoolDrain={this.GetPoolDrain}
-            />}
-            {creatorForm8 && <CreatorForm8
-            setPoolSkimmer={this.SetPoolSkimmer} getPoolSkimmer={this.GetPoolSkimmer}
-            
-            />}
-            {creatorForm9 && <CreatorForm9
-            setPoolPump={this.SetPoolPump} getPoolPump={this.GetPoolPump}
-            />}
+          
             {creatorFormSubmit && <CreatorFormFinal
             getPool={this.GetPool}
             getPoolMaterial={this.GetPoolMaterial}
