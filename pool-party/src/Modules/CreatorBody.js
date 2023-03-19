@@ -581,49 +581,11 @@ this.setState({_deepDepth: deepDepth}, function() {
         this.setState({ creatorForm7: false});
         this.setState({ creatorForm8: false});
         this.setState({ creatorForm9: false});
+        this.setState({ nextButtonText: 'Submit' });
 
-
-        this.setState({ nextButtonText: 'Next'});
         break;   
-      case 7:
-        this.setState({ creatorForm1: false });
-        this.setState({ creatorForm2: false });
-        this.setState({ creatorForm3: false });
-        this.setState({ creatorForm4: false });
-        this.setState({ creatorForm5: false});
-        this.setState({ creatorForm6: false});
-        this.setState({ creatorForm7: true});
-        this.setState({ creatorForm8: false});
-        this.setState({ creatorForm9: false});
-
-        this.setState({ nextButtonText: 'Next'});
-        break; 
-      case 8:
-        this.setState({ creatorForm1: false });
-        this.setState({ creatorForm2: false });
-        this.setState({ creatorForm3: false });
-        this.setState({ creatorForm4: false });
-        this.setState({ creatorForm5: false});
-        this.setState({ creatorForm6: false});
-        this.setState({ creatorForm7: false});
-        this.setState({ creatorForm8: true});
-        this.setState({ creatorForm9: false});
-        this.setState({ nextButtonText: 'Next'});
-        break; 
-     case 9:
-       this.setState({ creatorForm1: false });
-       this.setState({ creatorForm2: false });
-       this.setState({ creatorForm3: false });
-       this.setState({ creatorForm4: false });
-       this.setState({ creatorForm5: false});
-       this.setState({ creatorForm6: false});
-       this.setState({ creatorForm7: false});
-       this.setState({ creatorForm8: false});
-       this.setState({ creatorForm9: true});
-       this.setState({ creatorFormSubmit: false});
-       break; 
-
-       case 10:
+    
+       case 7:
         this.setState({ creatorForm1: false });
         this.setState({ creatorForm2: false });
         this.setState({ creatorForm3: false });
@@ -634,7 +596,6 @@ this.setState({_deepDepth: deepDepth}, function() {
         this.setState({ creatorForm8: false});
         this.setState({ creatorForm9: false});
         this.setState({ prevButton: false });
-        this.setState({ nextButtonText: 'Submit' });
         this.setState({ creatorFormSubmit: true});
 
         break;
