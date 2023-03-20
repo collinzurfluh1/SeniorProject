@@ -13,8 +13,11 @@
             padding:10px;
             display:flex;
             flex:25%;
-            justify-content: center;
             white-space: nowrap;
+            p{
+                text-overflow: elipses;
+                
+            }
         }
     }
 

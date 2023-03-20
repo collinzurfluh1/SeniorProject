@@ -495,7 +495,7 @@ const deletePool = async (e) => {
         : parseFloat(rebarPrice).toFixed(2)}</div>
         <div className='poolStat'>Steel Walling: ${parseFloat(steelWallingPrice).toFixed(2) == undefined ?
           "N/A"
-        : parseFloat(steelWallingPrice)}</div>
+        : parseFloat(steelWallingPrice).toFixed(2)}</div>
         <div className='poolStat'>Pool Liner: ${parseFloat(poolLiningPrice).toFixed(2) == undefined ?
           "N/A"
         : parseFloat(poolLiningPrice).toFixed(2)}</div>

@@ -292,13 +292,21 @@ function calculatePipesAmount(deepDepth, length, width)
 export async function calculatePipesCost(deepDepth, length, width, pipe_type)
 {
 
+    if(pipe_type == null){
+        return 0;
+    }
     var price_per_linear_foot =  (await get_piping(pipe_type))[0]['linft_cost'];
     // return price_per_linear_foot
 
     var pipeLength = Math.round(calculatePipesAmount(deepDepth, length, width));
     // return pipeLength
 
-
+    console.log("<><><><><><><><>")
+    console.log(price_per_linear_foot);
+    console.log("<><><><><><><><>")
+    console.log("<><><><><><><><>")
+    console.log(pipeLength);
+    console.log("<><><><><><><><>")
     return Math.round(pipeLength * price_per_linear_foot *100) / 100;
 }
 export async function getAllPipesPrices(deepDepth, length, width)

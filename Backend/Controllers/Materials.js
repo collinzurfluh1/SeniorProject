@@ -128,6 +128,7 @@ export async function get_shock(shock_name) {
 
 export async function get_piping(pipe_type) {
 
+   
     var pipe_data = null;
 
     if(pipe_type == null) {
@@ -138,7 +139,7 @@ export async function get_piping(pipe_type) {
         const piping_sequelize = await Piping.findAll({ where: { type: pipe_type } })
         pipe_data = piping_sequelize.map(piping => piping.get({ plain: true }));
     }
-
+    
     return pipe_data
 }
 

@@ -75,8 +75,8 @@ router.get('/getAllShockPrices', async (req, res) => {
 });
 
 router.get('/calculatePipesCost', async (req, res) => {
-    const { depth_deep, length, width, pipe_type } = req.query;
-    const results = await calculatePipesCost(depth_deep, length, width, pipe_type );
+    const { depth_deep, length, width, piping } = req.query;
+    const results = await calculatePipesCost(depth_deep, length, width, piping );
     res.json(results);
 });
 

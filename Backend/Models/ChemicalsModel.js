@@ -41,7 +41,7 @@ const chemicals_data = [
     {'name': 'HTH Pool Care Shock', 'type': 'shock', 'quantity': 12, 'cost': 51.58},
     {'name': 'In The Swim Super Pool Shock', 'type': 'shock', 'quantity': 24, 'cost': 62.99},
     {'name': 'Leslie\'s Power Powder', 'type': 'shock', 'quantity': 12, 'cost': 79.99},
-    {'name': 'Clorox Pool Aand Spa Pool Shock Xtrablue ', 'type': 'shock', 'quantity': 12, 'cost': 94.50}
+    {'name': 'Clorox Pool Aand Spa Pool Shock Xtrablue', 'type': 'shock', 'quantity': 12, 'cost': 94.50}
    ]
 
 //  db.sync({ force:true }).then(() => {
